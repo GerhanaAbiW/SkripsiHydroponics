@@ -21,7 +21,7 @@ class HorizontalList extends StatelessWidget {
         ),
         Categories(
           imageLocation: "images/categories/alat1.png",
-          imageCaption: "Alat",
+          imageCaption: "Alab",
         ),
       ]),
     );
