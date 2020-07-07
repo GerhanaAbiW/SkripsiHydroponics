@@ -38,11 +38,11 @@ class LoginRegisterState extends State<LoginRegister>
 
   Widget _buildLoginWidgets() {
     return Container(
-      padding: EdgeInsets.only(bottom: 62, top: 16),
+      padding: EdgeInsets.only(bottom: 62, top: 32),
       width: MediaQuery.of(context).size.width,
       height: loginSize.value,
       decoration: BoxDecoration(
-          color: Color(0XFF2a3ed7),
+          color: Colors.lightGreen,
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(190),
               bottomRight: Radius.circular(190))),
@@ -63,7 +63,7 @@ class LoginRegisterState extends State<LoginRegister>
                   },
             child: Container(
               child: Text(
-                'LOG IN'.toUpperCase(),
+                'log in'.toUpperCase(),
                 style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -114,21 +114,26 @@ class LoginRegisterState extends State<LoginRegister>
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(50))),
                   child: InkWell(
-                    onTap: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return MainMenu();}));},
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MainMenu();
+                      }));
+                    },
                     child: Center(
-                        child: Text(
-                          'LOG IN',
-                          style: TextStyle(
-                              color: Color(0XFF2a3ed7),
-                              fontWeight: FontWeight.bold),
-                        ),
+                      child: Text(
+                        'LOG IN',
+                        style: TextStyle(
+                            color: Colors.lightGreen,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: _buildSignInWithText(),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 30.0),
+                //   child: _buildSignInWithText(),
+                // ),
                 _buildSocialBtnRow()
               ],
             ),
@@ -137,29 +142,28 @@ class LoginRegisterState extends State<LoginRegister>
       ],
     );
   }
-  Widget _buildSignInWithText() {
-    return Column(
-      children: <Widget>[
-        Text(
-          '- OR -',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-        SizedBox(height: 20.0),
-        Text(
-          'Sign in with',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          )
-        ),
-      ],
-    );
-  }
+
+  // Widget _buildSignInWithText() {
+  //   return Column(
+  //     children: <Widget>[
+  //       Text(
+  //         '- OR -',
+  //         style: TextStyle(
+  //           color: Colors.white,
+  //           fontWeight: FontWeight.w400,
+  //           fontFamily: 'OpenSans',
+  //         ),
+  //       ),
+  //       SizedBox(height: 20.0),
+  //       Text('Sign in with',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontWeight: FontWeight.bold,
+  //             fontFamily: 'OpenSans',
+  //           )),
+  //     ],
+  //   );
+  // }
 
   Widget _buildSocialBtn(Function onTap, AssetImage logo) {
     return GestureDetector(
@@ -177,10 +181,7 @@ class LoginRegisterState extends State<LoginRegister>
               blurRadius: 6.0,
             ),
           ],
-          image: DecorationImage(
-            image: logo,
-            fit: BoxFit.fill
-          ),
+          image: DecorationImage(image: logo, fit: BoxFit.fill),
         ),
       ),
     );
@@ -191,20 +192,6 @@ class LoginRegisterState extends State<LoginRegister>
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-                () => print('Login with Facebook'),
-            AssetImage(
-                "images/login/facebook.jpg",
-            ),
-          ),
-          _buildSocialBtn(
-                () => print('Login with Google'),
-            AssetImage(
-              'images/login/google.jpg',
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -215,16 +202,16 @@ class LoginRegisterState extends State<LoginRegister>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 32),
-            child: Text(
-              'Sign Up'.toUpperCase(),
-              style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0XFF2a3ed7)),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 32),
+          //   child: Text(
+          //     'Sign Up'.toUpperCase(),
+          //     style: TextStyle(
+          //         fontSize: 32,
+          //         fontWeight: FontWeight.bold,
+          //         color: Colors.lightGreen),
+          //   ),
+          // ),
           TextField(
             style: TextStyle(color: Colors.black, height: 0.5),
             decoration: InputDecoration(
@@ -232,6 +219,25 @@ class LoginRegisterState extends State<LoginRegister>
                   Icons.email,
                 ),
                 hintText: 'Email',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(32)))),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16, top: 16),
+            child: TextField(
+              style: TextStyle(color: Colors.black, height: 0.5),
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.local_phone),
+                  hintText: 'Phone Number',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(32)))),
+            ),
+          ),
+          TextField(
+            style: TextStyle(color: Colors.black, height: 0.5),
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.location_on),
+                hintText: 'Address',
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(32)))),
           ),
@@ -261,7 +267,7 @@ class LoginRegisterState extends State<LoginRegister>
               height: 40,
               margin: EdgeInsets.only(top: 32),
               decoration: BoxDecoration(
-                  color: Color(0XFF2a3ed7),
+                  color: Colors.lightGreen,
                   borderRadius: BorderRadius.all(Radius.circular(50))),
               child: Center(
                 child: Text(
@@ -285,6 +291,7 @@ class LoginRegisterState extends State<LoginRegister>
         CurvedAnimation(parent: loginController, curve: Curves.linear));
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
@@ -319,7 +326,7 @@ class LoginRegisterState extends State<LoginRegister>
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Color(0XFF2a3ed7),
+                        color: Colors.lightGreen,
                       ),
                     ),
                   ),
