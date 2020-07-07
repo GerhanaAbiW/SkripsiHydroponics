@@ -12,13 +12,21 @@ class LoginRegister extends StatefulWidget {
 class LoginRegisterState extends State<LoginRegister>
     with SingleTickerProviderStateMixin {
   bool isLogin = true;
+  bool isVisible = true;
   Animation<double> loginSize;
   AnimationController loginController;
   AnimatedOpacity opacityAnimation;
   Duration animationDuration = Duration(milliseconds: 270);
 
+  void _toggleVisibility() {
+    setState(() {
+      isVisible = !isVisible;
+    });
+  }
+
   @override
   void initState() {
+    // isVisible = true;
     super.initState();
 
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -87,7 +95,7 @@ class LoginRegisterState extends State<LoginRegister>
             child: Column(
               children: <Widget>[
                 TextField(
-                  style: TextStyle(color: Colors.white, height: 0.5),
+                  style: TextStyle(color: Colors.white, height: 1.0),
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       hintText: 'Email',
@@ -95,19 +103,29 @@ class LoginRegisterState extends State<LoginRegister>
                           borderRadius: BorderRadius.all(Radius.circular(32)))),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.only(bottom: 16, top: 16),
                   child: TextField(
-                    style: TextStyle(color: Colors.white, height: 0.5),
+                    obscureText: isVisible,
+                    style: TextStyle(color: Colors.black, height: 1.5),
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.vpn_key),
-                        hintText: 'Password',
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(32)))),
+                      hintText: 'Password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(32))),
+                      prefixIcon: Icon(Icons.vpn_key),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          _toggleVisibility();
+                        },
+                        child: Icon(isVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                      ),
+                      isDense: true,
+                    ),
                   ),
                 ),
                 Container(
-                  width: 200,
+                  width: 200.0,
                   height: 40,
                   margin: EdgeInsets.only(top: 32),
                   decoration: BoxDecoration(
@@ -132,9 +150,9 @@ class LoginRegisterState extends State<LoginRegister>
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.only(top: 30.0),
-                //   child: _buildSignInWithText(),
+                //    child: _buildSignInWithText(),
                 // ),
-                _buildSocialBtnRow()
+                // _buildSocialBtnRow()
               ],
             ),
           ),
@@ -165,40 +183,40 @@ class LoginRegisterState extends State<LoginRegister>
   //   );
   // }
 
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
-            ),
-          ],
-          image: DecorationImage(image: logo, fit: BoxFit.fill),
-        ),
-      ),
-    );
-  }
+  // Widget _buildSocialBtn(Function onTap, AssetImage logo) {
+  //   return GestureDetector(
+  //     onTap: onTap,
+  //     child: Container(
+  //       height: 60.0,
+  //       width: 60.0,
+  //       decoration: BoxDecoration(
+  //         shape: BoxShape.circle,
+  //         color: Colors.white,
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: Colors.black26,
+  //             offset: Offset(0, 2),
+  //             blurRadius: 6.0,
+  //           ),
+  //         ],
+  //         image: DecorationImage(image: logo, fit: BoxFit.fill),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      ),
-    );
-  }
+  // Widget _buildSocialBtnRow() {
+  //   return Padding(
+  //     padding: EdgeInsets.symmetric(vertical: 10.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     ),
+  //   );
+  // }
 
   Widget _buildRegistercomponents() {
     return Padding(
-      padding: EdgeInsets.only(left: 42, right: 42, top: 32, bottom: 32),
+      padding: EdgeInsets.only(left: 42, right: 42, top: 42, bottom: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -213,7 +231,7 @@ class LoginRegisterState extends State<LoginRegister>
           //   ),
           // ),
           TextField(
-            style: TextStyle(color: Colors.black, height: 0.5),
+            style: TextStyle(color: Colors.black, height: 1.0),
             decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.email,
@@ -225,7 +243,7 @@ class LoginRegisterState extends State<LoginRegister>
           Padding(
             padding: const EdgeInsets.only(bottom: 16, top: 16),
             child: TextField(
-              style: TextStyle(color: Colors.black, height: 0.5),
+              style: TextStyle(color: Colors.black, height: 1.0),
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.local_phone),
                   hintText: 'Phone Number',
@@ -234,31 +252,52 @@ class LoginRegisterState extends State<LoginRegister>
             ),
           ),
           TextField(
-            style: TextStyle(color: Colors.black, height: 0.5),
+            style: TextStyle(color: Colors.black, height: 1.0),
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.location_on),
                 hintText: 'Address',
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(32)))),
           ),
+
           Padding(
             padding: const EdgeInsets.only(bottom: 16, top: 16),
             child: TextField(
-              style: TextStyle(color: Colors.black, height: 0.5),
+              obscureText: isVisible,
+              style: TextStyle(color: Colors.black, height: 1.5),
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.vpn_key),
-                  hintText: 'Password',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(32)))),
+                hintText: 'Password',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(32))),
+                prefixIcon: Icon(Icons.vpn_key),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    _toggleVisibility();
+                  },
+                  child:
+                      Icon(isVisible ? Icons.visibility_off : Icons.visibility),
+                ),
+                isDense: true,
+              ),
             ),
           ),
           TextField(
-            style: TextStyle(color: Colors.black, height: 0.5),
+            obscureText: isVisible,
+            style: TextStyle(color: Colors.black, height: 1.5),
             decoration: InputDecoration(
-                prefixIcon: Icon(Icons.vpn_key),
-                hintText: 'Confirm Password',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(32)))),
+              hintText: 'Confirm Password',
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32))),
+              prefixIcon: Icon(Icons.vpn_key),
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  _toggleVisibility();
+                },
+                child:
+                    Icon(isVisible ? Icons.visibility_off : Icons.visibility),
+              ),
+              isDense: true,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 24),
