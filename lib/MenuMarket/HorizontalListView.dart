@@ -8,19 +8,19 @@ class HorizontalList extends StatelessWidget {
       //color: Colors.white,
       child: ListView(scrollDirection: Axis.horizontal, children: <Widget>[
         Categories(
-          imageLocation: "images/categories/Bibit.png",
+          imageLocation: "images/Icons/1.png",
           imageCaption: "Bibit",
         ),
         Categories(
-          imageLocation: "images/categories/pestisida.jpg",
+          imageLocation: "images/Icons/2.png",
           imageCaption: "Pestisida",
         ),
         Categories(
-          imageLocation: "images/categories/pupuk.png",
+          imageLocation: "images/Icons/3.png",
           imageCaption: "Pupuk",
         ),
         Categories(
-          imageLocation: "images/categories/alat1.png",
+          imageLocation: "images/Icons/4.png",
           imageCaption: "Alab",
         ),
       ]),

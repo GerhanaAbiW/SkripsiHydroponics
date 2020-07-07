@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hydroponics/MainMenu/MainMenu.dart';
 
 class LoginRegister extends StatefulWidget {
   @override
@@ -112,12 +113,15 @@ class LoginRegisterState extends State<LoginRegister>
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(50))),
-                  child: Center(
-                    child: Text(
-                      'LOG IN',
-                      style: TextStyle(
-                          color: Color(0XFF2a3ed7),
-                          fontWeight: FontWeight.bold),
+                  child: InkWell(
+                    onTap: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return MainMenu();}));},
+                    child: Center(
+                        child: Text(
+                          'LOG IN',
+                          style: TextStyle(
+                              color: Color(0XFF2a3ed7),
+                              fontWeight: FontWeight.bold),
+                        ),
                     ),
                   ),
                 ),

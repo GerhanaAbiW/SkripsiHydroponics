@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -149,6 +151,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
           height: 70,
           width: 70,
           child: FloatingActionButton(
+            heroTag: "btn1",
             backgroundColor: Colors.transparent,
             elevation: 0,
             onPressed: () {},
@@ -180,20 +183,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
           color: Color(0xFF21BFBD),
         ),
       ),
-//      bottomNavigationBar: BottomNavyBar(
-//        selectedIndex: _currentIndex,
-//        onItemSelected: (index) {
-//          setState(() => _currentIndex = index);
-//          _pageController.jumpToPage(index);
-//        },
-//
-//        // items: <BottomNavyBarItem>[
-//        //   BottomNavyBarItem(title: Text("Add New Plant"), icon: Icon(Icons.add)),
-//        //   BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.apps)),
-//        //   // BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.chat_bubble)),
-//        //   // BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.settings)),
-//        // ],
-//      ),
+
     );
   }
 }

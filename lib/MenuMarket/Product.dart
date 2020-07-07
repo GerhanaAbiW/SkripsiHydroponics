@@ -63,7 +63,7 @@ class SingleProduct extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                       boxShadow: [
                         BoxShadow(
-                            blurRadius: 4.0,
+                            blurRadius: 5.0,
                             spreadRadius: 5.0,
                             color: Colors.grey.withOpacity(0.1))
                       ]),

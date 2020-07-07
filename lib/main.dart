@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
         "11": (BuildContext _) => ArticleDetail(),
         "12": (BuildContext _) => CartPage()
       },
-      initialRoute: '1',
+      initialRoute: '3',
     );
   }
 }

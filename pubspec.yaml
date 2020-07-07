@@ -73,6 +73,22 @@ flutter:
     - images/categories/alat1.png
     - images/categories/alat2.png
     - images/ficus.png
+    - images/Icons/1.png
+    - images/Icons/2.png
+    - images/Icons/3.png
+    - images/Icons/4.png
+    - images/Icons/5.png
+    - images/Icons/6.png
+    - images/Icons/7.png
+    - images/Icons/8.png
+    - images/Icons/9.png
+    - images/Icons/10.png
+    - images/Icons/11.png
+    - images/Icons/12.png
+    - images/Icons/13.png
+    - images/Icons/14.png
+    - images/Icons/15.png
+    - images/Icons/16.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

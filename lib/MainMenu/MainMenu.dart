@@ -87,12 +87,12 @@ class _MainMenuState extends State<MainMenu>
           mainAxisSpacing: 12.0,
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           children: <Widget>[
-           
-            MyItems(Icons.library_books, "Learning", 0xFF3F51B5, ""),
-            MyItems(Icons.shopping_cart, "Market", 0xFF03A9F4, ""),
+
+            MyItems(Icons.library_books, "Learning", 0xFF3F51B5, "6"),
+            MyItems(Icons.shopping_cart, "Market", 0xFF03A9F4, "3"),
             MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342, "2"),
-            MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4, ""),
-            MyItems(Icons.account_box, "Admin", 0xFFF4511E, ""),
+            MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4, "10"),
+            MyItems(Icons.account_box, "Admin", 0xFFF4511E, "7"),
           ],
           staggeredTiles: [
             
