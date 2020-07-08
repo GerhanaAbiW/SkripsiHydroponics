@@ -31,21 +31,24 @@ class _MenuLearningState extends State<MenuLearning> {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Hydroponics",
-              style: TextStyle(color: Colors.green[700]),
+              "Learning",
+              style: TextStyle(
+                  color: Colors.lightBlue[900],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32.0),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.blue,
             elevation: 0,
             bottom: TabBar(
-                unselectedLabelColor: Colors.redAccent,
+                unselectedLabelColor: Colors.blue[900],
                 indicatorPadding: EdgeInsets.only(left: 30, right: 30),
                 indicator: ShapeDecoration(
                     gradient: LinearGradient(
-                        colors: [Colors.redAccent, Colors.orangeAccent]),
+                        colors: [Colors.lightBlue[900], Colors.blue[200]]),
                     shape: BeveledRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(
-                          color: Colors.redAccent,
+                          color: Colors.lightBlue[900],
                         ))),
                 tabs: [
                   Tab(

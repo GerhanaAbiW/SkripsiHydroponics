@@ -1,12 +1,12 @@
-import 'dart:ffi';
+//import 'dart:ffi';
+//import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/MenuMyPlants/MyPlantsDetails.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-
+//import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class MyPlantsList extends StatefulWidget {
   @override
@@ -19,8 +19,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF21BFBD),
-
+      backgroundColor: Color(0xFF8BC34A),
       body: ListView(
         children: <Widget>[
           Padding(
@@ -31,30 +30,37 @@ class _MyPlantsListState extends State<MyPlantsList> {
                 IconButton(
                   icon: Icon(Icons.arrow_back),
                   color: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 Container(
                     width: 125.0,
                     child: InkWell(
-                      onTap: (){},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyPlantsDetail()),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          
-                          Text("Record  ", style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0)),
-                          Icon(Icons.schedule,
-                              color: Colors.white)
+                          Text("Record  ",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0)),
+                          Icon(Icons.schedule, color: Colors.white)
                         ],
                       ),
                     ))
               ],
             ),
           ),
-          SizedBox(height: 25.0),
+          SizedBox(height: 12.0),
           Padding(
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
@@ -128,7 +134,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                                       child: SlidableDrawerDismissal(),
                                     ),
                                     child: YourListChild(
-                                      imgPath: 'images/bayam.jpeg',
+                                      //imgPath: 'images/bayam.jpeg',
                                       foodName: 'Kangkung',
                                       price: '7 Hari',
                                     ),
@@ -165,7 +171,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                   begin: const Alignment(0.7, -0.5),
                   end: const Alignment(0.6, 0.5),
                   colors: [
-                    Color(0xFF53a78c),
+                    Color(0xFF8BC34A),
                     Color(0xFF70d88b),
                   ],
                 ),
@@ -177,13 +183,12 @@ class _MyPlantsListState extends State<MyPlantsList> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF21BFBD),
+        color: Color(0xFF8BC34A),
         child: Container(
           height: 50,
-          color: Color(0xFF21BFBD),
+          color: Color(0xFF8BC34A),
         ),
       ),
-
     );
   }
 }
@@ -203,13 +208,14 @@ class YourListChild extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(
           //padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-        elevation: 10.0,
+          elevation: 10.0,
           child: InkWell(
               onTap: () {
 //              Navigator.of(context).push(MaterialPageRoute(
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyPlantsDetail()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => MyPlantsDetail()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,11 +225,12 @@ class YourListChild extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Hero(
-                          tag: imgPath,
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: ExactAssetImage(imgPath),
-                          ),),
+                        tag: imgPath,
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: ExactAssetImage(imgPath),
+                        ),
+                      ),
                     ),
                     SizedBox(width: 10.0),
                     Padding(
@@ -233,9 +240,10 @@ class YourListChild extends StatelessWidget {
                           children: [
                             Text(foodName,
                                 style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.bold,)),
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.bold,
+                                )),
                             Text(price,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
@@ -244,11 +252,8 @@ class YourListChild extends StatelessWidget {
                           ]),
                     )
                   ])),
-
                 ],
               ))),
-            
     );
-    
   }
 }
