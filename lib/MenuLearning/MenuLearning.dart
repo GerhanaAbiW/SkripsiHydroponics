@@ -30,6 +30,13 @@ class _MenuLearningState extends State<MenuLearning> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: Colors.lightBlue[900],
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             title: Text(
               "Learning",
               style: TextStyle(
@@ -37,7 +44,7 @@ class _MenuLearningState extends State<MenuLearning> {
                   fontWeight: FontWeight.bold,
                   fontSize: 32.0),
             ),
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.white,
             elevation: 0,
             bottom: TabBar(
                 unselectedLabelColor: Colors.blue[900],
