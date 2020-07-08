@@ -30,11 +30,16 @@ class _MenuLearningState extends State<MenuLearning> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () {},
+            ),
             title: Text(
               "Hydroponics",
               style: TextStyle(color: Colors.green[700]),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.blue,
             elevation: 0,
             bottom: TabBar(
                 unselectedLabelColor: Colors.redAccent,
