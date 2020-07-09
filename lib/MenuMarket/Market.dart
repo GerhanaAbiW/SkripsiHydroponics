@@ -59,8 +59,8 @@ class _MenuMarketState extends State<MenuMarket> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                 // Navigator.of(context).push(
-                     // new MaterialPageRoute(builder: (context) => new Cart()));
+                 Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (context) => new CartPage()));
                 }),
           ],
         ),

@@ -89,6 +89,16 @@ flutter:
     - images/Icons/14.png
     - images/Icons/15.png
     - images/Icons/16.png
+    - images/asset_profile/deku.jpeg
+    - images/asset_profile/ic_invite_friends.png
+    - images/asset_profile/ic_about_us.png
+    - images/asset_profile/ic_logout.png
+    - images/asset_profile/ic_payment.png
+    - images/asset_profile/ic_settings.png
+    - images/asset_profile/ic_notification.png
+    - images/asset_profile/ic_qr_code.png
+    - images/asset_profile/ic_refer_friends_bg.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

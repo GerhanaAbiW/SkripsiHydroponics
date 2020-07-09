@@ -11,6 +11,8 @@ import 'package:hydroponics/MenuMarket/CartProduct.dart';
 import 'package:hydroponics/MenuMarket/Market.dart';
 import 'package:hydroponics/MenuMyPlants/MyPlantsDetails.dart';
 import 'package:hydroponics/MenuMyPlants/MyPlantsList.dart';
+import 'package:hydroponics/Profile/NewProfilePage.dart';
+import 'package:hydroponics/Profile/ProfilePage.dart';
 import 'package:hydroponics/home.dart';
 
 void main() => runApp(MyApp());
@@ -35,11 +37,13 @@ class _MyAppState extends State<MyApp> {
         "7": (BuildContext _) => MenuAdmin(),
         "8": (BuildContext _) => Dashboard(),
         "9": (BuildContext _) => AddProduct(),
-        "10": (BuildContext _) => CartProduct(),
-        "11": (BuildContext _) => ArticleDetail(),
-        "12": (BuildContext _) => CartPage()
+        "10": (BuildContext _) => ArticleDetail(),
+        "11": (BuildContext _) => CartPage(),
+        "12": (BuildContext _) => ProfilePage(),
+        "13": (BuildContext _) => NewProfilePage(),
+
       },
-      initialRoute: '/',
+      initialRoute: '13',
     );
   }
 }

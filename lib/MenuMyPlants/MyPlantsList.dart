@@ -102,9 +102,8 @@ class _MyPlantsListState extends State<MyPlantsList> {
                             return AnimationConfiguration.staggeredList(
                               position: index,
                               duration: const Duration(milliseconds: 3000),
-                              child: SlideAnimation(
-                                verticalOffset: 100.0,
                                 child: SlideAnimation(
+                                  verticalOffset: 100.0,
                                   child: Slidable(
                                     key: ValueKey(index),
                                     actionPane: SlidableDrawerActionPane(),
@@ -139,7 +138,6 @@ class _MyPlantsListState extends State<MyPlantsList> {
                                       price: '7 Hari',
                                     ),
                                   ),
-                                ),
                               ),
                             );
                           }),
