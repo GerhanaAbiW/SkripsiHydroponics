@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
         "9": (BuildContext _) => AddProduct(),
         "10": (BuildContext _) => ArticleDetail(),
         "11": (BuildContext _) => CartPage(),
-        "12": (BuildContext _) => ProfilePage(),
+        //"12": (BuildContext _) => ProfilePage(),
         "13": (BuildContext _) => NewProfilePage(),
 
       },

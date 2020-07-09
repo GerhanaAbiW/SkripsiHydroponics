@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class ListProfileSection {
   String title;
-  String icon;
   Color color;
   Widget widget;
+  IconData icon;
 
   ListProfileSection(this.title, this.icon, this.color, this.widget);
 }

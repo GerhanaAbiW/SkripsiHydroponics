@@ -24,22 +24,22 @@ class _NewProfilePageState extends State<NewProfilePage> {
   }
 
   void createListItem() {
-    listSection.add(createSection("Notifications", "images/asset_profile/ic_notification.png",
+    listSection.add(createSection("Notifications", Icons.notifications,
         Colors.blue.shade800, NotificationPage()));
     listSection.add(createSection(
-        "Payment Method", "images/asset_profile/ic_payment.png", Colors.teal.shade800, null));
+        "Payment Method", Icons.payment , Colors.teal.shade800, null));
     listSection.add(createSection(
-        "Invite Friends",
-        "images/asset_profile/ic_invite_friends.png",
+        "Invite Friends", Icons.insert_invitation
+        ,
         Colors.indigo.shade800,
         InviteFriendsPage()));
-    listSection.add(createSection("About Us", "images/asset_profile/ic_about_us.png",
+    listSection.add(createSection("About Us", Icons.help,
         Colors.black.withOpacity(0.8), AboutPage()));
     listSection.add(createSection(
-        "Logout", "images/asset_profile/ic_logout.png", Colors.red.withOpacity(0.7), null));
+        "Logout", Icons.exit_to_app, Colors.red.withOpacity(0.7), null));
   }
 
-  createSection(String title, String icon, Color color, Widget widget) {
+  createSection(String title, IconData icon, Color color, Widget widget) {
     return ListProfileSection(title, icon, color, widget);
   }
 
@@ -56,7 +56,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                 height: 240,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.green.withOpacity(0.5),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10))),
@@ -67,7 +67,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                         width: 200,
                         height: 200,
                         decoration: BoxDecoration(
-                            color: Colors.black, shape: BoxShape.circle),
+                            color: Colors.green, shape: BoxShape.circle),
                       ),
                       top: -40,
                       left: -40,
@@ -77,7 +77,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                         width: 300,
                         height: 260,
                         decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.green.withOpacity(0.5),
                             shape: BoxShape.circle),
                       ),
                       top: -40,
@@ -89,7 +89,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                           width: 400,
                           height: 260,
                           decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.5),
+                              color: Colors.green.withOpacity(0.5),
                               shape: BoxShape.circle),
                         ),
                       ),
@@ -245,19 +245,32 @@ class _NewProfilePageState extends State<NewProfilePage> {
           padding: EdgeInsets.only(top: 12, bottom: 12),
           child: Row(
             children: <Widget>[
-              Image(
-                image: AssetImage(listSection.icon),
-                width: 20,
-                height: 20,
-                color: Colors.grey.shade500,
+              Expanded(
+                child: Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
+                      color: listSection.color),
+                  child: Icon(
+                    listSection.icon,
+                    color: Colors.white,
+                    size: 20.0,
+                  ),
+                ),
+                flex: 8,
               ),
               SizedBox(
                 width: 12,
               ),
-              Text(
-                listSection.title,
-                style: CustomTextStyle.textFormFieldBold
-                    .copyWith(color: Colors.grey.shade500),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    listSection.title,
+                    style: CustomTextStyle.textFormFieldMedium,
+                  ),
+                ),
+                flex: 84,
               ),
               Spacer(
                 flex: 1,
