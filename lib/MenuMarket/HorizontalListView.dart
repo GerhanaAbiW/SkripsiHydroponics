@@ -13,7 +13,7 @@ class HorizontalList extends StatelessWidget {
         ),
         Categories(
           imageLocation: "images/Icons/2.png",
-          imageCaption: "Pestisida",
+          imageCaption: "Obat",
         ),
         Categories(
           imageLocation: "images/Icons/3.png",
@@ -21,7 +21,7 @@ class HorizontalList extends StatelessWidget {
         ),
         Categories(
           imageLocation: "images/Icons/4.png",
-          imageCaption: "Alab",
+          imageCaption: "Alat",
         ),
       ]),
     );

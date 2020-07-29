@@ -41,9 +41,8 @@ class _MyAppState extends State<MyApp> {
         "11": (BuildContext _) => CartPage(),
         //"12": (BuildContext _) => ProfilePage(),
         "13": (BuildContext _) => NewProfilePage(),
-
       },
-      initialRoute: '13',
+      initialRoute: '3',
     );
   }
 }
