@@ -51,7 +51,7 @@ class _MenuMarketState extends State<MenuMarket> {
         appBar: new AppBar(
           elevation: 0.1,
           title: Text("HydroMarket"),
-          backgroundColor: Colors.green[700],
+          backgroundColor: Colors.lightBlue,
           actions: <Widget>[
             new IconButton(
                 icon: Icon(
@@ -59,8 +59,8 @@ class _MenuMarketState extends State<MenuMarket> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                 Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (context) => new CartPage()));
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (context) => new CartPage()));
                 }),
           ],
         ),
