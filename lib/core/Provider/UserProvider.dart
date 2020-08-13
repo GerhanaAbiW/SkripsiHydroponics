@@ -1,16 +1,14 @@
 import 'dart:async';
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hydroponics/Database/User.dart';
+import 'package:hydroponics/core/Database/User.dart';
 
+enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
-enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
-
-class UserProvider with ChangeNotifier{
+class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
@@ -19,18 +17,17 @@ class UserProvider with ChangeNotifier{
   Firestore _firestore = Firestore.instance;
   UserServices _userServices = UserServices();
 
-
-  UserProvider.initialize(): _auth = FirebaseAuth.instance{
+  UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
   }
 
-  Future<bool> signIn(String email, String password)async{
-    try{
+  Future<bool> signIn(String email, String password) async {
+    try {
       _status = Status.Authenticating;
       notifyListeners();
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
-    }catch(e){
+    } catch (e) {
       _status = Status.Unauthenticated;
       notifyListeners();
       print(e.toString());
@@ -38,20 +35,20 @@ class UserProvider with ChangeNotifier{
     }
   }
 
-
-  Future<bool> signUp(String name,String email, String password)async{
-    try{
+  Future<bool> signUp(String name, String email, String password) async {
+    try {
       _status = Status.Authenticating;
       notifyListeners();
-      await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user){
-        _firestore.collection('users').document(user.user.uid).setData({
-          'name':name,
-          'email':email,
-          'uid':user.user.uid
-        });
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((user) {
+        _firestore
+            .collection('users')
+            .document(user.user.uid)
+            .setData({'name': name, 'email': email, 'uid': user.user.uid});
       });
       return true;
-    }catch(e){
+    } catch (e) {
       _status = Status.Unauthenticated;
       notifyListeners();
       print(e.toString());
@@ -59,19 +56,17 @@ class UserProvider with ChangeNotifier{
     }
   }
 
-  Future signOut()async{
+  Future signOut() async {
     _auth.signOut();
     _status = Status.Unauthenticated;
     notifyListeners();
     return Future.delayed(Duration.zero);
   }
 
-
-
-  Future<void> _onStateChanged(FirebaseUser user) async{
-    if(user == null){
+  Future<void> _onStateChanged(FirebaseUser user) async {
+    if (user == null) {
       _status = Status.Unauthenticated;
-    }else{
+    } else {
       _user = user;
       _status = Status.Authenticated;
     }

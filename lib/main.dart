@@ -20,7 +20,7 @@ import 'package:hydroponics/features/Dashboard/DashBoard.dart';
 // import 'package:hydroponics/Profile/NewProfilePage.dart';
 // import 'package:hydroponics/Profile/ProfilePage.dart';
 import 'package:hydroponics/Provider/UserProvider.dart';
-import 'package:hydroponics/Widget/SplashScreen.dart';
+import 'package:hydroponics/features/Widget/SplashScreen.dart';
 import 'package:hydroponics/home.dart';
 import 'package:provider/provider.dart';
 

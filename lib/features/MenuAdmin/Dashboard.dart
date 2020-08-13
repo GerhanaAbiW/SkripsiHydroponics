@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/MenuAdmin/AddProduct.dart';
-import 'package:hydroponics/MenuAdmin/AppState.dart';
+
+import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
+import 'package:hydroponics/features/MenuAdmin/AppState.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:hydroponics/MenuAdmin/SmallCard.dart';
+import 'package:hydroponics/features/MenuAdmin/SmallCard.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
