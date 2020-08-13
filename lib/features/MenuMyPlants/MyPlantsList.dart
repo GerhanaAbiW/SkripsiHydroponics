@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hydroponics/MenuMyPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
+
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class MyPlantsList extends StatefulWidget {
@@ -102,42 +103,42 @@ class _MyPlantsListState extends State<MyPlantsList> {
                             return AnimationConfiguration.staggeredList(
                               position: index,
                               duration: const Duration(milliseconds: 3000),
-                                child: SlideAnimation(
-                                  verticalOffset: 100.0,
-                                  child: Slidable(
-                                    key: ValueKey(index),
-                                    actionPane: SlidableDrawerActionPane(),
-                                    secondaryActions: <Widget>[
-                                      IconSlideAction(
-                                        caption: "Update",
-                                        color: Colors.grey.shade300,
-                                        icon: Icons.edit,
-                                        closeOnTap: false,
-                                        onTap: () {},
-                                      ),
-                                      IconSlideAction(
-                                        caption: "Delete",
-                                        color: Colors.red.shade300,
-                                        icon: Icons.edit,
-                                        closeOnTap: true,
-                                        onTap: () {
-                                          Fluttertoast.showToast(
-                                              msg: "Delete Successfull",
-                                              toastLength: Toast.LENGTH_SHORT,
-                                              backgroundColor: Colors.red,
-                                              textColor: Colors.white);
-                                        },
-                                      ),
-                                    ],
-                                    dismissal: SlidableDismissal(
-                                      child: SlidableDrawerDismissal(),
+                              child: SlideAnimation(
+                                verticalOffset: 100.0,
+                                child: Slidable(
+                                  key: ValueKey(index),
+                                  actionPane: SlidableDrawerActionPane(),
+                                  secondaryActions: <Widget>[
+                                    IconSlideAction(
+                                      caption: "Update",
+                                      color: Colors.grey.shade300,
+                                      icon: Icons.edit,
+                                      closeOnTap: false,
+                                      onTap: () {},
                                     ),
-                                    child: YourListChild(
-                                      //imgPath: 'images/bayam.jpeg',
-                                      foodName: 'Kangkung',
-                                      price: '7 Hari',
+                                    IconSlideAction(
+                                      caption: "Delete",
+                                      color: Colors.red.shade300,
+                                      icon: Icons.edit,
+                                      closeOnTap: true,
+                                      onTap: () {
+                                        Fluttertoast.showToast(
+                                            msg: "Delete Successfull",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            backgroundColor: Colors.red,
+                                            textColor: Colors.white);
+                                      },
                                     ),
+                                  ],
+                                  dismissal: SlidableDismissal(
+                                    child: SlidableDrawerDismissal(),
                                   ),
+                                  child: YourListChild(
+                                    //imgPath: 'images/bayam.jpeg',
+                                    foodName: 'Kangkung',
+                                    price: '7 Hari',
+                                  ),
+                                ),
                               ),
                             );
                           }),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hydroponics/MainMenu/MainMenu.dart';
+import 'package:hydroponics/features/Dashboard/DashBoard.dart';
 
 class LoginRegister extends StatefulWidget {
   @override
@@ -9,7 +9,8 @@ class LoginRegister extends StatefulWidget {
   }
 }
 
-class LoginRegisterState extends State<LoginRegister> with SingleTickerProviderStateMixin {
+class LoginRegisterState extends State<LoginRegister>
+    with SingleTickerProviderStateMixin {
   bool isLogin = true;
   bool isVisible = true;
   Animation<double> loginSize;

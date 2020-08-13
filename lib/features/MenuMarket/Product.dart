@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/MenuMarket/ProductClick.dart';
+import 'package:hydroponics/features/MenuMarket/ProductClick.dart';
 
 class Products extends StatefulWidget {
   @override
@@ -8,16 +8,35 @@ class Products extends StatefulWidget {
 
 class _ProductsState extends State<Products> {
   var productList = [
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": 100, "rating":5},
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": 100, "rating":5},
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": 100, "rating":5},
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": 100, "rating":5},
+    {
+      "name": "Bayam",
+      "picture": "images/bayam.jpeg",
+      "price": 100,
+      "rating": 5
+    },
+    {
+      "name": "Bayam",
+      "picture": "images/bayam.jpeg",
+      "price": 100,
+      "rating": 5
+    },
+    {
+      "name": "Bayam",
+      "picture": "images/bayam.jpeg",
+      "price": 100,
+      "rating": 5
+    },
+    {
+      "name": "Bayam",
+      "picture": "images/bayam.jpeg",
+      "price": 100,
+      "rating": 5
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-
       itemCount: productList.length,
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -43,14 +62,18 @@ class SingleProduct extends StatelessWidget {
   final productPrice;
   final productRating;
 
-  SingleProduct({this.productPicture, this.productName, this.productPrice, this.productRating});
+  SingleProduct(
+      {this.productPicture,
+      this.productName,
+      this.productPrice,
+      this.productRating});
 
   @override
   Widget build(BuildContext context) {
-   return Container(
-     height: 275.0,
-     width: MediaQuery.of(context).size.width,
-     child: Padding(
+    return Container(
+      height: 275.0,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
           padding: EdgeInsets.all(10.0),
           child: InkWell(
               onTap: () {
@@ -78,11 +101,12 @@ class SingleProduct extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(top: 20.0),
                           child: Hero(
-                              tag: productPicture,
-                              child: Image.asset(
-                  productPicture,
-                  fit: BoxFit.cover,
-                ),)),
+                            tag: productPicture,
+                            child: Image.asset(
+                              productPicture,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
                       Positioned(
                         top: 7.0,
                         left: 7.0,
@@ -131,7 +155,7 @@ class SingleProduct extends StatelessWidget {
                           ))
                     ],
                   )))),
-   );
+    );
 //    return Card(
 //      child: Hero(
 //          tag: new Text("ProductDetail"),
@@ -192,6 +216,7 @@ class SingleProduct extends StatelessWidget {
 //          ))),
 //    );
   }
+
   getRatingStar(rating, index) {
     if (index <= rating) {
       return Icon(
@@ -208,5 +233,3 @@ class SingleProduct extends StatelessWidget {
     }
   }
 }
-
-

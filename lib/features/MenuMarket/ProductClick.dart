@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/MenuMarket/Market.dart';
+import 'package:hydroponics/features/MenuMarket/Market.dart';
 
 class ProductDetails extends StatefulWidget {
   final productDetailPicture;

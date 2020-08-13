@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/LoginRegister/Login.dart';
-import 'package:hydroponics/LoginRegister/LoginRegister.dart';
-import 'package:hydroponics/LoginRegister/Register.dart';
-import 'package:hydroponics/MainMenu/MainMenu.dart';
-import 'package:hydroponics/MenuAdmin/AddProduct.dart';
-import 'package:hydroponics/MenuAdmin/Dashboard.dart';
-import 'package:hydroponics/MenuAdmin/MenuAdmin.dart';
-import 'package:hydroponics/MenuLearning/MenuArticleDetail.dart';
-import 'package:hydroponics/MenuLearning/MenuLearning.dart';
-import 'package:hydroponics/MenuMarket/Cart.dart';
-import 'package:hydroponics/MenuMarket/CartProduct.dart';
-import 'package:hydroponics/MenuMarket/Market.dart';
-import 'package:hydroponics/MenuMyPlants/MyPlantsDetails.dart';
-import 'package:hydroponics/MenuMyPlants/MyPlantsList.dart';
-import 'package:hydroponics/Profile/NewProfilePage.dart';
-import 'package:hydroponics/Profile/ProfilePage.dart';
+import 'package:hydroponics/features/LoginRegister/Login.dart';
+//import 'package:hydroponics/features/LoginRegister/Register.dart';
+//import 'package:hydroponics/features/LoginRegister/LoginRegister.dart';
+// import 'package:hydroponics/LoginRegister/Login.dart';
+// import 'package:hydroponics/LoginRegister/LoginRegister.dart';
+// import 'package:hydroponics/LoginRegister/Register.dart';
+
+import 'package:hydroponics/features/Dashboard/DashBoard.dart';
+// import 'package:hydroponics/MenuAdmin/AddProduct.dart';
+// import 'package:hydroponics/MenuAdmin/Dashboard.dart';
+// import 'package:hydroponics/MenuAdmin/MenuAdmin.dart';
+// import 'package:hydroponics/MenuLearning/MenuArticleDetail.dart';
+// import 'package:hydroponics/MenuLearning/MenuLearning.dart';
+// import 'package:hydroponics/MenuMarket/Cart.dart';
+// import 'package:hydroponics/MenuMarket/CartProduct.dart';
+// import 'package:hydroponics/MenuMarket/Market.dart';
+// import 'package:hydroponics/MenuMyPlants/MyPlantsDetails.dart';
+// import 'package:hydroponics/MenuMyPlants/MyPlantsList.dart';
+// import 'package:hydroponics/Profile/NewProfilePage.dart';
+// import 'package:hydroponics/Profile/ProfilePage.dart';
 import 'package:hydroponics/Provider/UserProvider.dart';
 import 'package:hydroponics/Widget/SplashScreen.dart';
 import 'package:hydroponics/home.dart';
@@ -56,16 +60,14 @@ import 'package:provider/provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider.value(value: UserProvider.initialize()),
-    //ChangeNotifierProvider.value(value: AppProvider()),
-
-  ],
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: UserProvider.initialize()),
+        //ChangeNotifierProvider.value(value: AppProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primaryColor: Colors.deepOrange
-        ),
+        theme: ThemeData(primaryColor: Colors.deepOrange),
         home: ScreensController(),
       )));
 }
@@ -74,7 +76,7 @@ class ScreensController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
-    switch(user.status){
+    switch (user.status) {
       case Status.Uninitialized:
         return Splash();
       case Status.Unauthenticated:
@@ -82,9 +84,8 @@ class ScreensController extends StatelessWidget {
         return LoginScreen();
       case Status.Authenticated:
         return MainMenu();
-      default: return LoginScreen();
+      default:
+        return LoginScreen();
     }
   }
 }
-
-

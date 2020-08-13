@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/MenuLearning/ArticleList.dart';
-import 'package:hydroponics/MenuLearning/VideoList.dart';
+import 'package:hydroponics/features/MenuLearning/ArticleList.dart';
+import 'package:hydroponics/features/MenuLearning/VideoList.dart';
 
 class MenuLearning extends StatefulWidget {
   @override

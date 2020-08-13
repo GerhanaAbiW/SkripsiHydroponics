@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/LoginRegister/Register.dart';
+import 'package:hydroponics/features/LoginRegister/Register.dart';
 import 'package:hydroponics/Provider/UserProvider.dart';
 import 'package:hydroponics/Routing/ChangeRoute.dart';
 import 'package:hydroponics/Widget/Loading.dart';
@@ -102,7 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: RaisedButton(
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              if (!await user.signIn(_email.text, _password.text))
+                              if (!await user.signIn(
+                                  _email.text, _password.text))
                                 _key.currentState.showSnackBar(
                                     SnackBar(content: Text("Sign in failed")));
                             }

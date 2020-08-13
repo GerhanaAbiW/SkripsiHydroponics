@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/MenuMarket/CheckOut.dart';
+import 'package:hydroponics/features/MenuMarket/CheckOut.dart';
 import 'package:hydroponics/Utils/CustomTextStyle.dart';
 import 'package:hydroponics/Utils/CustomUtils.dart';
-
 
 class CartPage extends StatefulWidget {
   @override
@@ -186,7 +185,7 @@ class _CartPageState extends State<CartPage> {
                                     child: Text(
                                       "1",
                                       style:
-                                      CustomTextStyle.textFormFieldSemiBold,
+                                          CustomTextStyle.textFormFieldSemiBold,
                                     ),
                                   ),
                                   Icon(
