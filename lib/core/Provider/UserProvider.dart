@@ -43,7 +43,7 @@ class UserProvider with ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
         _firestore
-            .collection('users')
+            .collection('User')
             .document(user.user.uid)
             .setData({'name': name, 'email': email, 'uid': user.user.uid});
       });
