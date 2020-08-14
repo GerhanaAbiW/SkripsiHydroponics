@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
 //import 'package:hydroponics/features/LoginRegister/Register.dart';
 //import 'package:hydroponics/features/LoginRegister/LoginRegister.dart';
@@ -19,7 +20,7 @@ import 'package:hydroponics/features/Dashboard/DashBoard.dart';
 // import 'package:hydroponics/MenuMyPlants/MyPlantsList.dart';
 // import 'package:hydroponics/Profile/NewProfilePage.dart';
 // import 'package:hydroponics/Profile/ProfilePage.dart';
-import 'package:hydroponics/Provider/UserProvider.dart';
+import 'package:hydroponics/core/Provider/UserProvider.dart';
 import 'package:hydroponics/features/Widget/SplashScreen.dart';
 import 'package:hydroponics/home.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,7 @@ void main() {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.deepOrange),
+        theme: ThemeData(primaryColor: GreenTosca),
         home: ScreensController(),
       )));
 }

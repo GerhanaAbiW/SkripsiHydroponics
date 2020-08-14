@@ -57,8 +57,10 @@ class _HomeState extends State<Home> {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.home)),
           BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.apps)),
-          BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.chat_bubble)),
-          BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.settings)),
+          BottomNavyBarItem(
+              title: Text('Item One'), icon: Icon(Icons.chat_bubble)),
+          BottomNavyBarItem(
+              title: Text('Item One'), icon: Icon(Icons.settings)),
         ],
       ),
     );

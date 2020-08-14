@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Routing/ChangeRoute.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
-import 'package:hydroponics/Provider/UserProvider.dart';
+import 'package:hydroponics/core/Provider/UserProvider.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -24,18 +26,56 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       key: _key,
       backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   backgroundColor: Color(0xFF00a79B),
+      // ),
       body: user.status == Status.Authenticating
           ? Loading()
           : Form(
               key: _formKey,
               child: ListView(
                 children: <Widget>[
-                  //BackButtonWidget(),
                   SizedBox(
-                    height: 20,
+                    height: 16,
+                  ),
+                  Container(
+                    //padding: const EdgeInsets.only(left: 0, top: 16),
+                    alignment: Alignment.topLeft,
+                    margin: EdgeInsets.all(8),
+                    height: 30,
+                    width: 50,
+                    child: FlatButton(
+                      child: Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  //BackButtonWidget(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40.0),
+                    child: Text(
+                      "Selamat Datang di\nHydroasik",
+                      style: CustomTextStyle.textFormFieldBold
+                          .copyWith(color: GreenTosca, fontSize: 21),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.only(left: 40.0),
+                    child: Text(
+                      "Kami membantu Anda untuk mempelajari, mempermudah mendapatkan perlengkapan, dan mengajak Anda untuk langsung praktik menanam secara Hidroponik\n\n",
+                      style: CustomTextStyle.textFormFieldRegular
+                          .copyWith(color: GreenTosca, fontSize: 14),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Row(
                       children: <Widget>[
                         IconButton(icon: Icon(Icons.person), onPressed: null),
@@ -107,33 +147,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                   ),
+                  // SizedBox(
+                  //   height: 40,
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: Row(
+                  //     children: <Widget>[
+                  //       Radio(value: null, groupValue: null, onChanged: null),
+                  //       RichText(
+                  //           text: TextSpan(
+                  //               text: 'I have accepted the',
+                  //               style: TextStyle(color: Colors.black),
+                  //               children: [
+                  //             TextSpan(
+                  //                 text: 'Terms & Condition',
+                  //                 style: TextStyle(
+                  //                     color: Colors.teal,
+                  //                     fontWeight: FontWeight.bold))
+                  //           ]))
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
-                    height: 40,
+                    height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: <Widget>[
-                        Radio(value: null, groupValue: null, onChanged: null),
-                        RichText(
-                            text: TextSpan(
-                                text: 'I have accepted the',
-                                style: TextStyle(color: Colors.black),
-                                children: [
-                              TextSpan(
-                                  text: 'Terms & Condition',
-                                  style: TextStyle(
-                                      color: Colors.teal,
-                                      fontWeight: FontWeight.bold))
-                            ]))
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
@@ -150,7 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               changeScreenReplacement(context, LoginScreen());
                             }
                           },
-                          color: Color(0xFF00a79B),
+                          color: GreenTosca,
                           child: Text(
                             'SIGN UP',
                             style: TextStyle(
@@ -169,55 +209,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 }
 
-class BackButtonWidget extends StatelessWidget {
-  const BackButtonWidget({
-    Key key,
-  }) : super(key: key);
+// class BackButtonWidget extends StatelessWidget {
+//   const BackButtonWidget({
+//     Key key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover, image: AssetImage('images/bayam.jpeg'))),
-      child: Positioned(
-          child: Stack(
-        children: <Widget>[
-          Positioned(
-              top: 20,
-              child: Row(
-                children: <Widget>[
-                  IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                  Text(
-                    'Back',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  )
-                ],
-              )),
-          Positioned(
-            bottom: 20,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Create New Account',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-            ),
-          )
-        ],
-      )),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 200,
+//       decoration: BoxDecoration(
+//           image: DecorationImage(
+//               fit: BoxFit.cover, image: AssetImage('images/bayam.jpeg'))),
+//       child: Positioned(
+//           child: Stack(
+//         children: <Widget>[
+//           Positioned(
+//               top: 20,
+//               child: Row(
+//                 children: <Widget>[
+//                   IconButton(
+//                       icon: Icon(
+//                         Icons.arrow_back_ios,
+//                         color: Colors.white,
+//                       ),
+//                       onPressed: () {
+//                         Navigator.pop(context);
+//                       }),
+//                   Text(
+//                     'Back',
+//                     style: TextStyle(
+//                         color: Colors.black, fontWeight: FontWeight.bold),
+//                   )
+//                 ],
+//               )),
+//           Positioned(
+//             bottom: 20,
+//             child: Padding(
+//               padding: const EdgeInsets.all(8.0),
+//               child: Text(
+//                 'Create New Account',
+//                 style: TextStyle(
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                     fontSize: 18),
+//               ),
+//             ),
+//           )
+//         ],
+//       )),
+//     );
+//   }
+// }

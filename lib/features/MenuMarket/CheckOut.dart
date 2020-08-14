@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
-
-import 'package:hydroponics/Utils/CustomTextStyle.dart';
-
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
 
 class CheckOutPage extends StatefulWidget {
   @override
@@ -82,7 +80,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: Colors.grey.shade200, width: 2),
-            borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16))),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(16), topLeft: Radius.circular(16))),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -107,7 +106,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -174,7 +173,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
@@ -282,7 +281,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-          Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
+              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
           color: Colors.tealAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -366,7 +365,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               fit: BoxFit.fitHeight,
             ),
             decoration:
-            BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
+                BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
           ),
           SizedBox(
             width: 8,
@@ -477,14 +476,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
     FlutterMoneyFormatter fmf = new FlutterMoneyFormatter(
         amount: amount,
         settings: MoneyFormatterSettings(
-            symbol: '₹',
-            thousandSeparator: '.',
-            decimalSeparator: ',',
-            symbolAndNumberSeparator: ' ',
-            //fractionDigits: 3,
-            //compactFormatType: CompactFormatType.sort
-        )
-    );
+          symbol: '₹',
+          thousandSeparator: '.',
+          decimalSeparator: ',',
+          symbolAndNumberSeparator: ' ',
+          //fractionDigits: 3,
+          //compactFormatType: CompactFormatType.sort
+        ));
     return fmf.output.compactSymbolOnLeft;
 //    FlutterMoneyFormatter fmf = new FlutterMoneyFormatter(amount: amount);
 //    fmf.L = "₹";

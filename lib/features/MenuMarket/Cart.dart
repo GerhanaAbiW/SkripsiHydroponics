@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/features/MenuMarket/CheckOut.dart';
-import 'package:hydroponics/Utils/CustomTextStyle.dart';
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
+
 import 'package:hydroponics/core/Utils/CustomUtils.dart';
 
 class CartPage extends StatefulWidget {

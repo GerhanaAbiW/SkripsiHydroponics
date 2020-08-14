@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Routing/ChangeRoute.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/constants/Image_Constants.dart' as images;
+import 'package:hydroponics/core/Router/Router_Constants.dart';
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
-import 'package:hydroponics/Provider/UserProvider.dart';
+import 'package:hydroponics/core/Provider/UserProvider.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 
@@ -33,8 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 300,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('images/bayam.jpeg'))),
+                            fit: BoxFit.cover, image: images.bibit
+                            //image: AssetImage('images/categories/Bibit.png')
+                            )),
                   ),
                   SizedBox(
                     height: 20,
@@ -108,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SnackBar(content: Text("Sign in failed")));
                             }
                           },
-                          color: Color(0xFF00a79B),
+                          color: GreenTosca,
                           child: Text(
                             'LOGIN',
                             style: TextStyle(
@@ -125,18 +130,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      changeScreenReplacement(context, RegisterScreen());
+                      //Navigator.pushNamed(context, Register);
+                      changeScreen(context, RegisterScreen());
                     },
                     child: Center(
                       child: RichText(
                         text: TextSpan(
-                            text: 'Don\'t have an account?',
-                            style: TextStyle(color: Colors.black),
+                            text: 'Don\'t have an account?\t',
+                            style: TextStyle(color: DarkGrey, fontSize: 14),
                             children: [
                               TextSpan(
                                 text: 'SIGN UP',
                                 style: TextStyle(
-                                    color: Colors.teal,
+                                    color: GreenTosca,
                                     fontWeight: FontWeight.bold),
                               )
                             ]),
