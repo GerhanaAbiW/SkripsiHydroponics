@@ -4,7 +4,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:hydroponics/features/MenuMarket/Cart.dart';
 import 'package:hydroponics/features/MenuMarket/HorizontalListView.dart';
 import 'package:hydroponics/features/MenuMarket/Product.dart';
-import 'package:hydroponics/features/MenuMarket/SearchMarket.dart';
+import 'package:hydroponics/features/Widget/SearchMarket.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class MenuMarket extends StatefulWidget {

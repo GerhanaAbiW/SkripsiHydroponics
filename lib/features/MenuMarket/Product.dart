@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/features/MenuMarket/ProductClick.dart';
+import 'package:hydroponics/core/Models/Product.dart';
+import 'package:hydroponics/core/Providers/ProductProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuMarket/ProductDetail.dart';
+import 'package:provider/provider.dart';
 
 class Products extends StatefulWidget {
   @override
@@ -36,19 +40,17 @@ class _ProductsState extends State<Products> {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return GridView.builder(
-      itemCount: productList.length,
+      itemCount: productProvider.products.length,
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.all(4.0),
-          child: SingleProduct(
-            productPicture: productList[index]["picture"],
-            productName: productList[index]["name"],
-            productPrice: productList[index]["price"],
-            productRating: productList[index]["rating"],
+          child: ProductCard(
+            product: productProvider.products[index],
           ),
         );
       },
@@ -56,17 +58,9 @@ class _ProductsState extends State<Products> {
   }
 }
 
-class SingleProduct extends StatelessWidget {
-  final productPicture;
-  final productName;
-  final productPrice;
-  final productRating;
-
-  SingleProduct(
-      {this.productPicture,
-      this.productName,
-      this.productPrice,
-      this.productRating});
+class ProductCard extends StatelessWidget {
+  final ProductModel product;
+  const ProductCard({Key key, this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +71,7 @@ class SingleProduct extends StatelessWidget {
           padding: EdgeInsets.all(10.0),
           child: InkWell(
               onTap: () {
-//              Navigator.of(context).push(MaterialPageRoute(
-//                  builder: (context) => WineDetail(wineDetail: wine)));
+                changeScreen(context, ProductDetails(product: product,));
               },
               child: Container(
                   width: 200.0,
@@ -101,16 +94,16 @@ class SingleProduct extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(top: 20.0),
                           child: Hero(
-                            tag: productPicture,
+                            tag: product.picture,
                             child: Image.asset(
-                              productPicture,
+                              product.picture,
                               fit: BoxFit.cover,
                             ),
                           )),
                       Positioned(
                         top: 7.0,
                         left: 7.0,
-                        child: Text("\$$productPrice",
+                        child: Text("\$${product.price}",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
@@ -127,25 +120,25 @@ class SingleProduct extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(productName,
+                              Text(product.name,
                                   style: TextStyle(
                                     fontFamily: 'AbrilFatFace',
                                     fontSize: 14.0,
                                   )),
                               SizedBox(height: 5.0),
-                              Text(productName,
+                              Text("by: ${product.brand} ",
                                   style: TextStyle(
                                       fontSize: 11.0, color: Colors.black)),
                               SizedBox(height: 5.0),
                               Row(
                                 children: <Widget>[
-                                  getRatingStar(productRating, 1),
-                                  getRatingStar(productRating, 2),
-                                  getRatingStar(productRating, 3),
-                                  getRatingStar(productRating, 4),
-                                  getRatingStar(productRating, 5),
+                                  getRatingStar(product.rating, 1),
+                                  getRatingStar(product.rating, 2),
+                                  getRatingStar(product.rating, 3),
+                                  getRatingStar(product.rating, 4),
+                                  getRatingStar(product.rating, 5),
                                   SizedBox(width: 3.0),
-                                  Text(productRating.roundToDouble().toString(),
+                                  Text(product.rating.roundToDouble().toString(),
                                       style: TextStyle(
                                           fontSize: 14.0,
                                           color: Color(0xFF199693))),

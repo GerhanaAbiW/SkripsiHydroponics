@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 
 class ProductDetails extends StatefulWidget {
-  final productDetailPicture;
-  final productDetailName;
-  final productDetailPrice;
+  final ProductModel product;
 
-  ProductDetails(
-      {this.productDetailPicture,
-      this.productDetailName,
-      this.productDetailPrice});
+  const ProductDetails({Key key, this.product}) : super(key: key);
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
@@ -50,22 +46,22 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: GridTile(
             child: Container(
                 color: Colors.white70,
-                child: Image.asset(widget.productDetailPicture)),
+                child: Image.asset(widget.product.picture)),
             footer: new Container(
               color: Colors.white,
               child: ListTile(
                 leading: new Text(
-                  widget.productDetailName,
+                  widget.product.name,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                 ),
                 title: new Row(
                   children: <Widget>[
                     Expanded(
-                      child: new Text("${widget.productDetailPrice}"),
+                      child: new Text("\$${widget.product.price}"),
                     ),
                     Expanded(
                       child: new Text(
-                        "${widget.productDetailPrice}",
+                        "\$${widget.product.price}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.red),
                       ),
@@ -167,7 +163,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         new ListTile(
           title: new Text("Product Detail"),
           subtitle: new Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+             widget.product.description),
         ),
         Divider(),
         new Row(children: <Widget>[
@@ -178,7 +174,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: new Text(widget.productDetailName),
+            child: new Text(widget.product.name),
           )
         ]),
         new Row(children: <Widget>[
@@ -189,7 +185,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: new Text("Brand X"),
+            child: new Text(widget.product.brand),
           )
         ]),
         new Row(children: <Widget>[
@@ -209,96 +205,96 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: new Text("Similar Products"),
         ),
         //Similar Product
-        Container(
-          height: 340.0,
-          child: SimilarProduct(),
-        )
+//        Container(
+//          height: 340.0,
+//          child: SimilarProduct(),
+//        )
       ]),
     );
   }
 }
 
-class SimilarProduct extends StatefulWidget {
-  @override
-  _SimilarProductState createState() => _SimilarProductState();
-}
-
-class _SimilarProductState extends State<SimilarProduct> {
-  var productList = [
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: productList.length,
-      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemBuilder: (BuildContext context, int index) {
-        return SimilarSinglePoduct(
-          productPicture: productList[index]["picture"],
-          productName: productList[index]["name"],
-          productPrice: productList[index]["price"],
-        );
-      },
-    );
-  }
-}
-
-class SimilarSinglePoduct extends StatelessWidget {
-  final productPicture;
-  final productName;
-  final productPrice;
-
-  SimilarSinglePoduct(
-      {this.productPicture, this.productName, this.productPrice});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Hero(
-          tag: new Text("ProductDetail"),
-          child: Material(
-              child: InkWell(
-            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                builder: (context) => new ProductDetails(
-                      //parsing data
-                      productDetailName: productName,
-                      productDetailPicture: productPicture,
-                      productDetailPrice: productPrice,
-                    ))),
-            child: GridTile(
-              footer: Container(
-                color: Colors.white70,
-                child: ListTile(
-                  leading: Text(
-                    productName,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  title: Text(
-                    "\$$productPrice",
-                    style: TextStyle(
-                        color: Colors.green, fontWeight: FontWeight.w800),
-                  ),
-                  subtitle: Text(
-                    "\$$productPrice",
-                    style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w800,
-                        decoration: TextDecoration.lineThrough),
-                  ),
-                ),
-              ),
-              child: Image.asset(
-                productPicture,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ))),
-    );
-  }
-}
+//class SimilarProduct extends StatefulWidget {
+//  @override
+//  _SimilarProductState createState() => _SimilarProductState();
+//}
+//
+//class _SimilarProductState extends State<SimilarProduct> {
+//  var productList = [
+//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
+//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
+//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
+//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
+//  ];
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return GridView.builder(
+//      itemCount: productList.length,
+//      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+//        crossAxisCount: 2,
+//      ),
+//      itemBuilder: (BuildContext context, int index) {
+//        return SimilarSinglePoduct(
+//          productPicture: productList[index]["picture"],
+//          productName: productList[index]["name"],
+//          productPrice: productList[index]["price"],
+//        );
+//      },
+//    );
+//  }
+//}
+//
+//class SimilarSinglePoduct extends StatelessWidget {
+//  final productPicture;
+//  final productName;
+//  final productPrice;
+//
+//  SimilarSinglePoduct(
+//      {this.productPicture, this.productName, this.productPrice});
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Card(
+//      child: Hero(
+//          tag: new Text("ProductDetail"),
+//          child: Material(
+//              child: InkWell(
+//            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+//                builder: (context) => new ProductDetails(
+//                      //parsing data
+//                      productDetailName: productName,
+//                      productDetailPicture: productPicture,
+//                      productDetailPrice: productPrice,
+//                    ))),
+//            child: GridTile(
+//              footer: Container(
+//                color: Colors.white70,
+//                child: ListTile(
+//                  leading: Text(
+//                    productName,
+//                    style: TextStyle(fontWeight: FontWeight.bold),
+//                  ),
+//                  title: Text(
+//                    "\$$productPrice",
+//                    style: TextStyle(
+//                        color: Colors.green, fontWeight: FontWeight.w800),
+//                  ),
+//                  subtitle: Text(
+//                    "\$$productPrice",
+//                    style: TextStyle(
+//                        color: Colors.black54,
+//                        fontWeight: FontWeight.w800,
+//                        decoration: TextDecoration.lineThrough),
+//                  ),
+//                ),
+//              ),
+//              child: Image.asset(
+//                productPicture,
+//                fit: BoxFit.cover,
+//              ),
+//            ),
+//          ))),
+//    );
+//  }
+//}
