@@ -57,9 +57,11 @@ class UserProvider with ChangeNotifier {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
+        debugPrint("user uid ${user.user.uid}");
         _userServices.createUser({
           'name': name,
           'email': email,
+          'role': "user",
           'uid': user.user.uid,
           'stripeId': ''
         });
@@ -104,6 +106,8 @@ class UserProvider with ChangeNotifier {
         "image": product.picture,
         "productId": product.id,
         "price": product.price,
+        "size": size,
+        "color": color
       };
 
       CartItemModel item = CartItemModel.fromMap(cartItem);
@@ -119,25 +123,24 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> removeFromCart({CartItemModel cartItem})async{
+  Future<bool> removeFromCart({CartItemModel cartItem}) async {
     print("THE PRODUC IS: ${cartItem.toString()}");
 
-    try{
+    try {
       _userServices.removeFromCart(userId: _user.uid, cartItem: cartItem);
       return true;
-    }catch(e){
+    } catch (e) {
       print("THE ERROR ${e.toString()}");
       return false;
     }
-
   }
 
-  getOrders()async{
+  getOrders() async {
     orders = await _orderServices.getUserOrders(userId: _user.uid);
     notifyListeners();
   }
 
-  Future<void> reloadUserModel()async{
+  Future<void> reloadUserModel() async {
     _userModel = await _userServices.getUserById(user.uid);
     notifyListeners();
   }

@@ -7,12 +7,14 @@ class UserModel {
   static const ID = "uid";
   static const NAME = "name";
   static const EMAIL = "email";
+  static const ROLE = "role";
   static const STRIPE_ID = "stripeId";
   static const CART = "cart";
 
 
   String _name;
   String _email;
+  String _role;
   String _id;
   String _stripeId;
   int _priceSum = 0;
@@ -22,6 +24,7 @@ class UserModel {
   String get name => _name;
 
   String get email => _email;
+  String get role => _role;
 
   String get id => _id;
 
@@ -36,6 +39,7 @@ class UserModel {
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     _name = snapshot.data[NAME];
     _email = snapshot.data[EMAIL];
+    _email = snapshot.data[ROLE];
     _id = snapshot.data[ID];
     _stripeId = snapshot.data[STRIPE_ID] ?? "";
     cart = _convertCartItems(snapshot.data[CART]?? []);

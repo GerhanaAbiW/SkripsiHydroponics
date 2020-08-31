@@ -13,6 +13,7 @@ import 'package:hydroponics/features/LoginRegister/Login.dart';
 // import 'package:hydroponics/LoginRegister/Register.dart';
 
 import 'package:hydroponics/features/Dashboard/DashBoard.dart';
+import 'package:hydroponics/features/LoginRegister/Register.dart';
 // import 'package:hydroponics/MenuAdmin/AddProduct.dart';
 // import 'package:hydroponics/MenuAdmin/Dashboard.dart';
 // import 'package:hydroponics/MenuAdmin/MenuAdmin.dart';
@@ -89,6 +90,7 @@ class ScreensController extends StatelessWidget {
       case Status.Uninitialized:
         return Splash();
       case Status.Unauthenticated:
+        return RegisterScreen();
       case Status.Authenticating:
         return LoginScreen();
       case Status.Authenticated:

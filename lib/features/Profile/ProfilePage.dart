@@ -1,7 +1,8 @@
 //import 'package:flutter/material.dart';
-//import 'package:hydroponics/Model/list_profile_section.dart';
-//import 'package:hydroponics/Utils/CustomTextStyle.dart';
-//import 'package:hydroponics/Utils/CustomUtils.dart';
+//import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+//import 'package:hydroponics/core/Utils/CustomUtils.dart';
+//
+//import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 //
 //
 //import 'AboutUsPage.dart';
@@ -24,25 +25,16 @@
 //  }
 //
 //  void createListItem() {
-//    listSection.add(createSection("Notifications", "images/asset_profile/ic_notification.png",
-//        Colors.blue.shade800, NotificationPage()));
-//    listSection.add(createSection(
-//        "Payment Method", "images/asset_profile/ic_payment.png", Colors.teal.shade800, null));
-//    listSection.add(createSection(
-//        "Settings", "images/asset_profile/ic_settings.png", Colors.red.shade800, null));
-//    listSection.add(createSection(
-//        "Invite Friends",
-//        "images/asset_profile/ic_invite_friends.png",
-//        Colors.indigo.shade800,
-//        InviteFriendsPage()));
-//    listSection.add(createSection("About Us", "images/asset_profile/ic_about_us.png",
-//        Colors.black.withOpacity(0.8), AboutPage()));
-//    listSection.add(createSection(
-//        "Logout", "images/asset_profile/ic_logout.png", Colors.red.withOpacity(0.7), null));
+//    listSection.add(createSection("Notifications", "images/asset_profile/ic_notification.png", Colors.blue.shade800, NotificationPage()));
+//    listSection.add(createSection("Payment Method", "images/asset_profile/ic_payment.png", Colors.teal.shade800, null));
+//    listSection.add(createSection("Settings", "images/asset_profile/ic_settings.png", Colors.red.shade800, null));
+//    listSection.add(createSection("Invite Friends", "images/asset_profile/ic_invite_friends.png", Colors.indigo.shade800, InviteFriendsPage()));
+//    listSection.add(createSection("About Us", "images/asset_profile/ic_about_us.png", Colors.black.withOpacity(0.8), AboutPage()));
+//    listSection.add(createSection("Logout", "images/asset_profile/ic_logout.png", Colors.red.withOpacity(0.7), null));
 //  }
 //
-//  createSection(String title, Icon icons, Color color, Widget widget) {
-//    return ListProfileSection(title, icons, color, widget);
+//  createSection(String title, String img, Color color, Widget widget) {
+//    return ListProfileSection(title, img, color, widget);
 //  }
 //
 //  @override
