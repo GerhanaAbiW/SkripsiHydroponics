@@ -4,6 +4,7 @@ import 'package:hydroponics/core/constants/Image_Constants.dart' as images;
 import 'package:hydroponics/core/Router/Router_Constants.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
+import 'package:hydroponics/features/Dashboard/DashBoard.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
@@ -107,8 +108,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: RaisedButton(
                           onPressed: () async {
                             if(_formKey.currentState.validate()){
-                              if(!await user.signIn(_email.text, _password.text))
-                                _key.currentState.showSnackBar(SnackBar(content: Text("Sign in failed")));
+                              if(!await user.signIn(_email.text, _password.text)==true)
+//                                _key.currentState.showSnackBar(SnackBar(content: Text("Sign in failed")));
+//                              return;
+                                changeScreenReplacement(context, MainMenu());
                             }
                           },
                           color: GreenTosca,

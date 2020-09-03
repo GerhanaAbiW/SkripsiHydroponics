@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -124,13 +125,15 @@ class _CartPageState extends State<CartPage> {
       shrinkWrap: true,
       primary: false,
       itemBuilder: (context, position) {
-        return createCartListItem();
+        return createCartListItem(position);
       },
       itemCount: count,
     );
   }
 
-  createCartListItem() {
+  createCartListItem(int index) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return Stack(
       children: <Widget>[
         Container(
@@ -144,11 +147,11 @@ class _CartPageState extends State<CartPage> {
                 margin: EdgeInsets.only(right: 8, left: 8, top: 8, bottom: 8),
                 width: 80,
                 height: 80,
-                // decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.all(Radius.circular(14)),
-                //     //color: Colors.blue.shade200,
-                //     image: DecorationImage(
-                //         image: AssetImage(userProvider.userModel.cart[index].image))),
+                 decoration: BoxDecoration(
+                     borderRadius: BorderRadius.all(Radius.circular(14)),
+                     color: Colors.blue.shade200,
+                     image: DecorationImage(
+                         image: AssetImage(userProvider.userModel.cart[index].image))),
               ),
               Expanded(
                 child: Container(
@@ -159,13 +162,13 @@ class _CartPageState extends State<CartPage> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.only(right: 8, top: 4),
-                        // child: Text(
-                        //   userProvider.userModel.cart[index].name,
-                        //   maxLines: 2,
-                        //   softWrap: true,
-                        //   style: CustomTextStyle.textFormFieldSemiBold
-                        //       .copyWith(fontSize: 14),
-                        // ),
+                         child: Text(
+                           userProvider.userModel.cart[index].name,
+                           maxLines: 2,
+                           softWrap: true,
+                           style: CustomTextStyle.textFormFieldSemiBold
+                               .copyWith(fontSize: 14),
+                         ),
                       ),
                       Utils.getSizedBox(height: 6),
                       // Text(
@@ -177,11 +180,11 @@ class _CartPageState extends State<CartPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            // Text(
-                            //   "\$${userProvider.userModel.cart[index].price} ",
-                            //   style: CustomTextStyle.textFormFieldBlack
-                            //       .copyWith(color: Colors.green),
-                            // ),
+                             Text(
+                               "\$${userProvider.userModel.cart[index].price} ",
+                               style: CustomTextStyle.textFormFieldBlack
+                                   .copyWith(color: Colors.green),
+                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -230,23 +233,23 @@ class _CartPageState extends State<CartPage> {
             alignment: Alignment.center,
             margin: EdgeInsets.only(right: 10, top: 8),
             child: GestureDetector(
-              // onTap: () async {
-              //   appProvider.changeIsLoading();
-              //   bool success =
-              //   await userProvider.removeFromCart(
-              //       cartItem: userProvider
-              //           .userModel.cart[index]);
-              //   if (success) {
-              //     userProvider.reloadUserModel();
-              //     print("Item added to cart");
-              //     _key.currentState.showSnackBar(SnackBar(
-              //         content: Text("Removed from Cart!")));
-              //     appProvider.changeIsLoading();
-              //     return;
-              //   } else {
-              //     appProvider.changeIsLoading();
-              //   }
-              // },
+               onTap: () async {
+                 appProvider.changeIsLoading();
+                 bool success =
+                 await userProvider.removeFromCart(
+                     cartItem: userProvider
+                         .userModel.cart[index]);
+                 if (success) {
+                   userProvider.reloadUserModel();
+                   print("Item added to cart");
+                   _key.currentState.showSnackBar(SnackBar(
+                       content: Text("Removed from Cart!")));
+                   appProvider.changeIsLoading();
+                   return;
+                 } else {
+                   appProvider.changeIsLoading();
+                 }
+               },
               child: Icon(
                 Icons.close,
                 color: Colors.white,

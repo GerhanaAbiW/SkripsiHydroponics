@@ -183,9 +183,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             if (_formKey.currentState.validate()) {
                               if (!await user.signUp(
                                   _name.text, _email.text, _password.text)) {
-                                _key.currentState.showSnackBar(
-                                    SnackBar(content: Text("Sign up failed")));
-                                return;
+//                                _key.currentState.showSnackBar(
+//                                    SnackBar(content: Text("Sign up failed")));
+//                                return;
                               }
                               changeScreenReplacement(context, LoginScreen());
                             }

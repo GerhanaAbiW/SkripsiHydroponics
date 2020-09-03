@@ -90,7 +90,7 @@ class ScreensController extends StatelessWidget {
       case Status.Uninitialized:
         return Splash();
       case Status.Unauthenticated:
-        return RegisterScreen();
+        return LoginScreen();
       case Status.Authenticating:
         return LoginScreen();
       case Status.Authenticated:

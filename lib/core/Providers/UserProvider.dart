@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +20,7 @@ class UserProvider with ChangeNotifier {
   Status _status = Status.Uninitialized;
   UserServices _userServices = UserServices();
   OrderServices _orderServices = OrderServices();
-
+  Firestore _firestore = Firestore.instance;
   UserModel _userModel;
 
 //  getter
@@ -57,13 +58,12 @@ class UserProvider with ChangeNotifier {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
-        debugPrint("user uid ${user.user.uid}");
-        _userServices.createUser({
-          'name': name,
-          'email': email,
-          'role': "user",
-          'uid': user.user.uid,
-          'stripeId': ''
+        _firestore.collection('users').document(user.user.uid).setData({
+          "name": name,
+          "email": email,
+          "role": "user",
+          "uid": user.user.uid,
+          "stripeId": ""
         });
       });
       return true;

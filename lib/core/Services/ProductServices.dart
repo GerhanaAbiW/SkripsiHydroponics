@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hydroponics/core/Models/Product.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductServices {
   String collection = "products";
@@ -15,6 +16,12 @@ class ProductServices {
         return products;
       });
 
+  void uploadProduct(Map<String, dynamic> data) {
+    var id = Uuid();
+    String productId = id.v1();
+    data["id"] = productId;
+    _firestore.collection(collection).document(productId).setData(data);
+  }
 
   Future<List<ProductModel>> searchProducts({String productName}) {
     // code to convert the first character to uppercase
