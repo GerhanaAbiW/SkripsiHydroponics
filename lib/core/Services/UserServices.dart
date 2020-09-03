@@ -12,8 +12,8 @@ class UserServices{
 
 
 
-  Future<UserModel> getUserById(String id)=> _firestore.collection(collection).document(id).get().then((doc){
-    return UserModel.fromSnapshot(doc);
+  Future<UserModel> getUserById(String id)=> _firestore.collection(collection).document(id).get().then((document){
+    return UserModel.fromSnapshot(document);
   });
 
   void addToCart({String userId, CartItemModel cartItem}){
