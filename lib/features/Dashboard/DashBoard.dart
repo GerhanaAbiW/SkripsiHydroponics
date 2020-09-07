@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:hydroponics/core/Router/Router_Constants.dart';
-import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/Dashboard/MainMenu.dart';
-import 'package:hydroponics/features/MenuLearning/MenuArticleDetail.dart';
-import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
-import 'package:hydroponics/features/Profile/NewProfilePage.dart';
-
-
-
-
+import 'package:hydroponics/features/Profile/ProfilePage.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -33,50 +23,54 @@ class _DashBoardState extends State<DashBoard> {
     _pageController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _currentIndex = index);
-          },
-          children: <Widget>[
-            MainMenu(),
-            NewProfilePage(),
-            Container(color: Colors.blueGrey,),
-            Container(color: Colors.red,),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _currentIndex,
-        showElevation: true, // use this to remove appBar's elevation
-        onItemSelected: (index) {
-          setState(() => _currentIndex = index);
-          _pageController.jumpToPage(index);
-        },
-        items: [
-          BottomNavyBarItem(
-            icon: Icon(Icons.apps),
-            title: Text('Home'),
-            activeColor: Colors.red,
+        body: SizedBox.expand(
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => _currentIndex = index);
+            },
+            children: <Widget>[
+              MainMenu(),
+              NewProfilePage(),
+              Container(
+                color: Colors.blueGrey,
+              ),
+              Container(
+                color: Colors.red,
+              ),
+            ],
           ),
-          BottomNavyBarItem(
-              icon: Icon(Icons.people),
-              title: Text('Users'),
-              activeColor: Colors.purpleAccent),
-          BottomNavyBarItem(
-              icon: Icon(Icons.message),
-              title: Text('Messages'),
-              activeColor: Colors.pink),
-          BottomNavyBarItem(
-              icon: Icon(Icons.assignment),
-              title: Text('Orders'),
-              activeColor: Colors.blue),
-        ],
-      )
-    );
+        ),
+        bottomNavigationBar: BottomNavyBar(
+          selectedIndex: _currentIndex,
+          showElevation: true, // use this to remove appBar's elevation
+          onItemSelected: (index) {
+            setState(() => _currentIndex = index);
+            _pageController.jumpToPage(index);
+          },
+          items: [
+            BottomNavyBarItem(
+              icon: Icon(Icons.apps),
+              title: Text('Home'),
+              activeColor: Colors.red,
+            ),
+            BottomNavyBarItem(
+                icon: Icon(Icons.people),
+                title: Text('Users'),
+                activeColor: Colors.purpleAccent),
+            BottomNavyBarItem(
+                icon: Icon(Icons.message),
+                title: Text('Messages'),
+                activeColor: Colors.pink),
+            BottomNavyBarItem(
+                icon: Icon(Icons.assignment),
+                title: Text('Orders'),
+                activeColor: Colors.blue),
+          ],
+        ));
   }
 }

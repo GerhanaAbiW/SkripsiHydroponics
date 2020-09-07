@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
+import 'package:hydroponics/features/MenuLearning/MenuArticleDetail.dart';
 
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';
@@ -19,7 +20,7 @@ class Router {
       case Myplant:
         return MaterialPageRoute(builder: (context) => MyPlantsList());
       case Learning:
-        return MaterialPageRoute(builder: (context) => MenuLearning());
+        return MaterialPageRoute(builder: (context) => ArticleDetail());
 
       default:
         return MaterialPageRoute(

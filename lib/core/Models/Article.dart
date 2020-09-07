@@ -1,43 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Article{
+class Article {
   static const ID = "id";
-  static const CATEGORY = "category";
-  static const NAME = "name";
-  static const PRICE = "price";
-  static const BRAND = "brand";
-  static const QUANTITY = "quantity";
-  static const PICTURE = "picture";
-
+  static const TITLE = "title";
+  static const DATE = "date";
+  static const IMAGE = "image";
+  static const AUTHOR = "author";
+  static const DESCRIPTION = "description";
 
   String _id;
-  String _name;
-  String _brand;
-  String _category;
-  String _picture;
-  double _price;
-  int _quantity;
-
+  String _title;
+  String _date;
+  String _image;
+  String _author;
+  String _description;
 
 //  getters
-  String get name => _name;
   String get id => _id;
-  String get category => _category;
-  String get brand => _brand;
-  String get picture => _picture;
-  double get price => _price;
-  int get quantity => _quantity;
-
+  String get title => _title;
+  String get date => _date;
+  String get image => _image;
+  String get author => _author;
+  String get description => _description;
 
 //  named constructure
-  Article.fromSnapshot(DocumentSnapshot snapshot){
+  Article.fromSnapshot(DocumentSnapshot snapshot) {
     Map data = snapshot.data;
-    _name = data[NAME];
-    _id = data[NAME];
-    _category = data[NAME];
-    _brand = data[BRAND];
-    _price = data[PRICE];
-    _quantity = data[QUANTITY];
-    _picture = data[PICTURE];
+    _id = data[ID];
+    _title = data[TITLE];
+    _date = data[DATE];
+    _image = data[IMAGE];
+    _author = data[AUTHOR];
+    _description = data[DESCRIPTION];
   }
 }

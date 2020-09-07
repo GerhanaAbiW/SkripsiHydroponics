@@ -16,13 +16,11 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
-
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _cPassword = TextEditingController();
   TextEditingController _name = TextEditingController();
   bool hidePass = true;
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
@@ -89,7 +87,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Fullname",
-                                  prefixIcon: Icon(Icons.person),
+                                  prefixIcon: Icon(Icons.person,
+                                      color: Color(0xff19803d)),
                                 ),
                               )),
                           Container(
@@ -116,7 +115,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Email",
-                                prefixIcon: Icon(Icons.email),
+                                prefixIcon:
+                                    Icon(Icons.email, color: Color(0xff19803d)),
                               ),
                             ),
                           ),
@@ -141,7 +141,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Password",
-                                prefixIcon: Icon(Icons.vpn_key),
+                                prefixIcon: Icon(Icons.vpn_key,
+                                    color: Color(0xff19803d)),
                               ),
                             ),
                           ),
@@ -166,7 +167,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "ConfirmPassword",
-                                prefixIcon: Icon(Icons.vpn_key),
+                                prefixIcon: Icon(Icons.vpn_key,
+                                    color: Color(0xff19803d)),
                               ),
                             ),
                           ),
