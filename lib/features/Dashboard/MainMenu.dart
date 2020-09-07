@@ -85,8 +85,7 @@ class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin
           MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4, "10"),
           MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342, "2"),
           MyItems(Icons.shopping_cart, "Market", 0xFF03A9F4, "3"),
-
-          // MyItems(Icons.account_box, "Admin", 0xFFF4511E, "7"),
+          MyItems(Icons.account_box, "Admin", 0xFFF4511E, "7"),
         ],
         staggeredTiles: [
           StaggeredTile.extent(1, 150.0),

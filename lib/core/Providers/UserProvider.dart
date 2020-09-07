@@ -17,6 +17,7 @@ import 'package:uuid/uuid.dart';
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
+
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
@@ -43,8 +44,8 @@ class UserProvider with ChangeNotifier {
   Future<bool> signIn(String email, String password) async {
     try {
       _status = Status.Authenticating;
-      notifyListeners();
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+      notifyListeners();
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;
@@ -146,6 +147,22 @@ class UserProvider with ChangeNotifier {
 
   Future<void> reloadUserModel() async {
     _userModel = await _userServices.getUserById(_user.uid);
+    notifyListeners();
+  }
+
+  Future<void> updateUser(String name, String email) async {
+    _firestore.collection('users').document(_user.uid).updateData({
+      "name": name,
+      "email": email,
+      "role": "user",
+      "uid": _user.uid,
+      "stripeId": ""
+    });
+    //var user = await _auth.currentUser();
+    
+    _user.updateProfile(UserUpdateInfo()..displayName = name);
+    //_user.updateProfile(UserUpdateInfo()..photoUrl = image);
+    _user.updateEmail(email);
     notifyListeners();
   }
 }

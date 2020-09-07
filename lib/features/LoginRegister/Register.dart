@@ -30,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
       key: _key,
       body: user.status == Status.Authenticating
           ? Loading()
-          : Container(
+          : SingleChildScrollView(
               padding: EdgeInsets.only(bottom: 30),
               child: Column(
                 children: <Widget>[
@@ -63,16 +63,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Form(
-                      key: _formKey,
-                      child: Container(
-                        margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Container(
+                  Form(
+                    key: _formKey,
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Container(
                               margin: EdgeInsets.only(top: 10),
                               decoration: BoxDecoration(
                                 borderRadius:
@@ -93,137 +91,146 @@ class _RegisterPageState extends State<RegisterPage> {
                                   hintText: "Fullname",
                                   prefixIcon: Icon(Icons.person),
                                 ),
+                              )),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.only(left: 10),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  Pattern pattern =
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                  RegExp regex = new RegExp(pattern);
+                                  if (!regex.hasMatch(value))
+                                    return 'Please make sure your email address is valid';
+                                  else
+                                    return null;
+                                }
+                              },
+                              controller: _email,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Email",
+                                prefixIcon: Icon(Icons.email),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.only(left: 10),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "The password field cannot be empty";
+                                } else if (value.length < 6) {
+                                  return "the password has to be at least 6 characters long";
+                                }
+                                return null;
+                              },
+                              controller: _password,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                prefixIcon: Icon(Icons.vpn_key),
                               ),
-                              padding: EdgeInsets.only(left: 10),
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    Pattern pattern =
-                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                    RegExp regex = new RegExp(pattern);
-                                    if (!regex.hasMatch(value))
-                                      return 'Please make sure your email address is valid';
-                                    else
-                                      return null;
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.only(left: 10),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "The password field cannot be empty";
+                                } else if (value != _password.text) {
+                                  return "Confirm Password Doesnt Match";
+                                }
+                                return null;
+                              },
+                              controller: _cPassword,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "ConfirmPassword",
+                                prefixIcon: Icon(Icons.vpn_key),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Center(
+                            child: InkWell(
+                              onTap: () async {
+                                if (_formKey.currentState.validate()) {
+                                  if (!await user.signUp(_name.text,
+                                          _email.text, _password.text) ==
+                                      true) {
+                                    changeScreenReplacement(
+                                        context, Dashboard());
                                   }
-                                },
-                                controller: _email,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Email",
-                                  prefixIcon: Icon(Icons.email),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
-                              ),
-                              padding: EdgeInsets.only(left: 10),
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "The password field cannot be empty";
-                                  } else if (value.length < 6) {
-                                    return "the password has to be at least 6 characters long";
-                                  }
-                                  return null;
-                                },
-                                controller: _password,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Password",
-                                  prefixIcon: Icon(Icons.vpn_key),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
-                              ),
-                              padding: EdgeInsets.only(left: 10),
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "The password field cannot be empty";
-                                  } else if (value != _password.text) {
-                                    return "Confirm Password Doesnt Match";
-                                  }
-                                  return null;
-                                },
-                                controller: _cPassword,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "ConfirmPassword",
-                                  prefixIcon: Icon(Icons.vpn_key),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: InkWell(
-                                  onTap: () async {
-                                    if (_formKey.currentState.validate()) {
-                                      if (!await user.signUp(_name.text, _email.text, _password.text)==true) {
-                                        changeScreenReplacement(context, Dashboard());
-                                      }
-                                    }
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            GreenTosca,
-                                            green,
-                                            CustomColors.COLOR_GREEN
-                                          ],
-                                          end: Alignment.centerLeft,
-                                          begin: Alignment.centerRight),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(100),
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "Register",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                }
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        GreenTosca,
+                                        green,
+                                        CustomColors.COLOR_GREEN
+                                      ],
+                                      end: Alignment.centerLeft,
+                                      begin: Alignment.centerRight),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(100),
                                   ),
                                 ),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Register",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                            RichText(
-                              text: TextSpan(children: [
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
                                 TextSpan(
                                     text: "Already a member ? ",
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
-                                  recognizer: new TapGestureRecognizer()..onTap = () => changeScreenReplacement(context, LoginPage()),
+                                    recognizer: new TapGestureRecognizer()
+                                      ..onTap = () => changeScreenReplacement(
+                                          context, LoginPage()),
                                     text: "Login",
                                     style: TextStyle(color: green)),
-                              ]),
-                            )
-                          ],
-                        ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )

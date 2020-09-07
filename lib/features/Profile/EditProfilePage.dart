@@ -1,6 +1,8 @@
  import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:provider/provider.dart';
 
 
  class EditProfilePage extends StatefulWidget {
@@ -9,9 +11,13 @@ import 'package:hydroponics/core/Constants/Colors.dart';
  }
 
  class _EditProfilePageState extends State<EditProfilePage> {
+   TextEditingController _email = TextEditingController();
+   TextEditingController _name = TextEditingController();
    @override
    Widget build(BuildContext context) {
-     return Scaffold(
+    // final user = Provider.of<UserProvider>(context,listen: false);
+     return Consumer<UserProvider>(
+       builder: (context, model, child) => Scaffold(
        appBar: AppBar(
          backgroundColor: Colors.white,
          leading: IconButton(
@@ -76,6 +82,7 @@ import 'package:hydroponics/core/Constants/Colors.dart';
              ),
              Container(
                child: TextFormField(
+                 controller: _name,
                  keyboardType: TextInputType.text,
                  decoration: InputDecoration(
                    contentPadding: EdgeInsets.all(12),
@@ -89,6 +96,7 @@ import 'package:hydroponics/core/Constants/Colors.dart';
              ),
              Container(
                child: TextFormField(
+                 controller: _email,
                  keyboardType: TextInputType.emailAddress,
                  decoration: InputDecoration(
                      contentPadding: EdgeInsets.all(12),
@@ -120,7 +128,9 @@ import 'package:hydroponics/core/Constants/Colors.dart';
                child: RaisedButton(
                  color: Colors.blue,
                  textColor: Colors.white,
-                 onPressed: () {},
+                 onPressed: () {
+                   model.updateUser(_name.text, _email.text);
+                 },
                  child: Text(
                    "Save",
                    style: CustomTextStyle.textFormFieldBlack
@@ -130,7 +140,7 @@ import 'package:hydroponics/core/Constants/Colors.dart';
              )
            ],
          ),
-       ),
+       ),)
      );
    }
 

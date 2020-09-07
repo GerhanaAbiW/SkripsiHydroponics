@@ -16,6 +16,9 @@ class UserServices{
     return UserModel.fromSnapshot(document);
   });
 
+
+
+
   void addToCart({String userId, CartItemModel cartItem}){
     _firestore.collection(collection).document(userId).updateData({
       "cart": FieldValue.arrayUnion([cartItem.toMap()])
