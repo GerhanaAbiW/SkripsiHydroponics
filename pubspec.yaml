@@ -63,6 +63,7 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
+    - images/plant.png
     - images/login/fb.jpg
     - images/login/fcb.jpeg
     - images/login/facebook.jpg

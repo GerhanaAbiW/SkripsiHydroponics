@@ -39,7 +39,7 @@ class UserModel {
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     _name = snapshot.data[NAME];
     _email = snapshot.data[EMAIL];
-    _email = snapshot.data[ROLE];
+    _role = snapshot.data[ROLE];
     _id = snapshot.data[ID];
     _stripeId = snapshot.data[STRIPE_ID] ?? "";
     cart = _convertCartItems(snapshot.data[CART]?? []);

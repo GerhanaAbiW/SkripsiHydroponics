@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/LoginRegister/Login.dart';
 import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
@@ -215,6 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     text: "Already a member ? ",
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
+                                  recognizer: new TapGestureRecognizer()..onTap = () => changeScreenReplacement(context, LoginPage()),
                                     text: "Login",
                                     style: TextStyle(color: green)),
                               ]),

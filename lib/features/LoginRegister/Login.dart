@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/Dashboard/DashBoard.dart';
@@ -87,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _email,
                           decoration: decor.copyWith(
                               hintText: 'Email',
-                              prefixIcon: Icon(Icons.email))),
+                              prefixIcon: Icon(Icons.email,color: Color(0xff19803d),))),
                       SizedBox(
                         height: 20,
                       ),
@@ -104,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: true,
                           decoration: decor.copyWith(
                               hintText: 'Password',
-                              prefixIcon: Icon(Icons.lock))),
+                              prefixIcon: Icon(Icons.lock,color: Color(0xff19803d),))),
                       SizedBox(
                         height: 20,
                       ),
@@ -135,29 +137,16 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text("Don't have an account?"),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          changeScreen(context, RegisterPage());
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(10),
-                          width: width * 0.8,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              gradient: LinearGradient(colors: [
-                                Color(0xff19803d),
-                                Color(0xff34ff7c),
-                              ])),
-                          child: Text(
-                            'Register',
-                            style: TextStyle(color: Colors.white, fontSize: 22),
-                          ),
-                        ),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: "Don't have an account?",
+                              style: TextStyle(color: Colors.black)),
+                          TextSpan(
+                              recognizer: new TapGestureRecognizer()..onTap = () => changeScreenReplacement(context, RegisterPage()),
+                              text: "Register",
+                              style: TextStyle(color: green)),
+                        ]),
                       )
                     ],
                   ),
