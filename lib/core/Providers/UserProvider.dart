@@ -8,8 +8,10 @@ import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Models/User.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/core/Services/UserServices.dart';
+import 'package:hydroponics/features/LoginRegister/Login.dart';
 import 'package:uuid/uuid.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
@@ -33,9 +35,10 @@ class UserProvider with ChangeNotifier {
   // public variables
   List<OrderModel> orders = [];
 
-  UserProvider.initialize() : _auth = FirebaseAuth.instance {
+  UserProvider.initialize(): _auth = FirebaseAuth.instance{
     _auth.onAuthStateChanged.listen(_onStateChanged);
   }
+
 
   Future<bool> signIn(String email, String password) async {
     try {
@@ -75,10 +78,11 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future signOut() async {
+  Future signOut(context) async {
     _auth.signOut();
     _status = Status.Unauthenticated;
     notifyListeners();
+    changeScreenReplacement(context, LoginPage());
     return Future.delayed(Duration.zero);
   }
 
@@ -141,7 +145,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> reloadUserModel() async {
-    _userModel = await _userServices.getUserById(user.uid);
+    _userModel = await _userServices.getUserById(_user.uid);
     notifyListeners();
   }
 }

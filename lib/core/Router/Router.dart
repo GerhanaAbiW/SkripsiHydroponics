@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
+
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';
-//import 'package:hydroponics/core/Widgets/Screenutil_Init.dart';
+
 import 'Router_Constants.dart';
 
 class Router {
@@ -12,9 +13,9 @@ class Router {
       // case Init:
       //   return MaterialPageRoute(builder: (context) => ScreenUtilsInit());
       case Login:
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        return MaterialPageRoute(builder: (context) => LoginPage());
       case Register:
-        return MaterialPageRoute(builder: (context) => RegisterScreen());
+        return MaterialPageRoute(builder: (context) => RegisterPage());
       case Myplant:
         return MaterialPageRoute(builder: (context) => MyPlantsList());
       case Learning:

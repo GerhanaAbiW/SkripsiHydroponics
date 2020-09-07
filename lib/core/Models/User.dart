@@ -60,10 +60,11 @@ class UserModel {
       return 0;
     }
     for(Map cartItem in cart){
-      _priceSum += cartItem["price"];
+      _priceSum += cartItem["price"]* cartItem["quantity"];
     }
 
     int total = _priceSum;
     return total;
   }
+
 }

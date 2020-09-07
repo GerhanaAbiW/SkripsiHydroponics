@@ -1,263 +1,232 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/LoginRegister/Login.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
-import 'package:hydroponics/core/constants/App_Text_Style.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
 
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
+  TextEditingController _cPassword = TextEditingController();
   TextEditingController _name = TextEditingController();
   bool hidePass = true;
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
-      backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   backgroundColor: Color(0xFF00a79B),
-      // ),
       body: user.status == Status.Authenticating
           ? Loading()
-          : Form(
-              key: _formKey,
-              child: ListView(
+          : Container(
+              padding: EdgeInsets.only(bottom: 30),
+              child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 16,
-                  ),
                   Container(
-                    //padding: const EdgeInsets.only(left: 0, top: 16),
-                    alignment: Alignment.topLeft,
-                    margin: EdgeInsets.all(8),
-                    height: 30,
-                    width: 50,
-                    child: FlatButton(
-                      child: Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  //BackButtonWidget(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: Text(
-                      "Selamat Datang di\nHydroasik",
-                      style: CustomTextStyle.textFormFieldBold
-                          .copyWith(color: GreenTosca, fontSize: 21),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: Text(
-                      "Kami membantu Anda untuk mempelajari, mempermudah mendapatkan perlengkapan, dan mengajak Anda untuk langsung praktik menanam secara Hidroponik\n\n",
-                      style: CustomTextStyle.textFormFieldRegular
-                          .copyWith(color: GreenTosca, fontSize: 14),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Row(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              GreenTosca,
+                              green,
+                              CustomColors.COLOR_GREEN
+                            ],
+                            end: Alignment.bottomCenter,
+                            begin: Alignment.topCenter),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(100))),
+                    child: Stack(
                       children: <Widget>[
-                        IconButton(icon: Icon(Icons.person), onPressed: null),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.only(right: 20, left: 10),
-                                child: TextFormField(
-                                  controller: _name,
-                                  decoration:
-                                      InputDecoration(hintText: 'Username'),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return "The name field cannot be empty";
-                                    }
-                                    return null;
-                                  },
-                                )))
+                        Positioned(
+                            bottom: 20,
+                            right: 20,
+                            child: Text(
+                              "Register",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            )),
+                        Center(
+                          child: Image.asset("images/plant.png"),
+                        ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      children: <Widget>[
-                        IconButton(icon: Icon(Icons.mail), onPressed: null),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.only(right: 20, left: 10),
-                                child: TextFormField(
-                                  controller: _email,
-                                  decoration:
-                                      InputDecoration(hintText: 'Email'),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      Pattern pattern =
-                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                      RegExp regex = new RegExp(pattern);
-                                      if (!regex.hasMatch(value))
-                                        return 'Please make sure your email address is valid';
-                                      else
-                                        return null;
-                                    }
-                                  },
-                                )))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      children: <Widget>[
-                        IconButton(icon: Icon(Icons.lock), onPressed: null),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.only(right: 20, left: 10),
-                                child: TextFormField(
-                                  decoration:
-                                      InputDecoration(hintText: 'Password'),
-                                  controller: _password,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return "The password field cannot be empty";
-                                    } else if (value.length < 6) {
-                                      return "the password has to be at least 6 characters long";
-                                    }
-                                    return null;
-                                  },
-                                )))
-                      ],
-                    ),
-                  ),
-                  // SizedBox(
-                  //   height: 40,
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Row(
-                  //     children: <Widget>[
-                  //       Radio(value: null, groupValue: null, onChanged: null),
-                  //       RichText(
-                  //           text: TextSpan(
-                  //               text: 'I have accepted the',
-                  //               style: TextStyle(color: Colors.black),
-                  //               children: [
-                  //             TextSpan(
-                  //                 text: 'Terms & Condition',
-                  //                 style: TextStyle(
-                  //                     color: Colors.teal,
-                  //                     fontWeight: FontWeight.bold))
-                  //           ]))
-                  //     ],
-                  //   ),
-                  // ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
+                  Expanded(
+                    flex: 1,
+                    child: Form(
+                      key: _formKey,
                       child: Container(
-                        height: 60,
-                        child: RaisedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              if (!await user.signUp(
-                                  _name.text, _email.text, _password.text)) {
-//                                _key.currentState.showSnackBar(
-//                                    SnackBar(content: Text("Sign up failed")));
-//                                return;
-                              }
-                              changeScreenReplacement(context, LoginScreen());
-                            }
-                          },
-                          color: GreenTosca,
-                          child: Text(
-                            'SIGN UP',
-                            style: TextStyle(
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
+                              ),
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The name field cannot be empty";
+                                  }
+                                  return null;
+                                },
+                                controller: _name,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Fullname",
+                                  prefixIcon: Icon(Icons.person),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                color: Colors.white,
+                              ),
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    Pattern pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regex = new RegExp(pattern);
+                                    if (!regex.hasMatch(value))
+                                      return 'Please make sure your email address is valid';
+                                    else
+                                      return null;
+                                  }
+                                },
+                                controller: _email,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Email",
+                                  prefixIcon: Icon(Icons.email),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                color: Colors.white,
+                              ),
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "the password has to be at least 6 characters long";
+                                  }
+                                  return null;
+                                },
+                                controller: _password,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Password",
+                                  prefixIcon: Icon(Icons.vpn_key),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                color: Colors.white,
+                              ),
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value != _password.text) {
+                                    return "Confirm Password Doesnt Match";
+                                  }
+                                  return null;
+                                },
+                                controller: _cPassword,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "ConfirmPassword",
+                                  prefixIcon: Icon(Icons.vpn_key),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      if (!await user.signUp(_name.text, _email.text, _password.text)==true) {
+                                        changeScreenReplacement(context, Dashboard());
+                                      }
+                                    }
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          colors: [
+                                            GreenTosca,
+                                            green,
+                                            CustomColors.COLOR_GREEN
+                                          ],
+                                          end: Alignment.centerLeft,
+                                          begin: Alignment.centerRight),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(100),
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Register",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: "Already a member ? ",
+                                    style: TextStyle(color: Colors.black)),
+                                TextSpan(
+                                    text: "Login",
+                                    style: TextStyle(color: green)),
+                              ]),
+                            )
+                          ],
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
     );
   }
 }
-
-// class BackButtonWidget extends StatelessWidget {
-//   const BackButtonWidget({
-//     Key key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 200,
-//       decoration: BoxDecoration(
-//           image: DecorationImage(
-//               fit: BoxFit.cover, image: AssetImage('images/bayam.jpeg'))),
-//       child: Positioned(
-//           child: Stack(
-//         children: <Widget>[
-//           Positioned(
-//               top: 20,
-//               child: Row(
-//                 children: <Widget>[
-//                   IconButton(
-//                       icon: Icon(
-//                         Icons.arrow_back_ios,
-//                         color: Colors.white,
-//                       ),
-//                       onPressed: () {
-//                         Navigator.pop(context);
-//                       }),
-//                   Text(
-//                     'Back',
-//                     style: TextStyle(
-//                         color: Colors.black, fontWeight: FontWeight.bold),
-//                   )
-//                 ],
-//               )),
-//           Positioned(
-//             bottom: 20,
-//             child: Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Text(
-//                 'Create New Account',
-//                 style: TextStyle(
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.bold,
-//                     fontSize: 18),
-//               ),
-//             ),
-//           )
-//         ],
-//       )),
-//     );
-//   }
-// }

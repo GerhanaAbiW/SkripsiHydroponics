@@ -8,5 +8,6 @@ class ListProfileSection {
   Widget widget;
   IconData icon;
 
+
   ListProfileSection(this.title, this.icon, this.color, this.widget);
 }
