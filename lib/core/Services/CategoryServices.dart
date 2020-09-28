@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hydroponics/core/Models/Category.dart';
 import 'package:uuid/uuid.dart';
 
-class CategoryService {
+class CategoryServices {
   Firestore _firestore = Firestore.instance;
   String collection = 'categories';
 
@@ -15,6 +16,15 @@ class CategoryService {
   Future<List<DocumentSnapshot>> getCategories() =>
       _firestore.collection(collection).getDocuments().then((snaps) {
         return snaps.documents;
+      });
+
+  Future<List<CategoryModel>> getForModelCategories() async =>
+      _firestore.collection(collection).getDocuments().then((result) {
+        List<CategoryModel> categories = [];
+        for(DocumentSnapshot category in result.documents){
+          categories.add(CategoryModel.fromSnapshot(category));
+        }
+        return categories;
       });
 
 

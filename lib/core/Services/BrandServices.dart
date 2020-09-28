@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hydroponics/core/Models/Brand.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
-class BrandService{
+class BrandServices{
   Firestore _firestore = Firestore.instance;
   String collection = 'brands';
 
@@ -17,6 +18,15 @@ class BrandService{
     print(snaps.documents.length);
     return snaps.documents;
   });
+
+  Future<List<BrandModel>> getForModelBrands() async =>
+      _firestore.collection(collection).getDocuments().then((result) {
+        List<BrandModel> categories = [];
+        for(DocumentSnapshot category in result.documents){
+          categories.add(BrandModel.fromSnapshot(category));
+        }
+        return categories;
+      });
 
   Future<List<DocumentSnapshot>> getSuggestions(String suggestion) =>
       _firestore.collection(collection).where('brand', isEqualTo: suggestion).getDocuments().then((snap){

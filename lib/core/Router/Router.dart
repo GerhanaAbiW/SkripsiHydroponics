@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
-import 'package:hydroponics/features/MenuLearning/MenuArticleDetail.dart';
+import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
 
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';

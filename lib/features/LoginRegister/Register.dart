@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/Dashboard/DashBoard.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
-import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 
@@ -183,7 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           _email.text, _password.text) ==
                                       true) {
                                     changeScreenReplacement(
-                                        context, Dashboard());
+                                        context, DashBoard());
                                   }
                                 }
                               },

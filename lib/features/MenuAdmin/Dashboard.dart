@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuAdmin/AddCategory.dart';
 
 import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
-import 'package:hydroponics/features/MenuAdmin/AppState.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+
 import 'package:hydroponics/features/MenuAdmin/SmallCard.dart';
 import 'package:provider/provider.dart';
 
-class Dashboard extends StatefulWidget {
+class AdminDashboard extends StatefulWidget {
   @override
-  _DashboardState createState() => _DashboardState();
+  _AdminDashboardState createState() => _AdminDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _AdminDashboardState extends State<AdminDashboard> {
   List<charts.Series<Task, String>> _seriesPieData;
 
   _getData() {
@@ -47,7 +50,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<AppProvider>(context);
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: SafeArea(
@@ -106,8 +109,8 @@ class _DashboardState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     appState.changeScreen(Screen.PRODUCTS);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => AddProduct()));
+                    changeScreen(context, AddProducts());
+
                   },
                   child: Wrap(
                     direction: Axis.horizontal,
@@ -142,6 +145,7 @@ class _DashboardState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     appState.changeScreen(Screen.CATEGORIES);
+                    changeScreen(context, AddCategory());
                   },
                   child: Wrap(
                     direction: Axis.horizontal,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
 
 class ArticleList extends StatelessWidget {
   final List<String> images;
@@ -55,14 +57,17 @@ class ArticleList extends StatelessWidget {
                     ),
                     child: Card(
                       elevation: 10.0,
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: ExactAssetImage(images[index]),
+                      child: GestureDetector(
+                        onTap: (){changeScreen(context, ArticleDetail());},
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: ExactAssetImage(images[index]),
+                          ),
+                          title: Text(title[index], style: TextStyle(fontSize: 14)),
+                          subtitle: Text(phones[index], style: TextStyle(fontSize: 10)),
+                          //trailing: Icon(Icons.tag_faces),
                         ),
-                        title: Text(title[index], style: TextStyle(fontSize: 14)),
-                        subtitle: Text(phones[index], style: TextStyle(fontSize: 10)),
-                        //trailing: Icon(Icons.tag_faces),
                       ),
                     ),
                   ),
