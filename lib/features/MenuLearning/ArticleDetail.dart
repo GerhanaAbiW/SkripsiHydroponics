@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/features/MenuLearning/ArticleList.dart';
 import 'package:provider/provider.dart';
 
 class ArticleDetail extends StatefulWidget {
@@ -26,7 +28,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
           style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {backScreen(context);},
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -45,7 +47,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        onPressed: () {},
+        onPressed: (){},
         child: Icon(Icons.add),
       ),
       body: SafeArea(
@@ -109,7 +111,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       SizedBox(
                         width: 80,
                       ),
-                      Image.asset('images/ficus.png', height: 220),
+                      Image.asset('images/ficus.png', height: 220, width: 100,),
                     ],
                   ),
                   SizedBox(
