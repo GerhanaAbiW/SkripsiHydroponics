@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddPlant.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
 
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -102,42 +103,42 @@ class _MyPlantsListState extends State<MyPlantsList> {
                           itemBuilder: (BuildContext context, int index) {
                             return AnimationConfiguration.staggeredList(
                               position: index,
-                              duration: const Duration(milliseconds: 3000),
-                              child: SlideAnimation(
-                                verticalOffset: 100.0,
-                                child: Slidable(
-                                  key: ValueKey(index),
-                                  actionPane: SlidableDrawerActionPane(),
-                                  secondaryActions: <Widget>[
-                                    IconSlideAction(
-                                      caption: "Update",
-                                      color: Colors.grey.shade300,
-                                      icon: Icons.edit,
-                                      closeOnTap: false,
-                                      onTap: () {},
-                                    ),
-                                    IconSlideAction(
-                                      caption: "Delete",
-                                      color: Colors.red.shade300,
-                                      icon: Icons.edit,
-                                      closeOnTap: true,
-                                      onTap: () {
-                                        Fluttertoast.showToast(
-                                            msg: "Delete Successfull",
-                                            toastLength: Toast.LENGTH_SHORT,
-                                            backgroundColor: Colors.red,
-                                            textColor: Colors.white);
-                                      },
-                                    ),
-                                  ],
-                                  dismissal: SlidableDismissal(
-                                    child: SlidableDrawerDismissal(),
+                              //duration: const Duration(milliseconds: 3000),
+                              // child: SlideAnimation(
+                              // verticalOffset: 100.0,
+                              child: Slidable(
+                                key: ValueKey(index),
+                                actionPane: SlidableDrawerActionPane(),
+                                secondaryActions: <Widget>[
+                                  IconSlideAction(
+                                    caption: "Update",
+                                    color: Colors.grey.shade300,
+                                    icon: Icons.edit,
+                                    closeOnTap: false,
+                                    onTap: () {},
                                   ),
-                                  child: YourListChild(
-                                    //imgPath: 'images/bayam.jpeg',
-                                    foodName: 'Kangkung',
-                                    price: '7 Hari',
+                                  IconSlideAction(
+                                    caption: "Delete",
+                                    color: Colors.red.shade300,
+                                    icon: Icons.edit,
+                                    closeOnTap: true,
+                                    onTap: () {
+                                      Fluttertoast.showToast(
+                                          msg: "Delete Successfull",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          backgroundColor: Colors.red,
+                                          textColor: Colors.white);
+                                    },
                                   ),
+                                ],
+                                dismissal: SlidableDismissal(
+                                  child: SlidableDrawerDismissal(),
+                                ),
+                                child: YourListChild(
+                                  //imgPath: 'images/bayam.jpeg',
+                                  foodName: 'Kangkung',
+                                  price: '7 Hari',
+                                  // ),
                                 ),
                               ),
                             );
@@ -159,7 +160,10 @@ class _MyPlantsListState extends State<MyPlantsList> {
             heroTag: "btn1",
             backgroundColor: Colors.transparent,
             elevation: 0,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddPlantView()));
+            },
             child: Container(
               height: 70,
               width: 70,
@@ -196,8 +200,9 @@ class YourListChild extends StatelessWidget {
   final imgPath;
   final foodName;
   final price;
+  final plantPicture;
 
-  YourListChild({this.imgPath, this.foodName, this.price});
+  YourListChild({this.imgPath, this.foodName, this.price, this.plantPicture});
 
   @override
   Widget build(BuildContext context) {
@@ -221,16 +226,38 @@ class YourListChild extends StatelessWidget {
                 children: <Widget>[
                   Container(
                       child: Row(children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Hero(
-                        tag: imgPath,
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: ExactAssetImage(imgPath),
-                        ),
+                    Container(
+                      width: 60, //ScreenUtil().setWidth(60),
+                      height: 60, //ScreenUtil().setWidth(60),
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(),
                       ),
+                      child:
+                          // plantPicture != null
+                          //     ? ClipRRect(
+                          //         borderRadius: BorderRadius.circular(
+                          //             44), //ScreenUtil().setWidth(44)),
+                          //         child: Image.network(
+                          //           plantPicture,
+                          //           fit: BoxFit.fitHeight,
+                          //           height: 60, //ScreenUtil().setWidth(60),
+                          //         ),
+                          //       )
+                          //     :
+
+                          Image.asset("images/plant.png"),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Hero(
+                    //     tag: imgPath,
+                    //     child: CircleAvatar(
+                    //       radius: 30,
+                    //       backgroundImage: ExactAssetImage(imgPath),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(width: 10.0),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
