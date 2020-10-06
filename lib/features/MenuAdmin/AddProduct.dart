@@ -389,7 +389,8 @@ class _AddProductsState extends State<AddProducts> {
     if (_currentCategory == "Select Product category") {
       showSnackBar("Please select a category", scaffoldKey);
       return;
-    }
+    }else
+      validateAndUpload();
 
   }
 }
