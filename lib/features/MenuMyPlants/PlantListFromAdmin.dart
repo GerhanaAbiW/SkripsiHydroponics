@@ -24,12 +24,19 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: GreenTosca,
         elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          'Hydroasik',
+          'Choose Your Plant',
           style: CustomTextStyle.textFormFieldBold
               .copyWith(color: Colors.white, fontSize: 21),
         ),

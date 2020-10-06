@@ -54,12 +54,12 @@ class _DashBoardState extends State<DashBoard> {
           },
           items: [
             BottomNavyBarItem(
-              icon: Icon(Icons.apps),
+              icon: Icon(Icons.home),
               title: Text('Home'),
               activeColor: Colors.red,
             ),
             BottomNavyBarItem(
-                icon: Icon(Icons.people),
+                icon: Icon(Icons.person),
                 title: Text('Users'),
                 activeColor: Colors.purpleAccent),
             BottomNavyBarItem(
