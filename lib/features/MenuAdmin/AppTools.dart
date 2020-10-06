@@ -80,9 +80,11 @@ Widget productTextField(
 Widget productDropDown(
     {String textTitle,
       String selectedItem,
+      String hintText,
       List<DropdownMenuItem<String>> dropDownItems,
       ValueChanged<String> changedDropDownItems}) {
   textTitle == null ? textTitle = "Enter Title" : textTitle;
+
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,10 +109,12 @@ Widget productDropDown(
             padding: const EdgeInsets.only(left: 15.0, right: 15.0),
             child: new DropdownButtonHideUnderline(
                 child: new DropdownButton(
+                  hint: Text(hintText),
                   value: selectedItem,
                   items: dropDownItems,
                   onChanged: changedDropDownItems,
-                )),
+                ),
+            ),
           ),
         ),
       ),

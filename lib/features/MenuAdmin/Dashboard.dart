@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuAdmin/AddBrand.dart';
 import 'package:hydroponics/features/MenuAdmin/AddCategory.dart';
 import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -138,77 +139,78 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ],
                   ),
                 ),
+//                SizedBox(
+//                  height: 20,
+//                ),
+//                InkWell(
+//                  onTap: () {
+//                    appState.changeScreen(Screen.CATEGORIES);
+//                    changeScreen(context, AddCategory());
+//                  },
+//                  child: Wrap(
+//                    direction: Axis.horizontal,
+//                    children: <Widget>[
+//                      RotatedBox(
+//                        quarterTurns: -1,
+//                        child: Text(
+//                          'Categories',
+//                        ),
+//                      ),
+//                      Visibility(
+//                        visible: appState.selectedScreen == Screen.CATEGORIES,
+//                        child: Wrap(
+//                          children: <Widget>[
+//                            SizedBox(
+//                              width: 10,
+//                            ),
+//                            Container(
+//                              height: 58,
+//                              width: 5,
+//                              color: Colors.black,
+//                            )
+//                          ],
+//                        ),
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//                SizedBox(
+//                  height: 20,
+//                ),
+//                InkWell(
+//                  onTap: () {
+//                    appState.changeScreen(Screen.BRANDS);
+//                    changeScreen(context, AddBrand());
+//                  },
+//                  child: Wrap(
+//                    direction: Axis.horizontal,
+//                    children: <Widget>[
+//                      RotatedBox(
+//                        quarterTurns: -1,
+//                        child: Text(
+//                          'Brands',
+//                        ),
+//                      ),
+//                      Visibility(
+//                        visible: appState.selectedScreen == Screen.BRANDS,
+//                        child: Wrap(
+//                          children: <Widget>[
+//                            SizedBox(
+//                              width: 10,
+//                            ),
+//                            Container(
+//                              height: 58,
+//                              width: 5,
+//                              color: Colors.black,
+//                            )
+//                          ],
+//                        ),
+//                      ),
+//                    ],
+//                  ),
+//                ),
                 SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    appState.changeScreen(Screen.CATEGORIES);
-                    changeScreen(context, AddCategory());
-                  },
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      RotatedBox(
-                        quarterTurns: -1,
-                        child: Text(
-                          'Categories',
-                        ),
-                      ),
-                      Visibility(
-                        visible: appState.selectedScreen == Screen.CATEGORIES,
-                        child: Wrap(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 58,
-                              width: 5,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    appState.changeScreen(Screen.BRANDS);
-                  },
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      RotatedBox(
-                        quarterTurns: -1,
-                        child: Text(
-                          'Brands',
-                        ),
-                      ),
-                      Visibility(
-                        visible: appState.selectedScreen == Screen.BRANDS,
-                        child: Wrap(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 58,
-                              width: 5,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 InkWell(
                   onTap: () {

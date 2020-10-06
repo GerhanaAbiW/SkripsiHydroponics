@@ -26,10 +26,11 @@ class _AddProductsState extends State<AddProducts> {
   TextEditingController quatityController = TextEditingController();
   TextEditingController prodcutDescriptionController = TextEditingController();
   final productPriceController = TextEditingController();
-  List<DocumentSnapshot> brands = <DocumentSnapshot>[];
-  List<DocumentSnapshot> categories = <DocumentSnapshot>[];
-  List<DropdownMenuItem<String>> categoriesDropDown =
-  <DropdownMenuItem<String>>[];
+  //List<DocumentSnapshot> brands = <DocumentSnapshot>[];
+  //List<DocumentSnapshot> categories = <DocumentSnapshot>[];
+  List<String> brands = ['A', 'B', 'C', 'D'];
+  List<String> categories = ['Bibit', 'Obat', 'Pupuk', 'Alat'];
+  List<DropdownMenuItem<String>> categoriesDropDown = <DropdownMenuItem<String>>[];
   List<DropdownMenuItem<String>> brandsDropDown = <DropdownMenuItem<String>>[];
   String _currentCategory;
   String _currentBrand;
@@ -38,24 +39,52 @@ class _AddProductsState extends State<AddProducts> {
 
   @override
   void initState() {
-    _getCategories();
-    _getBrands();
+//    _getCategories();
+  _getCategories();
+  _getBrands();
+//    _getBrands();
   }
 
-  List<DropdownMenuItem<String>> getCategoriesDropdown() {
+//  List<DropdownMenuItem<String>> getCategoriesDropdown() {
+//    List<DropdownMenuItem<String>> items = new List();
+//    for (int i = 0; i < categories.length; i++) {
+//      setState(() {
+//        items.insert(
+//            0,
+//            DropdownMenuItem(
+//                child: Text(categories[i].data['category']),
+//                value: categories[i].data['category']));
+//      });
+//    }
+//    return items;
+//  }
+    List<DropdownMenuItem<String>> getCategoriesDropdown() {
     List<DropdownMenuItem<String>> items = new List();
     for (int i = 0; i < categories.length; i++) {
       setState(() {
         items.insert(
             0,
             DropdownMenuItem(
-                child: Text(categories[i].data['category']),
-                value: categories[i].data['category']));
+                child: Text(categories[i]),
+                value: categories[i]));
       });
     }
     return items;
   }
-
+//
+//  List<DropdownMenuItem<String>> getBrandsDropDown() {
+//    List<DropdownMenuItem<String>> items = new List();
+//    for (int i = 0; i < brands.length; i++) {
+//      setState(() {
+//        items.insert(
+//            0,
+//            DropdownMenuItem(
+//                child: Text(brands[i].data['brand']),
+//                value: brands[i].data['brand']));
+//      });
+//    }
+//    return items;
+//  }
   List<DropdownMenuItem<String>> getBrandsDropDown() {
     List<DropdownMenuItem<String>> items = new List();
     for (int i = 0; i < brands.length; i++) {
@@ -63,8 +92,8 @@ class _AddProductsState extends State<AddProducts> {
         items.insert(
             0,
             DropdownMenuItem(
-                child: Text(brands[i].data['brand']),
-                value: brands[i].data['brand']));
+                child: Text(brands[i]),
+                value: brands[i]));
       });
     }
     return items;
@@ -139,16 +168,18 @@ class _AddProductsState extends State<AddProducts> {
               height: 10.0,
             ),
 
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 productDropDown(
                     textTitle: "Product Category",
+                    hintText: "Please choose the category",
                     selectedItem: _currentCategory,
                     dropDownItems: categoriesDropDown,
                     changedDropDownItems: changeSelectedCategory),
                 productDropDown(
                     textTitle: "Product Brand",
+                    hintText: "Please choose the brand",
                     selectedItem: _currentBrand,
                     dropDownItems: brandsDropDown,
                     changedDropDownItems: changeSelectedBrand),
@@ -169,26 +200,43 @@ class _AddProductsState extends State<AddProducts> {
     );
   }
 
-  _getCategories() async {
-    List<DocumentSnapshot> data = await _categoryService.getCategories();
-    print(data.length);
+//  _getCategories() async {
+//    List<DocumentSnapshot> data = await _categoryService.getCategories();
+//    print(data.length);
+//    setState(() {
+//      categories = data;
+//      categoriesDropDown = getCategoriesDropdown();
+//      _currentCategory = categories[0].data['category'];
+//    });
+//  }
+    _getCategories() {
+    //List<DocumentSnapshot> data = await _categoryService.getCategories();
+    print(categories.length);
     setState(() {
-      categories = data;
       categoriesDropDown = getCategoriesDropdown();
-      _currentCategory = categories[0].data['category'];
+      //_currentCategory = categories[0];
     });
   }
+//
+//  _getBrands() async {
+//    List<DocumentSnapshot> data = await _brandService.getBrands();
+//    print(data.length);
+//    setState(() {
+//      brands = data;
+//      brandsDropDown = getBrandsDropDown();
+//      _currentBrand = brands[0].data['brand'];
+//    });
+//  }
 
-  _getBrands() async {
-    List<DocumentSnapshot> data = await _brandService.getBrands();
-    print(data.length);
+    _getBrands() async {
+    //List<DocumentSnapshot> data = await _brandService.getBrands();
+    print(brands.length);
     setState(() {
-      brands = data;
+      //brands = data;
       brandsDropDown = getBrandsDropDown();
-      _currentBrand = brands[0].data['brand'];
+      //_currentBrand = brands[0];
     });
   }
-
   changeSelectedCategory(String selectedCategory) {
     setState(() => _currentCategory = selectedCategory);
   }
