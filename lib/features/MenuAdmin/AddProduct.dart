@@ -35,6 +35,9 @@ class _AddProductsState extends State<AddProducts> {
   String _currentCategory;
   String _currentBrand;
 
+  List<File> imageList;
+  List<File> tempImageList;
+
 
   bool isLoading = false;
 
@@ -371,8 +374,6 @@ class _AddProductsState extends State<AddProducts> {
 
 
 
-  List<File> imageList;
-  List<File> tempImageList;
 
   pickImage() async {
 
