@@ -96,7 +96,7 @@ class ProductCard extends StatelessWidget {
                           child: Hero(
                             tag: product.picture,
                             child: Image.asset(
-                              product.picture,
+                              product.picture[0],
                               fit: BoxFit.cover,
                             ),
                           )),
