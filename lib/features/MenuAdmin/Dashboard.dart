@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/AddCategory.dart';
-
 import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-
 import 'package:hydroponics/features/MenuAdmin/SmallCard.dart';
+import 'package:hydroponics/features/MenuLearning/AddArticle/AddArticle.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddPlant.dart';
 import 'package:provider/provider.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -110,7 +110,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   onTap: () {
                     appState.changeScreen(Screen.PRODUCTS);
                     changeScreen(context, AddProducts());
-
                   },
                   child: Wrap(
                     direction: Axis.horizontal,
@@ -209,12 +208,52 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    appState.changeScreen(Screen.AddArticle);
+                    changeScreen(context, AddArticleView());
+                  },
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: <Widget>[
+                      RotatedBox(
+                        quarterTurns: -1,
+                        child: Text(
+                          'Add Article',
+                        ),
+                      ),
+                      Visibility(
+                        visible: appState.selectedScreen == Screen.AddArticle,
+                        child: Wrap(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 58,
+                              width: 5,
+                              color: Colors.black,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      appState.changeScreen(Screen.ORDERS);
+                      appState.changeScreen(Screen.AddVideo);
+                      changeScreen(context, AddArticleView());
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => AddPlantView()));
                     },
                     child: Wrap(
                       direction: Axis.horizontal,
@@ -222,11 +261,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         RotatedBox(
                           quarterTurns: -1,
                           child: Text(
-                            'Orders',
+                            'Add Video',
                           ),
                         ),
                         Visibility(
-                          visible: appState.selectedScreen == Screen.ORDERS,
+                          visible: appState.selectedScreen == Screen.AddVideo,
                           child: Wrap(
                             children: <Widget>[
                               SizedBox(
@@ -244,6 +283,84 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                   ),
                 ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Expanded(
+                //   child: InkWell(
+                //     onTap: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => AddArticleView()));
+                //     },
+                //     child: Wrap(
+                //       direction: Axis.horizontal,
+                //       children: <Widget>[
+                //         RotatedBox(
+                //           quarterTurns: -1,
+                //           child: Text(
+                //             'Add Article',
+                //           ),
+                //         ),
+                //         // Visibility(
+                //         //   visible: appState.selectedScreen == Screen.ORDERS,
+                //         //   child: Wrap(
+                //         //     children: <Widget>[
+                //         //       SizedBox(
+                //         //         width: 10,
+                //         //       ),
+                //         //       Container(
+                //         //         height: 48,
+                //         //         width: 5,
+                //         //         color: Colors.black,
+                //         //       )
+                //         //     ],
+                //         //   ),
+                //         // ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Expanded(
+                //   child: InkWell(
+                //     onTap: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => AddArticleView()));
+                //     },
+                //     child: Wrap(
+                //       direction: Axis.horizontal,
+                //       children: <Widget>[
+                //         RotatedBox(
+                //           quarterTurns: -1,
+                //           child: Text(
+                //             'Add Video',
+                //           ),
+                //         ),
+                //         // Visibility(
+                //         //   visible: appState.selectedScreen == Screen.ORDERS,
+                //         //   child: Wrap(
+                //         //     children: <Widget>[
+                //         //       SizedBox(
+                //         //         width: 10,
+                //         //       ),
+                //         //       Container(
+                //         //         height: 48,
+                //         //         width: 5,
+                //         //         color: Colors.black,
+                //         //       )
+                //         //     ],
+                //         //   ),
+                //         // ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 IconButton(icon: Icon(Icons.open_in_new), onPressed: () {})
               ],
             ),
