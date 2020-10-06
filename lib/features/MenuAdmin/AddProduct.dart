@@ -198,7 +198,7 @@ class _AddProductsState extends State<AddProducts> {
               ),
               appButton(
                   btnTxt: "Add Product",
-                  onBtnclicked: validateAndUpload,
+                  onBtnclicked: addNewProducts,
                   btnPadding: 20.0,
                   btnColor: green),
             ],
@@ -319,7 +319,7 @@ class _AddProductsState extends State<AddProducts> {
               "brand":_currentBrand,
               "category":_currentCategory,
             });
-            //_formKey.currentState.reset();
+            _formKey.currentState.reset();
             setState(() => isLoading = false);
             Navigator.pop(context);
   //        });
