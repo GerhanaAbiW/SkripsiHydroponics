@@ -34,7 +34,8 @@ class _AddProductsState extends State<AddProducts> {
   List<DropdownMenuItem<String>> brandsDropDown = <DropdownMenuItem<String>>[];
   String _currentCategory;
   String _currentBrand;
-  List<File> imageList;
+
+
   bool isLoading = false;
 
   @override
@@ -269,7 +270,7 @@ class _AddProductsState extends State<AddProducts> {
 
   Future<List<String>> uploadImage(List<File> _imageFile) async {
     List<String> _urllist = [];
-    await _imageFile.forEach((image) async {
+     await _imageFile.forEach((image) async {
       String rannum = Uuid().v1();
       final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
       StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
@@ -277,17 +278,48 @@ class _AddProductsState extends State<AddProducts> {
       StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
       String _url = await downloadUrl.ref.getDownloadURL();
       _urllist.add(_url);
+
     });
 
     return _urllist;
   }
+
 
    validateAndUpload() async {
     if (_formKey.currentState.validate()) {
      setState(() => isLoading = true);
      if (imageList != null) {
         if (productNameController.text != "") {
-          List<String> imageUrlList= await uploadImage(imageList);
+          List<String> imageUrlList=[];
+          //await uploadImage(imageList);
+//          uploadImage(imageList).then((List<String> urls) => imageUrlList = urls );
+          //print("$imageUrlList");
+           await imageList.forEach((image) async {
+            String rannum = Uuid().v1();
+            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+            StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
+            StorageUploadTask uploadTask = reference.putFile(image);
+            StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
+            String _url = await downloadUrl.ref.getDownloadURL();
+        //    String _url = await (await uploadTask.onComplete).ref.getDownloadURL();
+            print("ini link = $_url");
+            imageUrlList.add(_url);
+            productService.uploadProduct({
+              "name":productNameController.text,
+              "price":double.parse(productPriceController.text),
+              "picture":imageUrlList,
+              "description" : prodcutDescriptionController.text,
+              "rating" : 1,
+              "quantity":int.parse(quatityController.text),
+              "brand":_currentBrand,
+              "category":_currentCategory,
+            });
+//
+//           // print("yang gua mau tau $imageUrlList");
+          });
+//           print("yang gua mau tau $imageUrlList");
+//          return imageUrlList;
+
 //          await _imageFile.forEach((image) async{
 //            String rannum = Uuid().v1();
 //            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
@@ -308,20 +340,19 @@ class _AddProductsState extends State<AddProducts> {
 //
 //          task1.onComplete.then((snapshot3) async {
 //            imageUrl1 = await snapshot1.ref.getDownloadURL();
-
-            productService.uploadProduct({
-              "name":productNameController.text,
-              "price":double.parse(productPriceController.text),
-              "picture":imageUrlList,
-              "description" : prodcutDescriptionController.text,
-              "rating" : 1,
-              "quantity":int.parse(quatityController.text),
-              "brand":_currentBrand,
-              "category":_currentCategory,
-            });
+//            productService.uploadProduct({
+//              "name":productNameController.text,
+//              "price":double.parse(productPriceController.text),
+//              "picture":imageUrlList,
+//              "description" : prodcutDescriptionController.text,
+//              "rating" : 1,
+//              "quantity":int.parse(quatityController.text),
+//              "brand":_currentBrand,
+//              "category":_currentCategory,
+//            });
             _formKey.currentState.reset();
             setState(() => isLoading = false);
-            Navigator.pop(context);
+            //Navigator.pop(context);
   //        });
 
 
@@ -340,11 +371,11 @@ class _AddProductsState extends State<AddProducts> {
 
 
 
-
-
+  List<File> imageList;
+  List<File> tempImageList;
 
   pickImage() async {
-    List<File> tempImageList;
+
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     File file = File(pickedFile.path);
@@ -357,6 +388,12 @@ class _AddProductsState extends State<AddProducts> {
         tempImageList = new List.from(imageFile, growable: true);
       } else {
         for (int s = 0; s < imageFile.length; s++) {
+//          if (imageFile.length <= 2) {
+//            s++;
+//            tempImageList.add(file);
+//          }else if(imageFile.length > 2){
+//            showSnackBar("Product Images cannot be empty", scaffoldKey);
+//          }
           tempImageList.add(file);
         }
       }

@@ -9,12 +9,12 @@ class ProductModel{
   static const CATEGORY = "category";
   static const QUANTITY = "quantity";
   static const BRAND = "brand";
-  static const RATING = "brand";
+  static const RATING = "rating";
 
 
   String _id;
   String _name;
-  String _picture;
+  List _picture;
   String _description;
   String _category;
   String _brand;
@@ -27,7 +27,7 @@ class ProductModel{
 
   String get name => _name;
 
-  String get picture => _picture;
+  List get picture => _picture;
 
   String get brand => _brand;
 
