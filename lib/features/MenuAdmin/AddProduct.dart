@@ -35,10 +35,8 @@ class _AddProductsState extends State<AddProducts> {
   List<DropdownMenuItem<String>> brandsDropDown = <DropdownMenuItem<String>>[];
   String _currentCategory;
   String _currentBrand;
-
-
+  List<File> imageList;
   bool isLoading = false;
-
   @override
   void initState() {
 //    _getCategories();
@@ -71,7 +69,7 @@ class _AddProductsState extends State<AddProducts> {
     return items;
   }
 
-//
+  //
 //  List<DropdownMenuItem<String>> getBrandsDropDown() {
 //    List<DropdownMenuItem<String>> items = new List();
 //    for (int i = 0; i < brands.length; i++) {
@@ -126,71 +124,78 @@ class _AddProductsState extends State<AddProducts> {
         ],
       ),
       body: new SingleChildScrollView(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new SizedBox(
-              height: 10.0,
-            ),
-            MultiImagePickerList(
-                imageList: imageList,
-                removeNewImage: (index) {
-                  removeImage(index);
-                }),
-            new SizedBox(
-              height: 10.0,
-            ),
-            productTextField(
-                textTitle: "Product Title",
-                textHint: "Enter Product Title",
-                controller: productNameController),
-            new SizedBox(
-              height: 10.0,
-            ),
-            productTextField(
-                textTitle: "Product Price",
-                textHint: "Enter Product Price",
-                textType: TextInputType.number,
-                controller: productPriceController),
-            new SizedBox(
-              height: 10.0,
-            ),
-            productTextField(
-                textTitle: "Product Description",
-                textHint: "Enter Description",
-                controller: prodcutDescriptionController,
-                height: 180.0),
-            new SizedBox(
-              height: 10.0,
-            ),
-            Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                productDropDown(
-                    textTitle: "Product Category",
-                    hintText: "Please choose the category",
-                    selectedItem: _currentCategory,
-                    dropDownItems: categoriesDropDown,
-                    changedDropDownItems: changeSelectedCategory),
-                productDropDown(
-                    textTitle: "Product Brand",
-                    hintText: "Please choose the brand",
-                    selectedItem: _currentBrand,
-                    dropDownItems: brandsDropDown,
-                    changedDropDownItems: changeSelectedBrand),
-              ],
-            ),
-            new SizedBox(
-              height: 20.0,
-            ),
-            appButton(
-                btnTxt: "Add Product",
-                onBtnclicked: addNewProducts,
-                btnPadding: 20.0,
-                btnColor: green),
-          ],
+        child: Form(
+          key: _formKey,
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new SizedBox(
+                height: 10.0,
+              ),
+              MultiImagePickerList(
+                  imageList: imageList,
+                  removeNewImage: (index) {
+                    removeImage(index);
+                  }),
+              new SizedBox(
+                height: 10.0,
+              ),
+              productTextField(
+                  textTitle: "Product Title",
+                  textHint: "Enter Product Title",
+                  controller: productNameController),
+              new SizedBox(
+                height: 10.0,
+              ),
+              productTextField(
+                  textTitle: "Product Price",
+                  textHint: "Enter Product Price",
+                  textType: TextInputType.number,
+                  controller: productPriceController),
+              new SizedBox(
+                height: 10.0,
+              ),
+              productTextField(
+                  textTitle: "Product Description",
+                  textHint: "Enter Description",
+                  controller: prodcutDescriptionController,
+                  height: 180.0),
+              new SizedBox(
+                height: 10.0,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  productTextField(
+                      textTitle: "Product Quantity",
+                      textHint: "Enter Product Quantity",
+                      textType: TextInputType.number,
+                      controller: quatityController),
+                  productDropDown(
+                      textTitle: "Product Category",
+                      hintText: "Please choose the category",
+                      selectedItem: _currentCategory,
+                      dropDownItems: categoriesDropDown,
+                      changedDropDownItems: changeSelectedCategory),
+                  productDropDown(
+                      textTitle: "Product Brand",
+                      hintText: "Please choose the brand",
+                      selectedItem: _currentBrand,
+                      dropDownItems: brandsDropDown,
+                      changedDropDownItems: changeSelectedBrand),
+                ],
+              ),
+              new SizedBox(
+                height: 20.0,
+              ),
+              appButton(
+                  btnTxt: "Add Product",
+                  onBtnclicked: addNewProducts,
+                  btnPadding: 20.0,
+                  btnColor: green),
+            ],
+          ),
         ),
       ),
     );
@@ -213,6 +218,7 @@ class _AddProductsState extends State<AddProducts> {
       //_currentCategory = categories[0];
     });
   }
+
 //
 //  _getBrands() async {
 //    List<DocumentSnapshot> data = await _brandService.getBrands();
@@ -223,7 +229,6 @@ class _AddProductsState extends State<AddProducts> {
 //      _currentBrand = brands[0].data['brand'];
 //    });
 //  }
-
   _getBrands() async {
     //List<DocumentSnapshot> data = await _brandService.getBrands();
     print(brands.length);
@@ -252,10 +257,10 @@ class _AddProductsState extends State<AddProducts> {
 //    print(imageUrls);
 //    return imageUrls;
 //  }
-
-  Future<List<String>> uploadImage(List<File> _imageFile) async {
+  uploadImage(List<File> _imageFile) async {
     List<String> _urllist = [];
-     await _imageFile.forEach((image) async {
+    // ignore: await_onl_futures
+    await _imageFile.forEach((image) async {
       String rannum = Uuid().v1();
       final String picture =
           "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
@@ -264,57 +269,23 @@ class _AddProductsState extends State<AddProducts> {
       StorageUploadTask uploadTask = reference.putFile(image);
       StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
       String _url = await downloadUrl.ref.getDownloadURL();
+      print('URL KITA SEMUA $_url');
       _urllist.add(_url);
-
+      print("bajinagan$_urllist");
     });
-
     return _urllist;
   }
 
-<<<<<<< HEAD
-  void validateAndUpload() async {
-=======
+  validateAndUpload() async {
+    List<String> urlURL = await uploadImage(imageList);
 
-   validateAndUpload() async {
->>>>>>> 468f35f054823069bcdd20158cdaeb8b3b821fc2
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
-      if (imageList != null) {
-        if (productNameController.text != "") {
-<<<<<<< HEAD
-          List<String> imageUrlList = await uploadImage(imageList);
-=======
-          List<String> imageUrlList=[];
-          //await uploadImage(imageList);
-//          uploadImage(imageList).then((List<String> urls) => imageUrlList = urls );
-          //print("$imageUrlList");
-           await imageList.forEach((image) async {
-            String rannum = Uuid().v1();
-            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-            StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
-            StorageUploadTask uploadTask = reference.putFile(image);
-            StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
-            String _url = await downloadUrl.ref.getDownloadURL();
-        //    String _url = await (await uploadTask.onComplete).ref.getDownloadURL();
-            print("ini link = $_url");
-            imageUrlList.add(_url);
-            productService.uploadProduct({
-              "name":productNameController.text,
-              "price":double.parse(productPriceController.text),
-              "picture":imageUrlList,
-              "description" : prodcutDescriptionController.text,
-              "rating" : 1,
-              "quantity":int.parse(quatityController.text),
-              "brand":_currentBrand,
-              "category":_currentCategory,
-            });
-//
-//           // print("yang gua mau tau $imageUrlList");
-          });
-//           print("yang gua mau tau $imageUrlList");
-//          return imageUrlList;
-
->>>>>>> 468f35f054823069bcdd20158cdaeb8b3b821fc2
+      // if (imageList != null) {
+      if (productNameController.text != "") {
+        List<String> imageUrlList = urlURL;
+        print('image $imageUrlList');
+        print('image URL $imageUrlList');
 //          await _imageFile.forEach((image) async{
 //            String rannum = Uuid().v1();
 //            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
@@ -332,61 +303,34 @@ class _AddProductsState extends State<AddProducts> {
 //
 //          task1.onComplete.then((snapshot3) async {
 //            imageUrl1 = await snapshot1.ref.getDownloadURL();
-<<<<<<< HEAD
+        productService.uploadProduct({
+          "name": productNameController.text,
+          "price": double.parse(productPriceController.text),
+          "picture": imageUrlList,
+          "description": prodcutDescriptionController.text,
+          //"rating": 1,
+          "quantity": int.parse(quatityController.text),
+          "brand": _currentBrand,
+          "category": _currentCategory,
+        });
+        _formKey.currentState.reset();
+        setState(() => isLoading = false);
+        Navigator.pop(context);
+        //        });
 
-          productService.uploadProduct({
-            "name": productNameController.text,
-            "price": double.parse(productPriceController.text),
-            "picture": imageUrlList,
-            "quantity": int.parse(quatityController.text),
-            "brand": _currentBrand,
-            "category": _currentCategory,
-          });
-          _formKey.currentState.reset();
-          setState(() => isLoading = false);
-          Navigator.pop(context);
-//          });
-=======
-//            productService.uploadProduct({
-//              "name":productNameController.text,
-//              "price":double.parse(productPriceController.text),
-//              "picture":imageUrlList,
-//              "description" : prodcutDescriptionController.text,
-//              "rating" : 1,
-//              "quantity":int.parse(quatityController.text),
-//              "brand":_currentBrand,
-//              "category":_currentCategory,
-//            });
-            _formKey.currentState.reset();
-            setState(() => isLoading = false);
-            //Navigator.pop(context);
-  //        });
-
->>>>>>> 468f35f054823069bcdd20158cdaeb8b3b821fc2
-
-        } else {
-          setState(() => isLoading = false);
-        }
       } else {
         setState(() => isLoading = false);
-
-//        Fluttertoast.showToast(msg: 'all the images must be provided');
       }
+      // }
+//      else {
+//         setState(() => isLoading = false);
+// //        Fluttertoast.showToast(msg: 'all the images must be provided');
+//       }
     }
   }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-  List<File> imageList;
-  List<File> tempImageList;
-
->>>>>>> 468f35f054823069bcdd20158cdaeb8b3b821fc2
   pickImage() async {
-
+    List<File> tempImageList;
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     File file = File(pickedFile.path);
@@ -399,13 +343,11 @@ class _AddProductsState extends State<AddProducts> {
         tempImageList = new List.from(imageFile, growable: true);
       } else {
         for (int s = 0; s < imageFile.length; s++) {
-//          if (imageFile.length <= 2) {
-//            s++;
-//            tempImageList.add(file);
-//          }else if(imageFile.length > 2){
-//            showSnackBar("Product Images cannot be empty", scaffoldKey);
-//          }
-          tempImageList.add(file);
+          if (imageFile.length == 2) {
+            tempImageList.add(file);
+          } else {
+            showSnackBar("Product Images cannot be empty", scaffoldKey);
+          }
         }
       }
       setState(() {
@@ -433,20 +375,18 @@ class _AddProductsState extends State<AddProducts> {
       showSnackBar("Product Price cannot be empty", scaffoldKey);
       return;
     }
-
     if (productNameController.text == "") {
       showSnackBar("Product Description cannot be empty", scaffoldKey);
       return;
     }
-
     if (_currentBrand == "Select Product category") {
       showSnackBar("Please select a category", scaffoldKey);
       return;
     }
-
     if (_currentCategory == "Select Product category") {
       showSnackBar("Please select a category", scaffoldKey);
       return;
-    }
+    } else
+      validateAndUpload();
   }
 }
