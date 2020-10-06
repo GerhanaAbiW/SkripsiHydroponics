@@ -33,8 +33,7 @@ class _AddProductsState extends State<AddProducts> {
   List<DropdownMenuItem<String>> brandsDropDown = <DropdownMenuItem<String>>[];
   String _currentCategory;
   String _currentBrand;
-
-  File _image1;
+  List<File> imageList;
   bool isLoading = false;
 
   @override
@@ -200,17 +199,17 @@ class _AddProductsState extends State<AddProducts> {
 
 
 
-  void _selectImage(Future<File> pickImage) async {
-    File tempImg = await pickImage;
-    setState(() => _image1 = tempImg);
-  }
+//  void _selectImage(Future<File> pickImage) async {
+//    File tempImg = await pickImage;
+//    setState(() => _image1 = tempImg);
+//  }
 
 
-  Future<List<String>> uploadFiles(List _images) async {
-    var imageUrls = await Future.wait(_images.map((_image) => uploadFile(_image)));
-    print(imageUrls);
-    return imageUrls;
-  }
+//  Future<List<String>> uploadFiles(List _images) async {
+//    var imageUrls = await Future.wait(_images.map((_image) => uploadFile(_image)));
+//    print(imageUrls);
+//    return imageUrls;
+//  }
 
   Future<List<String>> uploadImage(List<File> _imageFile) async {
     List<String> _urllist = [];
@@ -283,7 +282,7 @@ class _AddProductsState extends State<AddProducts> {
 
 
 
-  List<File> imageList;
+
 
 
   pickImage() async {
