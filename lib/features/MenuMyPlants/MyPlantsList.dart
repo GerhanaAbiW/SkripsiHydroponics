@@ -7,6 +7,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddPlant.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/PlantListFromAdmin.dart';
 
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
@@ -162,7 +163,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
             elevation: 0,
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddPlantView()));
+                  MaterialPageRoute(builder: (context) => PlantListFromAdmin()));
             },
             child: Container(
               height: 70,
