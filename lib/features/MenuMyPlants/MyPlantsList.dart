@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddPlant.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
 import 'package:hydroponics/features/MenuMyPlants/PlantListFromAdmin.dart';
@@ -162,8 +163,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PlantListFromAdmin()));
+              changeScreen(context, PlantListFromAdmin());
             },
             child: Container(
               height: 70,
