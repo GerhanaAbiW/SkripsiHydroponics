@@ -13,11 +13,27 @@ class ArticleService {
     _firestore.collection(collection).document(articleId).setData(data);
   }
 
-  Future<List<Article>> getListArticles() =>
-      _firestore.collection(collection).getDocuments().then((snap) {
+//  Future<List<Article>> getListArticles() =>
+//      _firestore.collection(collection).getDocuments().then((snap) {
+//        List<Article> listArticles = [];
+//        snap.documents.map(
+//            (snapshot) => listArticles.add(Article.fromSnapshot(snapshot)));
+//        return listArticles;
+//      });
+
+  Future<List<Article>> getListArticles() async =>
+      _firestore.collection(collection).getDocuments().then((result) {
         List<Article> listArticles = [];
-        snap.documents.map(
-            (snapshot) => listArticles.add(Article.fromSnapshot(snapshot)));
+        for (DocumentSnapshot article in result.documents) {
+          listArticles.add(Article.fromSnapshot(article));
+        }
         return listArticles;
       });
+
+  void uploadArticle(Map<String, dynamic> data) {
+    var id = Uuid();
+    String articleId = id.v1();
+    data["id"] = articleId;
+    _firestore.collection(collection).document(articleId).setData(data);
+  }
 }

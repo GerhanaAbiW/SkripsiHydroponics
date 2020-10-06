@@ -15,10 +15,26 @@ class VideoService {
     _firestore.collection(collection).document(videoId).setData(data);
   }
 
-  Future<List<Video>> getListVideos() =>
-      _firestore.collection(collection).getDocuments().then((snap){
+//  Future<List<Video>> getListVideos() =>
+//      _firestore.collection(collection).getDocuments().then((snap){
+//        List<Video> listVideos = [];
+//        snap.documents.map((snapshot) => listVideos.add(Video.fromSnapshot(snapshot)));
+//        return listVideos;
+//      });
+
+  Future<List<Video>> getListVideos() async =>
+      _firestore.collection(collection).getDocuments().then((result) {
         List<Video> listVideos = [];
-        snap.documents.map((snapshot) => listVideos.add(Video.fromSnapshot(snapshot)));
+        for (DocumentSnapshot video in result.documents) {
+          listVideos.add(Video.fromSnapshot(video));
+        }
         return listVideos;
       });
+
+  void uploadVideo(Map<String, dynamic> data) {
+    var id = Uuid();
+    String videoId = id.v1();
+    data["id"] = videoId;
+    _firestore.collection(collection).document(videoId).setData(data);
+  }
 }

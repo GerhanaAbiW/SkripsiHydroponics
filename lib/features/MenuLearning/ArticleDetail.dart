@@ -13,8 +13,7 @@ class ArticleDetail extends StatefulWidget {
 
 class _ArticleDetailState extends State<ArticleDetail> {
   TextStyle biggerText = TextStyle(fontSize: 22, fontWeight: FontWeight.w700);
-  TextStyle smallerText = TextStyle(
-      fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
+  TextStyle smallerText = TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
 
   @override
   Widget build(BuildContext context) {

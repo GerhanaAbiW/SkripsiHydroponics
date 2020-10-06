@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:hydroponics/core/Services/CategoryServices.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class AddProducts extends StatefulWidget {
   @override
@@ -204,28 +206,58 @@ class _AddProductsState extends State<AddProducts> {
   }
 
 
+  Future<List<String>> uploadFiles(List _images) async {
+    var imageUrls = await Future.wait(_images.map((_image) => uploadFile(_image)));
+    print(imageUrls);
+    return imageUrls;
+  }
 
+  Future<List<String>> uploadImage(List<File> _imageFile) async {
+    List<String> _urllist = [];
+    await _imageFile.forEach((image) async {
+      String rannum = Uuid().v1();
+      final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+      StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
+      StorageUploadTask uploadTask = reference.putFile(image);
+      StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
+      String _url = await downloadUrl.ref.getDownloadURL();
+      _urllist.add(_url);
+    });
 
+    return _urllist;
+  }
 
   void validateAndUpload() async {
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
-      if (_image1 != null) {
+      if (imageList != null) {
         if (productNameController.text != "") {
-          String imageUrl1;
-          final FirebaseStorage storage = FirebaseStorage.instance;
-          final String picture1 = "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-          StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image1);
-          StorageTaskSnapshot snapshot1 = await task1.onComplete.then((snapshot) => snapshot);
+          List<String> imageUrlList= await uploadImage(imageList);
+//          await _imageFile.forEach((image) async{
+//            String rannum = Uuid().v1();
+//            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+//            StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
+//            StorageUploadTask uploadTask = reference.putFile(image);
+//            StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
+//            String _url = await downloadUrl.ref.getDownloadURL();
+//            imageUrlList.add(_url);
+//          });
+//          final FirebaseStorage storage = FirebaseStorage.instance;
+//          final String picture1 = "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+//          StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image1);
+//          StorageTaskSnapshot snapshot1 = await task1.onComplete.then((snapshot) => snapshot);
 
 
-          task1.onComplete.then((snapshot3) async {
-            imageUrl1 = await snapshot1.ref.getDownloadURL();
+
+
+//
+//          task1.onComplete.then((snapshot3) async {
+//            imageUrl1 = await snapshot1.ref.getDownloadURL();
 
             productService.uploadProduct({
               "name":productNameController.text,
               "price":double.parse(productPriceController.text),
-              "picture":imageUrl1,
+              "picture":imageUrlList,
               "quantity":int.parse(quatityController.text),
               "brand":_currentBrand,
               "category":_currentCategory,
@@ -233,7 +265,9 @@ class _AddProductsState extends State<AddProducts> {
             _formKey.currentState.reset();
             setState(() => isLoading = false);
             Navigator.pop(context);
-          });
+//          });
+
+
         } else {
           setState(() => isLoading = false);
         }
@@ -248,25 +282,30 @@ class _AddProductsState extends State<AddProducts> {
 
 
 
+
   List<File> imageList;
 
+
   pickImage() async {
+    List<File> tempImageList;
     final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
     File file = File(pickedFile.path);
     if (file != null) {
       //imagesMap[imagesMap.length] = file;
       List<File> imageFile = new List();
       imageFile.add(file);
       //imageList = new List.from(imageFile);
-      if (imageList == null) {
-        imageList = new List.from(imageFile, growable: true);
+      if (tempImageList == null) {
+        tempImageList = new List.from(imageFile, growable: true);
       } else {
         for (int s = 0; s < imageFile.length; s++) {
-          imageList.add(file);
+          tempImageList.add(file);
         }
       }
-      setState(() {});
+      setState(() {
+        imageList = tempImageList;
+      });
     }
   }
 
