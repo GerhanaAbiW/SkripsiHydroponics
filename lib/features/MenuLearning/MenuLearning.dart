@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/features/MenuLearning/ArticleList.dart';
-import 'package:hydroponics/features/MenuLearning/VideoList.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
+import 'package:hydroponics/features/MenuLearning/Widget/WidgetArticleList.dart';
+import 'package:hydroponics/features/MenuLearning/Widget/WidgetVideoList.dart';
+
+var blueColor = Color(0xFF3232FF);
+var darkBlueColor = Color(0xFF3F51B5);
+var lightblue = Color(0xFFadd8e6);
 
 class MenuLearning extends StatefulWidget {
   @override
@@ -17,11 +22,11 @@ class _MenuLearningState extends State<MenuLearning> {
   ];
   final List<String> names = ['ichigo', 'niigo', 'sango', 'yongo', 'hakko'];
   final List<String> phones = [
-    '(021)678392',
-    '(021)678334',
-    '(021)672414',
-    '(021)678390',
-    '(021)679992'
+    'Lorem ipsum dolor si...',
+    'Lorem ipsum dolor si...',
+    'Lorem ipsum dolor si...',
+    'Lorem ipsum dolor si...',
+    'Lorem ipsum dolor si...',
   ];
 
   @override
@@ -32,7 +37,7 @@ class _MenuLearningState extends State<MenuLearning> {
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              color: Colors.lightBlue[900],
+              color: white,
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -40,20 +45,19 @@ class _MenuLearningState extends State<MenuLearning> {
             title: Text(
               "Learning",
               style: TextStyle(
-                  color: Colors.lightBlue[900],
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32.0),
+                  color: white, fontWeight: FontWeight.bold, fontSize: 32.0),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: darkBlueColor,
             elevation: 0,
             bottom: TabBar(
                 unselectedLabelColor: Colors.blue[900],
                 indicatorPadding: EdgeInsets.only(left: 30, right: 30),
                 indicator: ShapeDecoration(
+                    // color: Colors.lightBlue[900],
                     gradient: LinearGradient(
                         colors: [Colors.lightBlue[900], Colors.blue[200]]),
                     shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         side: BorderSide(
                           color: Colors.lightBlue[900],
                         ))),
@@ -61,13 +65,19 @@ class _MenuLearningState extends State<MenuLearning> {
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("ARTICLES"),
+                      child: Text(
+                        "ARTICLES",
+                        style: TextStyle(color: white),
+                      ),
                     ),
                   ),
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("MOVIES"),
+                      child: Text(
+                        "VIDEOS",
+                        style: TextStyle(color: white),
+                      ),
                     ),
                   ),
                 ]),
@@ -75,7 +85,7 @@ class _MenuLearningState extends State<MenuLearning> {
           body: TabBarView(children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ArticleList(
+              child: WidgetArticleList(
                 images: myList,
                 title: names,
                 phones: phones,
@@ -83,7 +93,7 @@ class _MenuLearningState extends State<MenuLearning> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: VideoList(
+              child: WidgetVideoList(
                 images: myList,
                 title: names,
                 phones: phones,

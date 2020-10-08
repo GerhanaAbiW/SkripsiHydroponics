@@ -10,12 +10,12 @@ var blueColor = Color(0xFF3232FF);
 var darkBlueColor = Color(0xFF3F51B5);
 var lightblue = Color(0xFFadd8e6);
 
-class ArticleDetail extends StatefulWidget {
+class VideoDetail extends StatefulWidget {
   @override
-  _ArticleDetailState createState() => _ArticleDetailState();
+  _VideoDetailState createState() => _VideoDetailState();
 }
 
-class _ArticleDetailState extends State<ArticleDetail> {
+class _VideoDetailState extends State<VideoDetail> {
   TextStyle biggerText = TextStyle(fontSize: 22, fontWeight: FontWeight.w700);
   TextStyle smallerText = TextStyle(
       fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
@@ -28,7 +28,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'Hydro Article',
+            'Hydro Video',
             style: TextStyle(color: Colors.white),
           ),
           leading: IconButton(
@@ -79,18 +79,18 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   child: Padding(
                     padding: EdgeInsets.all(30),
                     child: Column(children: <Widget>[
-                      Text(
-                        'Cara Cepat Menyemai Bibit Bayam',
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
                       Image.asset(
                         'images/bayam.jpeg',
                         height: MediaQuery.of(context).size.height / 4,
                         width: MediaQuery.of(context).size.width / 1,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'Cara Cepat Menyemai Bibit Bayam',
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.w600),
                       ),
                       Row(children: [
                         Expanded(
@@ -172,6 +172,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
+                                    'descrption Video\n\n'
                                     'Param iupsum Una de las características de las especies de este género,'
                                     'y de la familia es la secreción lechosa llamada látex que segregan al cortar o herir'
                                     'cualquier parte de la planta. La especie Ficus carica, la higuera común, pertenece'
