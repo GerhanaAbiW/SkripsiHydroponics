@@ -2,15 +2,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/features/MenuMyPlants/Widget/WidgetPlantListFromAdmin.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/Widget/WidgetListRecordDetailPlant.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:hydroponics/features/Widget/SearchPlantRecordDate.dart';
 
-class PlantListFromAdmin extends StatefulWidget {
+class ListRecordDetailPlant extends StatefulWidget {
   @override
-  _PlantListFromAdminState createState() => _PlantListFromAdminState();
+  _RecordDetailPlantState createState() => _RecordDetailPlantState();
 }
 
-class _PlantListFromAdminState extends State<PlantListFromAdmin> {
+class _RecordDetailPlantState extends State<ListRecordDetailPlant> {
   //List<String> images;
   // List<String> title = ['Kangkung', 'Caisim', 'Sawi', 'Kol', 'Bayam'];
   // List<String> desc = [
@@ -37,16 +40,13 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          'Choose Your Plant',
+          'Plant Record',
           style: CustomTextStyle.textFormFieldBold
               .copyWith(color: Colors.white, fontSize: 21),
         ),
       ),
       body: Column(
         children: <Widget>[
-          Container(
-            child: SearchListAddPlantWidget(),
-          ),
           Container(
               height: MediaQuery.of(context).size.height - 200.0,
               //height: 20,
@@ -64,7 +64,7 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    child: WidgetPlantListFromAdmin(
+                    child: WidgetLIstRecordDetailPlant(
                       plantName: 'Kangkung',
                       desc: 'PH ideal 12, PPM Ideal 120 - 322',
                     ),

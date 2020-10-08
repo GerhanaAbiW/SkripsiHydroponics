@@ -4,7 +4,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMarket/ProductSearchScreen.dart';
 import 'package:provider/provider.dart';
 
-class SearchListAddPlantWidget extends StatelessWidget {
+class SearchLPlantRecordDateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -33,7 +33,7 @@ class SearchListAddPlantWidget extends StatelessWidget {
                 ),
                 //fillColor: Colors.greenAccent[600],
                 hintStyle: new TextStyle(color: Colors.green[600]),
-                hintText: "Search Plant...",
+                hintText: "Search Record Month...",
               ),
               autofocus: false,
             ),
