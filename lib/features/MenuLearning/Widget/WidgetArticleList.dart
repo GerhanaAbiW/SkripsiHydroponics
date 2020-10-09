@@ -57,8 +57,8 @@ class WidgetArticleList extends StatelessWidget {
               //         child: SlidableDrawerDismissal(),
               //       ),
               return Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 9,
+                // width: MediaQuery.of(context).size.width,
+                height: 90, //MediaQuery.of(context).size.height,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
                 child: Card(
                     //padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),

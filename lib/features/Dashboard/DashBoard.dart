@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/Dashboard/MainMenu.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 
@@ -56,12 +57,12 @@ class _DashBoardState extends State<DashBoard> {
             BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('Home'),
-              activeColor: Colors.red,
+              activeColor: GreenTosca,
             ),
             BottomNavyBarItem(
                 icon: Icon(Icons.person),
-                title: Text('Users'),
-                activeColor: Colors.purpleAccent),
+                title: Text('Profile'),
+                activeColor: Color(0xFF689F38)),
             BottomNavyBarItem(
                 icon: Icon(Icons.message),
                 title: Text('Messages'),

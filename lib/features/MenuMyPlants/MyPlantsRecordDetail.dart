@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';
+import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 
 var greenColor = Color(0xFF8BC34A);
 var darkGreenColor = Color(0xFF689F38);
@@ -13,6 +15,34 @@ class MyPlantsRecordDetail extends StatefulWidget {
 }
 
 class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
+  List<ListProfileSection> listSection = new List();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createListItem();
+  }
+
+  void createListItem() {
+    listSection.add(
+        createSection("Media Semai : -", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection(
+        "Waktu Semai : 15 - 20 Hari", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Jenis Pupuk : Urea, TSP, dan KCL",
+        Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection(
+        "Dosis Pupuk : 1 Sendok Makan", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(
+        createSection("Waktu Pupuk : -", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Waktu Panen : 2,5 - 3 Bulan (75 - 90 Hari)",
+        Icons.ac_unit, darkGreenColor, null));
+  }
+
+  createSection(String title, IconData icon, Color color, Widget widget) {
+    return ListProfileSection(title, icon, color, widget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +79,7 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Padding(
-                                padding: EdgeInsets.fromLTRB(40, 10, 60, 10),
+                                padding: EdgeInsets.fromLTRB(40, 0, 60, 10),
                                 child: Text('Bayam',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -83,168 +113,48 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold)),
                           SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                size: (15),
-                                color: darkGreenColor,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text("Media Semai : Rockwoll",
-                                  style: TextStyle(
-                                      color: greenColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                size: (15),
-                                color: darkGreenColor,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text("Waktu Semai : 15 - 20 Hari",
-                                  style: TextStyle(
-                                      color: greenColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                size: (15),
-                                color: darkGreenColor,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text("Jenis Pupuk : -",
-                                  style: TextStyle(
-                                      color: greenColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                size: (15),
-                                color: darkGreenColor,
-                              ),
-                              SizedBox(
-                                width: 2,
-                              ),
-                              Text("Dosis Pupuk : 1 Sendok Makan",
-                                  style: TextStyle(
-                                      color: greenColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                size: (15),
-                                color: darkGreenColor,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                  "Waktu Pupuk : 20, 30, 40 Hari Setelah Tanam",
-                                  style: TextStyle(
-                                      color: greenColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                size: (15),
-                                color: darkGreenColor,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text("Waktu Panen : 2,5 - 3 Bulan (75 - 90 Hari)",
-                                  style: TextStyle(
-                                      color: greenColor,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal)),
-                            ],
+                          new Container(
+                            height: MediaQuery.of(context).size.height / 4,
+                            child: buildListView(),
                           ),
                         ],
                       ),
-                      Column(
-                        children: <Widget>[
-                          Spacer(
-                            flex: 5,
-                          ),
-                          // Row(
-                          //   crossAxisAlignment: CrossAxisAlignment.end,
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: <Widget>[
-                          //     FloatingActionButton(
-                          //       onPressed: () {
-                          //         Navigator.push(
-                          //             context,
-                          //             MaterialPageRoute(
-                          //                 builder: (context) =>
-                          //                     MyPlantsList()));
-                          //       },
-                          //       backgroundColor: greenColor,
-                          //       child: Icon(Icons.add_circle),
-                          //     ),
-                          //   ],
-                          // ),
-                        ],
-                      ),
-                      SizedBox(height: 16.0)
+                      // Column(
+                      //   children: <Widget>[
+                      // Spacer(
+                      //   flex: 5,
+                      // ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.end,
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: <Widget>[
+                      //     FloatingActionButton(
+                      //       onPressed: () {
+                      //         Navigator.push(
+                      //             context,
+                      //             MaterialPageRoute(
+                      //                 builder: (context) =>
+                      //                     MyPlantsList()));
+                      //       },
+                      //       backgroundColor: greenColor,
+                      //       child: Icon(Icons.add_circle),
+                      //     ),
+                      //   ],
+                      // ),
+                      //   ],
+                      // ),
+                      //SizedBox(height: 16.0)
                     ],
                   ),
                 ),
               ),
             ),
             Expanded(
-              flex: 1,
+              // flex: 1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 38.0),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -346,5 +256,74 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
             )
           ],
         ));
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return createListViewItem(listSection[index]);
+      },
+      itemCount: listSection.length,
+    );
+  }
+
+  createListViewItem(ListProfileSection listSection) {
+    return Builder(builder: (context) {
+      return InkWell(
+        splashColor: Colors.teal.shade200,
+        onTap: () {
+          if (listSection.widget != null) {
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (context) => listSection.widget));
+          }
+          if (listSection.title == "Logout") {
+            // _showDialog();
+          }
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: 16, right: 12),
+          padding: EdgeInsets.only(top: 12, bottom: 12),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
+                      color: listSection.color),
+                  child: Icon(
+                    listSection.icon,
+                    color: Colors.white,
+                    size: 20.0,
+                  ),
+                ),
+                flex: 8,
+              ),
+              SizedBox(
+                width: 12,
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    listSection.title,
+                    style: CustomTextStyle.textFormFieldMedium,
+                  ),
+                ),
+                flex: 84,
+              ),
+              // Spacer(
+              //   flex: 1,
+              // ),
+              // Icon(
+              //   Icons.navigate_next,
+              //   color: Colors.grey.shade500,
+              // )
+            ],
+          ),
+        ),
+      );
+    });
   }
 }

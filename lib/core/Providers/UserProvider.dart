@@ -1,7 +1,9 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'dart:async';
+// import 'dart:typed_data';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
@@ -13,10 +15,15 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/core/Services/UserServices.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
+  Uint8List profileImage;
+  String imageUrl;
+  http.MultipartFile image;
+  PickedFile pickedImage;
 
   FirebaseAuth _auth;
   FirebaseUser _user;
@@ -36,10 +43,19 @@ class UserProvider with ChangeNotifier {
   // public variables
   List<OrderModel> orders = [];
 
-  UserProvider.initialize(): _auth = FirebaseAuth.instance{
+  UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
   }
 
+  //init() async {}
+
+  selectImage() async {
+    pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+
+    profileImage = await pickedImage.readAsBytes();
+
+    notifyListeners();
+  }
 
   Future<bool> signIn(String email, String password) async {
     try {
@@ -159,7 +175,7 @@ class UserProvider with ChangeNotifier {
       "stripeId": ""
     });
     //var user = await _auth.currentUser();
-    
+
     _user.updateProfile(UserUpdateInfo()..displayName = name);
     //_user.updateProfile(UserUpdateInfo()..photoUrl = image);
     _user.updateEmail(email);

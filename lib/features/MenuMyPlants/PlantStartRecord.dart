@@ -446,6 +446,9 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 30,
+                          )
                         ],
                       ),
 

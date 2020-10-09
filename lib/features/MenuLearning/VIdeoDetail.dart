@@ -74,7 +74,7 @@ class _VideoDetailState extends State<VideoDetail> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(50))),
+                          BorderRadius.only(topRight: Radius.circular(50))),
                   margin: EdgeInsets.only(top: 20),
                   child: Padding(
                     padding: EdgeInsets.all(30),

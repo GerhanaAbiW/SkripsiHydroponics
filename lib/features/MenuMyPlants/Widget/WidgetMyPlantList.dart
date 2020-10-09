@@ -12,8 +12,8 @@ class WidgetMyPlantList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 9,
+      //width: MediaQuery.of(context).size.width,
+      height: 90, //MediaQuery.of(context).size.height / 9,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(
           //padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),

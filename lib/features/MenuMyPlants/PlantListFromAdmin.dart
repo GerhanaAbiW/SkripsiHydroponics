@@ -66,7 +66,7 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
                     position: index,
                     child: WidgetPlantListFromAdmin(
                       plantName: 'Kangkung',
-                      desc: 'PH ideal 12, PPM Ideal 120 - 322',
+                      desc: 'PH ideal 12, PPM Ide..',
                     ),
                   );
                   // return Card(

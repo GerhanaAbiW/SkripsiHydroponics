@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
+import 'package:hydroponics/features/Profile/ChangePassword.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 import 'package:provider/provider.dart';
 
-
 import 'AboutUsPage.dart';
 import 'EditProfilePage.dart';
-import 'InviteFriendsPage.dart';
+//import 'InviteFriendsPage.dart';
 import 'NotificationPage.dart';
+
+var darkGreenColor = Color(0xFF689F38);
 
 class NewProfilePage extends StatefulWidget {
   @override
@@ -26,11 +29,16 @@ class _NewProfilePageState extends State<NewProfilePage> {
   }
 
   void createListItem() {
-    listSection.add(createSection("Notifications", Icons.notifications, Colors.blue.shade800, NotificationPage()));
-    listSection.add(createSection("Payment Method", Icons.payment, Colors.teal.shade800, null));
-    listSection.add(createSection("Invite Friends", Icons.insert_invitation, Colors.indigo.shade800, InviteFriendsPage()));
-    listSection.add(createSection("About Us", Icons.help, Colors.black.withOpacity(0.8), AboutPage()));
-    listSection.add(createSection("Logout", Icons.exit_to_app, Colors.red.withOpacity(0.7),null));
+    listSection.add(createSection("Notifications", Icons.notifications,
+        Colors.blue.shade800, NotificationPage()));
+    // listSection.add(createSection(
+    //     "Payment Method", Icons.payment, Colors.teal.shade800, null));
+    listSection.add(createSection("Change Password", Icons.lock,
+        Colors.indigo.shade800, ChangePasswordPage()));
+    listSection.add(createSection(
+        "About Us", Icons.help, Colors.black.withOpacity(0.8), AboutPage()));
+    listSection.add(createSection(
+        "Logout", Icons.exit_to_app, Colors.red.withOpacity(0.7), null));
   }
 
   createSection(String title, IconData icon, Color color, Widget widget) {
@@ -39,7 +47,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context,listen: false);
+    final user = Provider.of<UserProvider>(context, listen: false);
     user.reloadUserModel();
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -53,7 +61,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                   height: 240,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.5),
+                      color: darkGreenColor.withOpacity(0.5),
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),
@@ -64,9 +72,9 @@ class _NewProfilePageState extends State<NewProfilePage> {
                           width: 200,
                           height: 200,
                           decoration: BoxDecoration(
-                              color: Colors.green, shape: BoxShape.circle),
+                              color: darkGreenColor, shape: BoxShape.circle),
                         ),
-                        top: -40,
+                        top: -70,
                         left: -40,
                       ),
                       Positioned(
@@ -74,7 +82,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                           width: 300,
                           height: 260,
                           decoration: BoxDecoration(
-                              color: Colors.green.withOpacity(0.5),
+                              color: darkGreenColor.withOpacity(0.5),
                               shape: BoxShape.circle),
                         ),
                         top: -40,
@@ -86,7 +94,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                             width: 400,
                             height: 260,
                             decoration: BoxDecoration(
-                                color: Colors.green.withOpacity(0.5),
+                                color: darkGreenColor.withOpacity(0.5),
                                 shape: BoxShape.circle),
                           ),
                         ),
@@ -130,15 +138,14 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                     margin: EdgeInsets.only(
                                         left: 8, top: 8, right: 8, bottom: 8),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.end,
                                       children: <Widget>[
-                                        IconButton(
-                                          icon: Icon(Icons.settings),
-                                          iconSize: 24,
-                                          color: Colors.black,
-                                          onPressed: () {},
-                                        ),
+                                        // IconButton(
+                                        //   icon: Icon(Icons.settings),
+                                        //   iconSize: 24,
+                                        //   color: Colors.black,
+                                        //   onPressed: () {},
+                                        // ),
                                         IconButton(
                                           icon: Icon(Icons.edit),
                                           color: Colors.black,
@@ -157,10 +164,12 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                   SizedBox(
                                     height: 8,
                                   ),
-                                    CustomText(
-                                    text: user.userModel?.name ?? "username loading..."),
                                   CustomText(
-                                      text: user.userModel?.email ?? "email loading..."),
+                                      text: user.userModel?.name ??
+                                          "username loading..."),
+                                  CustomText(
+                                      text: user.userModel?.email ??
+                                          "email loading..."),
                                   SizedBox(
                                     height: 16,
                                   ),
@@ -225,11 +234,10 @@ class _NewProfilePageState extends State<NewProfilePage> {
           if (listSection.widget != null) {
             Navigator.of(context).push(new MaterialPageRoute(
                 builder: (context) => listSection.widget));
-          }if(listSection.title =="Logout"){
+          }
+          if (listSection.title == "Logout") {
             _showDialog();
           }
-
-
         },
         child: Container(
           margin: EdgeInsets.only(left: 16, right: 12),
@@ -284,22 +292,71 @@ class _NewProfilePageState extends State<NewProfilePage> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("Alert Dialog title"),
-          content: new Text("Alert Dialog body"),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(7),
+          ),
+          title: new Text("Anda akan keluar dari akun Anda",
+              style: TextStyle(
+                  color: darkGreenColor, fontWeight: FontWeight.bold)),
+          content: new Text(
+            "Apakah Anda yakin ingin keluar dari akun Anda?",
+            style: TextStyle(fontWeight: FontWeight.normal),
+          ),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Provider.of<UserProvider>(context,listen: false).signOut(context);
-
-              },
-            ),
+            Row(
+              children: <Widget>[
+                // Expanded(
+                //   child:
+                new FlatButton(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: black,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Batal',
+                    style: TextStyle(fontWeight: FontWeight.bold, color: black),
+                  ),
+                ),
+                //),
+                SizedBox(
+                  width: 16,
+                ),
+                // Expanded(
+                //   child:
+                new FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  color: darkGreenColor,
+                  onPressed: () {
+                    Provider.of<UserProvider>(context, listen: false)
+                        .signOut(context);
+                  },
+                  child: Text(
+                    'Ya',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // ),
+              ],
+            )
+            // new FlatButton(
+            //   child: new Text("Ya"),
+            //   onPressed: () {
+            //     Provider.of<UserProvider>(context, listen: false)
+            //         .signOut(context);
+            //   },
+            // ),
           ],
         );
       },
     );
   }
 }
-
-

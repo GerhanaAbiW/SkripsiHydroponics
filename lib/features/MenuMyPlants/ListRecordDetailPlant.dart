@@ -48,7 +48,7 @@ class _RecordDetailPlantState extends State<ListRecordDetailPlant> {
       body: Column(
         children: <Widget>[
           Container(
-              height: MediaQuery.of(context).size.height - 200.0,
+              height: MediaQuery.of(context).size.height - 100.0,
               //height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -66,7 +66,7 @@ class _RecordDetailPlantState extends State<ListRecordDetailPlant> {
                     position: index,
                     child: WidgetLIstRecordDetailPlant(
                       plantName: 'Kangkung',
-                      desc: 'PH ideal 12, PPM Ideal 120 - 322',
+                      desc: 'PH ideal 12, PPM Ide..',
                     ),
                   );
                   // return Card(
