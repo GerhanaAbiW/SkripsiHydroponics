@@ -1,27 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Constants/Colors.dart';
-import 'package:hydroponics/features/MenuMyPlants/ListRecordDetailPlant.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/Widget/WidgetListRecordDate.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
-import 'package:hydroponics/features/Widget/SearchPlantRecordDate.dart';
 
-class RecordDatePlant extends StatefulWidget {
+class ListRecordDatePlant extends StatefulWidget {
   @override
-  _RecordDatePlantState createState() => _RecordDatePlantState();
+  _ListRecordDatePlantState createState() => _ListRecordDatePlantState();
 }
 
-class _RecordDatePlantState extends State<RecordDatePlant> {
-  //List<String> images;
-  List<String> title = [
-    'Februari 2020',
-    'Maret 2020',
-    'April 2020',
-    'Mei 2020',
-    'Juni 2020'
-  ];
-
+class _ListRecordDatePlantState extends State<ListRecordDatePlant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,39 +32,33 @@ class _RecordDatePlantState extends State<RecordDatePlant> {
               .copyWith(color: Colors.white, fontSize: 21),
         ),
       ),
-      body: Column(
+      body: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-            child: SearchLPlantRecordDateWidget(),
+            child: SearchListAddPlantWidget(),
           ),
           Container(
+              height: MediaQuery.of(context).size.height - 200.0,
+              //height: 20,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+              ),
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: title.length,
+                itemCount: 20,
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                      elevation: 10.0,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ListRecordDetailPlant()));
-                        },
-                        child: ListTile(
-                          // leading: CircleAvatar(
-                          //   radius: 30,
-                          //   backgroundImage: ExactAssetImage("images/plant.png"),
-                          // ),
-                          title: Text(title[index],
-                              style: TextStyle(fontSize: 14)),
-                          // subtitle:
-                          //     Text(phones[index], style: TextStyle(fontSize: 10)),
-                          trailing: Icon(Icons.date_range),
-                        ),
-                      ));
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: WidgetListRecordDate(
+                      date: 'Januari 2020',
+                    ),
+                  );
                 },
               )),
         ],

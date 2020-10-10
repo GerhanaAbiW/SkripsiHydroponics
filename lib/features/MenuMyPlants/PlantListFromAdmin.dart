@@ -42,7 +42,8 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
               .copyWith(color: Colors.white, fontSize: 21),
         ),
       ),
-      body: Column(
+      body: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
             child: SearchListAddPlantWidget(),
@@ -60,7 +61,7 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: 15,
+                itemCount: 20,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,

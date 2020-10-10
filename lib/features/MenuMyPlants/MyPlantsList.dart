@@ -42,7 +42,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RecordDatePlant()),
+                              builder: (context) => ListRecordDatePlant()),
                         );
                       },
                       child: Row(
