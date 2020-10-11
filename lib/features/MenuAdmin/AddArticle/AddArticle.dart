@@ -5,7 +5,7 @@ import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/core/constants/Costumized_Text_Field.dart';
-import 'package:hydroponics/features/MenuLearning/AddArticle/AddArticle_viewmodel.dart';
+import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class AddArticleView extends StatefulWidget {
