@@ -6,7 +6,7 @@ class ArticleService {
   Firestore _firestore = Firestore.instance;
   String collection = 'articles';
 
-  void uploadProduct(Map<String, dynamic> data) {
+  void uploadArticle(Map<String, dynamic> data) {
     var id = Uuid();
     String articleId = id.v1();
     data["id"] = articleId;
@@ -30,10 +30,10 @@ class ArticleService {
         return listArticles;
       });
 
-  void uploadArticle(Map<String, dynamic> data) {
+  void editArticle(Map<String, dynamic> data) {
     var id = Uuid();
     String articleId = id.v1();
     data["id"] = articleId;
-    _firestore.collection(collection).document(articleId).setData(data);
+    _firestore.collection(collection).document(articleId).updateData(data);
   }
 }

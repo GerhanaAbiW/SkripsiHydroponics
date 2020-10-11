@@ -8,7 +8,7 @@ class VideoService {
   Firestore _firestore = Firestore.instance;
   String collection = 'Videos';
 
-  void uploadProduct(Map<String, dynamic> data) {
+  void uploadVideo(Map<String, dynamic> data) {
     var id = Uuid();
     String videoId = id.v1();
     data["id"] = videoId;
@@ -31,10 +31,10 @@ class VideoService {
         return listVideos;
       });
 
-  void uploadVideo(Map<String, dynamic> data) {
+  void editVideo(Map<String, dynamic> data) {
     var id = Uuid();
     String videoId = id.v1();
     data["id"] = videoId;
-    _firestore.collection(collection).document(videoId).setData(data);
+    _firestore.collection(collection).document(videoId).updateData(data);
   }
 }
