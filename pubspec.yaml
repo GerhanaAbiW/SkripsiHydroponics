@@ -67,6 +67,7 @@ flutter:
   assets:
     - images/plant.png
     - images/no-image-icon.png
+    - images/no-image-icon-blue.png
     - images/login/fb.jpg
     - images/login/fcb.jpeg
     - images/login/facebook.jpg

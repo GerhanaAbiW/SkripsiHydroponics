@@ -296,6 +296,8 @@ PODS:
     - FirebaseCore (~> 6.10)
     - GTMSessionFetcher/Core (~> 1.1)
   - Flutter (1.0.0)
+  - flutter_inappwebview (0.0.1):
+    - Flutter
   - flutter_keyboard_visibility (0.7.0):
     - Flutter
   - flutter_money_formatter (0.0.1):
@@ -383,6 +385,7 @@ DEPENDENCIES:
   - firebase_core_web (from `.symlinks/plugins/firebase_core_web/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
+  - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_money_formatter (from `.symlinks/plugins/flutter_money_formatter/ios`)
   - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
@@ -432,6 +435,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
+  flutter_inappwebview:
+    :path: ".symlinks/plugins/flutter_inappwebview/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_money_formatter:
@@ -470,6 +475,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseStorage: 15e0f15ef3c7fec3d1899d68623e47d4447066b4
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_inappwebview: 69dfbac46157b336ffbec19ca6dfd4638c7bf189
   flutter_keyboard_visibility: 6195387fb6d8f46e5cd6dda4a4154e41f800f545
   flutter_money_formatter: d0d18ddc5be333fad8d09964d741b59fa11a91dc
   flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35

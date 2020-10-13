@@ -96,7 +96,7 @@ Widget productDropDown(
         child: new Text(
           textTitle,
           style:
-              new TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
+              new TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
         ),
       ),
       Padding(
@@ -104,7 +104,7 @@ Widget productDropDown(
         child: Container(
           decoration: new BoxDecoration(
               color: Colors.white,
-              border: new Border.all(color: Colors.white),
+              border: new Border.all(color: Colors.grey),
               borderRadius: new BorderRadius.all(new Radius.circular(4.0))),
           child: Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 15.0),
