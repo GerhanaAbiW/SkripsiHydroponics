@@ -1,4 +1,5 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
@@ -47,7 +48,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: GridTile(
             child: Container(
                 color: Colors.white70,
-                child: CarouselSlider(
+                child: Carousel(
                   boxFit: BoxFit.cover,
                   images: [
                     AssetImage('images/bayam.jpeg'),
