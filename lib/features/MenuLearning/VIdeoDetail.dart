@@ -5,6 +5,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuLearning/Widget/WidgetArticleList.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 var blueColor = Color(0xFF3232FF);
 var darkBlueColor = Color(0xFF3F51B5);
@@ -17,8 +18,15 @@ class VideoDetail extends StatefulWidget {
 
 class _VideoDetailState extends State<VideoDetail> {
   TextStyle biggerText = TextStyle(fontSize: 22, fontWeight: FontWeight.w700);
-  TextStyle smallerText = TextStyle(
-      fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
+  TextStyle smallerText = TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
+
+  YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: YoutubePlayer.convertUrlToId("https://youtu.be/xM71RSVfE-c"), // id youtube video
+    flags: YoutubePlayerFlags(
+      autoPlay: false,
+      mute: false,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +87,18 @@ class _VideoDetailState extends State<VideoDetail> {
                   child: Padding(
                     padding: EdgeInsets.all(30),
                     child: Column(children: <Widget>[
-                      Image.asset(
-                        'images/bayam.jpeg',
-                        height: MediaQuery.of(context).size.height / 4,
-                        width: MediaQuery.of(context).size.width / 1,
+                      YoutubePlayer(
+                        controller: _controller,
+                        showVideoProgressIndicator: true,
+                        progressIndicatorColor: Colors.amber,
+                        progressColors: const ProgressBarColors(
+                          playedColor: Colors.amber,
+                          handleColor: Colors.amberAccent,
+                        ),
+                        onEnded: (metaData){
+                          _controller.seekTo(Duration());
+                          _controller.pause();
+                        },
                       ),
                       SizedBox(
                         height: 30,

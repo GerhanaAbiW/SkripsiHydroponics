@@ -98,40 +98,33 @@ class _AddProductsState extends State<AddProducts> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Colors.blue,
-      appBar: new AppBar(
-        title: new Text("Add Products"),
-        centerTitle: false,
-        elevation: 0.0,
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: new RaisedButton.icon(
-                color: Colors.green,
-                shape: new RoundedRectangleBorder(
-                    borderRadius:
-                        new BorderRadius.all(new Radius.circular(15.0))),
-                onPressed: () => pickImage(),
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                label: new Text(
-                  "Add Images",
-                  style: new TextStyle(color: Colors.white),
-                )),
-          )
-        ],
-      ),
-      body: new SingleChildScrollView(
+    return  new SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              new SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new RaisedButton.icon(
+                    color: Colors.green,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius:
+                        new BorderRadius.all(new Radius.circular(15.0))),
+                    onPressed: () => pickImage(),
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    label: new Text(
+                      "Add Images",
+                      style: new TextStyle(color: Colors.white),
+                    )),
+              ),
               new SizedBox(
                 height: 10.0,
               ),
@@ -199,7 +192,7 @@ class _AddProductsState extends State<AddProducts> {
             ],
           ),
         ),
-      ),
+
     );
   }
 
@@ -259,21 +252,22 @@ class _AddProductsState extends State<AddProducts> {
 //    print(imageUrls);
 //    return imageUrls;
 //  }
-  Future<List<String>> uploadImage(List<File> _imageFile) async {
-    List<String> _urllist = [];
-    await _imageFile.forEach((image) async {
-      String rannum = Uuid().v1();
-      final String picture =
-          "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-      StorageReference reference =
-          FirebaseStorage.instance.ref().child(picture).child(rannum);
-      StorageUploadTask uploadTask = reference.putFile(image);
-      StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
-      String _url = await downloadUrl.ref.getDownloadURL();
-      _urllist.add(_url);
-    });
-    return _urllist;
-  }
+
+//  Future<List<String>> uploadImage(List<File> _imageFile) async {
+//    List<String> _urllist = [];
+//    await _imageFile.forEach((image) async {
+//      String rannum = Uuid().v1();
+//      final String picture =
+//          "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+//      StorageReference reference =
+//          FirebaseStorage.instance.ref().child(picture).child(rannum);
+//      StorageUploadTask uploadTask = reference.putFile(image);
+//      StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
+//      String _url = await downloadUrl.ref.getDownloadURL();
+//      _urllist.add(_url);
+//    });
+//    return _urllist;
+//  }
 
   validateAndUpload() async {
     if (_formKey.currentState.validate()) {

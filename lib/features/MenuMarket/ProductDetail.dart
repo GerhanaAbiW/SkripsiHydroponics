@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
@@ -46,7 +47,21 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: GridTile(
             child: Container(
                 color: Colors.white70,
-                child: Image.asset(widget.product.picture[0])),
+                child: CarouselSlider(
+                  boxFit: BoxFit.cover,
+                  images: [
+                    AssetImage('images/bayam.jpeg'),
+                    AssetImage('images/hydro1.jpeg'),
+                    AssetImage('images/obat.jpeg'),
+                    AssetImage('images/hydro2.jpeg'),
+                    AssetImage('images/pupuk.jpeg'),
+                  ],
+                  autoplay: true,
+                  animationCurve: Curves.fastOutSlowIn,
+                  animationDuration: Duration(milliseconds: 1000),
+                  dotSize: 4.0,
+                  indicatorBgPadding: 2.0,
+                ),),
             footer: new Container(
               color: Colors.white,
               child: ListTile(

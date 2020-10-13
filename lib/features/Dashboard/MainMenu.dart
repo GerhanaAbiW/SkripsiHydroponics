@@ -4,6 +4,8 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
+import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
+import 'package:hydroponics/features/MenuAdmin/NewDashboard.dart';
 import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
@@ -91,7 +93,7 @@ class _MainMenuState extends State<MainMenu>
           MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4, ArticleDetail()),
           MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342, MyPlantsList()),
           MyItems(Icons.shopping_cart, "Market", 0xFF03A9F4, MenuMarket()),
-          MyItems(Icons.account_box, "Penjual", 0xFFF4511E, AdminDashboard()),
+          MyItems(Icons.account_box, "Penjual", 0xFFF4511E, MenuAdmin()),
         ],
         staggeredTiles: [
           StaggeredTile.extent(1, 150.0),
