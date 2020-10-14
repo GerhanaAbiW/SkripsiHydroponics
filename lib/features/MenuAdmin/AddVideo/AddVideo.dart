@@ -19,10 +19,10 @@ class _AddVideoViewState extends State<AddVideoView> {
   Radius topLeft;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  TextEditingController linkController= TextEditingController();
-  TextEditingController titleController= TextEditingController();
-  TextEditingController descriptionController= TextEditingController();
-  TextEditingController authorController= TextEditingController();
+  TextEditingController linkController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+  TextEditingController authorController = TextEditingController();
   TextEditingController dateController = new TextEditingController();
   VideoService videoService = VideoService();
   bool isLoading = false;
@@ -36,7 +36,8 @@ class _AddVideoViewState extends State<AddVideoView> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        dateController.value = TextEditingValue(text: DateFormat('dd/MM/yyyy').format(picked).toString());
+        dateController.value = TextEditingValue(
+            text: DateFormat('dd/MM/yyyy').format(picked).toString());
       });
   }
 
@@ -45,12 +46,10 @@ class _AddVideoViewState extends State<AddVideoView> {
       setState(() => isLoading = true);
       videoService.uploadVideo({
         "link": linkController.text,
-        "title" : titleController.text,
+        "title": titleController.text,
         "author": authorController.text,
         "date": dateController.text,
-        "description": descriptionController.text
-
-
+        "description": descController.text
       });
       _formKey.currentState.reset();
       setState(() => isLoading = false);
@@ -74,36 +73,80 @@ class _AddVideoViewState extends State<AddVideoView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                      Text(
-                        'Lengkapi Data Untuk Video',
-                        style: CustomTextStyle.textFormFieldBold
-                            .copyWith(color: Colors.black, fontSize: 15),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      TextFormField(
-                        controller: linkController,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                        validator: (val) {
-                          if (val.length == 0) {
-                            return "Email cannot be empty";
-                          } else {
-                            return null;
-                          }
-                        },
-                        // validator: (value) => emptyValidation(value),
-                        decoration: CommonStyle.textFieldStyle(labelTextStr:"Username",hintTextStr:"Enter Username"),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
+                Text(
+                  'Lengkapi Data Untuk Video',
+                  style: CustomTextStyle.textFormFieldBold
+                      .copyWith(color: Colors.black, fontSize: 15),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+//                 TextFormField(
+//                   controller: linkController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Username", hintTextStr: "Enter Username"),
+//                 ),
+//                 SizedBox(
+//                   height: 16,
+//                 ),
+//                 TextFormField(
+//                   controller: titleController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Username", hintTextStr: "Enter Username"),
+//                 ),
+//                 SizedBox(
+//                   height: 16,
+//                 ),
+//                 TextFormField(
+//                   controller: authorController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Username", hintTextStr: "Enter Username"),
+//                 ),
                 TextFormField(
                   controller: titleController,
                   keyboardType: TextInputType.text,
@@ -121,64 +164,96 @@ class _AddVideoViewState extends State<AddVideoView> {
                     }
                   },
                   // validator: (value) => emptyValidation(value),
-                  decoration: CommonStyle.textFieldStyle(labelTextStr:"Username",hintTextStr:"Enter Username"),
+                  decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Judul Video",
+                      hintTextStr: "Masukkan Judul Video"),
                 ),
                 SizedBox(
                   height: 16,
                 ),
-                      TextFormField(
-                        controller: authorController,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        autofocus: false,
+                GestureDetector(
+                  onTap: () => _selectDate(context),
+                  child: AbsorbPointer(
+                    child: TextFormField(
+                      controller: dateController,
+                      autofocus: false,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.datetime,
+                      decoration: InputDecoration(
+                        hintText: 'Tanggal Video',
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(
+                            color: Colors.green,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                            width: 2.0,
+                          ),
+                        ),
+                        suffixIcon: Icon(
+                          Icons.calendar_today,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  controller: authorController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  autofocus: false,
 //                          focusNode: _focusNode,
 //                          onFieldSubmitted: (_) {
 //                            FocusScope.of(context).requestFocus(_focusScopeNode);
 //                          },
-                        validator: (val) {
-                          if (val.length == 0) {
-                            return "Email cannot be empty";
-                          } else {
-                            return null;
-                          }
-                        },
-                        // validator: (value) => emptyValidation(value),
-                        decoration: CommonStyle.textFieldStyle(labelTextStr:"Username",hintTextStr:"Enter Username"),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      GestureDetector(
-                        onTap: () => _selectDate(context),
-                        child: AbsorbPointer(
-                          child: TextFormField(
-                            controller: dateController,
-                            autofocus: false,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.datetime,
-                            decoration: InputDecoration(
-                              hintText: 'Date of Birth',
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
-                                  color: Colors.green,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
-                                  color: Colors.blue,
-                                  width: 2.0,
-                                ),
-                              ),
-                              suffixIcon: Icon(
-                                Icons.calendar_today,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                  validator: (val) {
+                    if (val.length == 0) {
+                      return "Email cannot be empty";
+                    } else {
+                      return null;
+                    }
+                  },
+                  // validator: (value) => emptyValidation(value),
+                  decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Pengarang",
+                      hintTextStr: "Masukkan Nama Pengarang"),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  controller: descController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 10,
+                  minLines: 1,
+
+                  textInputAction: TextInputAction.next,
+
+                  autofocus: false,
+//                          focusNode: _focusNode,
+//                          onFieldSubmitted: (_) {
+//                            FocusScope.of(context).requestFocus(_focusScopeNode);
+//                          },
+                  validator: (val) {
+                    if (val.length == 0) {
+                      return "Email cannot be empty";
+                    } else {
+                      return null;
+                    }
+                  },
+                  // validator: (value) => emptyValidation(value),
+                  decoration: DescCommonStyle.textFieldStyle(
+                      labelTextStr: "Deskripsi Video",
+                      hintTextStr: "Masukkan Deskripsi Video"),
+                ),
 //                        Container(
 //                          decoration: BoxDecoration(
 //                            border: Border(
@@ -223,73 +298,94 @@ class _AddVideoViewState extends State<AddVideoView> {
 //                            ],
 //                          ),
 //                        ),
-                      SizedBox(
-                        height: 16,
+                // SizedBox(
+                //   height: 16,
+                // ),
+                // SizedBox(
+                //   height: 16,
+                // ),
+                SizedBox(
+                  height: 40,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: GreenTosca,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(80),
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      GestureDetector(
-                        onTap: (){},
-                        child: Container(
-                          width: double.infinity,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: GreenTosca,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Add Plant",
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Add Video",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
+                ),
+              ],
+            ),
           ),
-
         ),
       ),
-
     );
   }
 }
 
-class CommonStyle{
-  static InputDecoration textFieldStyle({String labelTextStr="",String hintTextStr=""}) {return InputDecoration(
-    contentPadding: EdgeInsets.all(12),
-    labelText: labelTextStr,
-    labelStyle: TextStyle(
-        color: Colors.green
-    ),
-    hintText:hintTextStr,
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.0),
-      borderSide: BorderSide(
-        color: Colors.green,
+class CommonStyle {
+  static InputDecoration textFieldStyle(
+      {String labelTextStr = "", String hintTextStr = ""}) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.all(12),
+      labelText: labelTextStr,
+      labelStyle: TextStyle(color: Colors.green),
+      hintText: hintTextStr,
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(
+          color: Colors.green,
+        ),
       ),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.0),
-      borderSide: BorderSide(
-        color: Colors.blue,
-        width: 2.0,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(
+          color: Colors.blue,
+          width: 2.0,
+        ),
       ),
-    ),
-  );
+    );
   }
 }
 
+class DescCommonStyle {
+  static InputDecoration textFieldStyle(
+      {String labelTextStr = "", String hintTextStr = ""}) {
+    return InputDecoration(
+      contentPadding:
+          new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
 
-
-
-
+      //contentPadding: EdgeInsets.only(),
+      labelText: labelTextStr,
+      labelStyle: TextStyle(color: Colors.green),
+      hintText: hintTextStr,
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(
+          color: Colors.green,
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(
+          color: Colors.blue,
+          width: 2.0,
+        ),
+      ),
+    );
+  }
+}
