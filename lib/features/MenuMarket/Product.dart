@@ -71,7 +71,8 @@ class ProductCard extends StatelessWidget {
           padding: EdgeInsets.all(10.0),
           child: InkWell(
               onTap: () {
-                changeScreen(context, ProductDetails(product: product,));
+                //changeScreen(context, ProductDetails(product: product,));
+                changeScreen(context, ProductDetails());
               },
               child: Container(
                   width: 200.0,

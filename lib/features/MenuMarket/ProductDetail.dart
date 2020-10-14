@@ -1,19 +1,41 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 
 class ProductDetails extends StatefulWidget {
-  final ProductModel product;
-
-  const ProductDetails({Key key, this.product}) : super(key: key);
+//  final ProductModel product;
+//
+//  const ProductDetails({Key key, this.product}) : super(key: key);
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
+
+
 class _ProductDetailsState extends State<ProductDetails> {
+
+  final List<String> imgList = [
+    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  ];
+
+  List<NetworkImage> productImage;
+  static List<NetworkImage> productAssets(List<String> images) {
+    List<NetworkImage> asset = List<NetworkImage>();
+
+    for (String item in images) {
+      asset.add(NetworkImage(item));
+    }
+
+    return asset;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,64 +50,71 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: Text("HydroMarket"),
         ),
         actions: <Widget>[
-          new IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {}),
-          // new IconButton(
-          //   icon: Icon(
-          //     Icons.shopping_cart,
-          //     color: Colors.white,
-          // ), onPressed: (){}),
+//          new IconButton(
+//              icon: Icon(
+//                Icons.search,
+//                color: Colors.white,
+//              ),
+//              onPressed: () {}),
+           new IconButton(
+             icon: Icon(
+               Icons.shopping_cart,
+               color: Colors.white,
+           ), onPressed: (){}),
         ],
       ),
       backgroundColor: Colors.green[100],
-      body: new ListView(children: <Widget>[
+      body: new Column(children: <Widget>[
         new Container(
           height: 300.0,
-          child: GridTile(
-            child: Container(
-                color: Colors.white70,
-                child: Carousel(
-                  boxFit: BoxFit.cover,
-                  images: [
-                    AssetImage('images/bayam.jpeg'),
-                    AssetImage('images/hydro1.jpeg'),
-                    AssetImage('images/obat.jpeg'),
-                    AssetImage('images/hydro2.jpeg'),
-                    AssetImage('images/pupuk.jpeg'),
-                  ],
-                  autoplay: true,
-                  animationCurve: Curves.fastOutSlowIn,
-                  animationDuration: Duration(milliseconds: 1000),
-                  dotSize: 4.0,
-                  indicatorBgPadding: 2.0,
-                ),),
-            footer: new Container(
-              color: Colors.white,
-              child: ListTile(
-                leading: new Text(
-                  widget.product.name,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-                title: new Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: new Text("\$${widget.product.price}"),
-                    ),
-                    Expanded(
-                      child: new Text(
-                        "\$${widget.product.price}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+          child: Column(
+            children: <Widget>[
+                 Expanded(
+                   child: Carousel(
+                    boxFit: BoxFit.cover,
+                    images: productAssets(imgList),
+//                    [
+//                      AssetImage('images/bayam.jpeg'),
+//                      AssetImage('images/hydro1.jpeg'),
+//                      AssetImage('images/obat.jpeg'),
+//                      AssetImage('images/hydro2.jpeg'),
+//                      AssetImage('images/pupuk.jpeg'),
+//                    ],
+                    autoplay: true,
+                    animationCurve: Curves.fastOutSlowIn,
+                    animationDuration: Duration(milliseconds: 1000),
+                    dotSize: 4.0,
+                    dotColor: Colors.green,
+                    indicatorBgPadding: 2.0,
+
             ),
+                 ),
+
+                Container(
+                 height: 50,
+                color: Colors.white,
+                child: ListTile(
+                  leading: new Text(
+                    "widget.product.name",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  ),
+                  title: new Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new Text("\$${"widget.product.price"}"),
+                      ),
+                      Expanded(
+                        child: new Text(
+                          "\$${"widget.product.price"}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  ),
+
+            ),
+             ),]
           ),
         ),
         Row(
@@ -179,7 +208,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         new ListTile(
           title: new Text("Product Detail"),
           subtitle: new Text(
-             widget.product.description),
+             "widget.product.description"),
         ),
         Divider(),
         new Row(children: <Widget>[
@@ -190,7 +219,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: new Text(widget.product.name),
+            child: new Text("widget.product.name"),
           )
         ]),
         new Row(children: <Widget>[
@@ -201,7 +230,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: new Text(widget.product.brand),
+            child: new Text("widget.product.brand"),
           )
         ]),
         new Row(children: <Widget>[
@@ -314,3 +343,5 @@ class _ProductDetailsState extends State<ProductDetails> {
 //    );
 //  }
 //}
+
+

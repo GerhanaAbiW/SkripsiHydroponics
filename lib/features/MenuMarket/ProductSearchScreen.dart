@@ -51,7 +51,8 @@ class ProductSearchScreen extends StatelessWidget {
           itemBuilder: (context, index){
             return GestureDetector(
                 onTap: ()async{
-                  changeScreen(context, ProductDetails(product: productProvider.productsSearched[index]));
+                  //changeScreen(context, ProductDetails(product: productProvider.productsSearched[index]));
+                  //changeScreen(context, ProductDetails(product: productProvider.productsSearched[index]));
                 },
                 child: ProductCard(product:  productProvider.productsSearched[index]));
           }),
