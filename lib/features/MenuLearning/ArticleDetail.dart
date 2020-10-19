@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/Article.dart';
 import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
@@ -11,18 +12,18 @@ var darkBlueColor = Color(0xFF3F51B5);
 var lightblue = Color(0xFFadd8e6);
 
 class ArticleDetail extends StatefulWidget {
+  Article article;
+  ArticleDetail(this.article);
   @override
   _ArticleDetailState createState() => _ArticleDetailState();
 }
 
 class _ArticleDetailState extends State<ArticleDetail> {
   TextStyle biggerText = TextStyle(fontSize: 22, fontWeight: FontWeight.w700);
-  TextStyle smallerText = TextStyle(
-      fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
+  TextStyle smallerText = TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
 
   @override
   Widget build(BuildContext context) {
-    final article = Provider.of<ArticleProvider>(context, listen: false);
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
@@ -80,15 +81,15 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     padding: EdgeInsets.all(30),
                     child: Column(children: <Widget>[
                       Text(
-                        'Cara Cepat Menyemai Bibit Bayam',
+                        widget.article.title,
                         style: TextStyle(
                             fontSize: 28, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
                         height: 30,
                       ),
-                      Image.asset(
-                        'images/bayam.jpeg',
+                      Image.network(
+                        "${widget.article.image}",
                         height: MediaQuery.of(context).size.height / 4,
                         width: MediaQuery.of(context).size.width / 1,
                       ),
@@ -100,7 +101,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                               Container(
                                 padding: const EdgeInsets.only(bottom: 4),
                                 child: Text(
-                                  'Mr.Marcow',
+                                  widget.article.author,
 
                                   // style: AppTextStyle
                                   //     .regular12SecondaryPurple()
@@ -120,7 +121,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                                   Text(
                                       //model.dateFormat.format(
                                       //  DateTime.tryParse(
-                                      '20/02/2022'),
+                                      widget.article.date),
                                   // style: AppTextStyle
                                   //     .regular10PrimaryOrange()),
                                 ],
@@ -172,15 +173,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    'Param iupsum Una de las características de las especies de este género,'
-                                    'y de la familia es la secreción lechosa llamada látex que segregan al cortar o herir'
-                                    'cualquier parte de la planta. La especie Ficus carica, la higuera común, pertenece'
-                                    'a este género. Produce un fruto muy comercializado, el higo o breva.'
-                                    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt'
-                                    ' ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco '
-                                    'laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in '
-                                    'voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat '
-                                    'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                                    widget.article.description,
                                     style: smallerText,
                                   ),
                                 ],

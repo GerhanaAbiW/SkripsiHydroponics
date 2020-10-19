@@ -13,21 +13,7 @@ class MenuLearning extends StatefulWidget {
 }
 
 class _MenuLearningState extends State<MenuLearning> {
-  final List<String> myList = [
-    'images/bayam.jpeg',
-    'images/bayam.jpeg',
-    'images/bayam.jpeg',
-    'images/bayam.jpeg',
-    'images/bayam.jpeg',
-  ];
-  final List<String> names = ['ichigo', 'niigo', 'sango', 'yongo', 'hakko'];
-  final List<String> phones = [
-    'Lorem ipsum dolor si...',
-    'Lorem ipsum dolor si...',
-    'Lorem ipsum dolor si...',
-    'Lorem ipsum dolor si...',
-    'Lorem ipsum dolor si...',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,17 +72,13 @@ class _MenuLearningState extends State<MenuLearning> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: WidgetArticleList(
-                images: myList,
-                title: names,
-                phones: phones,
+
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: WidgetVideoList(
-                images: myList,
-                title: names,
-                phones: phones,
+
               ),
             )
           ]),

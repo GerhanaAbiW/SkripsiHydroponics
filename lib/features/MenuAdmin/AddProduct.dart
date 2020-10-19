@@ -1,13 +1,16 @@
+
 import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/BrandServices.dart';
 import 'package:hydroponics/core/Services/CategoryServices.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/AppTools.dart';
+import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
@@ -188,7 +191,7 @@ class _AddProductsState extends State<AddProducts> {
                   btnTxt: "Add Product",
                   onBtnclicked: addNewProducts,
                   btnPadding: 20.0,
-                  btnColor: green),
+                  btnColor: Colors.white),
             ],
           ),
         ),
@@ -242,32 +245,7 @@ class _AddProductsState extends State<AddProducts> {
     setState(() => _currentBrand = selectedBrand);
   }
 
-//  void _selectImage(Future<File> pickImage) async {
-//    File tempImg = await pickImage;
-//    setState(() => _image1 = tempImg);
-//  }
 
-//  Future<List<String>> uploadFiles(List _images) async {
-//    var imageUrls = await Future.wait(_images.map((_image) => uploadFile(_image)));
-//    print(imageUrls);
-//    return imageUrls;
-//  }
-
-//  Future<List<String>> uploadImage(List<File> _imageFile) async {
-//    List<String> _urllist = [];
-//    await _imageFile.forEach((image) async {
-//      String rannum = Uuid().v1();
-//      final String picture =
-//          "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-//      StorageReference reference =
-//          FirebaseStorage.instance.ref().child(picture).child(rannum);
-//      StorageUploadTask uploadTask = reference.putFile(image);
-//      StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
-//      String _url = await downloadUrl.ref.getDownloadURL();
-//      _urllist.add(_url);
-//    });
-//    return _urllist;
-//  }
 
   validateAndUpload() async {
     if (_formKey.currentState.validate()) {
@@ -275,65 +253,31 @@ class _AddProductsState extends State<AddProducts> {
       if (imageList != null) {
         if (productNameController.text != "") {
           List<String> imageUrlList = [];
-          //await uploadImage(imageList);
-//          uploadImage(imageList).then((List<String> urls) => imageUrlList = urls );
-          //print("$imageUrlList");
-          await imageList.forEach((image) async {
+
+          for(int i=0; i<imageList.length; i++){
             String rannum = Uuid().v1();
-            final String picture =
-                "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-            StorageReference reference =
-                FirebaseStorage.instance.ref().child(picture).child(rannum);
-            StorageUploadTask uploadTask = reference.putFile(image);
+            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+            StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
+            StorageUploadTask uploadTask = reference.putFile(imageList[i]);
             StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
             String _url = await downloadUrl.ref.getDownloadURL();
-            //    String _url = await (await uploadTask.onComplete).ref.getDownloadURL();
-            print("ini link = $_url");
             imageUrlList.add(_url);
-            productService.uploadProduct({
-              "name": productNameController.text,
-              "price": double.parse(productPriceController.text),
-              "picture": imageUrlList,
-              "description": prodcutDescriptionController.text,
-              "rating": 1,
-              "quantity": int.parse(quatityController.text),
-              "brand": _currentBrand,
-              "category": _currentCategory,
-            });
-//
-//           // print("yang gua mau tau $imageUrlList");
-          });
-//           print("yang gua mau tau $imageUrlList");
-//          return imageUrlList;
-//          await _imageFile.forEach((image) async{
-//            String rannum = Uuid().v1();
-//            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-//            StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
-//            StorageUploadTask uploadTask = reference.putFile(image);
-//            StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
-//            String _url = await downloadUrl.ref.getDownloadURL();
-//            imageUrlList.add(_url);
-//          });
-//          final FirebaseStorage storage = FirebaseStorage.instance;
-//          final String picture1 = "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-//          StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image1);
-//          StorageTaskSnapshot snapshot1 = await task1.onComplete.then((snapshot) => snapshot);
+          }
 
-//
-//          task1.onComplete.then((snapshot3) async {
-//            imageUrl1 = await snapshot1.ref.getDownloadURL();
-//            productService.uploadProduct({
-//              "name":productNameController.text,
-//              "price":double.parse(productPriceController.text),
-//              "picture":imageUrlList,
-//              "description" : prodcutDescriptionController.text,
-//              "rating" : 1,
-//              "quantity":int.parse(quatityController.text),
-//              "brand":_currentBrand,
-//              "category":_currentCategory,
-//            });
+          productService.uploadProduct({
+            "name": productNameController.text,
+            "price": double.parse(productPriceController.text),
+            "picture": imageUrlList,
+            "description": prodcutDescriptionController.text,
+            "rating": 1,
+            "quantity": int.parse(quatityController.text),
+            "brand": _currentBrand,
+            "category": _currentCategory,
+          });
+
           _formKey.currentState.reset();
           setState(() => isLoading = false);
+          changeScreen(context, MenuAdmin());
           //Navigator.pop(context);
           //        });
 

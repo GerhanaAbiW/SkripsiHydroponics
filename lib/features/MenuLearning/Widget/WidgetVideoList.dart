@@ -2,28 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuLearning/VIdeoDetail.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecordDetail.dart';
+import 'package:provider/provider.dart';
 
 class WidgetVideoList extends StatelessWidget {
-  final List<String> images;
-  final List<String> title;
-  final List<String> phones;
 
-  WidgetVideoList({this.images, this.title, this.phones});
 
   @override
   Widget build(BuildContext context) {
+    String idUrl;
+    final videoProvider = Provider.of<VideoProvider>(context);
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 2,
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
         child: AnimationLimiter(
           child: ListView.builder(
-            itemCount: images.length,
+            itemCount: videoProvider.videos.length,
             itemBuilder: (BuildContext context, int index) {
+              if (videoProvider.videos[index].video != null &&
+                  videoProvider.videos[index].video != "") {
+                idUrl = videoProvider.videos[index].video
+                    .substring(videoProvider.videos[index].video.length - 11);
+              }
               //return AnimationConfiguration.staggeredList(
               //   position: index,
               //   duration: const Duration(milliseconds: 3000),
@@ -70,7 +75,7 @@ class WidgetVideoList extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => VideoDetail()));
+                              builder: (context) => VideoDetail(videoProvider.videos[index])));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +104,20 @@ class WidgetVideoList extends StatelessWidget {
                                       //       )
                                       //     :
 
-                                      Image.asset(images[index]),
+                                  Stack(
+                                    children: <Widget>[
+                                      Image.network(
+                                        "https://img.youtube.com/vi/$idUrl/0.jpg",
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Positioned.fill(
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Image.asset("images/play_button.png"),
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ),
                               ),
                               // Padding(
@@ -122,7 +140,7 @@ class WidgetVideoList extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(title[index],
+                                      Text(videoProvider.videos[index].title,
                                           style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontSize: 17.0,
@@ -131,7 +149,7 @@ class WidgetVideoList extends StatelessWidget {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text(phones[index],
+                                      Text(videoProvider.videos[index].date,
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontSize: 15.0,

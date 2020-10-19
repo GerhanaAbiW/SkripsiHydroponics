@@ -93,33 +93,7 @@ class _MenuMarketState extends State<MenuMarket> {
             Flexible(child: Products()),
           ],
         ),
-        bottomNavigationBar: BottomNavyBar(
-          selectedIndex: _selectedIndex,
-          showElevation: true, // use this to remove appBar's elevation
-          onItemSelected: (index) => setState(() {
-            _selectedIndex = index;
-            _pageController.animateToPage(index,
-                duration: Duration(milliseconds: 300), curve: Curves.ease);
-          }),
-          items: [
-            BottomNavyBarItem(
-              icon: Icon(Icons.apps),
-              title: Text('Home'),
-              activeColor: Colors.red,
-            ),
-            BottomNavyBarItem(
-                icon: Icon(Icons.people),
-                title: Text('Users'),
-                activeColor: Colors.purpleAccent),
-            BottomNavyBarItem(
-                icon: Icon(Icons.message),
-                title: Text('Messages'),
-                activeColor: Colors.pink),
-            BottomNavyBarItem(
-                icon: Icon(Icons.assignment),
-                title: Text('Orders'),
-                activeColor: Colors.blue),
-          ],
-        ));
+
+    );
   }
 }
