@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
 
 Widget appButton(
     {String btnTxt,
@@ -14,7 +15,7 @@ Widget appButton(
   return Padding(
     padding: new EdgeInsets.all(btnPadding),
     child: new RaisedButton(
-      color: Colors.white,
+      color: GreenTosca,
       shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.all(new Radius.circular(15.0))),
       onPressed: onBtnclicked,
@@ -100,7 +101,7 @@ Widget productDropDown(
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+        padding: const EdgeInsets.only(left: 10.0, right: 15.0),
         child: Container(
           decoration: new BoxDecoration(
               color: Colors.white,

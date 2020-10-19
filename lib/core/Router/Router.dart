@@ -20,7 +20,7 @@ class Router {
       case Myplant:
         return MaterialPageRoute(builder: (context) => MyPlantsList());
       case Learning:
-        return MaterialPageRoute(builder: (context) => ArticleDetail());
+        return MaterialPageRoute(builder: (context) => MenuLearning());
 
       default:
         return MaterialPageRoute(

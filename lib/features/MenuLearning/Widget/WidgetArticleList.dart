@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecordDetail.dart';
+import 'package:provider/provider.dart';
 
 class WidgetArticleList extends StatelessWidget {
-  final List<String> images;
-  final List<String> title;
-  final List<String> phones;
 
-  WidgetArticleList({this.images, this.title, this.phones});
 
   @override
   Widget build(BuildContext context) {
+    final articleProvider = Provider.of<ArticleProvider>(context);
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 2,
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
         child: AnimationLimiter(
           child: ListView.builder(
-            itemCount: images.length,
+            itemCount: articleProvider.articles.length,
             itemBuilder: (BuildContext context, int index) {
               //return AnimationConfiguration.staggeredList(
               //   position: index,
@@ -69,7 +68,7 @@ class WidgetArticleList extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ArticleDetail()));
+                              builder: (context) => ArticleDetail(articleProvider.articles[index])));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,7 +84,7 @@ class WidgetArticleList extends StatelessWidget {
                                     shape: BoxShape.rectangle,
                                     border: Border.all(),
                                   ),
-                                  child:
+                                  child: articleProvider.articles[index].image != null ?
                                       // plantPicture != null
                                       //     ? ClipRRect(
                                       //         borderRadius: BorderRadius.circular(
@@ -98,7 +97,8 @@ class WidgetArticleList extends StatelessWidget {
                                       //       )
                                       //     :
 
-                                      Image.asset(images[index]),
+                                      Image.network('${articleProvider.articles[index].image}', fit: BoxFit.fill,):
+                                      Image.asset("images/bayam.jpeg")
                                 ),
                               ),
                               // Padding(
@@ -121,7 +121,7 @@ class WidgetArticleList extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(title[index],
+                                      Text(articleProvider.articles[index].title,
                                           style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontSize: 17.0,
@@ -130,7 +130,7 @@ class WidgetArticleList extends StatelessWidget {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text(phones[index],
+                                      Text(articleProvider.articles[index].date,
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontSize: 15.0,
@@ -166,5 +166,17 @@ class WidgetArticleList extends StatelessWidget {
             },
           ),
         ));
+  }
+}
+
+class CardArticle extends StatefulWidget {
+  @override
+  _CardArticleState createState() => _CardArticleState();
+}
+
+class _CardArticleState extends State<CardArticle> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

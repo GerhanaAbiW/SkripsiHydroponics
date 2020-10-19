@@ -101,8 +101,7 @@ class _AddArticleViewState extends State<AddArticleView> {
       if (_image != null) {
         String imageUrl1;
         final FirebaseStorage storage = FirebaseStorage.instance;
-        final String picture1 =
-            "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+        final String picture1 = "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
         StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
             await task1.onComplete.then((snapshot) => snapshot);
@@ -113,7 +112,8 @@ class _AddArticleViewState extends State<AddArticleView> {
             "title": titleController.text,
             "author": authorController.text,
             "date": dateController.text,
-            "picture": imageUrl1,
+            "description" : descController.text,
+            "image": imageUrl1,
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);

@@ -11,32 +11,6 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-  var productList = [
-    {
-      "name": "Bayam",
-      "picture": "images/bayam.jpeg",
-      "price": 100,
-      "rating": 5
-    },
-    {
-      "name": "Bayam",
-      "picture": "images/bayam.jpeg",
-      "price": 100,
-      "rating": 5
-    },
-    {
-      "name": "Bayam",
-      "picture": "images/bayam.jpeg",
-      "price": 100,
-      "rating": 5
-    },
-    {
-      "name": "Bayam",
-      "picture": "images/bayam.jpeg",
-      "price": 100,
-      "rating": 5
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +45,8 @@ class ProductCard extends StatelessWidget {
           padding: EdgeInsets.all(10.0),
           child: InkWell(
               onTap: () {
-                //changeScreen(context, ProductDetails(product: product,));
-                changeScreen(context, ProductDetails());
+                changeScreen(context, ProductDetails(product: product,));
+//                changeScreen(context, ProductDetails());
               },
               child: Container(
                   width: 200.0,
@@ -96,8 +70,8 @@ class ProductCard extends StatelessWidget {
                           padding: EdgeInsets.only(top: 20.0),
                           child: Hero(
                             tag: product.picture,
-                            child: Image.asset(
-                              product.picture[0],
+                            child: Image.network(
+                              "${product.picture[0]}",
                               fit: BoxFit.cover,
                             ),
                           )),

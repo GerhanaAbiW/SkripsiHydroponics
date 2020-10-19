@@ -45,7 +45,7 @@ class _AddVideoViewState extends State<AddVideoView> {
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
       videoService.uploadVideo({
-        "link": linkController.text,
+        "video": linkController.text,
         "title": titleController.text,
         "author": authorController.text,
         "date": dateController.text,
@@ -77,6 +77,30 @@ class _AddVideoViewState extends State<AddVideoView> {
                   'Lengkapi Data Untuk Video',
                   style: CustomTextStyle.textFormFieldBold
                       .copyWith(color: Colors.black, fontSize: 15),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  controller: linkController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  autofocus: false,
+//                          focusNode: _focusNode,
+//                          onFieldSubmitted: (_) {
+//                            FocusScope.of(context).requestFocus(_focusScopeNode);
+//                          },
+                  validator: (val) {
+                    if (val.length == 0) {
+                      return "Email cannot be empty";
+                    } else {
+                      return null;
+                    }
+                  },
+                  // validator: (value) => emptyValidation(value),
+                  decoration: CommonStyle.textFieldStyle(
+                      labelTextStr: "Judul Video",
+                      hintTextStr: "Masukkan Judul Video"),
                 ),
                 SizedBox(
                   height: 16,
@@ -308,7 +332,9 @@ class _AddVideoViewState extends State<AddVideoView> {
                   height: 40,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    validateAndUpload();
+                  },
                   child: Container(
                     width: double.infinity,
                     height: 50,
