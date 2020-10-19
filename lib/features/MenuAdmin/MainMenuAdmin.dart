@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle.dart';
+import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
 import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
 import 'package:hydroponics/features/MenuAdmin/AddVideo/AddVideo.dart';
 import 'package:hydroponics/features/MenuAdmin/NewDashboard.dart';
@@ -19,12 +20,10 @@ class MenuAdmin extends StatefulWidget {
   _MenuAdminState createState() => _MenuAdminState();
   final drawerItem = [
     DrawerItem("Dashbord", Icons.home, IconThemeData(color: Colors.black)),
-    DrawerItem("Add Product", Icons.card_giftcard,
-        IconThemeData(color: Colors.redAccent)),
-    DrawerItem(
-        "Add Artcile", Icons.border_color, IconThemeData(color: Colors.black)),
+    DrawerItem("Add Product", Icons.card_giftcard, IconThemeData(color: Colors.redAccent)),
+    DrawerItem("Add Artcile", Icons.border_color, IconThemeData(color: Colors.black)),
     DrawerItem("Add Video", Icons.videocam, IconThemeData(color: Colors.black)),
-    DrawerItem("4", Icons.settings, IconThemeData(color: Colors.black)),
+    DrawerItem("Add Plant", Icons.settings, IconThemeData(color: Colors.black)),
     DrawerItem("5", Icons.live_help, IconThemeData(color: Colors.black)),
   ];
 }
@@ -43,7 +42,7 @@ class _MenuAdminState extends State<MenuAdmin> {
       case 3:
         return AddVideoView();
       case 4:
-        return AddArticleView();
+        return AddPlantView();
       case 5:
         return AddArticleView();
       default:

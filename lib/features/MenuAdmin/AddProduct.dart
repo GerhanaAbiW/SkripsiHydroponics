@@ -188,7 +188,7 @@ class _AddProductsState extends State<AddProducts> {
                 height: 20.0,
               ),
               appButton(
-                  btnTxt: "Add Product",
+                    btnTxt: "Add Product",
                   onBtnclicked: addNewProducts,
                   btnPadding: 20.0,
                   btnColor: Colors.white),
