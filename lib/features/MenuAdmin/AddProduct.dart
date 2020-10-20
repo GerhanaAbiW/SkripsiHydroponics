@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -101,101 +100,100 @@ class _AddProductsState extends State<AddProducts> {
 
   @override
   Widget build(BuildContext context) {
-    return  new SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: new RaisedButton.icon(
-                    color: Colors.green,
-                    shape: new RoundedRectangleBorder(
-                        borderRadius:
-                        new BorderRadius.all(new Radius.circular(15.0))),
-                    onPressed: () => pickImage(),
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                    label: new Text(
-                      "Add Images",
-                      style: new TextStyle(color: Colors.white),
-                    )),
-              ),
-              new SizedBox(
-                height: 10.0,
-              ),
-              MultiImagePickerList(
-                  imageList: imageList,
-                  removeNewImage: (index) {
-                    removeImage(index);
-                  }),
-              new SizedBox(
-                height: 10.0,
-              ),
-              productTextField(
-                  textTitle: "Product Title",
-                  textHint: "Enter Product Title",
-                  controller: productNameController),
-              new SizedBox(
-                height: 10.0,
-              ),
-              productTextField(
-                  textTitle: "Product Price",
-                  textHint: "Enter Product Price",
-                  textType: TextInputType.number,
-                  controller: productPriceController),
-              new SizedBox(
-                height: 10.0,
-              ),
-              productTextField(
-                  textTitle: "Product Description",
-                  textHint: "Enter Description",
-                  controller: prodcutDescriptionController,
-                  height: 180.0),
-              new SizedBox(
-                height: 10.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  productTextField(
-                      textTitle: "Product Quantity",
-                      textHint: "Enter Product Quantity",
-                      textType: TextInputType.number,
-                      controller: quatityController),
-                  productDropDown(
-                      textTitle: "Product Category",
-                      hintText: "Please choose the category",
-                      selectedItem: _currentCategory,
-                      dropDownItems: categoriesDropDown,
-                      changedDropDownItems: changeSelectedCategory),
-                  productDropDown(
-                      textTitle: "Product Brand",
-                      hintText: "Please choose the brand",
-                      selectedItem: _currentBrand,
-                      dropDownItems: brandsDropDown,
-                      changedDropDownItems: changeSelectedBrand),
-                ],
-              ),
-              new SizedBox(
-                height: 20.0,
-              ),
-              appButton(
-                  btnTxt: "Add Product",
-                  onBtnclicked: addNewProducts,
-                  btnPadding: 20.0,
-                  btnColor: Colors.white),
-            ],
-          ),
+    return new SingleChildScrollView(
+      child: Form(
+        key: _formKey,
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            new SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: new RaisedButton.icon(
+                  color: Colors.green,
+                  shape: new RoundedRectangleBorder(
+                      borderRadius:
+                          new BorderRadius.all(new Radius.circular(15.0))),
+                  onPressed: () => pickImage(),
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                  label: new Text(
+                    "Add Images",
+                    style: new TextStyle(color: Colors.white),
+                  )),
+            ),
+            new SizedBox(
+              height: 10.0,
+            ),
+            MultiImagePickerList(
+                imageList: imageList,
+                removeNewImage: (index) {
+                  removeImage(index);
+                }),
+            new SizedBox(
+              height: 10.0,
+            ),
+            productTextField(
+                textTitle: "Product Title",
+                textHint: "Enter Product Title",
+                controller: productNameController),
+            new SizedBox(
+              height: 10.0,
+            ),
+            productTextField(
+                textTitle: "Product Price",
+                textHint: "Enter Product Price",
+                textType: TextInputType.number,
+                controller: productPriceController),
+            new SizedBox(
+              height: 10.0,
+            ),
+            productTextField(
+                textTitle: "Product Description",
+                textHint: "Enter Description",
+                controller: prodcutDescriptionController,
+                height: 180.0),
+            new SizedBox(
+              height: 10.0,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                productTextField(
+                    textTitle: "Product Quantity",
+                    textHint: "Enter Product Quantity",
+                    textType: TextInputType.number,
+                    controller: quatityController),
+                productDropDown(
+                    textTitle: "Product Category",
+                    hintText: "Please choose the category",
+                    selectedItem: _currentCategory,
+                    dropDownItems: categoriesDropDown,
+                    changedDropDownItems: changeSelectedCategory),
+                productDropDown(
+                    textTitle: "Product Brand",
+                    hintText: "Please choose the brand",
+                    selectedItem: _currentBrand,
+                    dropDownItems: brandsDropDown,
+                    changedDropDownItems: changeSelectedBrand),
+              ],
+            ),
+            new SizedBox(
+              height: 20.0,
+            ),
+            appButton(
+                btnTxt: "Add Product",
+                onBtnclicked: addNewProducts,
+                btnPadding: 20.0,
+                btnColor: Colors.white),
+          ],
         ),
-
+      ),
     );
   }
 
@@ -245,8 +243,6 @@ class _AddProductsState extends State<AddProducts> {
     setState(() => _currentBrand = selectedBrand);
   }
 
-
-
   validateAndUpload() async {
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
@@ -254,10 +250,12 @@ class _AddProductsState extends State<AddProducts> {
         if (productNameController.text != "") {
           List<String> imageUrlList = [];
 
-          for(int i=0; i<imageList.length; i++){
+          for (int i = 0; i < imageList.length; i++) {
             String rannum = Uuid().v1();
-            final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-            StorageReference reference = FirebaseStorage.instance.ref().child(picture).child(rannum);
+            final String picture =
+                "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+            StorageReference reference =
+                FirebaseStorage.instance.ref().child(picture).child(rannum);
             StorageUploadTask uploadTask = reference.putFile(imageList[i]);
             StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
             String _url = await downloadUrl.ref.getDownloadURL();

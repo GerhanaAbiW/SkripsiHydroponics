@@ -14,7 +14,6 @@ import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/MenuOrder/Gmaps/GmapsLocation.dart';
 import 'package:hydroponics/features/MenuOrder/HydroOderList.dart';
 
-
 class MainMenu extends StatefulWidget {
   @override
   _MainMenuState createState() => _MainMenuState();
@@ -93,10 +92,8 @@ class _MainMenuState extends State<MainMenu>
         padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
         children: <Widget>[
           MyItems(Icons.library_books, "Learning", 0xFF3F51B5, MenuLearning()),
-
           MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4,
               HydroOrderList()),
-
           MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342, MyPlantsList()),
           MyItems(Icons.shopping_cart, "Market", 0xFF03A9F4, MenuMarket()),
           MyItems(Icons.account_box, "Penjual", 0xFFF4511E, MenuAdmin()),
