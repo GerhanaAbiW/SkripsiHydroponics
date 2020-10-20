@@ -7,7 +7,7 @@ import 'package:hydroponics/features/MenuAdmin/AddCategory.dart';
 import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hydroponics/features/MenuAdmin/SmallCard.dart';
-import 'package:hydroponics/features/MenuMyPlants/AddPlant.dart';
+import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
 import 'package:provider/provider.dart';
 
 class NewAdminDashboard extends StatefulWidget {
