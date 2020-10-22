@@ -2,8 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Providers/PlantProvider.dart';
 import 'package:hydroponics/features/MenuMyPlants/Widget/WidgetPlantListFromAdmin.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:provider/provider.dart';
 
 class PlantListFromAdmin extends StatefulWidget {
   @override
@@ -11,18 +13,11 @@ class PlantListFromAdmin extends StatefulWidget {
 }
 
 class _PlantListFromAdminState extends State<PlantListFromAdmin> {
-  //List<String> images;
-  // List<String> title = ['Kangkung', 'Caisim', 'Sawi', 'Kol', 'Bayam'];
-  // List<String> desc = [
-  //   'ppm ideal 12%, suhu ideal 34',
-  //   'ppm ideal 15%, suhu ideal 53',
-  //   'ppm ideal 17%, suhu ideal 22',
-  //   'ppm ideal 18%, suhu ideal 49',
-  //   'ppm ideal 19%, suhu ideal 47'
-  // ];
+
 
   @override
   Widget build(BuildContext context) {
+    final plantProvider = Provider.of<PlantProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -61,12 +56,12 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: 20,
+                itemCount: plantProvider.plants.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
                     child: WidgetPlantListFromAdmin(
-                      plantName: 'Kangkung',
+                      plantName: plantProvider.plants[index].plant,
                       desc: 'PH ideal 12, PPM Ide..',
                     ),
                   );

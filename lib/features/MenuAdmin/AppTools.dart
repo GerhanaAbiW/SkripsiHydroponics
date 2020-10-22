@@ -33,7 +33,8 @@ Widget appButton(
 }
 
 Widget productTextField(
-    {String textTitle,
+    {String textLabel,
+    String textTitle,
     String textHint,
     double height,
     TextEditingController controller,
@@ -65,13 +66,33 @@ Widget productTextField(
               borderRadius: new BorderRadius.all(new Radius.circular(4.0))),
           child: new Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            child: new TextField(
+            child: new TextFormField(
               controller: controller,
               keyboardType: textType == null ? TextInputType.text : textType,
               maxLines: 5,
               minLines: 1,
               decoration: new InputDecoration(
-                  border: InputBorder.none, hintText: textHint),
+                contentPadding:
+                    new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
+
+                //contentPadding: EdgeInsets.only(),
+                labelText: textLabel,
+                labelStyle: TextStyle(color: Colors.green),
+                hintText: textHint,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: Colors.green,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                    width: 2.0,
+                  ),
+                ),
+              ),
             ),
           ),
         ),

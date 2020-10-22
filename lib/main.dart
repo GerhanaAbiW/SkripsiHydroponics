@@ -3,6 +3,7 @@ import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Providers/BrandProvider.dart';
 import 'package:hydroponics/core/Providers/CategoryProvider.dart';
+import 'package:hydroponics/core/Providers/PlantProvider.dart';
 
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -25,6 +26,7 @@ void main() {
       ChangeNotifierProvider.value(value: AddArticleViewModel()),
       ChangeNotifierProvider.value(value: UserProvider.initialize()),
       ChangeNotifierProvider.value(value: ProductProvider.initialize()),
+      ChangeNotifierProvider.value(value: PlantProvider.initialize()),
       ChangeNotifierProvider.value(value: AppProvider()),
       ChangeNotifierProvider.value(value: ArticleProvider.initialize()),
       ChangeNotifierProvider.value(value: VideoProvider.initialize()),
