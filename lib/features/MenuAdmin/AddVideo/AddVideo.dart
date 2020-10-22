@@ -205,6 +205,7 @@ class _AddVideoViewState extends State<AddVideoView> {
                       keyboardType: TextInputType.datetime,
                       decoration: InputDecoration(
                         hintText: 'Tanggal Video',
+                        hintStyle: new TextStyle(color: Colors.green[600]),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: BorderSide(
