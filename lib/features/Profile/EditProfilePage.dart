@@ -177,124 +177,129 @@ class _EditProfilePageState extends State<EditProfilePage> {
             //     )
             //   ],
             // ),
-            Container(
-              child: FormTextField(
-                textLabel: "Nama",
-                textHint: "Masukkan Nama Anda",
-                //controller: prodcutDescriptionController,
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  FormTextField(
+                    textLabel: "Nama",
+                    textHint: "Masukkan Nama Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+
+                  // Container(
+                  //   child: TextFormField(
+                  //     controller: _name,
+                  //     keyboardType: TextInputType.text,
+                  //     decoration: InputDecoration(
+                  //       contentPadding: EdgeInsets.all(12),
+                  //       border: border,
+                  //       hintText: "Name",
+                  //       focusedBorder: border.copyWith(
+                  //           borderSide: BorderSide(color: Colors.blue)),
+                  //     ),
+                  //   ),
+                  //   margin: EdgeInsets.only(left: 12, right: 12, top: 24),
+                  // ),
+                  // Container(
+                  //   child: TextFormField(
+                  //     controller: _email,
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     decoration: InputDecoration(
+                  //         contentPadding: EdgeInsets.all(12),
+                  //         border: border,
+                  //         hintText: "Tanggal Lahir",
+                  //         focusedBorder: border.copyWith(
+                  //             borderSide: BorderSide(color: Colors.blue))),
+                  //   ),
+                  //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+                  // ),
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textLabel: "Tanggal Lahir",
+                    textHint: "Masukkan Tanggal Lahir Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textLabel: "Jenis Kelamin",
+                    textHint: "Masukkan Jenis Kelamin Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+
+                  // Container(
+                  //   child: TextFormField(
+                  //     controller: _email,
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     decoration: InputDecoration(
+                  //         contentPadding: EdgeInsets.all(12),
+                  //         border: border,
+                  //         hintText: "Jenis Kelamin",
+                  //         focusedBorder: border.copyWith(
+                  //             borderSide: BorderSide(color: Colors.blue))),
+                  //   ),
+                  //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+                  // ),
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textType: TextInputType.emailAddress,
+                    textLabel: "Email",
+                    textHint: "Masukkan Email Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+
+                  // Container(
+                  //   child: TextFormField(
+                  //     controller: _email,
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     decoration: InputDecoration(
+                  //         contentPadding: EdgeInsets.all(12),
+                  //         border: border,
+                  //         hintText: "Email",
+                  //         focusedBorder: border.copyWith(
+                  //             borderSide: BorderSide(color: Colors.blue))),
+                  //   ),
+                  //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                  //   child: Text(
+                  //     "Nomor HP",
+                  //     style: new TextStyle(
+                  //         fontWeight: FontWeight.w700, color: Colors.black),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   child: TextFormField(
+                  //     keyboardType: TextInputType.phone,
+                  //     decoration: InputDecoration(
+                  //         contentPadding: EdgeInsets.all(12),
+                  //         border: border,
+                  //         hintText: "Nomor HP",
+                  //         focusedBorder: border.copyWith(
+                  //             borderSide: BorderSide(color: Colors.blue))),
+                  //   ),
+                  //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+                  // ),
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textType: TextInputType.number,
+                    textLabel: "Nomor HP",
+                    textHint: "Masukkan Nomor HP Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+                  SizedBox(height: 16),
+                  MultilineFormTextField(
+                      textType: TextInputType.multiline,
+                      textLabel: "Alamat",
+                      textHint: "Masukkan Alamat Anda",
+                      //controller: prodcutDescriptionController,
+                      height: 180.0),
+                ],
               ),
             ),
-            // Container(
-            //   child: TextFormField(
-            //     controller: _name,
-            //     keyboardType: TextInputType.text,
-            //     decoration: InputDecoration(
-            //       contentPadding: EdgeInsets.all(12),
-            //       border: border,
-            //       hintText: "Name",
-            //       focusedBorder: border.copyWith(
-            //           borderSide: BorderSide(color: Colors.blue)),
-            //     ),
-            //   ),
-            //   margin: EdgeInsets.only(left: 12, right: 12, top: 24),
-            // ),
-            // Container(
-            //   child: TextFormField(
-            //     controller: _email,
-            //     keyboardType: TextInputType.emailAddress,
-            //     decoration: InputDecoration(
-            //         contentPadding: EdgeInsets.all(12),
-            //         border: border,
-            //         hintText: "Tanggal Lahir",
-            //         focusedBorder: border.copyWith(
-            //             borderSide: BorderSide(color: Colors.blue))),
-            //   ),
-            //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            // ),
-            Container(
-              child: FormTextField(
-                textLabel: "Tanggal Lahir",
-                textHint: "Masukkan Tanggal Lahir Anda",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
-            Container(
-              child: FormTextField(
-                textLabel: "Jenis Kelamin",
-                textHint: "Masukkan Jenis Kelamin Anda",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
-            // Container(
-            //   child: TextFormField(
-            //     controller: _email,
-            //     keyboardType: TextInputType.emailAddress,
-            //     decoration: InputDecoration(
-            //         contentPadding: EdgeInsets.all(12),
-            //         border: border,
-            //         hintText: "Jenis Kelamin",
-            //         focusedBorder: border.copyWith(
-            //             borderSide: BorderSide(color: Colors.blue))),
-            //   ),
-            //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            // ),
-            Container(
-              child: FormTextField(
-                textType: TextInputType.emailAddress,
-                textLabel: "Email",
-                textHint: "Masukkan Email Anda",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
-            // Container(
-            //   child: TextFormField(
-            //     controller: _email,
-            //     keyboardType: TextInputType.emailAddress,
-            //     decoration: InputDecoration(
-            //         contentPadding: EdgeInsets.all(12),
-            //         border: border,
-            //         hintText: "Email",
-            //         focusedBorder: border.copyWith(
-            //             borderSide: BorderSide(color: Colors.blue))),
-            //   ),
-            //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-            //   child: Text(
-            //     "Nomor HP",
-            //     style: new TextStyle(
-            //         fontWeight: FontWeight.w700, color: Colors.black),
-            //   ),
-            // ),
-            // Container(
-            //   child: TextFormField(
-            //     keyboardType: TextInputType.phone,
-            //     decoration: InputDecoration(
-            //         contentPadding: EdgeInsets.all(12),
-            //         border: border,
-            //         hintText: "Nomor HP",
-            //         focusedBorder: border.copyWith(
-            //             borderSide: BorderSide(color: Colors.blue))),
-            //   ),
-            //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            // ),
-            Container(
-              child: FormTextField(
-                textType: TextInputType.number,
-                textLabel: "Nomor HP",
-                textHint: "Masukkan Nomor HP Anda",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
-            Container(
-              child: FormTextField(
-                  textType: TextInputType.multiline,
-                  textLabel: "Alamat",
-                  textHint: "Masukkan Alamat Anda",
-                  //controller: prodcutDescriptionController,
-                  height: 180.0),
-            ),
+
             // Container(
             //   child: TextField(
             //     keyboardType: TextInputType.multiline,

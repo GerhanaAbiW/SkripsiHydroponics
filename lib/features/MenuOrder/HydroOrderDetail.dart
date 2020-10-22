@@ -111,45 +111,59 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              child: FormTextField(
-                textLabel: "Luas Lahan",
-                textHint: "Masukkan Luas Lahan",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
                 children: <Widget>[
+                  //Container(
+                  FormTextField(
+                    textLabel: "Luas Lahan",
+                    textHint: "Masukkan Luas Lahan",
+                    //controller: prodcutDescriptionController,
+                  ),
+                  //),
+                  // Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //children: <Widget>[
+
+                  // ]),
+                  //Container(
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textLabel: "jumlah Lubang",
+                    textHint: "Masukkan Jumlah Lubang Tanaman",
+                    //controller: prodcutDescriptionController,
+                  ),
+                  //),
+                  //Container(
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textType: TextInputType.number,
+                    textLabel: "Nomor HP",
+                    textHint: "Masukkan Nomor HP Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+                  //),
+                  // Container(
+                  //   child:
+                  SizedBox(height: 16),
                   FormDropDown(
                       labelText: "Tipe Lahan",
                       hintText: "Masukkan Type Lahan",
                       selectedItem: _currentTipeLahan,
                       dropDownItems: typelahanDropdown,
                       changedDropDownItems: changeSelectedCategory),
-                ]),
-            Container(
-              child: FormTextField(
-                textLabel: "jumlah Lubang",
-                textHint: "Masukkan Jumlah Lubang Tanaman",
-                //controller: prodcutDescriptionController,
+                  SizedBox(height: 16),
+                  MultilineFormTextField(
+                      textType: TextInputType.multiline,
+                      textLabel: "Alamat",
+                      textHint: "Masukkan Alamat Anda",
+                      //controller: prodcutDescriptionController,
+                      height: 20.0),
+
+                  // ),
+                ],
               ),
-            ),
-            Container(
-              child: FormTextField(
-                textType: TextInputType.number,
-                textLabel: "Nomor HP",
-                textHint: "Masukkan Nomor HP Anda",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
-            Container(
-              child: FormTextField(
-                  textType: TextInputType.multiline,
-                  textLabel: "Alamat",
-                  textHint: "Masukkan Alamat Anda",
-                  //controller: prodcutDescriptionController,
-                  height: 180.0),
             ),
             SizedBox(
               height: 40,

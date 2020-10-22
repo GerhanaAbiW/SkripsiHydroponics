@@ -5,6 +5,7 @@ import 'package:hydroponics/core/Services/ArticleServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/core/constants/Costumized_Text_Field.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -100,7 +101,8 @@ class _AddArticleViewState extends State<AddArticleView> {
       if (_image != null) {
         String imageUrl1;
         final FirebaseStorage storage = FirebaseStorage.instance;
-        final String picture1 = "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+        final String picture1 =
+            "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
         StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
             await task1.onComplete.then((snapshot) => snapshot);
@@ -111,7 +113,7 @@ class _AddArticleViewState extends State<AddArticleView> {
             "title": titleController.text,
             "author": authorController.text,
             "date": dateController.text,
-            "description" : descController.text,
+            "description": descController.text,
             "image": imageUrl1,
           });
           _formKey.currentState.reset();
@@ -192,9 +194,9 @@ class _AddArticleViewState extends State<AddArticleView> {
                         child: FlatButton(
                           shape: CircleBorder(
                               // borderRadius: BorderRadius.circular(2000.0),
-                              side: BorderSide(color: Colors.black)),
+                              side: BorderSide(color: Colors.white)),
                           color: GreenTosca,
-                          child: Icon(Icons.camera_alt),
+                          child: Icon(Icons.camera_alt, color: white),
                           // child: Center(
                           //     child: Text(
                           //   'Choose Image',
@@ -211,30 +213,35 @@ class _AddArticleViewState extends State<AddArticleView> {
                 SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: titleController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Judul Artikel",
-                      hintTextStr: "Masukkan Judul Artikel"),
-                ),
+                FormTextField(
+                    textLabel: "Judul Article ",
+                    textHint: "Masukkan Judul Article",
+                    controller: titleController),
                 SizedBox(
                   height: 16,
                 ),
+//                 TextFormField(
+//                   controller: titleController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Judul Artikel",
+//                       hintTextStr: "Masukkan Judul Artikel"),
+//                 ),
+
                 GestureDetector(
                   onTap: () => _selectDate(context),
                   child: AbsorbPointer(
@@ -268,102 +275,67 @@ class _AddArticleViewState extends State<AddArticleView> {
                     ),
                   ),
                 ),
-//                        Container(
-//                          decoration: BoxDecoration(
-//                            border: Border(
-//                                bottom: BorderSide(
-//                              width: 1,
-//                              color: GreenTosca,
-//                            )),
-//                          ),
-//                          child: Stack(
-//                            alignment: Alignment.topLeft,
-//                            children: <Widget>[
-//                              Text(
-//                                'Tanggal Lahir',
-//                                style: CustomTextStyle.textFormFieldBold
-//                                    .copyWith(
-//                                        color: Colors.black, fontSize: 15),
-//                              ),
-//                              SizedBox(
-//                                height: 12,
-//                              ),
-//                              Stack(
-//                                alignment: Alignment.centerLeft,
-//                                children: <Widget>[
-//                                  // Provider.of<AddArticleViewModel>(context,listen: false).dateFormat.format();
-//                                  Text(model.dateFormat
-//                                      .format(model.selectedDate)),
-//                                  FlatButton(
-//                                    padding: EdgeInsets.fromLTRB(0, 20, 0, 25),
-//                                    child: Align(
-//                                      alignment: Alignment.bottomRight,
-//                                      child: Icon(Icons.arrow_drop_down),
-//                                      // child: Image(
-//                                      //   image: arrow,
-//                                      //   width: 56,
-//                                      //   height: 56,
-//                                      // ),
-//                                    ),
-//                                    onPressed: () => model.selectDate(context),
-//                                  ),
-//                                ],
-//                              ),
-//                            ],
-//                          ),
-//                        ),
                 SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: authorController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Pengarang",
-                      hintTextStr: "Masukkan Nama Pengarang"),
-                ),
+                FormTextField(
+                    textLabel: "Pengarang",
+                    textHint: "Masukkan Nama Pengarang",
+                    controller: authorController),
+//                 TextFormField(
+//                   controller: authorController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Pengarang",
+//                       hintTextStr: "Masukkan Nama Pengarang"),
+//                 ),
                 SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: descController,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 10,
-                  minLines: 1,
+                MultilineFormTextField(
+                    controller: descController,
+                    textHint: "Masukkan Isi Konten",
+                    textLabel: "Konten",
+                    height: 10),
+//                 TextFormField(
+//                   controller: descController,
+//                   keyboardType: TextInputType.multiline,
+//                   maxLines: 10,
+//                   minLines: 1,
 
-                  textInputAction: TextInputAction.next,
+//                   textInputAction: TextInputAction.next,
 
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: DescCommonStyle.textFieldStyle(
-                      labelTextStr: "Konten",
-                      hintTextStr: "Masukkan Isi Konten"),
-                ),
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: DescCommonStyle.textFieldStyle(
+//                       labelTextStr: "Konten",
+//                       hintTextStr: "Masukkan Isi Konten"),
+//                 ),
                 SizedBox(
                   height: 16,
                 ),

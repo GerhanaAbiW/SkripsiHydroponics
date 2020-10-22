@@ -4,6 +4,7 @@ import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/core/constants/Costumized_Text_Field.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -80,27 +81,31 @@ class _AddVideoViewState extends State<AddVideoView> {
                 SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: linkController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Judul Video",
-                      hintTextStr: "Masukkan Judul Video"),
-                ),
+                FormTextField(
+                    textLabel: "Link Video",
+                    textHint: "Masukkan Link Video",
+                    controller: linkController),
+//                 TextFormField(
+//                   controller: linkController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Judul Video",
+//                       hintTextStr: "Masukkan Judul Video"),
+//                 ),
                 SizedBox(
                   height: 16,
                 ),
@@ -170,27 +175,31 @@ class _AddVideoViewState extends State<AddVideoView> {
 //                   decoration: CommonStyle.textFieldStyle(
 //                       labelTextStr: "Username", hintTextStr: "Enter Username"),
 //                 ),
-                TextFormField(
-                  controller: titleController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Judul Video",
-                      hintTextStr: "Masukkan Judul Video"),
-                ),
+                FormTextField(
+                    textLabel: "Judul Video",
+                    textHint: "Masukkan Judul Video",
+                    controller: titleController),
+//                 TextFormField(
+//                   controller: titleController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Judul Video",
+//                       hintTextStr: "Masukkan Judul Video"),
+//                 ),
                 SizedBox(
                   height: 16,
                 ),
@@ -229,55 +238,64 @@ class _AddVideoViewState extends State<AddVideoView> {
                 SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: authorController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: CommonStyle.textFieldStyle(
-                      labelTextStr: "Pengarang",
-                      hintTextStr: "Masukkan Nama Pengarang"),
-                ),
+                FormTextField(
+                    textLabel: "Creator",
+                    textHint: "Masukkan Nama Creator",
+                    controller: titleController),
+//                 TextFormField(
+//                   controller: authorController,
+//                   keyboardType: TextInputType.text,
+//                   textInputAction: TextInputAction.next,
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: CommonStyle.textFieldStyle(
+//                       labelTextStr: "Pengarang",
+//                       hintTextStr: "Masukkan Nama Pengarang"),
+//                 ),
                 SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: descController,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 10,
-                  minLines: 1,
+                MultilineFormTextField(
+                    controller: descController,
+                    textHint: "Masukkan Deskripsi Video",
+                    textLabel: "Deskripsi Video",
+                    height: 10),
+//                 TextFormField(
+//                   controller: descController,
+//                   keyboardType: TextInputType.multiline,
+//                   maxLines: 10,
+//                   minLines: 1,
 
-                  textInputAction: TextInputAction.next,
+//                   textInputAction: TextInputAction.next,
 
-                  autofocus: false,
-//                          focusNode: _focusNode,
-//                          onFieldSubmitted: (_) {
-//                            FocusScope.of(context).requestFocus(_focusScopeNode);
-//                          },
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  // validator: (value) => emptyValidation(value),
-                  decoration: DescCommonStyle.textFieldStyle(
-                      labelTextStr: "Deskripsi Video",
-                      hintTextStr: "Masukkan Deskripsi Video"),
-                ),
+//                   autofocus: false,
+// //                          focusNode: _focusNode,
+// //                          onFieldSubmitted: (_) {
+// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
+// //                          },
+//                   validator: (val) {
+//                     if (val.length == 0) {
+//                       return "Email cannot be empty";
+//                     } else {
+//                       return null;
+//                     }
+//                   },
+//                   // validator: (value) => emptyValidation(value),
+//                   decoration: DescCommonStyle.textFieldStyle(
+//                       labelTextStr: "Deskripsi Video",
+//                       hintTextStr: "Masukkan Deskripsi Video"),
+//                 ),
 //                        Container(
 //                          decoration: BoxDecoration(
 //                            border: Border(

@@ -42,20 +42,29 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             SizedBox(
               height: 24,
             ),
-            Container(
-              child: FormTextField(
-                textLabel: "Password Lama",
-                textHint: "Masukkan Password Lama Anda",
-                //controller: prodcutDescriptionController,
+            //Container(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  FormTextField(
+                    textLabel: "Password Lama",
+                    textHint: "Masukkan Password Lama Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+
+                  //),
+                  //Container(
+                  SizedBox(height: 16),
+                  FormTextField(
+                    textLabel: "Password Baru",
+                    textHint: "Masukkan Password Baru Anda",
+                    //controller: prodcutDescriptionController,
+                  ),
+                ],
               ),
             ),
-            Container(
-              child: FormTextField(
-                textLabel: "Password Baru",
-                textHint: "Masukkan Password Baru Anda",
-                //controller: prodcutDescriptionController,
-              ),
-            ),
+            // ),
 
             SizedBox(
               height: 40,

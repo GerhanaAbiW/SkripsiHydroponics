@@ -24,6 +24,7 @@ class _AddPlantViewState extends State<AddPlantView> {
       _image = File(pickedFile.path);
     });
   }
+
   PlantService plantService;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController namaTumbuhanController = TextEditingController();
@@ -85,24 +86,25 @@ class _AddPlantViewState extends State<AddPlantView> {
       if (_image != null) {
         String imageUrl1;
         final FirebaseStorage storage = FirebaseStorage.instance;
-        final String picture1 = "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+        final String picture1 =
+            "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
         StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
-        await task1.onComplete.then((snapshot) => snapshot);
+            await task1.onComplete.then((snapshot) => snapshot);
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
           plantService.uploadPlant({
-          "Plant": namaTumbuhanController.text,
-          "Media": mediaSemaiController.text,
-          "Image": imageUrl1,
-          "PPM": ppmIdealController.text,
-          "PH": phIdealController.text,
-          "FertilizerType": jenisPupukController.text,
-          "TimeOfFertilizer": waktuPupukController.text,
-          "DosageOfFertilizer": dosisPupukController.text,
-          "HarvestTime": waktuPanenController.text,
-          "PestType": jenisHamaController.text
+            "Plant": namaTumbuhanController.text,
+            "Media": mediaSemaiController.text,
+            "Image": imageUrl1,
+            "PPM": ppmIdealController.text,
+            "PH": phIdealController.text,
+            "FertilizerType": jenisPupukController.text,
+            "TimeOfFertilizer": waktuPupukController.text,
+            "DosageOfFertilizer": dosisPupukController.text,
+            "HarvestTime": waktuPanenController.text,
+            "PestType": jenisHamaController.text
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);
@@ -184,9 +186,12 @@ class _AddPlantViewState extends State<AddPlantView> {
                             child: FlatButton(
                               shape: CircleBorder(
                                   // borderRadius: BorderRadius.circular(2000.0),
-                                  side: BorderSide(color: Colors.black)),
+                                  side: BorderSide(color: Colors.white)),
                               color: GreenTosca,
-                              child: Icon(Icons.camera_alt),
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: white,
+                              ),
                               // child: Center(
                               //     child: Text(
                               //   'Choose Image',
@@ -204,79 +209,78 @@ class _AddPlantViewState extends State<AddPlantView> {
                   new SizedBox(
                     height: 10.0,
                   ),
-
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Nama Tumbuhan',
-                      textHint: "Masukkan nama tumbuhan...",
+                      textHint: "Masukkan nama tumbuhan",
                       controller: namaTumbuhanController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Media Semai',
-                      textHint: "Masukkan media semai...",
+                      textHint: "Masukkan media semai",
                       controller: mediaSemaiController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Waktu Semai',
-                      textHint: "Masukkan waktu semai...",
+                      textHint: "Masukkan waktu semai",
                       controller: waktuSemaiController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'PH Ideal',
-                      textHint: "Masukkan PH ideal...",
+                      textHint: "Masukkan PH ideal",
                       controller: phIdealController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'PPM Ideal',
-                      textHint: "Masukkan PPM ideal...",
+                      textHint: "Masukkan PPM ideal",
                       controller: ppmIdealController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Jenis Pupuk',
-                      textHint: "Masukkan jenis pupuk...",
+                      textHint: "Masukkan jenis pupuk",
                       controller: jenisPupukController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Dosis Pupuk',
-                      textHint: "Masukkan dosis pupuk...",
+                      textHint: "Masukkan dosis pupuk",
                       controller: dosisPupukController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Waktu Pupuk',
-                      textHint: "Masukkan waktu pupuk...",
+                      textHint: "Masukkan waktu pupuk",
                       controller: waktuPupukController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Waktu Panen',
-                      textHint: "masukkan waktu panen...",
+                      textHint: "masukkan waktu panen",
                       controller: waktuPanenController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   FormTextField(
                       textLabel: 'Jenis Hama',
-                      textHint: "Masukkan jenis hama...",
+                      textHint: "Masukkan jenis hama",
                       controller: jenisHamaController),
                   new SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   SizedBox(
                     height: 40,
