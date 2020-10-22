@@ -9,12 +9,9 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/BrandServices.dart';
 import 'package:hydroponics/core/Services/CategoryServices.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
-<<<<<<< Updated upstream:lib/features/MenuAdmin/AddProduct/AddProduct.dart
-import 'package:hydroponics/features/Widget/AppTools.dart';
-=======
-import 'package:hydroponics/core/Widgets/AppTools.dart';
->>>>>>> Stashed changes:lib/features/MenuAdmin/AddProduct.dart
+
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 

@@ -4,11 +4,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle.dart';
 import 'package:hydroponics/features/MenuAdmin/AddBrand/AddBrand.dart';
 import 'package:hydroponics/features/MenuAdmin/AddCategory/AddCategory.dart';
-<<<<<<< Updated upstream
-import 'package:hydroponics/features/MenuAdmin/AddProduct/AddProduct.dart';
-=======
-import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
->>>>>>> Stashed changes
+
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hydroponics/features/MenuAdmin/SmallCard.dart';
 import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
