@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/Dashboard/MainMenu.dart';
+import 'package:hydroponics/features/MainMenu/MainMenu.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 
 class DashBoard extends StatefulWidget {

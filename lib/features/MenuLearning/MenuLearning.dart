@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/MenuLearning/Widget/WidgetArticleList.dart';
-import 'package:hydroponics/features/MenuLearning/Widget/WidgetVideoList.dart';
+import 'package:hydroponics/features/MenuLearning/Article/WidgetArticleList.dart';
+import 'package:hydroponics/features/MenuLearning/Video/WidgetVideoList.dart';
 
 var blueColor = Color(0xFF3232FF);
 var darkBlueColor = Color(0xFF3F51B5);

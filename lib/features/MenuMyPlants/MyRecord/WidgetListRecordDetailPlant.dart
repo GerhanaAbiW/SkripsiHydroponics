@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyRecord/MyPlantsRecordDetail.dart';
 
-class WidgetPlantListFromAdmin extends StatelessWidget {
+class WidgetLIstRecordDetailPlant extends StatelessWidget {
   final plantName;
   final desc;
   final plantPicture;
 
-  WidgetPlantListFromAdmin({this.plantName, this.desc, this.plantPicture});
+  WidgetLIstRecordDetailPlant({this.plantName, this.desc, this.plantPicture});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: MediaQuery.of(context).size.width,
+      //width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(
@@ -19,11 +20,8 @@ class WidgetPlantListFromAdmin extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-//              Navigator.of(context).push(MaterialPageRoute(
-//                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
-//              ));
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => MyPlantsDetail()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => MyPlantsRecordDetail()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

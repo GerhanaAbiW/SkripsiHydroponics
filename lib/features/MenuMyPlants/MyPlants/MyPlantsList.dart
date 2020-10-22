@@ -3,9 +3,9 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuMyPlants/PlantListFromAdmin.dart';
-import 'package:hydroponics/features/MenuMyPlants/ListRecordDatePlant.dart';
-import 'package:hydroponics/features/MenuMyPlants/Widget/WidgetMyPlantList.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddPlants/PlantListFromAdmin.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyRecord/ListRecordDatePlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlants/WidgetMyPlantList.dart';
 
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
-import 'package:hydroponics/features/MenuAdmin/AppTools.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
 
 var blueOrder = Color(0xFF03A9F4);
 
-class OrderMediumArea extends StatefulWidget {
-  _OrderMediumAreaState createState() => _OrderMediumAreaState();
+class HydroOrderCustomDetail extends StatefulWidget {
+  _HydroOrderCustomDetailState createState() => _HydroOrderCustomDetailState();
 }
 
-class _OrderMediumAreaState extends State<OrderMediumArea> {
+class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
   @override
   List<DropdownMenuItem<String>> typelahanDropdown =
       <DropdownMenuItem<String>>[];
@@ -38,7 +38,7 @@ class _OrderMediumAreaState extends State<OrderMediumArea> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            'Order Medium Area',
+            'Order Custom Area',
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21),
           ),

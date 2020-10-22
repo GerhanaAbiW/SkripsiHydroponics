@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/Dashboard/DashBoard.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsDetails.dart';
-import 'package:hydroponics/features/MenuMyPlants/Widget/WidgetListRecordDetailPlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddPlants/MyPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyRecord/WidgetListRecordDetailPlant.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
 import 'package:hydroponics/features/Widget/SearchPlantRecordDate.dart';
 

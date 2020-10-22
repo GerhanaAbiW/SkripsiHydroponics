@@ -5,12 +5,12 @@ import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
-import 'package:hydroponics/features/MenuAdmin/NewDashboard.dart';
-import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
+import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
+import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:hydroponics/features/MenuMarket/ProductDetail.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/MenuOrder/Gmaps/GmapsLocation.dart';
 import 'package:hydroponics/features/MenuOrder/HydroOderList.dart';
 

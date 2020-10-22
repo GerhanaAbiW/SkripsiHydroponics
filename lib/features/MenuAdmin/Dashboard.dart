@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle.dart';
-import 'package:hydroponics/features/MenuAdmin/AddBrand.dart';
-import 'package:hydroponics/features/MenuAdmin/AddCategory.dart';
-import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
+import 'package:hydroponics/features/MenuAdmin/AddBrand/AddBrand.dart';
+import 'package:hydroponics/features/MenuAdmin/AddCategory/AddCategory.dart';
+import 'package:hydroponics/features/MenuAdmin/AddProduct/AddProduct.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hydroponics/features/MenuAdmin/SmallCard.dart';
 import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
 import 'package:provider/provider.dart';
 
-class AdminDashboard extends StatefulWidget {
+class NewAdminDashboard extends StatefulWidget {
   @override
-  _AdminDashboardState createState() => _AdminDashboardState();
+  _NewAdminDashboardState createState() => _NewAdminDashboardState();
 }
 
-class _AdminDashboardState extends State<AdminDashboard> {
+class _NewAdminDashboardState extends State<NewAdminDashboard> {
   List<charts.Series<Task, String>> _seriesPieData;
 
   _getData() {
@@ -32,8 +32,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
       charts.Series(
         domainFn: (Task task, _) => task.task,
         measureFn: (Task task, _) => task.taskvalue,
-        colorFn: (Task task, _) =>
-            charts.ColorUtil.fromDartColor(task.colorval),
+        colorFn: (Task task, _) => charts.ColorUtil.fromDartColor(task.colorval),
         id: 'Air Pollution',
         data: piedata,
         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
@@ -52,430 +51,115 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context);
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      body: SafeArea(
-          child: Row(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(
-                  color: Colors.grey[400],
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 4)
-            ]),
-            width: 40,
-            child: Column(
-              children: <Widget>[
-                IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {}),
-                InkWell(
-                  onTap: () {
-                    appState.changeScreen(Screen.DASH);
-                  },
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      RotatedBox(
-                        quarterTurns: -1,
-                        child: Text(
-                          'Dashboard',
-                        ),
-                      ),
-                      Visibility(
-                        visible: appState.selectedScreen == Screen.DASH,
-                        child: Wrap(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 58,
-                              width: 5,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    appState.changeScreen(Screen.PRODUCTS);
-                    changeScreen(context, AddProducts());
-                  },
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      RotatedBox(
-                        quarterTurns: -1,
-                        child: Text(
-                          'Products',
-                        ),
-                      ),
-                      Visibility(
-                        visible: appState.selectedScreen == Screen.PRODUCTS,
-                        child: Wrap(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 58,
-                              width: 5,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-//                SizedBox(
-//                  height: 20,
-//                ),
-//                InkWell(
-//                  onTap: () {
-//                    appState.changeScreen(Screen.CATEGORIES);
-//                    changeScreen(context, AddCategory());
-//                  },
-//                  child: Wrap(
-//                    direction: Axis.horizontal,
-//                    children: <Widget>[
-//                      RotatedBox(
-//                        quarterTurns: -1,
-//                        child: Text(
-//                          'Categories',
-//                        ),
-//                      ),
-//                      Visibility(
-//                        visible: appState.selectedScreen == Screen.CATEGORIES,
-//                        child: Wrap(
-//                          children: <Widget>[
-//                            SizedBox(
-//                              width: 10,
-//                            ),
-//                            Container(
-//                              height: 58,
-//                              width: 5,
-//                              color: Colors.black,
-//                            )
-//                          ],
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-//                ),
-//                SizedBox(
-//                  height: 20,
-//                ),
-//                InkWell(
-//                  onTap: () {
-//                    appState.changeScreen(Screen.BRANDS);
-//                    changeScreen(context, AddBrand());
-//                  },
-//                  child: Wrap(
-//                    direction: Axis.horizontal,
-//                    children: <Widget>[
-//                      RotatedBox(
-//                        quarterTurns: -1,
-//                        child: Text(
-//                          'Brands',
-//                        ),
-//                      ),
-//                      Visibility(
-//                        visible: appState.selectedScreen == Screen.BRANDS,
-//                        child: Wrap(
-//                          children: <Widget>[
-//                            SizedBox(
-//                              width: 10,
-//                            ),
-//                            Container(
-//                              height: 58,
-//                              width: 5,
-//                              color: Colors.black,
-//                            )
-//                          ],
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-//                ),
-                SizedBox(
-                  height: 30,
-                ),
-                InkWell(
-                  onTap: () {
-                    appState.changeScreen(Screen.AddArticle);
-                    changeScreen(context, AddArticleView());
-                  },
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      RotatedBox(
-                        quarterTurns: -1,
-                        child: Text(
-                          'Add Article',
-                        ),
-                      ),
-                      Visibility(
-                        visible: appState.selectedScreen == Screen.AddArticle,
-                        child: Wrap(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 58,
-                              width: 5,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      appState.changeScreen(Screen.AddVideo);
-                      changeScreen(context, AddArticleView());
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => AddPlantView()));
-                    },
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: <Widget>[
-                        RotatedBox(
-                          quarterTurns: -1,
-                          child: Text(
-                            'Add Video',
-                          ),
-                        ),
-                        Visibility(
-                          visible: appState.selectedScreen == Screen.AddVideo,
-                          child: Wrap(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 48,
-                                width: 5,
+    return
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: 'Revenue\n',
+                            style: TextStyle(fontSize: 35, color: Colors.grey)),
+                        TextSpan(
+                            text: '\$1287.99',
+                            style: TextStyle(
+                                fontSize: 55,
                                 color: Colors.black,
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
+                                fontWeight: FontWeight.w300)),
+                      ]),
                     ),
                   ),
-                ),
-                // SizedBox(
-                //   height: 10,
-                // ),
-                // Expanded(
-                //   child: InkWell(
-                //     onTap: () {
-                //       Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //               builder: (context) => AddArticleView()));
-                //     },
-                //     child: Wrap(
-                //       direction: Axis.horizontal,
-                //       children: <Widget>[
-                //         RotatedBox(
-                //           quarterTurns: -1,
-                //           child: Text(
-                //             'Add Article',
-                //           ),
-                //         ),
-                //         // Visibility(
-                //         //   visible: appState.selectedScreen == Screen.ORDERS,
-                //         //   child: Wrap(
-                //         //     children: <Widget>[
-                //         //       SizedBox(
-                //         //         width: 10,
-                //         //       ),
-                //         //       Container(
-                //         //         height: 48,
-                //         //         width: 5,
-                //         //         color: Colors.black,
-                //         //       )
-                //         //     ],
-                //         //   ),
-                //         // ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Expanded(
-                //   child: InkWell(
-                //     onTap: () {
-                //       Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //               builder: (context) => AddArticleView()));
-                //     },
-                //     child: Wrap(
-                //       direction: Axis.horizontal,
-                //       children: <Widget>[
-                //         RotatedBox(
-                //           quarterTurns: -1,
-                //           child: Text(
-                //             'Add Video',
-                //           ),
-                //         ),
-                //         // Visibility(
-                //         //   visible: appState.selectedScreen == Screen.ORDERS,
-                //         //   child: Wrap(
-                //         //     children: <Widget>[
-                //         //       SizedBox(
-                //         //         width: 10,
-                //         //       ),
-                //         //       Container(
-                //         //         height: 48,
-                //         //         width: 5,
-                //         //         color: Colors.black,
-                //         //       )
-                //         //     ],
-                //         //   ),
-                //         // ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                IconButton(icon: Icon(Icons.open_in_new), onPressed: () {})
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                        text: 'Revenue\n',
-                        style: TextStyle(fontSize: 35, color: Colors.grey)),
-                    TextSpan(
-                        text: '\$1287.99',
-                        style: TextStyle(
-                            fontSize: 55,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w300)),
-                  ]),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SmallCard(
-                    color2: Colors.indigo,
-                    color1: Colors.blue,
-                    icon: Icons.person_outline,
-                    value: 1265,
-                    title: 'Users',
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SmallCard(
+                        color2: Colors.indigo,
+                        color1: Colors.blue,
+                        icon: Icons.person_outline,
+                        value: 1265,
+                        title: 'Users',
+                      ),
+                      SmallCard(
+                        color2: Colors.indigo,
+                        color1: Colors.blue,
+                        icon: Icons.shopping_cart,
+                        value: 30,
+                        title: 'Orders',
+                      ),
+                    ],
                   ),
-                  SmallCard(
-                    color2: Colors.indigo,
-                    color1: Colors.blue,
-                    icon: Icons.shopping_cart,
-                    value: 30,
-                    title: 'Orders',
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SmallCard(
+                        color2: Colors.black87,
+                        color1: Colors.black87,
+                        icon: Icons.attach_money,
+                        value: 65,
+                        title: 'Sales',
+                      ),
+                      SmallCard(
+                        color2: Colors.black,
+                        color1: Colors.black87,
+                        icon: Icons.shopping_basket,
+                        value: 230,
+                        title: 'Stock',
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SmallCard(
-                    color2: Colors.black87,
-                    color1: Colors.black87,
-                    icon: Icons.attach_money,
-                    value: 65,
-                    title: 'Sales',
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      'Sales per category',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
-                  SmallCard(
-                    color2: Colors.black,
-                    color1: Colors.black87,
-                    icon: Icons.shopping_basket,
-                    value: 230,
-                    title: 'Stock',
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  'Sales per category',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey[400],
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 4)
-                        ]),
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    child: ListTile(
-                      title: charts.PieChart(_seriesPieData,
-                          animate: true,
-                          animationDuration: Duration(seconds: 3),
-                          behaviors: [
-                            new charts.DatumLegend(
-                              outsideJustification:
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey[400],
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 4)
+                            ]),
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        child: ListTile(
+                          title: charts.PieChart(_seriesPieData,
+                              animate: true,
+                              animationDuration: Duration(seconds: 3),
+                              behaviors: [
+                                new charts.DatumLegend(
+                                  outsideJustification:
                                   charts.OutsideJustification.endDrawArea,
-                              horizontalFirst: false,
-                              desiredMaxRows: 2,
-                              cellPadding:
+                                  horizontalFirst: false,
+                                  desiredMaxRows: 2,
+                                  cellPadding:
                                   new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                            )
-                          ],
-                          defaultRenderer: new charts.ArcRendererConfig(
-                              arcWidth: 30,
-                              arcRendererDecorators: [
-                                new charts.ArcLabelDecorator(
-                                    labelPosition:
+                                )
+                              ],
+                              defaultRenderer: new charts.ArcRendererConfig(
+                                  arcWidth: 30,
+                                  arcRendererDecorators: [
+                                    new charts.ArcLabelDecorator(
+                                        labelPosition:
                                         charts.ArcLabelPosition.inside)
-                              ])),
+                                  ])),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              )
-            ],
-          )
-        ],
-      )),
-    );
+                  )
+                ],
+              );
+
   }
 }
 

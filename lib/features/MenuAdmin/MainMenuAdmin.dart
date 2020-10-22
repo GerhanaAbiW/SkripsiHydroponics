@@ -6,11 +6,15 @@ import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/Dashboard/MainMenu.dart';
 import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle.dart';
 import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
-import 'package:hydroponics/features/MenuAdmin/AddProduct.dart';
+import 'package:hydroponics/features/MenuAdmin/AddProduct/AddProduct.dart';
 import 'package:hydroponics/features/MenuAdmin/AddVideo/AddVideo.dart';
+<<<<<<< Updated upstream
 import 'package:hydroponics/features/MenuAdmin/NewDashboard.dart';
 import 'package:hydroponics/features/MenuAdmin/OrderList/ListOrder.dart';
 import 'package:hydroponics/features/MenuAdmin/OrderList/OrderDetails.dart';
+=======
+import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
+>>>>>>> Stashed changes
 
 class DrawerItem {
   String title;

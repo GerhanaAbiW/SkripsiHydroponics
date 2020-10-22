@@ -2,26 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hydroponics/core/Providers/ArticleProvider.dart';
+import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuLearning/ArticleDetail.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecordDetail.dart';
+import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
+import 'package:hydroponics/features/MenuLearning/Video/VIdeoDetail.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyRecord/MyPlantsRecordDetail.dart';
 import 'package:provider/provider.dart';
 
-class WidgetArticleList extends StatelessWidget {
+class WidgetVideoList extends StatelessWidget {
 
 
   @override
   Widget build(BuildContext context) {
-    final articleProvider = Provider.of<ArticleProvider>(context);
+    String idUrl;
+    final videoProvider = Provider.of<VideoProvider>(context);
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 2,
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
         child: AnimationLimiter(
           child: ListView.builder(
-            itemCount: articleProvider.articles.length,
+            itemCount: videoProvider.videos.length,
             itemBuilder: (BuildContext context, int index) {
+              if (videoProvider.videos[index].video != null &&
+                  videoProvider.videos[index].video != "") {
+                idUrl = videoProvider.videos[index].video
+                    .substring(videoProvider.videos[index].video.length - 11);
+              }
               //return AnimationConfiguration.staggeredList(
               //   position: index,
               //   duration: const Duration(milliseconds: 3000),
@@ -57,7 +64,7 @@ class WidgetArticleList extends StatelessWidget {
               //       ),
               return Container(
                 // width: MediaQuery.of(context).size.width,
-                height: 90, //MediaQuery.of(context).size.height,
+                height: 90, //MediaQuery.of(context).size.height / 9,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
                 child: Card(
                     //padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
@@ -68,7 +75,7 @@ class WidgetArticleList extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ArticleDetail(articleProvider.articles[index])));
+                              builder: (context) => VideoDetail(videoProvider.videos[index])));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +91,7 @@ class WidgetArticleList extends StatelessWidget {
                                     shape: BoxShape.rectangle,
                                     border: Border.all(),
                                   ),
-                                  child: articleProvider.articles[index].image != null ?
+                                  child:
                                       // plantPicture != null
                                       //     ? ClipRRect(
                                       //         borderRadius: BorderRadius.circular(
@@ -97,8 +104,20 @@ class WidgetArticleList extends StatelessWidget {
                                       //       )
                                       //     :
 
-                                      Image.network('${articleProvider.articles[index].image}', fit: BoxFit.fill,):
-                                      Image.asset("images/bayam.jpeg")
+                                  Stack(
+                                    children: <Widget>[
+                                      Image.network(
+                                        "https://img.youtube.com/vi/$idUrl/0.jpg",
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Positioned.fill(
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Image.asset("images/play_button.png"),
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ),
                               ),
                               // Padding(
@@ -121,7 +140,7 @@ class WidgetArticleList extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(articleProvider.articles[index].title,
+                                      Text(videoProvider.videos[index].title,
                                           style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontSize: 17.0,
@@ -130,7 +149,7 @@ class WidgetArticleList extends StatelessWidget {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text(articleProvider.articles[index].date,
+                                      Text(videoProvider.videos[index].date,
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontSize: 15.0,
@@ -169,14 +188,81 @@ class WidgetArticleList extends StatelessWidget {
   }
 }
 
-class CardArticle extends StatefulWidget {
-  @override
-  _CardArticleState createState() => _CardArticleState();
-}
+// import 'package:flutter/material.dart';
+// import 'package:flutter_slidable/flutter_slidable.dart';
+// import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
-class _CardArticleState extends State<CardArticle> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+// class WidgetVideoList extends StatelessWidget {
+//   final List<String> images;
+//   final List<String> title;
+//   final List<String> phones;
+
+//   WidgetVideoList({this.images, this.title, this.phones});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         width: MediaQuery.of(context).size.width,
+//         height: MediaQuery.of(context).size.height / 2,
+//         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+//         child: AnimationLimiter(
+//           child: ListView.builder(
+//             itemCount: images.length,
+//             itemBuilder: (BuildContext context, int index) {
+//               return AnimationConfiguration.staggeredList(
+//                 position: index,
+//                 duration: const Duration(milliseconds: 3000),
+//                 child: SlideAnimation(
+//                   verticalOffset: 100.0,
+//                   child: Slidable(
+//                     key: ValueKey(index),
+//                     actionPane: SlidableDrawerActionPane(),
+//                     secondaryActions: <Widget>[
+//                       IconSlideAction(
+//                         caption: "Update",
+//                         color: Colors.grey.shade300,
+//                         icon: Icons.edit,
+//                         closeOnTap: false,
+//                         onTap: () {},
+//                       ),
+//                       IconSlideAction(
+//                         caption: "Delete",
+//                         color: Colors.red.shade300,
+//                         icon: Icons.edit,
+//                         closeOnTap: true,
+//                         onTap: () {
+//                           Fluttertoast.showToast(
+//                               msg: "Delete Successfull",
+//                               toastLength: Toast.LENGTH_SHORT,
+//                               backgroundColor: Colors.red,
+//                               textColor: Colors.white);
+//                         },
+//                       ),
+//                     ],
+//                     dismissal: SlidableDismissal(
+//                       child: SlidableDrawerDismissal(),
+//                     ),
+//                     child: Card(
+//                       elevation: 10.0,
+//                       child: ListTile(
+//                         leading: Image(
+//                             image: AssetImage(images[index]),
+//                             fit: BoxFit.cover,
+//                             height: 75.0,
+//                             width: 75.0),
+//                         title:
+//                             Text(title[index], style: TextStyle(fontSize: 14)),
+//                         subtitle:
+//                             Text(phones[index], style: TextStyle(fontSize: 10)),
+//                         //trailing: Icon(Icons.tag_faces),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               );
+//             },
+//           ),
+//         ));
+//   }
+// }

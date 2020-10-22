@@ -4,7 +4,6 @@ import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/core/constants/Costumized_Text_Field.dart';
-import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle_viewmodel.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';

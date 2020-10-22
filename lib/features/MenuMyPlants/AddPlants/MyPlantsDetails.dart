@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsList.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 
 var greenColor = Color(0xFF8BC34A);

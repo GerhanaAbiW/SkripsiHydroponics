@@ -9,8 +9,7 @@ import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Providers/VideoProvider.dart';
 
-import 'package:hydroponics/features/Dashboard/DashBoard.dart';
-import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle_viewmodel.dart';
+import 'package:hydroponics/Dashboard.dart';
 
 import 'package:hydroponics/features/Widget/SplashScreen.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +21,6 @@ void main() {
 
   runApp(MultiProvider(
     providers: [
-
-      ChangeNotifierProvider.value(value: AddArticleViewModel()),
       ChangeNotifierProvider.value(value: UserProvider.initialize()),
       ChangeNotifierProvider.value(value: ProductProvider.initialize()),
       ChangeNotifierProvider.value(value: PlantProvider.initialize()),
