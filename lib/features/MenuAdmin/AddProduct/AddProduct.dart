@@ -140,23 +140,24 @@ class _AddProductsState extends State<AddProducts> {
               new SizedBox(
                 height: 10.0,
               ),
-              productTextField(
-                  textTitle: "Product Title",
+              FormTextField(
+                  textLabel: "Product Title",
+
                   textHint: "Enter Product Title",
                   controller: productNameController),
               new SizedBox(
                 height: 10.0,
               ),
-              productTextField(
-                  textTitle: "Product Price",
+              FormTextField(
+                textLabel: "Product Price",
                   textHint: "Enter Product Price",
                   textType: TextInputType.number,
                   controller: productPriceController),
               new SizedBox(
                 height: 10.0,
               ),
-              productTextField(
-                  textTitle: "Product Description",
+              FormTextField(
+                  textLabel: "Product Description",
                   textHint: "Enter Description",
                   controller: prodcutDescriptionController,
                   height: 180.0),
@@ -166,19 +167,25 @@ class _AddProductsState extends State<AddProducts> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  productTextField(
-                      textTitle: "Product Quantity",
+                  FormTextField(
+                      textLabel: "Product Quantity",
                       textHint: "Enter Product Quantity",
                       textType: TextInputType.number,
                       controller: quatityController),
-                  productDropDown(
-                      textTitle: "Product Category",
+                  new SizedBox(
+                    height: 10.0,
+                  ),
+                  FormDropDown(
+                      labelText: "Product Category",
                       hintText: "Please choose the category",
                       selectedItem: _currentCategory,
                       dropDownItems: categoriesDropDown,
                       changedDropDownItems: changeSelectedCategory),
-                  productDropDown(
-                      textTitle: "Product Brand",
+                  new SizedBox(
+                    height: 10.0,
+                  ),
+                  FormDropDown(
+                      labelText: "Product Brand",
                       hintText: "Please choose the brand",
                       selectedItem: _currentBrand,
                       dropDownItems: brandsDropDown,

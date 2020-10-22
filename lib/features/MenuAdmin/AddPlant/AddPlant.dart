@@ -208,71 +208,71 @@ class _AddPlantViewState extends State<AddPlantView> {
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Nama Tumbuhan',
+                  FormTextField(
+                      textLabel: 'Nama Tumbuhan',
                       textHint: "Masukkan nama tumbuhan...",
                       controller: namaTumbuhanController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Media Semai',
+                  FormTextField(
+                      textLabel: 'Media Semai',
                       textHint: "Masukkan media semai...",
                       controller: mediaSemaiController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Waktu Semai',
+                  FormTextField(
+                      textLabel: 'Waktu Semai',
                       textHint: "Masukkan waktu semai...",
                       controller: waktuSemaiController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'PH Ideal',
+                  FormTextField(
+                      textLabel: 'PH Ideal',
                       textHint: "Masukkan PH ideal...",
                       controller: phIdealController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'PPM Ideal',
+                  FormTextField(
+                      textLabel: 'PPM Ideal',
                       textHint: "Masukkan PPM ideal...",
                       controller: ppmIdealController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Jenis Pupuk',
+                  FormTextField(
+                      textLabel: 'Jenis Pupuk',
                       textHint: "Masukkan jenis pupuk...",
                       controller: jenisPupukController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Dosis Pupuk',
+                  FormTextField(
+                      textLabel: 'Dosis Pupuk',
                       textHint: "Masukkan dosis pupuk...",
                       controller: dosisPupukController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Waktu Pupuk',
+                  FormTextField(
+                      textLabel: 'Waktu Pupuk',
                       textHint: "Masukkan waktu pupuk...",
                       controller: waktuPupukController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Waktu Panen',
+                  FormTextField(
+                      textLabel: 'Waktu Panen',
                       textHint: "masukkan waktu panen...",
                       controller: waktuPanenController),
                   new SizedBox(
                     height: 10.0,
                   ),
-                  productTextField(
-                      textTitle: 'Jenis Hama',
+                  FormTextField(
+                      textLabel: 'Jenis Hama',
                       textHint: "Masukkan jenis hama...",
                       controller: jenisHamaController),
                   new SizedBox(

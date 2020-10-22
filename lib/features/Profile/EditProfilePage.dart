@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
@@ -179,8 +178,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
             //   ],
             // ),
             Container(
-              child: productTextField(
-                textTitle: "Nama",
+              child: FormTextField(
+                textLabel: "Nama",
                 textHint: "Masukkan Nama Anda",
                 //controller: prodcutDescriptionController,
               ),
@@ -213,15 +212,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
             //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
             // ),
             Container(
-              child: productTextField(
-                textTitle: "Tanggal Lahir",
+              child: FormTextField(
+                textLabel: "Tanggal Lahir",
                 textHint: "Masukkan Tanggal Lahir Anda",
                 //controller: prodcutDescriptionController,
               ),
             ),
             Container(
-              child: productTextField(
-                textTitle: "Jenis Kelamin",
+              child: FormTextField(
+                textLabel: "Jenis Kelamin",
                 textHint: "Masukkan Jenis Kelamin Anda",
                 //controller: prodcutDescriptionController,
               ),
@@ -240,9 +239,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
             // ),
             Container(
-              child: productTextField(
+              child: FormTextField(
                 textType: TextInputType.emailAddress,
-                textTitle: "Email",
+                textLabel: "Email",
                 textHint: "Masukkan Email Anda",
                 //controller: prodcutDescriptionController,
               ),
@@ -281,17 +280,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
             //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
             // ),
             Container(
-              child: productTextField(
+              child: FormTextField(
                 textType: TextInputType.number,
-                textTitle: "Nomor HP",
+                textLabel: "Nomor HP",
                 textHint: "Masukkan Nomor HP Anda",
                 //controller: prodcutDescriptionController,
               ),
             ),
             Container(
-              child: productTextField(
+              child: FormTextField(
                   textType: TextInputType.multiline,
-                  textTitle: "Alamat",
+                  textLabel: "Alamat",
                   textHint: "Masukkan Alamat Anda",
                   //controller: prodcutDescriptionController,
                   height: 180.0),

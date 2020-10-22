@@ -32,39 +32,24 @@ Widget appButton(
   );
 }
 
-Widget productTextField(
+Widget FormTextField(
     {String textLabel,
-    String textTitle,
     String textHint,
     double height,
     TextEditingController controller,
     TextInputType textType}) {
-  textTitle == null ? textTitle = "Enter Title" : textTitle;
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
   textHint == null ? textHint = "Enter Hint" : textHint;
   height == null ? height = 50.0 : height;
   //height !=null
 
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      new Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: new Text(
-          textTitle,
-          style:
-              new TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
-        ),
-      ),
-      new Padding(
+  return new Padding(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: new TextFormField(
           controller: controller,
           keyboardType: textType == null ? TextInputType.text : textType,
-          maxLines: 5,
-          minLines: 1,
           decoration: new InputDecoration(
-            contentPadding:
-                new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
+            contentPadding: EdgeInsets.all(12),
             //contentPadding: EdgeInsets.only(),
             labelText: textLabel,
             labelStyle: TextStyle(color: Colors.green),
@@ -84,38 +69,71 @@ Widget productTextField(
             ),
           ),
         ),
-      ),
-    ],
-  );
+      );
+
 }
 
-Widget productDropDown(
-    {String textTitle,
+Widget MultilineFormTextField(
+    {String textLabel,
+      String textHint,
+      double height,
+      TextEditingController controller,
+      TextInputType textType}) {
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
+  textHint == null ? textHint = "Enter Hint" : textHint;
+  //height == null ? height = 50.0 : height;
+  //height !=null
+
+  return new Padding(
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+        child: new TextFormField(
+          controller: controller,
+          keyboardType: textType == null ? TextInputType.text : textType,
+          maxLines: 5,
+          minLines: 1,
+          decoration: new InputDecoration(
+
+            contentPadding:
+            new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
+            //contentPadding: EdgeInsets.only(),
+            labelText: textLabel,
+            labelStyle: TextStyle(color: Colors.green),
+            hintText: textHint,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(
+                color: Colors.green,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(
+                color: Colors.blue,
+                width: 2.0,
+              ),
+            ),
+          ),
+        ),
+      );
+
+}
+
+Widget FormDropDown(
+    {
     String selectedItem,
     String hintText,
     String labelText,
     List<DropdownMenuItem<String>> dropDownItems,
     ValueChanged<String> changedDropDownItems}) {
-  textTitle == null ? textTitle = "Enter Title" : textTitle;
 
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: <Widget>[
-      new Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: new Text(
-          textTitle,
-          style: new TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
-        ),
-      ),
-      Padding(
+  labelText == null ? labelText = "Enter Title" : labelText;
+
+
+  return new Padding(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: FormField(builder: (FormFieldState state) {
           return InputDecorator(
-            decoration: InputDecoration(
-              contentPadding:
-                  new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
+            decoration: InputDecoration(contentPadding: EdgeInsets.all(11),
               //contentPadding: EdgeInsets.only(),
               labelText: labelText,
               labelStyle: TextStyle(color: Colors.green),
@@ -134,19 +152,24 @@ Widget productDropDown(
                 ),
               ),
             ),
-            child: new DropdownButtonHideUnderline(
-              child: new DropdownButton(
-                //hint: Text(hintText),
-                value: selectedItem,
-                items: dropDownItems,
-                onChanged: changedDropDownItems,
+            child: Container(
+              height: 30,
+              child: new DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: new DropdownButton(
+                    //hint: Text(hintText),
+                    value: selectedItem,
+                    items: dropDownItems,
+                    onChanged: changedDropDownItems,
+                  ),
+                ),
               ),
             ),
           );
         }),
-      ),
-    ],
-  );
+      );
+
 }
 
 Widget MultiImagePickerMap(

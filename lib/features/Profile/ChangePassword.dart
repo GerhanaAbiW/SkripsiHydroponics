@@ -43,15 +43,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               height: 24,
             ),
             Container(
-              child: productTextField(
-                textTitle: "Password Lama",
+              child: FormTextField(
+                textLabel: "Password Lama",
                 textHint: "Masukkan Password Lama Anda",
                 //controller: prodcutDescriptionController,
               ),
             ),
             Container(
-              child: productTextField(
-                textTitle: "Password Baru",
+              child: FormTextField(
+                textLabel: "Password Baru",
                 textHint: "Masukkan Password Baru Anda",
                 //controller: prodcutDescriptionController,
               ),

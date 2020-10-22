@@ -112,8 +112,8 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
               height: 30,
             ),
             Container(
-              child: productTextField(
-                textTitle: "Luas Lahan",
+              child: FormTextField(
+                textLabel: "Luas Lahan",
                 textHint: "Masukkan Luas Lahan",
                 //controller: prodcutDescriptionController,
               ),
@@ -121,32 +121,32 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  productDropDown(
-                      textTitle: "Tipe Lahan",
+                  FormDropDown(
+                      labelText: "Tipe Lahan",
                       hintText: "Masukkan Type Lahan",
                       selectedItem: _currentTipeLahan,
                       dropDownItems: typelahanDropdown,
                       changedDropDownItems: changeSelectedCategory),
                 ]),
             Container(
-              child: productTextField(
-                textTitle: "jumlah Lubang",
+              child: FormTextField(
+                textLabel: "jumlah Lubang",
                 textHint: "Masukkan Jumlah Lubang Tanaman",
                 //controller: prodcutDescriptionController,
               ),
             ),
             Container(
-              child: productTextField(
+              child: FormTextField(
                 textType: TextInputType.number,
-                textTitle: "Nomor HP",
+                textLabel: "Nomor HP",
                 textHint: "Masukkan Nomor HP Anda",
                 //controller: prodcutDescriptionController,
               ),
             ),
             Container(
-              child: productTextField(
+              child: FormTextField(
                   textType: TextInputType.multiline,
-                  textTitle: "Alamat",
+                  textLabel: "Alamat",
                   textHint: "Masukkan Alamat Anda",
                   //controller: prodcutDescriptionController,
                   height: 180.0),
