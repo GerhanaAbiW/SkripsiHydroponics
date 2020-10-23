@@ -20,7 +20,8 @@ class ArticleDetail extends StatefulWidget {
 
 class _ArticleDetailState extends State<ArticleDetail> {
   TextStyle biggerText = TextStyle(fontSize: 22, fontWeight: FontWeight.w700);
-  TextStyle smallerText = TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
+  TextStyle smallerText = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[800]);
 
   @override
   Widget build(BuildContext context) {
@@ -93,20 +94,40 @@ class _ArticleDetailState extends State<ArticleDetail> {
                         height: MediaQuery.of(context).size.height / 4,
                         width: MediaQuery.of(context).size.width / 1,
                       ),
+                      SizedBox(
+                        height: 16,
+                      ),
                       Row(children: [
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Text(
-                                  widget.article.author,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text("by,"),
 
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                      //model.dateFormat.format(
+                                      //  DateTime.tryParse(
+                                      widget.article.author),
                                   // style: AppTextStyle
-                                  //     .regular12SecondaryPurple()
-                                ),
+                                  //     .regular10PrimaryOrange()),
+                                ],
                               ),
+                              // Container(
+                              //   padding: const EdgeInsets.only(bottom: 4),
+
+                              //   child: Text(
+                              //     widget.article.author,
+
+                              //     // style: AppTextStyle
+                              //     //     .regular12SecondaryPurple()
+                              //   ),
+                              // ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
@@ -172,10 +193,10 @@ class _ArticleDetailState extends State<ArticleDetail> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    widget.article.description,
-                                    style: smallerText,
-                                  ),
+                                  Text(widget.article.description,
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.normal)),
                                 ],
                               )
                             ],

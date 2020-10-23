@@ -32,8 +32,8 @@ class _HydroOrderListState extends State<HydroOrderList> {
 
   List<HydroList> listSection = new List();
   void createListItem() {
-    listSection.add(createSection("Small", "images/bayam.jpeg", "10x20x30",
-        "Rp.10.000", HydroOrderDetail()));
+    listSection.add(createSection("Small", "images/no-image-icon.png",
+        "10x20x30", "Rp.10.000", HydroOrderDetail()));
     listSection.add(createSection("Medium", "images/bayam.jpeg", "10x50x30",
         "Rp.10.000", HydroOrderDetail()));
     listSection.add(createSection("Large", "images/bayam.jpeg", "10x20x90",
@@ -50,27 +50,37 @@ class _HydroOrderListState extends State<HydroOrderList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: blueOrder,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text(
-            'Hydro Order',
-            style: CustomTextStyle.textFormFieldBold
-                .copyWith(color: Colors.white, fontSize: 21),
-          ),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: CardListOrder(
-          list: listSection,
-        ));
+        backgroundColor: blueOrder,
+        elevation: 10,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Hydro Order',
+          style: CustomTextStyle.textFormFieldBold
+              .copyWith(color: Colors.white, fontSize: 21),
+        ),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("ini kasi text apa kek"),
+          ),
+          SizedBox(height: 16),
+          CardListOrder(
+            list: listSection,
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -82,12 +92,12 @@ class CardListOrder extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 1),
         child: ListView.builder(
           itemCount: list.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              height: 120,
+              height: MediaQuery.of(context).size.height / 6.5,
               child: Card(
                 elevation: 20.0,
                 child: GestureDetector(
@@ -96,11 +106,11 @@ class CardListOrder extends StatelessWidget {
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(5.0), //or 15.0
                       child: Container(
-                        height: 80.0,
-                        width: 80.0,
+                        height: MediaQuery.of(context).size.height / 5.5,
+                        width: MediaQuery.of(context).size.width / 5.5,
                         color: blueOrder,
                         child: Image(
-                          image: ExactAssetImage(
+                          image: AssetImage(
                             list[index].image,
                           ),
                           fit: BoxFit

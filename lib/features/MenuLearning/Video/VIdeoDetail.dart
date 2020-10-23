@@ -113,19 +113,38 @@ class _VideoDetailState extends State<VideoDetail> {
                         style: TextStyle(
                             fontSize: 28, fontWeight: FontWeight.w600),
                       ),
+                      SizedBox(
+                        height: 8,
+                      ),
                       Row(children: [
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Text(
-                                  widget.video.author,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text("by,"),
 
+                                  Text(
+                                      //model.dateFormat.format(
+                                      //  DateTime.tryParse(
+                                      widget.video.author),
                                   // style: AppTextStyle
-                                  //     .regular12SecondaryPurple()
-                                ),
+                                  //     .regular10PrimaryOrange()),
+                                ],
+                              ),
+                              // Container(
+                              //   padding: const EdgeInsets.only(bottom: 4),
+                              //   child: Text(
+                              //     widget.video.author,
+
+                              //     // style: AppTextStyle
+                              //     //     .regular12SecondaryPurple()
+                              //   ),
+                              // ),
+                              SizedBox(
+                                height: 3,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,10 +211,10 @@ class _VideoDetailState extends State<VideoDetail> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    widget.video.description,
-                                    style: smallerText,
-                                  ),
+                                  Text(widget.video.description,
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.normal)),
                                 ],
                               )
                             ],

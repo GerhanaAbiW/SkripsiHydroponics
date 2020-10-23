@@ -9,15 +9,14 @@ import 'package:hydroponics/features/MenuMyPlants/MyRecord/MyPlantsRecordDetail.
 import 'package:provider/provider.dart';
 
 class WidgetArticleList extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
+    //double c_width = MediaQuery.of(context).size.width / 2;
     final articleProvider = Provider.of<ArticleProvider>(context);
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 2,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+        //padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
         child: AnimationLimiter(
           child: ListView.builder(
             itemCount: articleProvider.articles.length,
@@ -57,8 +56,8 @@ class WidgetArticleList extends StatelessWidget {
               //       ),
               return Container(
                 // width: MediaQuery.of(context).size.width,
-                height: 90, //MediaQuery.of(context).size.height,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                height: 100, //MediaQuery.of(context).size.height,
+                // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
                 child: Card(
                     //padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
                     elevation: 10.0,
@@ -68,7 +67,8 @@ class WidgetArticleList extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ArticleDetail(articleProvider.articles[index])));
+                              builder: (context) => ArticleDetail(
+                                  articleProvider.articles[index])));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,28 +78,33 @@ class WidgetArticleList extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  width: 70, //ScreenUtil().setWidth(60),
-                                  height: 60, //ScreenUtil().setWidth(60),
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    border: Border.all(),
-                                  ),
-                                  child: articleProvider.articles[index].image != null ?
-                                      // plantPicture != null
-                                      //     ? ClipRRect(
-                                      //         borderRadius: BorderRadius.circular(
-                                      //             44), //ScreenUtil().setWidth(44)),
-                                      //         child: Image.network(
-                                      //           plantPicture,
-                                      //           fit: BoxFit.fitHeight,
-                                      //           height: 60, //ScreenUtil().setWidth(60),
-                                      //         ),
-                                      //       )
-                                      //     :
+                                    width: 70, //ScreenUtil().setWidth(60),
+                                    height: 60, //ScreenUtil().setWidth(60),
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      border: Border.all(),
+                                    ),
+                                    child: articleProvider
+                                                .articles[index].image !=
+                                            null
+                                        ?
+                                        // plantPicture != null
+                                        //     ? ClipRRect(
+                                        //         borderRadius: BorderRadius.circular(
+                                        //             44), //ScreenUtil().setWidth(44)),
+                                        //         child: Image.network(
+                                        //           plantPicture,
+                                        //           fit: BoxFit.fitHeight,
+                                        //           height: 60, //ScreenUtil().setWidth(60),
+                                        //         ),
+                                        //       )
+                                        //     :
 
-                                      Image.network('${articleProvider.articles[index].image}', fit: BoxFit.fill,):
-                                      Image.asset("images/bayam.jpeg")
-                                ),
+                                        Image.network(
+                                            '${articleProvider.articles[index].image}',
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Image.asset("images/bayam.jpeg")),
                               ),
                               // Padding(
                               //   padding: const EdgeInsets.all(8.0),
@@ -111,30 +116,49 @@ class WidgetArticleList extends StatelessWidget {
                               //     ),
                               //   ),
                               // ),
-                              SizedBox(width: 10.0),
+                              SizedBox(width: 3.0),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        height: 10,
+                                      new Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                        child: Text(
+                                            articleProvider
+                                                .articles[index].title,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold)),
                                       ),
-                                      Text(articleProvider.articles[index].title,
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.bold,
-                                          )),
+
+                                      // Text(
+                                      //     articleProvider.articles[index].title,
+                                      //     style: TextStyle(
+                                      //       fontFamily: 'Montserrat',
+                                      //       fontSize: 17.0,
+                                      //       fontWeight: FontWeight.bold,
+                                      //     )),
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text(articleProvider.articles[index].date,
-                                          style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 15.0,
-                                              color: Colors.grey))
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8.0),
+                                        child: Text(
+                                            articleProvider
+                                                .articles[index].date,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 15.0,
+                                                color: Colors.grey)),
+                                      )
                                     ]),
                               )
                             ])),
