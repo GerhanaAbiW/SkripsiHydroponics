@@ -5,10 +5,13 @@ import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
+import 'package:hydroponics/features/MenuAdmin/OrderList/OrderDetails.dart';
 import 'package:hydroponics/features/MenuMarket/CheckOut.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 
 import 'package:hydroponics/core/Utils/CustomUtils.dart';
+import 'package:hydroponics/features/MenuMarket/Market.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -32,25 +35,60 @@ class _CartPageState extends State<CartPage> {
       resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            changeScreen(context, MenuMarket());
+          },
+        ),
+        backgroundColor: Color(0xFF2b961f),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Shopping Cart',
+          style: CustomTextStyle.textFormFieldBold
+              .copyWith(color: Colors.white, fontSize: 21),
+        ),
+      ),
       body: appProvider.isLoading
           ? Loading()
-          : Builder(
-              builder: (context) {
-                return ListView(
-                  children: <Widget>[
-                    createHeader(),
-                    createSubTitle(userProvider.userModel.cart.length),
-                    createCartList(userProvider.userModel.cart),
-                    footer(context,
-                        userProvider.userModel.totalCartPrice.toString(),userProvider.userModel.cart)
-                  ],
-                );
-              },
+          : SafeArea(
+              child: Container(
+                  child: Column(children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height - 150,
+                  child: ListView(
+                    children: <Widget>[
+                      createHeader(),
+                      createSubTitle(userProvider.userModel.cart.length),
+                      createCartList(userProvider.userModel.cart),
+                      footer(
+                          context,
+                          userProvider.userModel.totalCartPrice.toString(),
+                          userProvider.userModel.cart)
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                    child: ButtonButtom(
+                        buttonText: 'Checkout',
+                        onPressed: () {
+                          changeScreen(context, CheckOutPage());
+                        }),
+                  ),
+                ),
+              ])),
+              // },
             ),
     );
   }
 
-  footer(BuildContext context, String total,List<CartItemModel> cart) {
+  footer(BuildContext context, String total, List<CartItemModel> cart) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +102,7 @@ class _CartPageState extends State<CartPage> {
                 child: Text(
                   "Total",
                   style: CustomTextStyle.textFormFieldMedium
-                      .copyWith(color: Colors.grey, fontSize: 12),
+                      .copyWith(color: Colors.black, fontSize: 12),
                 ),
               ),
               Container(
@@ -78,20 +116,20 @@ class _CartPageState extends State<CartPage> {
             ],
           ),
           Utils.getSizedBox(height: 8),
-          RaisedButton(
-            onPressed: () {
-             changeScreen(context, CheckOutPage(cart: cart));
-            },
-            color: Colors.green,
-            padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(24))),
-            child: Text(
-              "Finalize",
-              style: CustomTextStyle.textFormFieldSemiBold
-                  .copyWith(color: Colors.white),
-            ),
-          ),
+          // RaisedButton(
+          //   onPressed: () {
+          //     changeScreen(context, CheckOutPage());
+          //   },
+          //   color: Colors.green,
+          //   padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
+          //   shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.all(Radius.circular(24))),
+          //   child: Text(
+          //     "Checkout",
+          //     style: CustomTextStyle.textFormFieldSemiBold
+          //         .copyWith(color: Colors.white),
+          //   ),
+          // ),
           Utils.getSizedBox(height: 8),
         ],
       ),
@@ -103,9 +141,9 @@ class _CartPageState extends State<CartPage> {
     return Container(
       alignment: Alignment.topLeft,
       child: Text(
-        "SHOPPING CART",
+        "Your Cart",
         style: CustomTextStyle.textFormFieldBold
-            .copyWith(fontSize: 16, color: Colors.black),
+            .copyWith(fontSize: 16, color: Color(0xFF2b961f)),
       ),
       margin: EdgeInsets.only(left: 12, top: 12),
     );
@@ -117,7 +155,7 @@ class _CartPageState extends State<CartPage> {
       child: Text(
         "Total($totalItems) Items",
         style: CustomTextStyle.textFormFieldBold
-            .copyWith(fontSize: 12, color: Colors.grey),
+            .copyWith(fontSize: 12, color: Colors.black),
       ),
       margin: EdgeInsets.only(left: 12, top: 4),
     );
@@ -206,7 +244,7 @@ class _CartPageState extends State<CartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              "\$${cart.price} ",
+                              "\Rp${cart.price} ",
                               style: CustomTextStyle.textFormFieldBlack
                                   .copyWith(color: Colors.green),
                             ),
@@ -220,7 +258,8 @@ class _CartPageState extends State<CartPage> {
                                     width: 24,
                                     height: 24,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
                                         color: Colors.green),
                                     child: Icon(
                                       Icons.remove,
@@ -242,7 +281,8 @@ class _CartPageState extends State<CartPage> {
                                     width: 24,
                                     height: 24,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
                                         color: Colors.green),
                                     child: Icon(
                                       Icons.add,

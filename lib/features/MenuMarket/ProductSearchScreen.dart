@@ -3,7 +3,9 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuMarket/Cart.dart';
+import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:hydroponics/features/MenuMarket/Product.dart';
 import 'package:hydroponics/features/MenuMarket/ProductDetail.dart';
 import 'package:provider/provider.dart';
@@ -18,22 +20,40 @@ class _SearchScreenMarketState extends State<SearchScreenMarket> {
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
-      appBar: new AppBar(
-        elevation: 0.1,
-        title: Text("HydroMarket"),
-        backgroundColor: Colors.lightBlue,
-        actions: <Widget>[
-          new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (context) => new CartPage()));
-              }),
-        ],
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            changeScreen(context, MenuMarket());
+          },
+        ),
+        backgroundColor: Color(0xFF2b961f),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Hydro Market',
+          style: CustomTextStyle.textFormFieldBold
+              .copyWith(color: Colors.white, fontSize: 21),
+        ),
       ),
+      // appBar: new AppBar(
+      //   elevation: 0.1,
+      //   title: Text("HydroMarket"),
+      //   backgroundColor: Colors.lightBlue,
+      //   actions: <Widget>[
+      //     new IconButton(
+      //         icon: Icon(
+      //           Icons.shopping_cart,
+      //           color: Colors.white,
+      //         ),
+      //         onPressed: () {
+      //           Navigator.of(context).push(new MaterialPageRoute(
+      //               builder: (context) => new CartPage()));
+      //         }),
+      //   ],
+      // ),
       backgroundColor: Colors.white,
       body: Container(
         child: SingleChildScrollView(
@@ -124,7 +144,9 @@ class _SearchScreenMarketState extends State<SearchScreenMarket> {
                               new Text("Product Found")
                             ],
                           ),
-                          SizedBox(height: 16.0,),
+                          SizedBox(
+                            height: 16.0,
+                          ),
                           Products(productProvider.productsSearched)
                         ],
                       ),

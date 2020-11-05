@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 Widget appButton(
@@ -90,7 +91,6 @@ Widget DateFormField(
       firstDate: DateTime(1901, 1),
       lastDate: DateTime(2100),
       controller: controller,
-      
       dateMask: 'dd MMM, yyyy',
       type: DateTimePickerType.date,
       decoration: new InputDecoration(
@@ -483,4 +483,36 @@ showSnackBar(String message, final scaffoldKey) {
       style: new TextStyle(color: Colors.white),
     ),
   ));
+}
+
+class ButtonButtom extends StatelessWidget {
+  ButtonButtom(
+      {@required this.buttonText,
+      @required this.onPressed,
+      this.isDisabled = false});
+  final String buttonText;
+  final Function onPressed;
+  final bool isDisabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      // height: ScreenUtil().setHeight(38),
+      height: 40,
+      margin: EdgeInsets.only(bottom: 24),
+      child: FlatButton(
+        color: isDisabled ? Color(0xFF2b961f) : Color(0xFF2b961f),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          buttonText,
+          style: CustomTextStyle.textFormFieldSemiBold
+              .copyWith(color: Colors.white),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
 }

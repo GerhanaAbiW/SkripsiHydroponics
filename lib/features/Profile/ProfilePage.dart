@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/Profile/ChangePassword.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
@@ -29,7 +30,6 @@ class _NewProfilePageState extends State<NewProfilePage> {
     super.initState();
     createListItem();
     Provider.of<UserProvider>(context, listen: false).reloadUserModel();
-
   }
 
   void createListItem() {
@@ -153,11 +153,8 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                           color: Colors.black,
                                           iconSize: 24,
                                           onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                new MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EditProfilePage()));
+                                            changeScreenReplacement(
+                                                context, EditProfilePage());
                                           },
                                         )
                                       ],
@@ -167,11 +164,10 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                     height: 8,
                                   ),
                                   CustomText(
-                                      text: user?.name ??
-                                          "username loading..."),
+                                      text:
+                                          user?.name ?? "username loading..."),
                                   CustomText(
-                                      text: user?.email ??
-                                          "email loading..."),
+                                      text: user?.email ?? "email loading..."),
                                   SizedBox(
                                     height: 16,
                                   ),

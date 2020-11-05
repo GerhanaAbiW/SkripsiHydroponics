@@ -3,8 +3,10 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuLearning/Video/VIdeoDetail.dart';
 import 'package:hydroponics/features/MenuMarket/Cart.dart';
 import 'package:hydroponics/features/MenuMarket/HorizontalListView.dart';
+import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:hydroponics/features/MenuMarket/Product.dart';
 import 'package:hydroponics/features/MenuMarket/ProductSearchScreen.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
@@ -23,22 +25,40 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //final productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
-      appBar: new AppBar(
-        elevation: 0.1,
-        title: Text("HydroMarket"),
-        backgroundColor: Colors.lightBlue,
-        actions: <Widget>[
-          new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (context) => new CartPage()));
-              }),
-        ],
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            changeScreen(context, MenuMarket());
+          },
+        ),
+        backgroundColor: Color(0xFF2b961f),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Hydro Market',
+          style: CustomTextStyle.textFormFieldBold
+              .copyWith(color: Colors.white, fontSize: 21),
+        ),
       ),
+      // appBar: new AppBar(
+      //   elevation: 0.1,
+      //   title: Text("HydroMarket"),
+      //   backgroundColor: Colors.lightBlue,
+      //   actions: <Widget>[
+      //     new IconButton(
+      //         icon: Icon(
+      //           Icons.shopping_cart,
+      //           color: Colors.white,
+      //         ),
+      //         onPressed: () {
+      //           Navigator.of(context).push(new MaterialPageRoute(
+      //               builder: (context) => new CartPage()));
+      //         }),
+      //   ],
+      // ),
       backgroundColor: Colors.white,
       body: Container(
         child: SingleChildScrollView(
@@ -105,16 +125,15 @@ class CategoryScreen extends StatelessWidget {
                     child: new Text("Recent Product")),
               ),
               Container(
-                child: productsByCategory.length == 0 ||
-                        productsByCategory.length == null
-                    ? CustomText(
-                        text: "No products Found",
-                        color: Colors.black,
-                        weight: FontWeight.w300,
-                        size: 22,
-                      )
-                    : Products(productsByCategory)
-              ),
+                  child: productsByCategory.length == 0 ||
+                          productsByCategory.length == null
+                      ? CustomText(
+                          text: "No products Found",
+                          color: Colors.black,
+                          weight: FontWeight.w300,
+                          size: 22,
+                        )
+                      : Products(productsByCategory)),
             ],
           ),
         ),

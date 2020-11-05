@@ -1,5 +1,3 @@
-
-
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 import 'package:flutter/material.dart';
@@ -41,8 +39,11 @@ class _MyPlantsListState extends State<MyPlantsList> {
                     width: 125.0,
                     child: InkWell(
                       onTap: () {
-                       changeScreen(context, ListRecordPlant(list: "date",));
-
+                        changeScreen(
+                            context,
+                            ListRecordPlant(
+                              list: "date",
+                            ));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

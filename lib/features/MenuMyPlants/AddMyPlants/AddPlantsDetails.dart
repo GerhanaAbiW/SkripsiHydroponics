@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
@@ -132,11 +133,8 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
                             children: <Widget>[
                               FloatingActionButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MyPlantsList()));
+                                  changeScreenReplacement(
+                                      context, MyPlantsList());
                                 },
                                 backgroundColor: greenColor,
                                 child: Icon(Icons.add_circle),

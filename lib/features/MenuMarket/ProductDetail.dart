@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:provider/provider.dart';
 
@@ -18,8 +21,6 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   final _key = GlobalKey<ScaffoldState>();
   int qty = 0;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,37 +43,55 @@ class _ProductDetailsState extends State<ProductDetails> {
 
       return asset;
     }
+
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       key: _key,
-      appBar: new AppBar(
-        elevation: 0.1,
-        backgroundColor: Colors.green[700],
-        title: InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => new MenuMarket()));
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            changeScreen(context, MenuMarket());
           },
-          child: Text("HydroMarket"),
         ),
-        actions: <Widget>[
-//          new IconButton(
-//              icon: Icon(
-//                Icons.search,
-//                color: Colors.white,
-//              ),
-//              onPressed: () {}),
-          new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-              onPressed: () {}),
-        ],
+        backgroundColor: Color(0xFF2b961f),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Hydro Market',
+          style: CustomTextStyle.textFormFieldBold
+              .copyWith(color: Colors.white, fontSize: 21),
+        ),
       ),
+//       appBar: new AppBar(
+//         elevation: 0.1,
+//         backgroundColor: Colors.green[700],
+//         title: InkWell(
+//           onTap: () {
+//             changeScreenReplacement(context, MenuMarket());
+//           },
+//           child: Text("HydroMarket"),
+//         ),
+//         actions: <Widget>[
+// //          new IconButton(
+// //              icon: Icon(
+// //                Icons.search,
+// //                color: Colors.white,
+// //              ),
+// //              onPressed: () {}),
+//           new IconButton(
+//               icon: Icon(
+//                 Icons.shopping_cart,
+//                 color: Colors.white,
+//               ),
+//               onPressed: () {}),
+//         ],
+//       ),
       backgroundColor: Colors.green[100],
-      body: new Column(children: <Widget>[
+      body: ListView(children: <Widget>[
         new Container(
           height: 300.0,
           child: Column(children: <Widget>[
@@ -202,13 +221,11 @@ class _ProductDetailsState extends State<ProductDetails> {
               color: Colors.white,
               textColor: Colors.grey,
               elevation: 0.2,
-              child: Row(
-
-                  children: <Widget>[
+              child: Row(children: <Widget>[
                 Expanded(
                   child: new Text("Quantity"),
                 ),
-                 new Icon(Icons.arrow_drop_down),
+                new Icon(Icons.arrow_drop_down),
               ]),
             ),
           ),
@@ -274,23 +291,23 @@ class _ProductDetailsState extends State<ProductDetails> {
               onPressed: () async {
                 appProvider.changeIsLoading();
                 bool success = await userProvider.addToCart(
-                    product: widget.product,
-                    qty: qty);
+                    product: widget.product, qty: qty);
                 if (success) {
-                  _key.currentState.showSnackBar(
-                      SnackBar(content: Text("Added to Cart!")));
+                  _key.currentState
+                      .showSnackBar(SnackBar(content: Text("Added to Cart!")));
                   userProvider.reloadUserModel();
                   appProvider.changeIsLoading();
                   return;
                 } else {
-                  _key.currentState.showSnackBar(SnackBar(
-                      content: Text("Not added to Cart!")));
+                  _key.currentState.showSnackBar(
+                      SnackBar(content: Text("Not added to Cart!")));
                   appProvider.changeIsLoading();
                   return;
                 }
               },
               color: Colors.green[700],
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               textColor: Colors.grey,
               child: new Text("Buy Now"),
             ),
@@ -390,4 +407,3 @@ class _ProductDetailsState extends State<ProductDetails> {
 //    );
 //  }
 //}
-
