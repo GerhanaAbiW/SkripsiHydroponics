@@ -1,7 +1,8 @@
 import 'dart:io';
-
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 Widget appButton(
     {String btnTxt,
@@ -72,6 +73,110 @@ Widget FormTextField(
   );
 }
 
+Widget DateFormField(
+    {String textLabel,
+    String textHint,
+    double height,
+    TextEditingController controller,
+    TextInputType textType}) {
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
+  textHint == null ? textHint = "Enter Hint" : textHint;
+  height == null ? height = 50.0 : height;
+  //height !=null
+
+  return new Padding(
+    padding: const EdgeInsets.only(left: 0, right: 0),
+    child: new DateTimePicker(
+      firstDate: DateTime(1901, 1),
+      lastDate: DateTime(2100),
+      controller: controller,
+      
+      dateMask: 'dd MMM, yyyy',
+      type: DateTimePickerType.date,
+      decoration: new InputDecoration(
+        contentPadding: EdgeInsets.all(12),
+        //contentPadding: EdgeInsets.only(),
+        suffixIcon: Icon(
+          Icons.calendar_today,
+          color: Colors.green,
+        ),
+        labelText: textLabel,
+        labelStyle: TextStyle(color: Colors.green),
+        hintText: textHint,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.green,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.blue,
+            width: 2.0,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget DropdownForm(
+    {String textLabel,
+    String textHint,
+    String selectedItem,
+    double height,
+    TextEditingController controller,
+    List<Map<String, dynamic>> dropDownItems,
+    ValueChanged<String> changedDropDownItems,
+    TextInputType textType}) {
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
+  textHint == null ? textHint = "Enter Hint" : textHint;
+  height == null ? height = 50.0 : height;
+  //height !=null
+
+  return new Padding(
+      padding: const EdgeInsets.only(left: 0.0, right: 0.0),
+      child: SelectFormField(
+        //titleText: textLabel,
+        enableInteractiveSelection: true,
+        labelText: textLabel,
+        hintText: textHint,
+        decoration: new InputDecoration(
+          contentPadding: EdgeInsets.all(12),
+          //contentPadding: EdgeInsets.only(),
+          suffixIcon: Container(
+            width: 10,
+            margin: EdgeInsets.all(0),
+            child: FlatButton(
+              onPressed: () {},
+              child: Icon(Icons.arrow_drop_down),
+            ),
+          ),
+          labelText: textLabel,
+          labelStyle: TextStyle(color: Colors.green),
+          hintText: textHint,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.green,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+              width: 2.0,
+            ),
+          ),
+        ),
+        items: dropDownItems,
+        //value: selectedItem,
+        //dataSource: dropDownItems,
+        onChanged: changedDropDownItems,
+      ));
+}
+
 Widget MultilineFormTextField(
     {String textLabel,
     String textHint,
@@ -93,6 +198,7 @@ Widget MultilineFormTextField(
       decoration: new InputDecoration(
         contentPadding:
             new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
+
         //contentPadding: EdgeInsets.only(),
         labelText: textLabel,
         labelStyle: TextStyle(color: Colors.green),
@@ -124,7 +230,7 @@ Widget FormDropDown(
   labelText == null ? labelText = "Enter Title" : labelText;
 
   return new Padding(
-    padding: const EdgeInsets.only(left: 0.0, right: 0.0),
+    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
     child: FormField(builder: (FormFieldState state) {
       return InputDecorator(
         decoration: InputDecoration(
@@ -153,7 +259,10 @@ Widget FormDropDown(
             child: ButtonTheme(
               alignedDropdown: true,
               child: new DropdownButton(
-                //hint: Text(hintText),
+                hint: Text(
+                  hintText,
+                  style: TextStyle(color: Colors.green),
+                ),
                 value: selectedItem,
                 items: dropDownItems,
                 onChanged: changedDropDownItems,

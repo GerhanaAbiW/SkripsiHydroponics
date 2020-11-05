@@ -29,6 +29,7 @@ class _AddArticleViewState extends State<AddArticleView> {
     });
   }
 
+
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController articleController = TextEditingController();
@@ -241,40 +242,44 @@ class _AddArticleViewState extends State<AddArticleView> {
 //                       labelTextStr: "Judul Artikel",
 //                       hintTextStr: "Masukkan Judul Artikel"),
 //                 ),
-
-                GestureDetector(
-                  onTap: () => _selectDate(context),
-                  child: AbsorbPointer(
-                    child: TextFormField(
-                      controller: dateController,
-                      autofocus: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.datetime,
-                      decoration: InputDecoration(
-                        labelText: 'Tanggal Terbit',
-                        labelStyle: TextStyle(color: Colors.green),
-                        hintText: 'Tanggal Terbit',
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.0,
-                          ),
-                        ),
-                        suffixIcon: Icon(
-                          Icons.calendar_today,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+//
+//                 GestureDetector(
+//                   onTap: () => _selectDate(context),
+//                   child: AbsorbPointer(
+//                     child: TextFormField(
+//                       controller: dateController,
+//                       autofocus: false,
+//                       textInputAction: TextInputAction.next,
+//                       keyboardType: TextInputType.datetime,
+//                       decoration: InputDecoration(
+//                         labelText: 'Tanggal Terbit',
+//                         labelStyle: TextStyle(color: Colors.green),
+//                         hintText: 'Tanggal Terbit',
+//                         focusedBorder: OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(10.0),
+//                           borderSide: BorderSide(
+//                             color: Colors.green,
+//                           ),
+//                         ),
+//                         enabledBorder: OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(10.0),
+//                           borderSide: BorderSide(
+//                             color: Colors.blue,
+//                             width: 2.0,
+//                           ),
+//                         ),
+//                         suffixIcon: Icon(
+//                           Icons.calendar_today,
+//                           color: Colors.green,
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+                DateFormField(
+                    textLabel: 'Tanggal Terbit',
+                    textHint: 'Tanggal Terbit',
+                    controller: dateController),
                 SizedBox(
                   height: 16,
                 ),

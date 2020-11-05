@@ -5,6 +5,7 @@ import 'package:hydroponics/features/MainMenu/MainMenu.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 
 class DashBoard extends StatefulWidget {
+
   @override
   _DashBoardState createState() => _DashBoardState();
 }

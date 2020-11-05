@@ -2,30 +2,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Constants/Colors.dart';
-import 'package:hydroponics/features/MenuMyPlants/AddPlants/AddPlantsDetails.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/WidgetListRecordDetailPlant.dart';
+import 'package:hydroponics/core/Providers/PlantProvider.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddPlants/AddPlantCard.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
-import 'package:hydroponics/features/Widget/SearchPlantRecordDate.dart';
+import 'package:provider/provider.dart';
 
-class ListRecordDetailPlant extends StatefulWidget {
+class PlantListFromAdmin extends StatefulWidget {
   @override
-  _RecordDetailPlantState createState() => _RecordDetailPlantState();
+  _PlantListFromAdminState createState() => _PlantListFromAdminState();
 }
 
-class _RecordDetailPlantState extends State<ListRecordDetailPlant> {
-  //List<String> images;
-  // List<String> title = ['Kangkung', 'Caisim', 'Sawi', 'Kol', 'Bayam'];
-  // List<String> desc = [
-  //   'ppm ideal 12%, suhu ideal 34',
-  //   'ppm ideal 15%, suhu ideal 53',
-  //   'ppm ideal 17%, suhu ideal 22',
-  //   'ppm ideal 18%, suhu ideal 49',
-  //   'ppm ideal 19%, suhu ideal 47'
-  // ];
+class _PlantListFromAdminState extends State<PlantListFromAdmin> {
+
 
   @override
   Widget build(BuildContext context) {
+    final plantProvider = Provider.of<PlantProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -40,15 +32,19 @@ class _RecordDetailPlantState extends State<ListRecordDetailPlant> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          'Plant Record',
+          'Choose Your Plant',
           style: CustomTextStyle.textFormFieldBold
               .copyWith(color: Colors.white, fontSize: 21),
         ),
       ),
-      body: Column(
+      body: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-              height: MediaQuery.of(context).size.height - 100.0,
+            child: SearchListAddPlantWidget(),
+          ),
+          Container(
+              height: MediaQuery.of(context).size.height - 200.0,
               //height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -60,13 +56,12 @@ class _RecordDetailPlantState extends State<ListRecordDetailPlant> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: 15,
+                itemCount: plantProvider.plants.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    child: WidgetLIstRecordDetailPlant(
-                      plantName: 'Kangkung',
-                      desc: 'PH ideal 12, PPM Ide..',
+                    child: WidgetPlantListFromAdmin(
+                      plant: plantProvider.plants[index],
                     ),
                   );
                   // return Card(

@@ -16,7 +16,7 @@ class SearchWidget extends StatelessWidget {
               textInputAction: TextInputAction.search,
               onSubmitted: (pattern)async{
                 await productProvider.search(productName: pattern);
-                changeScreen(context, ProductSearchScreen());
+                changeScreen(context, SearchScreenMarket());
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(

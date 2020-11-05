@@ -32,6 +32,54 @@ class _AddProductsState extends State<AddProducts> {
   //List<DocumentSnapshot> brands = <DocumentSnapshot>[];
   //List<DocumentSnapshot> categories = <DocumentSnapshot>[];
   List<String> brands = ['A', 'B', 'C', 'D'];
+  final List<Map<String, dynamic>> brandItems = [
+    {
+      'value': 'A',
+      'label': 'A',
+      // 'icon': Icon(Icons.stop),
+    },
+    {
+      'value': 'B',
+      'label': 'B',
+      // 'icon': Icon(Icons.fiber_manual_record),
+      // 'textStyle': TextStyle(color: Colors.red),
+    },
+    {
+      'value': 'C',
+      'label': 'C',
+      // 'enable': false,
+      // 'icon': Icon(Icons.grade),
+    },{
+      'value': 'D',
+      'label': 'D',
+      // 'enable': false,
+      // 'icon': Icon(Icons.grade),
+    },
+  ];
+  final List<Map<String, dynamic>> categoryItems = [
+    {
+      'value': 'Alat',
+      'label': 'Alat',
+      // 'icon': Icon(Icons.stop),
+    },
+    {
+      'value': 'Bibit',
+      'label': 'Bibit',
+      // 'icon': Icon(Icons.fiber_manual_record),
+      // 'textStyle': TextStyle(color: Colors.red),
+    },
+    {
+      'value': 'Pupuk',
+      'label': 'Pupuk',
+      // 'enable': false,
+      // 'icon': Icon(Icons.grade),
+    },{
+      'value': 'Obat',
+      'label': 'Obat',
+      // 'enable': false,
+      // 'icon': Icon(Icons.grade),
+    },
+  ];
   List<String> categories = ['Bibit', 'Obat', 'Pupuk', 'Alat'];
   List<DropdownMenuItem<String>> categoriesDropDown =
       <DropdownMenuItem<String>>[];
@@ -177,22 +225,23 @@ class _AddProductsState extends State<AddProducts> {
                       SizedBox(
                         height: 16,
                       ),
-                      FormDropDown(
-                          labelText: "Product Category",
-                          hintText: "Please choose the category",
+                      DropdownForm(
+                          textLabel: "Product Category",
+                          textHint: "Please choose the category",
                           selectedItem: _currentCategory,
-                          dropDownItems: categoriesDropDown,
+                          dropDownItems: categoryItems,
                           changedDropDownItems: changeSelectedCategory),
                       SizedBox(
                         height: 16,
                       ),
-                      FormDropDown(
-                          labelText: "Product Brand",
-                          hintText: "Please choose the brand",
+                      DropdownForm(
+                          textLabel: "Product Brand",
+                          textHint: "Please choose the brand",
                           selectedItem: _currentBrand,
-                          dropDownItems: brandsDropDown,
+                          dropDownItems: brandItems,
                           changedDropDownItems: changeSelectedBrand),
                     ],
+
                   ),
                 ],
               ),

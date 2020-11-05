@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_money_formatter/flutter_money_formatter.dart';
+import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Services/OrderServices.dart';
+
+// import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:provider/provider.dart';
 
 class CheckOutPage extends StatefulWidget {
   @override
@@ -9,9 +15,12 @@ class CheckOutPage extends StatefulWidget {
 
 class _CheckOutPageState extends State<CheckOutPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  OrderServices _orderServices = OrderServices();
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return MaterialApp(
       home: Scaffold(
         key: _scaffoldKey,
@@ -48,10 +57,28 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   child: RaisedButton(
-                    onPressed: () {
-                      /*Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => OrderPlacePage()));*/
-                      showThankYouBottomSheet(context);
+                    onPressed: () async {
+                      _orderServices.createOrder(
+                          userId: userProvider.user.uid,
+                          description: "Some random description",
+                          status: "complete",
+                          totalPrice: userProvider.userModel.totalCartPrice,
+                          cart: userProvider.userModel.cart);
+                      for (CartItemModel cartItem in userProvider.userModel.cart) {
+                        bool value = await userProvider.removeFromCart(
+                            cartItem: cartItem);
+                        if (value) {
+                          userProvider.reloadUserModel();
+                          print("Item added to cart");
+                          _scaffoldKey.currentState.showSnackBar(
+                              SnackBar(content: Text("Removed from Cart!")));
+                        } else {
+                          print("ITEM WAS NOT REMOVED");
+                        }
+                      }
+                      _scaffoldKey.currentState.showSnackBar(
+                          SnackBar(content: Text("Order created!")));
+                      Navigator.pop(context);
                     },
                     child: Text(
                       "Place Order",
@@ -60,7 +87,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           fontSize: 14,
                           fontWeight: FontWeight.bold),
                     ),
-                    color: Colors.pink,
+                    color: Colors.greenAccent,
                     textColor: Colors.white,
                   ),
                 ),
@@ -427,13 +454,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
               SizedBox(
                 height: 8,
               ),
-              createPriceItem("Total MRP", getFormattedCurrency(5197),
+              createPriceItem("Total MRP", "getFormattedCurrency(5197)",
                   Colors.grey.shade700),
-              createPriceItem("Bag discount", getFormattedCurrency(3280),
+              createPriceItem("Bag discount", "getFormattedCurrency(3280)",
                   Colors.teal.shade300),
               createPriceItem(
-                  "Tax", getFormattedCurrency(96), Colors.grey.shade700),
-              createPriceItem("Order Total", getFormattedCurrency(2013),
+                  "Tax", "getFormattedCurrency(96)", Colors.grey.shade700),
+              createPriceItem("Order Total", "getFormattedCurrency(2013)",
                   Colors.grey.shade700),
               createPriceItem(
                   "Delievery Charges", "FREE", Colors.teal.shade300),
@@ -459,7 +486,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    getFormattedCurrency(2013),
+                    "getFormattedCurrency(2013)",
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
@@ -472,25 +499,25 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  String getFormattedCurrency(double amount) {
-    FlutterMoneyFormatter fmf = new FlutterMoneyFormatter(
-        amount: amount,
-        settings: MoneyFormatterSettings(
-          symbol: '₹',
-          thousandSeparator: '.',
-          decimalSeparator: ',',
-          symbolAndNumberSeparator: ' ',
-          //fractionDigits: 3,
-          //compactFormatType: CompactFormatType.sort
-        ));
-    return fmf.output.compactSymbolOnLeft;
-//    FlutterMoneyFormatter fmf = new FlutterMoneyFormatter(amount: amount);
-//    fmf.L = "₹";
-//    fmf.thousandSeparator = ",";
-//    fmf.decimalSeparator = ".";
-//    fmf.spaceBetweenSymbolAndNumber = true;
-//    return fmf.formattedLeftSymbol;
-  }
+//   String getFormattedCurrency(double amount) {
+//     FlutterMoneyFormatter fmf = new FlutterMoneyFormatter(
+//         amount: amount,
+//         settings: MoneyFormatterSettings(
+//           symbol: '₹',
+//           thousandSeparator: '.',
+//           decimalSeparator: ',',
+//           symbolAndNumberSeparator: ' ',
+//           //fractionDigits: 3,
+//           //compactFormatType: CompactFormatType.sort
+//         ));
+//     return fmf.output.compactSymbolOnLeft;
+// //    FlutterMoneyFormatter fmf = new FlutterMoneyFormatter(amount: amount);
+// //    fmf.L = "₹";
+// //    fmf.thousandSeparator = ",";
+// //    fmf.decimalSeparator = ".";
+// //    fmf.spaceBetweenSymbolAndNumber = true;
+// //    return fmf.formattedLeftSymbol;
+//   }
 
   createPriceItem(String key, String value, Color color) {
     return Container(

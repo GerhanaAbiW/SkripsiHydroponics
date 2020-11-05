@@ -1,7 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hydroponics/core/Models/Plants.dart';
+import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:uuid/uuid.dart';
 
 class PlantService {

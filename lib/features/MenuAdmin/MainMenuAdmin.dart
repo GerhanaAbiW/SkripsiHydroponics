@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
@@ -94,7 +95,7 @@ class _MenuAdminState extends State<MenuAdmin> {
       ),
       drawer: Container(
         child: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Colors.blue),
+          data: Theme.of(context).copyWith(canvasColor: greenTosca),
           child: Drawer(
               child: Column(children: <Widget>[
             // SizedBox(
@@ -105,6 +106,7 @@ class _MenuAdminState extends State<MenuAdmin> {
             //   child: DrawerHeader(child: new CircleAvatar()),
             //   color: Colors.tealAccent,
             // ),
+            SizedBox(height: 50,),
             Expanded(child: Container(child: Column(children: drawerOptions))),
             Container(
               color: Colors.black.withOpacity(0.3),
@@ -114,7 +116,7 @@ class _MenuAdminState extends State<MenuAdmin> {
                   children: <Widget>[
                     Divider(),
                     GestureDetector(
-                      onTap: () => changeScreenReplacement(context, MainMenu()),
+                      onTap: () => changeScreenReplacement(context, DashBoard()),
                       child: ListTile(
                         leading: Icon(
                           Icons.exit_to_app,

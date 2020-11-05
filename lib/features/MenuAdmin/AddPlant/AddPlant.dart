@@ -24,8 +24,8 @@ class _AddPlantViewState extends State<AddPlantView> {
       _image = File(pickedFile.path);
     });
   }
+  PlantService _plantService = PlantService();
 
-  PlantService plantService;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController namaTumbuhanController = TextEditingController();
   TextEditingController mediaSemaiController = TextEditingController();
@@ -94,7 +94,7 @@ class _AddPlantViewState extends State<AddPlantView> {
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
-          plantService.uploadPlant({
+          _plantService.uploadPlant({
             "Plant": namaTumbuhanController.text,
             "Media": mediaSemaiController.text,
             "Image": imageUrl1,
@@ -288,7 +288,7 @@ class _AddPlantViewState extends State<AddPlantView> {
                   Center(
                     child: InkWell(
                       onTap: () {
-                        //disini
+                        validateAndUpload();
                       },
                       child: Container(
                         width: double.infinity,

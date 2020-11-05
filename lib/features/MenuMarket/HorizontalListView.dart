@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Providers/ProductProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuMarket/CategoryMarket.dart';
+import 'package:provider/provider.dart';
 
 class HorizontalList extends StatelessWidget {
   @override
@@ -6,7 +10,8 @@ class HorizontalList extends StatelessWidget {
     return Container(
       height: 40.0,
       //color: Colors.white,
-      child: ListView(scrollDirection: Axis.horizontal, children: <Widget>[
+      child: ListView(scrollDirection: Axis.horizontal,
+          shrinkWrap: true,children: <Widget>[
         Categories(
           imageLocation: "images/Icons/1.png",
           imageCaption: "Bibit",
@@ -36,10 +41,21 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: InkWell(
-          onTap: () {},
+          onTap: () async{
+            await productProvider.loadProductsByCategory(
+                categoryName:
+                imageCaption);
+
+            changeScreen(
+                context,
+                CategoryScreen(
+                productsByCategory: productProvider.productsByCategory,
+                ));
+          },
           child: Container(
               width: 80.0,
               height: 80.0,
@@ -59,3 +75,5 @@ class Categories extends StatelessWidget {
     );
   }
 }
+
+

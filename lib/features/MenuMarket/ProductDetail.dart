@@ -1,7 +1,10 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Product.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel product;
@@ -12,15 +15,15 @@ class ProductDetails extends StatefulWidget {
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
-
-
 class _ProductDetailsState extends State<ProductDetails> {
+  final _key = GlobalKey<ScaffoldState>();
+  int qty = 0;
 
 
 
   @override
   Widget build(BuildContext context) {
-    final List imgList =  widget.product.picture;
+    final List imgList = widget.product.picture;
 //  [
 //    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
 //    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -29,7 +32,6 @@ class _ProductDetailsState extends State<ProductDetails> {
 //    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
 //    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
 //  ];
-
 
     List<NetworkImage> productAssets(List images) {
       List<NetworkImage> asset = List<NetworkImage>();
@@ -40,8 +42,10 @@ class _ProductDetailsState extends State<ProductDetails> {
 
       return asset;
     }
-
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
+      key: _key,
       appBar: new AppBar(
         elevation: 0.1,
         backgroundColor: Colors.green[700],
@@ -59,132 +63,153 @@ class _ProductDetailsState extends State<ProductDetails> {
 //                color: Colors.white,
 //              ),
 //              onPressed: () {}),
-           new IconButton(
-             icon: Icon(
-               Icons.shopping_cart,
-               color: Colors.white,
-           ), onPressed: (){}),
+          new IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+              ),
+              onPressed: () {}),
         ],
       ),
       backgroundColor: Colors.green[100],
       body: new Column(children: <Widget>[
         new Container(
           height: 300.0,
-          child: Column(
-            children: <Widget>[
-                 Expanded(
-                   child: Carousel(
-                    boxFit: BoxFit.cover,
-                    images: productAssets(imgList),
-                    autoplay: true,
-                    animationCurve: Curves.fastOutSlowIn,
-                    animationDuration: Duration(milliseconds: 1000),
-                    dotSize: 4.0,
-                    dotColor: Colors.green,
-                    indicatorBgPadding: 2.0,
-
-            ),
-                 ),
-
-                Container(
-                 height: 50,
-                color: Colors.white,
-                child: ListTile(
-                  leading: new Text(
-                    widget.product.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-                  ),
-                  title: new Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: new Text("\$${widget.product.price}"),
-                      ),
-                      Expanded(
-                        child: new Text(
-                          "\$${widget.product.price}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
-
-            ),
-             ),]
-          ),
-        ),
-        Row(
-          children: <Widget>[
+          child: Column(children: <Widget>[
             Expanded(
-              child: MaterialButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: new Text("Size"),
-                          content: new Text("Choose the size"),
-                          actions: <Widget>[
-                            new MaterialButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(context);
-                                },
-                                child: new Text("close"))
-                          ],
-                        );
-                      });
-                },
-                color: Colors.white,
-                textColor: Colors.grey,
-                elevation: 0.2,
-                child: Row(children: <Widget>[
-                  Expanded(
-                    child: new Text("Size"),
-                  ),
-                  Expanded(child: new Icon(Icons.arrow_drop_down)),
-                ]),
+              child: Carousel(
+                boxFit: BoxFit.cover,
+                images: productAssets(imgList),
+                autoplay: true,
+                animationCurve: Curves.fastOutSlowIn,
+                animationDuration: Duration(milliseconds: 1000),
+                dotSize: 4.0,
+                dotColor: Colors.white,
+                dotIncreasedColor: Colors.blue,
+                indicatorBgPadding: 2.0,
               ),
             ),
-            Expanded(
-              child: MaterialButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: new Text("Quantity"),
-                          content: new Text("Choose the quantity"),
-                          actions: <Widget>[
-                            new MaterialButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(context);
-                                },
-                                child: new Text("close"))
-                          ],
-                        );
-                      });
-                },
-                color: Colors.white,
-                textColor: Colors.grey,
-                elevation: 0.2,
-                child: Row(children: <Widget>[
-                  Expanded(
-                    child: new Text("Quantity"),
-                  ),
-                  Expanded(child: new Icon(Icons.arrow_drop_down)),
-                ]),
+            Container(
+              height: 50,
+              color: Colors.white,
+              child: ListTile(
+                leading: new Text(
+                  widget.product.name,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
+                title: new Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: new Text("\$${widget.product.price}"),
+                    ),
+                    Expanded(
+                      child: new Text(
+                        "\$${widget.product.price}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
+          ]),
         ),
+        // Row(
+        //   children: <Widget>[
+        //     Expanded(
+        //       child: MaterialButton(
+        //         onPressed: () {
+        //           showDialog(
+        //               context: context,
+        //               builder: (context) {
+        //                 return AlertDialog(
+        //                   title: new Text("Size"),
+        //                   content: new Text("Choose the size"),
+        //                   actions: <Widget>[
+        //                     new MaterialButton(
+        //                         onPressed: () {
+        //                           Navigator.of(context).pop(context);
+        //                         },
+        //                         child: new Text("close"))
+        //                   ],
+        //                 );
+        //               });
+        //         },
+        //         color: Colors.white,
+        //         textColor: Colors.grey,
+        //         elevation: 0.2,
+        //         child: Row(children: <Widget>[
+        //           Expanded(
+        //             child: new Text("Size"),
+        //           ),
+        //           Expanded(child: new Icon(Icons.arrow_drop_down)),
+        //         ]),
+        //       ),
+        //     ),
+        //     Expanded(
+        //       child: MaterialButton(
+        //         onPressed: () {
+        //           showDialog(
+        //               context: context,
+        //               builder: (context) {
+        //                 return AlertDialog(
+        //                   title: new Text("Quantity"),
+        //                   content: new Text("Choose the quantity"),
+        //                   actions: <Widget>[
+        //                     new MaterialButton(
+        //                         onPressed: () {
+        //                           Navigator.of(context).pop(context);
+        //                         },
+        //                         child: new Text("close"))
+        //                   ],
+        //                 );
+        //               });
+        //         },
+        //         color: Colors.white,
+        //         textColor: Colors.grey,
+        //         elevation: 0.2,
+        //         child: Row(children: <Widget>[
+        //           Expanded(
+        //             child: new Text("Quantity"),
+        //           ),
+        //           Expanded(child: new Icon(Icons.arrow_drop_down)),
+        //         ]),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(children: <Widget>[
           Expanded(
             child: MaterialButton(
-              onPressed: () {},
-              color: Colors.green[700],
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: new Text("Quantity"),
+                        content: new Text("Choose the quantity"),
+                        actions: <Widget>[
+                          new MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                              child: new Text("close"))
+                        ],
+                      );
+                    });
+              },
+              color: Colors.white,
               textColor: Colors.grey,
               elevation: 0.2,
-              child: new Text("Buy Now"),
+              child: Row(
+
+                  children: <Widget>[
+                Expanded(
+                  child: new Text("Quantity"),
+                ),
+                 new Icon(Icons.arrow_drop_down),
+              ]),
             ),
           ),
           new IconButton(
@@ -203,8 +228,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         Divider(),
         new ListTile(
           title: new Text("Product Detail"),
-          subtitle: new Text(
-             widget.product.description),
+          subtitle: new Text(widget.product.description),
         ),
         Divider(),
         new Row(children: <Widget>[
@@ -243,7 +267,34 @@ class _ProductDetailsState extends State<ProductDetails> {
         Divider(),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: new Text("Similar Products"),
+          child: Container(
+            height: 50.0,
+            width: MediaQuery.of(context).size.width,
+            child: new MaterialButton(
+              onPressed: () async {
+                appProvider.changeIsLoading();
+                bool success = await userProvider.addToCart(
+                    product: widget.product,
+                    qty: qty);
+                if (success) {
+                  _key.currentState.showSnackBar(
+                      SnackBar(content: Text("Added to Cart!")));
+                  userProvider.reloadUserModel();
+                  appProvider.changeIsLoading();
+                  return;
+                } else {
+                  _key.currentState.showSnackBar(SnackBar(
+                      content: Text("Not added to Cart!")));
+                  appProvider.changeIsLoading();
+                  return;
+                }
+              },
+              color: Colors.green[700],
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              textColor: Colors.grey,
+              child: new Text("Buy Now"),
+            ),
+          ),
         ),
         //Similar Product
 //        Container(
@@ -339,5 +390,4 @@ class _ProductDetailsState extends State<ProductDetails> {
 //    );
 //  }
 //}
-
 

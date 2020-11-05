@@ -2,12 +2,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/Order.dart';
+import 'package:uuid/uuid.dart';
 
 class OrderServices{
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
 
-  void createOrder({String userId ,String id,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
+  void createOrder({String userId ,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
+    var uuid = Uuid();
+    String id = uuid.v4();
     List<Map> convertedCart = [];
 
     for(CartItemModel item in cart){
@@ -29,6 +32,18 @@ class OrderServices{
       _firestore
           .collection(collection)
           .where("userId", isEqualTo: userId)
+          .getDocuments()
+          .then((result) {
+        List<OrderModel> orders = [];
+        for (DocumentSnapshot order in result.documents) {
+          orders.add(OrderModel.fromSnapshot(order));
+        }
+        return orders;
+      });
+
+  Future<List<OrderModel>> getAdminOrders() async =>
+      _firestore
+          .collection(collection)
           .getDocuments()
           .then((result) {
         List<OrderModel> orders = [];

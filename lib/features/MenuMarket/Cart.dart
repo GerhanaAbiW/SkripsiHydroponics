@@ -3,6 +3,7 @@ import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/features/MenuMarket/CheckOut.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
@@ -10,6 +11,7 @@ import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Utils/CustomUtils.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final _key = GlobalKey<ScaffoldState>();
   OrderServices _orderServices = OrderServices();
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -31,22 +34,23 @@ class _CartPageState extends State<CartPage> {
       backgroundColor: Colors.grey.shade100,
       body: appProvider.isLoading
           ? Loading()
-          :Builder(
-        builder: (context) {
-          return ListView(
-            children: <Widget>[
-              createHeader(),
-              createSubTitle(),
-              createCartList(userProvider.userModel.cart.length),
-              footer(context)
-            ],
-          );
-        },
-      ),
+          : Builder(
+              builder: (context) {
+                return ListView(
+                  children: <Widget>[
+                    createHeader(),
+                    createSubTitle(userProvider.userModel.cart.length),
+                    createCartList(userProvider.userModel.cart),
+                    footer(context,
+                        userProvider.userModel.totalCartPrice.toString())
+                  ],
+                );
+              },
+            ),
     );
   }
 
-  footer(BuildContext context) {
+  footer(BuildContext context, String total) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,19 +69,18 @@ class _CartPageState extends State<CartPage> {
               ),
               Container(
                 margin: EdgeInsets.only(right: 30),
-                // child: Text(
-                //   " \$${userProvider.userModel.totalCartPrice}",
-                //   style: CustomTextStyle.textFormFieldBlack.copyWith(
-                //       color: Colors.greenAccent.shade700, fontSize: 14),
-                // ),
+                child: Text(
+                  "\$" + total,
+                  style: CustomTextStyle.textFormFieldBlack.copyWith(
+                      color: Colors.greenAccent.shade700, fontSize: 14),
+                ),
               ),
             ],
           ),
           Utils.getSizedBox(height: 8),
           RaisedButton(
             onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => CheckOutPage()));
+             changeScreen(context, CheckOutPage());
             },
             color: Colors.green,
             padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
@@ -108,11 +111,11 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  createSubTitle() {
+  createSubTitle(int totalItems) {
     return Container(
       alignment: Alignment.topLeft,
       child: Text(
-        "Total(3) Items",
+        "Total($totalItems) Items",
         style: CustomTextStyle.textFormFieldBold
             .copyWith(fontSize: 12, color: Colors.grey),
       ),
@@ -120,18 +123,18 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  createCartList(int count) {
+  createCartList(List<CartItemModel> cart) {
     return ListView.builder(
       shrinkWrap: true,
       primary: false,
-      itemBuilder: (context, position) {
-        return createCartListItem(position);
+      itemBuilder: (context, index) {
+        return createCartListItem(cart[index]);
       },
-      itemCount: count,
+      itemCount: cart.length,
     );
   }
 
-  createCartListItem(int index) {
+  createCartListItem(CartItemModel cart) {
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
     return Stack(
@@ -147,11 +150,33 @@ class _CartPageState extends State<CartPage> {
                 margin: EdgeInsets.only(right: 8, left: 8, top: 8, bottom: 8),
                 width: 80,
                 height: 80,
-                 decoration: BoxDecoration(
-                     borderRadius: BorderRadius.all(Radius.circular(14)),
-                     color: Colors.blue.shade200,
-                     image: DecorationImage(
-                         image: AssetImage(userProvider.userModel.cart[index].image))),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(14)),
+                  color: Colors.blue.shade200,
+                  // image: DecorationImage(
+                  // image: AssetImage(cart.image))
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                        child: Align(
+                      alignment: Alignment.center,
+                      child: Loading(),
+                    )),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: cart.image,
+                          height: MediaQuery.of(context).size.height,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
               Expanded(
                 child: Container(
@@ -162,13 +187,13 @@ class _CartPageState extends State<CartPage> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.only(right: 8, top: 4),
-                         child: Text(
-                           userProvider.userModel.cart[index].name,
-                           maxLines: 2,
-                           softWrap: true,
-                           style: CustomTextStyle.textFormFieldSemiBold
-                               .copyWith(fontSize: 14),
-                         ),
+                        child: Text(
+                          cart.name,
+                          maxLines: 2,
+                          softWrap: true,
+                          style: CustomTextStyle.textFormFieldSemiBold
+                              .copyWith(fontSize: 14),
+                        ),
                       ),
                       Utils.getSizedBox(height: 6),
                       // Text(
@@ -180,21 +205,28 @@ class _CartPageState extends State<CartPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                             Text(
-                               "\$${userProvider.userModel.cart[index].price} ",
-                               style: CustomTextStyle.textFormFieldBlack
-                                   .copyWith(color: Colors.green),
-                             ),
+                            Text(
+                              "\$${cart.price} ",
+                              style: CustomTextStyle.textFormFieldBlack
+                                  .copyWith(color: Colors.green),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.remove,
-                                    size: 24,
-                                    color: Colors.grey.shade700,
+                                  Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                                        color: Colors.green),
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   Container(
                                     color: Colors.grey.shade200,
@@ -206,10 +238,17 @@ class _CartPageState extends State<CartPage> {
                                           CustomTextStyle.textFormFieldSemiBold,
                                     ),
                                   ),
-                                  Icon(
-                                    Icons.add,
-                                    size: 24,
-                                    color: Colors.grey.shade700,
+                                  Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                                        color: Colors.green),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
                                   )
                                 ],
                               ),
@@ -233,23 +272,21 @@ class _CartPageState extends State<CartPage> {
             alignment: Alignment.center,
             margin: EdgeInsets.only(right: 10, top: 8),
             child: GestureDetector(
-               onTap: () async {
-                 appProvider.changeIsLoading();
-                 bool success =
-                 await userProvider.removeFromCart(
-                     cartItem: userProvider
-                         .userModel.cart[index]);
-                 if (success) {
-                   userProvider.reloadUserModel();
-                   print("Item added to cart");
-                   _key.currentState.showSnackBar(SnackBar(
-                       content: Text("Removed from Cart!")));
-                   appProvider.changeIsLoading();
-                   return;
-                 } else {
-                   appProvider.changeIsLoading();
-                 }
-               },
+              onTap: () async {
+                appProvider.changeIsLoading();
+                bool success =
+                    await userProvider.removeFromCart(cartItem: cart);
+                if (success) {
+                  userProvider.reloadUserModel();
+                  print("Item remove from cart");
+                  _key.currentState.showSnackBar(
+                      SnackBar(content: Text("Removed from Cart!")));
+                  appProvider.changeIsLoading();
+                  return;
+                } else {
+                  appProvider.changeIsLoading();
+                }
+              },
               child: Icon(
                 Icons.close,
                 color: Colors.white,
@@ -258,13 +295,10 @@ class _CartPageState extends State<CartPage> {
             ),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                color: Colors.green),
+                color: Colors.red),
           ),
         )
       ],
     );
   }
 }
-
-
-

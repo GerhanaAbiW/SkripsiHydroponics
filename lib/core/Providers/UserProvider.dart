@@ -81,7 +81,7 @@ class UserProvider with ChangeNotifier {
         _firestore.collection('users').document(user.user.uid).setData({
           "name": name,
           "email": email,
-          "role": "user",
+          "role": "admin",
           "uid": user.user.uid,
           "stripeId": ""
         });
@@ -115,7 +115,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<bool> addToCart(
-      {ProductModel product, String size, String color}) async {
+      {ProductModel product, int qty}) async {
     try {
       var uuid = Uuid();
       String cartItemId = uuid.v4();
@@ -124,11 +124,10 @@ class UserProvider with ChangeNotifier {
       Map cartItem = {
         "id": cartItemId,
         "name": product.name,
-        "image": product.picture,
+        "image": product.picture[0],
         "productId": product.id,
         "price": product.price,
-        "size": size,
-        "color": color
+        "quantity": qty,
       };
 
       CartItemModel item = CartItemModel.fromMap(cartItem);

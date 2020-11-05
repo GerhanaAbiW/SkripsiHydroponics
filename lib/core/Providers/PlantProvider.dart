@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Models/Plants.dart';
+import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
 
 
