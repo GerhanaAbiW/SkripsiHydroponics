@@ -203,38 +203,42 @@ class _AddVideoViewState extends State<AddVideoView> {
                 SizedBox(
                   height: 16,
                 ),
-                GestureDetector(
-                  onTap: () => _selectDate(context),
-                  child: AbsorbPointer(
-                    child: TextFormField(
-                      controller: dateController,
-                      autofocus: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.datetime,
-                      decoration: InputDecoration(
-                        hintText: 'Tanggal Video',
-                        hintStyle: new TextStyle(color: Colors.green[600]),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.0,
-                          ),
-                        ),
-                        suffixIcon: Icon(
-                          Icons.calendar_today,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () => _selectDate(context),
+                //   child: AbsorbPointer(
+                //     child: TextFormField(
+                //       controller: dateController,
+                //       autofocus: false,
+                //       textInputAction: TextInputAction.next,
+                //       keyboardType: TextInputType.datetime,
+                //       decoration: InputDecoration(
+                //         hintText: 'Tanggal Video',
+                //         hintStyle: new TextStyle(color: Colors.green[600]),
+                //         focusedBorder: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(10.0),
+                //           borderSide: BorderSide(
+                //             color: Colors.green,
+                //           ),
+                //         ),
+                //         enabledBorder: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(10.0),
+                //           borderSide: BorderSide(
+                //             color: Colors.blue,
+                //             width: 2.0,
+                //           ),
+                //         ),
+                //         suffixIcon: Icon(
+                //           Icons.calendar_today,
+                //           color: Colors.green,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                DateFormField(
+                    textLabel: 'Tanggal Video',
+                    textHint: 'Tanggal Video',
+                    controller: dateController),
                 SizedBox(
                   height: 16,
                 ),

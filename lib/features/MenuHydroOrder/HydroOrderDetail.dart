@@ -11,6 +11,19 @@ class HydroOrderDetail extends StatefulWidget {
 }
 
 class _HydroOrderDetailState extends State<HydroOrderDetail> {
+  final List<Map<String, dynamic>> areaItems = [
+    {
+      'value': 'Vertikal',
+      'label': 'Vertikal',
+      // 'icon': Icon(Icons.stop),
+    },
+    {
+      'value': 'Horizontal',
+      'label': 'Horizontal',
+      // 'icon': Icon(Icons.fiber_manual_record),
+      // 'textStyle': TextStyle(color: Colors.red),
+    },
+  ];
   @override
   List<DropdownMenuItem<String>> typelahanDropdown =
       <DropdownMenuItem<String>>[];
@@ -147,12 +160,18 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                   // Container(
                   //   child:
                   SizedBox(height: 16),
-                  FormDropDown(
-                      labelText: "Tipe Lahan",
-                      hintText: "Masukkan Type Lahan",
+                  DropdownForm(
+                      textLabel: "Tipe Lahan",
+                      textHint: "Masukkan Type Lahan",
                       selectedItem: _currentTipeLahan,
-                      dropDownItems: typelahanDropdown,
+                      dropDownItems: areaItems,
                       changedDropDownItems: changeSelectedCategory),
+                  // FormDropDown(
+                  //     labelText: "Tipe Lahan",
+                  //     hintText: "Masukkan Type Lahan",
+                  //     selectedItem: _currentTipeLahan,
+                  //     dropDownItems: typelahanDropdown,
+                  //     changedDropDownItems: changeSelectedCategory),
                   SizedBox(height: 16),
                   MultilineFormTextField(
                       textType: TextInputType.multiline,

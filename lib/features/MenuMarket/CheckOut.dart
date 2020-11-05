@@ -64,7 +64,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           status: "complete",
                           totalPrice: userProvider.userModel.totalCartPrice,
                           cart: userProvider.userModel.cart);
-                      for (CartItemModel cartItem in userProvider.userModel.cart) {
+                      for (CartItemModel cartItem
+                          in userProvider.userModel.cart) {
                         bool value = await userProvider.removeFromCart(
                             cartItem: cartItem);
                         if (value) {
@@ -385,7 +386,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
           Container(
             child: Image(
               image: AssetImage(
-                "images/details_shoes_image.webp",
+                'images/asset_profile/placeholderprofile.png',
               ),
               width: 35,
               height: 45,

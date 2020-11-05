@@ -12,8 +12,13 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _name = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController jenisKelaminController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nomorHPController = TextEditingController();
+  TextEditingController alamatController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // final user = Provider.of<UserProvider>(context,listen: false);
@@ -185,7 +190,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   FormTextField(
                     textLabel: "Nama",
                     textHint: "Masukkan Nama Anda",
-                    //controller: prodcutDescriptionController,
+                    controller: nameController,
                   ),
 
                   // Container(
@@ -216,17 +221,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   //   margin: EdgeInsets.only(left: 12, right: 12, top: 12),
                   // ),
                   SizedBox(height: 16),
-                  FormTextField(
-                    textLabel: "Tanggal Lahir",
-                    textHint: "Masukkan Tanggal Lahir Anda",
-                    //controller: prodcutDescriptionController,
-                  ),
+                  DateFormField(
+                      textLabel: "Tanggal Lahir",
+                      textHint: "Masukkan Tanggal Lahir Anda",
+                      controller: dateController),
+
                   SizedBox(height: 16),
                   FormTextField(
-                    textLabel: "Jenis Kelamin",
-                    textHint: "Masukkan Jenis Kelamin Anda",
-                    //controller: prodcutDescriptionController,
-                  ),
+                      textLabel: "Jenis Kelamin",
+                      textHint: "Masukkan Jenis Kelamin Anda",
+                      controller: jenisKelaminController),
 
                   // Container(
                   //   child: TextFormField(
@@ -246,7 +250,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     textType: TextInputType.emailAddress,
                     textLabel: "Email",
                     textHint: "Masukkan Email Anda",
-                    //controller: prodcutDescriptionController,
+                    controller: emailController,
                   ),
 
                   // Container(
@@ -287,14 +291,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     textType: TextInputType.number,
                     textLabel: "Nomor HP",
                     textHint: "Masukkan Nomor HP Anda",
-                    //controller: prodcutDescriptionController,
+                    controller: nomorHPController,
                   ),
                   SizedBox(height: 16),
                   MultilineFormTextField(
                       textType: TextInputType.multiline,
                       textLabel: "Alamat",
                       textHint: "Masukkan Alamat Anda",
-                      //controller: prodcutDescriptionController,
+                      controller: alamatController,
                       height: 180.0),
                 ],
               ),
