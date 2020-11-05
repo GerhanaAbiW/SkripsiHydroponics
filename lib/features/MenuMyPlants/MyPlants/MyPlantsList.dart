@@ -7,9 +7,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuMyPlants/AddPlants/AddPlantList.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantList.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsCard.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/ListRecordDatePlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyRecord/ListRecordPlant.dart';
 
 class MyPlantsList extends StatefulWidget {
   @override
@@ -41,11 +41,8 @@ class _MyPlantsListState extends State<MyPlantsList> {
                     width: 125.0,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ListRecordDatePlant()),
-                        );
+                       changeScreen(context, ListRecordPlant(list: "date",));
+
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

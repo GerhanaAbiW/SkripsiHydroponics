@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
+import 'package:hydroponics/features/MenuAdmin/OrderList/OrderDetails.dart';
 
-class WidgetMyPlantList extends StatelessWidget {
+
+class WidgetListOrder extends StatelessWidget {
   final plantName;
   final desc;
   final plantPicture;
 
-  WidgetMyPlantList({this.plantName, this.desc, this.plantPicture});
+  WidgetListOrder({this.plantName, this.desc, this.plantPicture});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      //width: MediaQuery.of(context).size.width,
+      // width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(
@@ -22,8 +23,8 @@ class WidgetMyPlantList extends StatelessWidget {
 //              Navigator.of(context).push(MaterialPageRoute(
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantStartRecord()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => OrderDetails()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,11 +35,8 @@ class WidgetMyPlantList extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: 60, //ScreenUtil().setWidth(60),
-                        height: 60, //ScreenUtil().setWidth(60),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(),
-                        ),
+                        height: MediaQuery.of(context).size.height, //60,
+
                         child:
                             // plantPicture != null
                             //     ? ClipRRect(
@@ -52,7 +50,11 @@ class WidgetMyPlantList extends StatelessWidget {
                             //       )
                             //     :
 
-                            Image.asset("images/plant.png"),
+                            Image.asset('images/hydro1.jpeg',
+                                height: MediaQuery.of(context).size.height,
+                                width:
+                                    100 //MediaQuery.of(context).size.width / 1,
+                                ),
                       ),
                     ),
                     // Padding(
@@ -66,6 +68,9 @@ class WidgetMyPlantList extends StatelessWidget {
                     //   ),
                     // ),
                     SizedBox(width: 10.0),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -89,7 +94,12 @@ class WidgetMyPlantList extends StatelessWidget {
                                     fontSize: 15.0,
                                     color: Colors.grey))
                           ]),
-                    )
+                    ),
+                    //   Padding(
+                    //       padding: const EdgeInsets.only(right: 2),
+                    //       child: Icon(Icons.date_range)),
+                    // ],
+                    //)
                   ])),
                 ],
               ))),

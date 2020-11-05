@@ -221,59 +221,59 @@ Widget MultilineFormTextField(
   );
 }
 
-Widget FormDropDown(
-    {String selectedItem,
-    String hintText,
-    String labelText,
-    List<DropdownMenuItem<String>> dropDownItems,
-    ValueChanged<String> changedDropDownItems}) {
-  labelText == null ? labelText = "Enter Title" : labelText;
-
-  return new Padding(
-    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-    child: FormField(builder: (FormFieldState state) {
-      return InputDecorator(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(11),
-          //contentPadding: EdgeInsets.only(),
-          labelText: labelText,
-          labelStyle: TextStyle(color: Colors.green),
-          hintText: hintText,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: Colors.green,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: Colors.blue,
-              width: 2.0,
-            ),
-          ),
-        ),
-        child: Container(
-          height: 30,
-          child: new DropdownButtonHideUnderline(
-            child: ButtonTheme(
-              alignedDropdown: true,
-              child: new DropdownButton(
-                hint: Text(
-                  hintText,
-                  style: TextStyle(color: Colors.green),
-                ),
-                value: selectedItem,
-                items: dropDownItems,
-                onChanged: changedDropDownItems,
-              ),
-            ),
-          ),
-        ),
-      );
-    }),
-  );
-}
+// Widget FormDropDown(
+//     {String selectedItem,
+//     String hintText,
+//     String labelText,
+//     List<DropdownMenuItem<String>> dropDownItems,
+//     ValueChanged<String> changedDropDownItems}) {
+//   labelText == null ? labelText = "Enter Title" : labelText;
+//
+//   return new Padding(
+//     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+//     child: FormField(builder: (FormFieldState state) {
+//       return InputDecorator(
+//         decoration: InputDecoration(
+//           contentPadding: EdgeInsets.all(11),
+//           //contentPadding: EdgeInsets.only(),
+//           labelText: labelText,
+//           labelStyle: TextStyle(color: Colors.green),
+//           hintText: hintText,
+//           focusedBorder: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(10.0),
+//             borderSide: BorderSide(
+//               color: Colors.green,
+//             ),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(10.0),
+//             borderSide: BorderSide(
+//               color: Colors.blue,
+//               width: 2.0,
+//             ),
+//           ),
+//         ),
+//         child: Container(
+//           height: 30,
+//           child: new DropdownButtonHideUnderline(
+//             child: ButtonTheme(
+//               alignedDropdown: true,
+//               child: new DropdownButton(
+//                 hint: Text(
+//                   hintText,
+//                   style: TextStyle(color: Colors.green),
+//                 ),
+//                 value: selectedItem,
+//                 items: dropDownItems,
+//                 onChanged: changedDropDownItems,
+//               ),
+//             ),
+//           ),
+//         ),
+//       );
+//     }),
+//   );
+// }
 
 Widget MultiImagePickerMap(
     {Map<int, File> imageList,

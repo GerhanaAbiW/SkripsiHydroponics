@@ -2,6 +2,8 @@
 // import 'dart:typed_data';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/MyPlants.dart';
+import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -155,6 +157,47 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  Future<bool> addPlant(
+      {Plants plant, int qty}) async {
+    try {
+      List<MyPlantsModel> myPlant = _userModel.myPlant;
+
+      Map plantItem = {
+        "Plant": plant.plant,
+        "Media": plant.media,
+        "Image": plant.image,
+        "PPM": plant.ppm,
+        "PH": plant.ph,
+        "FertilizerType": plant.fertilizerType,
+        "TimeOfFertilizer": plant.timeOfFertilizer,
+        "DosageOfFertilizer": plant.dosageFertilizer,
+        "HarvestTime": plant.harvestTime,
+        "PestType": plant.pestsType
+      };
+
+      MyPlantsModel item = MyPlantsModel.fromMap(plantItem);
+//      if(!itemExists){
+      print("CART ITEMS ARE: ${myPlant.toString()}");
+      _userServices.addMyPlant(userId: _user.uid, plantItem: item);
+//      }
+
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+  Future<bool> deleteMyPlant({MyPlantsModel plantItem}) async {
+    print("THE PRODUC IS: ${plantItem.toString()}");
+
+    try {
+      _userServices.deleteMyPlant(userId: _user.uid, plantItem: plantItem);
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
   getOrders() async {
     orders = await _orderServices.getUserOrders(userId: _user.uid);
     notifyListeners();

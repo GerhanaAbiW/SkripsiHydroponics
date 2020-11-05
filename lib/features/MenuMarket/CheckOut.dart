@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/features/MenuMarket/Market.dart';
+import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class CheckOutPage extends StatefulWidget {
+  final List<CartItemModel> cart;
+
+  CheckOutPage({Key key, this.cart}) : super(key: key);
+
   @override
   _CheckOutPageState createState() => _CheckOutPageState();
 }
@@ -32,7 +40,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 Navigator.pop(context);
               }),
           title: Text(
-            "ADDRESS",
+            "Order",
             style: TextStyle(color: Colors.white, fontSize: 14),
           ),
         ),
@@ -45,7 +53,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     children: <Widget>[
                       selectedAddressSection(),
                       standardDelivery(),
-                      checkoutItem(),
+                      checkoutItem(widget.cart),
                       priceSection()
                     ],
                   ),
@@ -63,7 +71,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           description: "Some random description",
                           status: "complete",
                           totalPrice: userProvider.userModel.totalCartPrice,
-                          cart: userProvider.userModel.cart);
+                          cart: widget.cart);
+
                       for (CartItemModel cartItem
                           in userProvider.userModel.cart) {
                         bool value = await userProvider.removeFromCart(
@@ -79,7 +88,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       }
                       _scaffoldKey.currentState.showSnackBar(
                           SnackBar(content: Text("Order created!")));
-                      Navigator.pop(context);
+                      changeScreen(context, MenuMarket());
                     },
                     child: Text(
                       "Place Order",
@@ -349,7 +358,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  checkoutItem() {
+  checkoutItem(List<CartItemModel> cart) {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -366,9 +375,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
           padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
           child: ListView.builder(
             itemBuilder: (context, position) {
-              return checkoutListItem();
+              return checkoutListItem(cart[position]);
             },
-            itemCount: 3,
+            itemCount: cart.length,
             shrinkWrap: true,
             primary: false,
             scrollDirection: Axis.vertical,
@@ -378,19 +387,33 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  checkoutListItem() {
+  checkoutListItem(CartItemModel cart) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: <Widget>[
           Container(
-            child: Image(
-              image: AssetImage(
-                'images/asset_profile/placeholderprofile.png',
-              ),
-              width: 35,
-              height: 45,
-              fit: BoxFit.fitHeight,
+            width: 35,
+            height: 45,
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                    child: Align(
+                  alignment: Alignment.center,
+                  child: Loading(),
+                )),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 1)),
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: cart.image,
+                    height: MediaQuery.of(context).size.height,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ],
             ),
             decoration:
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),

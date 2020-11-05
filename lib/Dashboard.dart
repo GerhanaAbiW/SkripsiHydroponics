@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MainMenu/MainMenu.dart';
+import 'package:hydroponics/features/MyOrders/MyOrders.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 
 class DashBoard extends StatefulWidget {
@@ -41,9 +42,7 @@ class _DashBoardState extends State<DashBoard> {
               Container(
                 color: Colors.blueGrey,
               ),
-              Container(
-                color: Colors.red,
-              ),
+              OrdersScreen()
             ],
           ),
         ),

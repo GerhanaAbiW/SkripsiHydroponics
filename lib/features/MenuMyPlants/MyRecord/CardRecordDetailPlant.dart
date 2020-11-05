@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddPlantsDetails.dart';
 
-class WidgetMyPlantList extends StatelessWidget {
+
+class WidgetLIstRecordDetailPlant extends StatelessWidget {
   final plantName;
   final desc;
   final plantPicture;
 
-  WidgetMyPlantList({this.plantName, this.desc, this.plantPicture});
+  WidgetLIstRecordDetailPlant({this.plantName, this.desc, this.plantPicture});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,7 @@ class WidgetMyPlantList extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-//              Navigator.of(context).push(MaterialPageRoute(
-//                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
-//              ));
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantStartRecord()));
+               changeScreen(context, MyPlantsDetail());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

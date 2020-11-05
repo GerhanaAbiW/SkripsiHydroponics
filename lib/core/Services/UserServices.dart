@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Models/User.dart';
 
 class UserServices{
@@ -28,6 +29,16 @@ class UserServices{
   void removeFromCart({String userId, CartItemModel cartItem}){
     _firestore.collection(collection).document(userId).updateData({
       "cart": FieldValue.arrayRemove([cartItem.toMap()])
+    });
+  }
+  void addMyPlant({String userId, MyPlantsModel plantItem}){
+    _firestore.collection(collection).document(userId).updateData({
+      "cart": FieldValue.arrayUnion([plantItem.toMap()])
+    });
+  }
+  void deleteMyPlant({String userId, MyPlantsModel plantItem}){
+    _firestore.collection(collection).document(userId).updateData({
+      "cart": FieldValue.arrayRemove([plantItem.toMap()])
     });
   }
 }

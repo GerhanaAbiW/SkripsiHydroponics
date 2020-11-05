@@ -1,17 +1,21 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
+import 'package:hydroponics/core/Models/Plant.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddPlantsDetails.dart';
+import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:transparent_image/transparent_image.dart';
 
-class WidgetMyPlantList extends StatelessWidget {
-  final plantName;
-  final desc;
-  final plantPicture;
+class WidgetPlantListFromAdmin extends StatelessWidget {
+  Plants plant;
 
-  WidgetMyPlantList({this.plantName, this.desc, this.plantPicture});
+  WidgetPlantListFromAdmin({this.plant});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      //width: MediaQuery.of(context).size.width,
+      // width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(
@@ -19,11 +23,7 @@ class WidgetMyPlantList extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-//              Navigator.of(context).push(MaterialPageRoute(
-//                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
-//              ));
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantStartRecord()));
+                changeScreen(context, MyPlantsDetail());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +52,24 @@ class WidgetMyPlantList extends StatelessWidget {
                             //       )
                             //     :
 
-                            Image.asset("images/plant.png"),
+                        Stack(
+                          children: <Widget>[
+                            Positioned.fill(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Loading(),
+                                )),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: FadeInImage.memoryNetwork(
+                                placeholder: kTransparentImage,
+                                image: plant.image,
+                                height: MediaQuery.of(context).size.height,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     // Padding(
@@ -74,7 +91,7 @@ class WidgetMyPlantList extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Text(plantName,
+                            Text(plant.plant,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 17.0,
@@ -83,7 +100,7 @@ class WidgetMyPlantList extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(desc,
+                            Text(plant.harvestTime,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 15.0,

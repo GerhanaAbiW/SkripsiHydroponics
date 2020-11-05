@@ -2,17 +2,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/WidgetListRecordDate.dart';
+import 'package:hydroponics/core/Providers/PlantProvider.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:provider/provider.dart';
 
-class ListRecordDatePlant extends StatefulWidget {
+class PlantListFromAdmin extends StatefulWidget {
   @override
-  _ListRecordDatePlantState createState() => _ListRecordDatePlantState();
+  _PlantListFromAdminState createState() => _PlantListFromAdminState();
 }
 
-class _ListRecordDatePlantState extends State<ListRecordDatePlant> {
+class _PlantListFromAdminState extends State<PlantListFromAdmin> {
+
+
   @override
   Widget build(BuildContext context) {
+    final plantProvider = Provider.of<PlantProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -27,7 +32,7 @@ class _ListRecordDatePlantState extends State<ListRecordDatePlant> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          'Plant Record',
+          'Choose Your Plant',
           style: CustomTextStyle.textFormFieldBold
               .copyWith(color: Colors.white, fontSize: 21),
         ),
@@ -51,14 +56,33 @@ class _ListRecordDatePlantState extends State<ListRecordDatePlant> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: 20,
+                itemCount: plantProvider.plants.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    child: WidgetListRecordDate(
-                      date: 'Januari 2020',
+                    child: WidgetPlantListFromAdmin(
+                      plant: plantProvider.plants[index],
                     ),
                   );
+                  // return Card(
+                  //     elevation: 10.0,
+                  //     child: InkWell(
+                  //       onTap: () {
+                  //         Navigator.of(context).push(MaterialPageRoute(
+                  //             builder: (context) => MyPlantsDetail()));
+                  //       },
+                  //       child: ListTile(
+                  //         leading: CircleAvatar(
+                  //           radius: 30,
+                  //           backgroundImage:
+                  //               ExactAssetImage("images/plant.png"),
+                  //         ),
+                  //         title: Text(title[index],
+                  //             style: TextStyle(fontSize: 14)),
+                  //         subtitle:
+                  //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                  //       ),
+                  //     ));
                 },
               )),
         ],
