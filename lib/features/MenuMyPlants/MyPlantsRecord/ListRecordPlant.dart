@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/CardRecordDate.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/CardRecordDetailPlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/CardRecordDate.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/CardRecordDetailPlant.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
 
 class ListRecordPlant extends StatefulWidget {

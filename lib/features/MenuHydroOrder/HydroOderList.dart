@@ -2,20 +2,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuHydroOrder/DetailType.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCustomDetail.dart';
+import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
 
 var blueOrder = Color(0xFF03A9F4);
 
-class HydroList {
-  String type;
-  String image;
-  String area;
-  String price;
-  Widget widget;
 
-  HydroList(this.type, this.image, this.area, this.price, this.widget);
-}
 
 class HydroOrderList extends StatefulWidget {
   @override
@@ -27,28 +21,21 @@ class _HydroOrderListState extends State<HydroOrderList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    createListItem();
+
   }
 
-  List<HydroList> listSection = new List();
-  void createListItem() {
-    listSection.add(createSection("Small", "images/no-image-icon.png",
-        "10x20x30", "Rp.10.000", HydroOrderDetail()));
-    listSection.add(createSection("Medium", "images/bayam.jpeg", "10x50x30",
-        "Rp.10.000", HydroOrderDetail()));
-    listSection.add(createSection("Large", "images/bayam.jpeg", "10x20x90",
-        "Rp.10.000", HydroOrderDetail()));
-    listSection.add(createSection("Custom", "images/bayam.jpeg", "10x20x20",
-        "Rp.10.000", HydroOrderCustomDetail()));
-  }
+  List<HydroList> listSection = [
+    HydroList("Small", "images/hydro2.jpeg", "10x20x30", "Rp.10.000","2 - 4 tingkatan","4 - 6 lubang"),
+    HydroList("Medium", "images/bayam.jpeg", "10x50x30", "Rp.10.000","2 - 4 tingkatan","4 - 6 lubang"),
+    HydroList("Large", "images/bayam.jpeg", "10x20x90", "Rp.10.000","2 - 4 tingkatan","4 - 6 lubang"),
+    HydroList("Custom", "images/bayam.jpeg", "10x20x20","Rp.10.000","2 - 4 tingkatan","4 - 6 lubang")
+  ];
 
-  createSection(
-      String type, String image, String area, String price, Widget widget) {
-    return HydroList(type, image, area, price, widget);
-  }
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -101,7 +88,13 @@ class CardListOrder extends StatelessWidget {
               child: Card(
                 elevation: 20.0,
                 child: GestureDetector(
-                  onTap: () => changeScreen(context, list[index].widget),
+                  onTap: (){
+                    if(list[index].type=="Small"||list[index].type=="Medium"||list[index].type=="Large"){
+                      changeScreen(context, HydroOrderDetail(hydroList: list[index],));
+                    }else{
+                      changeScreen(context, HydroOrderCustomDetail());
+                    }
+                      },
                   child: ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(5.0), //or 15.0

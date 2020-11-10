@@ -7,10 +7,10 @@ import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddPlantsDetails.d
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class WidgetPlantListFromAdmin extends StatelessWidget {
-  Plants plant;
+class AddMyPlantCard extends StatelessWidget {
+  final Plants plant;
 
-  WidgetPlantListFromAdmin({this.plant});
+  AddMyPlantCard({this.plant});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class WidgetPlantListFromAdmin extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-                changeScreen(context, MyPlantsDetail());
+                changeScreen(context, MyPlantsDetail(plant: plant,));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

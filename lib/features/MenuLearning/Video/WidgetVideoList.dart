@@ -6,7 +6,6 @@ import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuLearning/Video/VIdeoDetail.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/MyPlantsRecordDetail.dart';
 import 'package:provider/provider.dart';
 
 class WidgetVideoList extends StatelessWidget {

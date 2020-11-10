@@ -32,6 +32,7 @@ class OrderModel {
   // public variable
   List cart;
 
+
   OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
     _description = snapshot.data[DESCRIPTION];

@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/MyPlantsRecordDetail.dart';
 import 'package:provider/provider.dart';
 
 class WidgetArticleList extends StatelessWidget {

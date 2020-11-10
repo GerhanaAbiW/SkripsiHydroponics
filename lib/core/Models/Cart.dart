@@ -24,6 +24,7 @@ class CartItemModel {
   String get productId => _productId;
 
   int get price => _price;
+
   int get quantity => _quantity;
 
 

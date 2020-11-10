@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/Plant.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
+import 'package:provider/provider.dart';
 
 var greenColor = Color(0xFF8BC34A);
 var darkGreenColor = Color(0xFF689F38);
@@ -11,12 +15,16 @@ var productImage =
     'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/4/4/67339064/67339064_0e9a5822-c3db-49fb-be1a-ea1f3ad177e4_336_336.jpg';
 
 class MyPlantsDetail extends StatefulWidget {
+  final Plants plant;
+
+  const MyPlantsDetail({Key key, this.plant}) : super(key: key);
   @override
   _MyPlantsDetailState createState() => _MyPlantsDetailState();
 }
 
 class _MyPlantsDetailState extends State<MyPlantsDetail> {
   List<ListProfileSection> listSection = new List();
+  final _key = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -46,7 +54,10 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
+        key: _key,
         backgroundColor: greenColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,9 +143,25 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               FloatingActionButton(
-                                onPressed: () {
-                                  changeScreenReplacement(
-                                      context, MyPlantsList());
+                                onPressed: () async {
+                                  appProvider.changeIsLoading();
+                                  bool success = await userProvider.addPlant(
+                                      plant: widget.plant);
+                                  if (success) {
+                                    _key.currentState.showSnackBar(SnackBar(
+                                        content: Text("Added to MyPlants!")));
+                                    userProvider.reloadUserModel();
+                                    appProvider.changeIsLoading();
+                                    return changeScreen(
+                                        context, MyPlantsList());
+                                    ;
+                                  } else {
+                                    _key.currentState.showSnackBar(SnackBar(
+                                        content:
+                                            Text("Not added to MyPlants!")));
+                                    appProvider.changeIsLoading();
+                                    return;
+                                  }
                                 },
                                 backgroundColor: greenColor,
                                 child: Icon(Icons.add_circle),

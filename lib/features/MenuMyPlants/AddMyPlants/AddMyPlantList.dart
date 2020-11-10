@@ -7,12 +7,12 @@ import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dar
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
 import 'package:provider/provider.dart';
 
-class PlantListFromAdmin extends StatefulWidget {
+class AddMyPlantList extends StatefulWidget {
   @override
-  _PlantListFromAdminState createState() => _PlantListFromAdminState();
+  _AddMyPlantListState createState() => _AddMyPlantListState();
 }
 
-class _PlantListFromAdminState extends State<PlantListFromAdmin> {
+class _AddMyPlantListState extends State<AddMyPlantList> {
 
 
   @override
@@ -60,7 +60,7 @@ class _PlantListFromAdminState extends State<PlantListFromAdmin> {
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    child: WidgetPlantListFromAdmin(
+                    child: AddMyPlantCard(
                       plant: plantProvider.plants[index],
                     ),
                   );

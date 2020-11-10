@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/ListRecordPlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListRecordPlant.dart';
 
 class WidgetListRecordDate extends StatelessWidget {
   final date;
