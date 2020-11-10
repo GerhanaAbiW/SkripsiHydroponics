@@ -4,6 +4,7 @@ import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MainMenu/MainMenu.dart';
 import 'package:hydroponics/features/MyOrders/MyOrders.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
+import 'package:hydroponics/features/Widget/WhatsApps.dart';
 
 class DashBoard extends StatefulWidget {
 
@@ -39,9 +40,7 @@ class _DashBoardState extends State<DashBoard> {
             children: <Widget>[
               MainMenu(),
               NewProfilePage(),
-              Container(
-                color: Colors.blueGrey,
-              ),
+              WhatsApps(),
               OrdersScreen()
             ],
           ),
