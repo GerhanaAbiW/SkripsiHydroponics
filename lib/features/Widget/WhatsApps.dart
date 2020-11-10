@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:flutter_launch/flutter_launch.dart';
 
@@ -52,7 +53,8 @@ class _WhatsAppsState extends State<WhatsApps> {
               ],
             ),
             onPressed: () {
-              whatsAppOpen(phone: "08881615116", message: "hello");
+              FlutterOpenWhatsapp.sendSingleMessage("085728248887", "Hello");
+              //whatsAppOpen(phone: "08881615116", message: "hello");
             },
           )
       ),
