@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_launch/flutter_launch.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:flutter_launch/flutter_launch.dart';
 
 class WhatsApps extends StatefulWidget {
@@ -8,13 +10,31 @@ class WhatsApps extends StatefulWidget {
 }
 
 class _WhatsAppsState extends State<WhatsApps> {
-  void whatsAppOpen() async {
-    bool whatsapp = await FlutterLaunch.hasApp(name: "whatsapp");
+  // void whatsAppOpen() async {
+  //   bool whatsapp = await FlutterLaunch.hasApp(name: "whatsapp");
+  //
+  //   if (whatsapp) {
+  //     await FlutterLaunch.launchWathsApp(phone: "08881615116", message: "Hello, flutter_launch");
+  //   } else {
+  //     print("Whatsapp não instalado");
+  //   }
+  // }
+  void whatsAppOpen(
+      {@required String phone,
+        @required String message,
+      }) async {
+    String url() {
+      if (Platform.isIOS) {
+        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
+      } else {
+        return "whatsapp://send?   phone=$phone&text=${Uri.parse(message)}";
+      }
+    }
 
-    if (whatsapp) {
-      await FlutterLaunch.launchWathsApp(phone: "08881615116", message: "Hello, flutter_launch");
+    if (await canLaunch(url())) {
+      await launch(url());
     } else {
-      print("Whatsapp não instalado");
+      throw 'Could not launch ${url()}';
     }
   }
   @override
@@ -32,7 +52,7 @@ class _WhatsAppsState extends State<WhatsApps> {
               ],
             ),
             onPressed: () {
-              whatsAppOpen();
+              whatsAppOpen(phone: "08881615116", message: "hello");
             },
           )
       ),
