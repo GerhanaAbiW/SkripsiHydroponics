@@ -1,4 +1,6 @@
-class MyPlantsModel {
+import 'package:hydroponics/core/Models/Plant.dart';
+
+class MyPlantsRecord{
   static const ID = "id";
   static const PlantID = "PlantId";
   static const PLANT = "Plant";
@@ -25,6 +27,18 @@ class MyPlantsModel {
   String _harvestTime;
   String _pestsType;
 
+
+  bool _checkMedia;
+  bool _checkPPM;
+  bool _checkPH;
+  bool _checkFertilizerType;
+  bool _checkTimeOfFertilizer;
+  bool _checkDosageFertilizer;
+  bool _checkHarvestTime;
+  bool _checkPestsType;
+
+
+
 //  getters
   String get id => _id;
 
@@ -50,7 +64,24 @@ class MyPlantsModel {
 
   String get pestsType => _pestsType;
 
-  MyPlantsModel.fromMap(Map data){
+  bool get checkPPM => _checkPPM;
+
+  bool get checkPH => _checkPH;
+
+  bool get checkFertilizerType => _checkFertilizerType;
+
+  bool get checkTimeOfFertilizer => _checkTimeOfFertilizer;
+
+  bool get checkDosageFertilizer => _checkDosageFertilizer;
+
+  bool get checkHarvestTime => _checkHarvestTime;
+
+  bool get checkPestsType => _checkPestsType;
+
+  bool get checkMedia => _checkMedia;
+
+
+  MyPlantsRecord.fromMap(Map data){
     _id = data[ID];
     _plantId = data[PlantID];
     _plant =  data[PLANT];
@@ -80,4 +111,6 @@ class MyPlantsModel {
     TimeOfFertilizer : _timeOfFertilizer
 
   };
+
+
 }

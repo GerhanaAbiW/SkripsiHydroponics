@@ -6,10 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantList.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsCard.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyRecord/ListRecordPlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListRecordPlant.dart';
+import 'package:provider/provider.dart';
 
 class MyPlantsList extends StatefulWidget {
   @override
@@ -17,10 +20,11 @@ class MyPlantsList extends StatefulWidget {
 }
 
 class _MyPlantsListState extends State<MyPlantsList> {
-  int _currentIndex = 0;
-  PageController _pageController;
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xFF8BC34A),
       body: Column(
@@ -100,7 +104,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                     height: MediaQuery.of(context).size.height - 250.0,
                     child: AnimationLimiter(
                       child: ListView.builder(
-                          itemCount: 10,
+                          itemCount: userProvider.userModel.myPlant.length,
                           itemBuilder: (BuildContext context, int index) {
                             return AnimationConfiguration.staggeredList(
                               position: index,
@@ -135,10 +139,8 @@ class _MyPlantsListState extends State<MyPlantsList> {
                                 dismissal: SlidableDismissal(
                                   child: SlidableDrawerDismissal(),
                                 ),
-                                child: WidgetMyPlantList(
-                                  //imgPath: 'images/bayam.jpeg',
-                                  plantName: 'Kangkung',
-                                  desc: '7 Hari',
+                                child: MyPlantListCard(
+                                  myPlantsModel: userProvider.userModel.myPlant[index],
                                   // ),
                                 ),
                               ),
@@ -162,7 +164,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             onPressed: () {
-              changeScreen(context, PlantListFromAdmin());
+              changeScreen(context, AddMyPlantList());
             },
             child: Container(
               height: 70,

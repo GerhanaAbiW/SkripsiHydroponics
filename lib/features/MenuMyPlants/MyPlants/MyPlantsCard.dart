@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
 
-class WidgetMyPlantList extends StatelessWidget {
-  final plantName;
-  final desc;
-  final plantPicture;
+class MyPlantListCard extends StatelessWidget {
+  final MyPlantsModel myPlantsModel;
 
-  WidgetMyPlantList({this.plantName, this.desc, this.plantPicture});
+  MyPlantListCard({this.myPlantsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,7 @@ class WidgetMyPlantList extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Text(plantName,
+                            Text(myPlantsModel.plant,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 17.0,
@@ -83,7 +82,7 @@ class WidgetMyPlantList extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(desc,
+                            Text(myPlantsModel.harvestTime,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 15.0,

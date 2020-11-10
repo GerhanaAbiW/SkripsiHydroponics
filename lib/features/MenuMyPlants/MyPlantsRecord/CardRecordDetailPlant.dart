@@ -1,21 +1,19 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddPlantsDetails.dart';
-import 'package:hydroponics/features/Widget/Loading.dart';
-import 'package:transparent_image/transparent_image.dart';
 
-class AddMyPlantCard extends StatelessWidget {
-  final Plants plant;
 
-  AddMyPlantCard({this.plant});
+class WidgetLIstRecordDetailPlant extends StatelessWidget {
+  final plantName;
+  final desc;
+  final plantPicture;
+
+  WidgetLIstRecordDetailPlant({this.plantName, this.desc, this.plantPicture});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: MediaQuery.of(context).size.width,
+      //width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(
@@ -23,7 +21,7 @@ class AddMyPlantCard extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-                changeScreen(context, MyPlantsDetail(plant: plant,));
+               changeScreen(context, MyPlantsDetail());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,24 +50,7 @@ class AddMyPlantCard extends StatelessWidget {
                             //       )
                             //     :
 
-                        Stack(
-                          children: <Widget>[
-                            Positioned.fill(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Loading(),
-                                )),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: plant.image,
-                                height: MediaQuery.of(context).size.height,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          ],
-                        ),
+                            Image.asset("images/plant.png"),
                       ),
                     ),
                     // Padding(
@@ -91,7 +72,7 @@ class AddMyPlantCard extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Text(plant.plant,
+                            Text(plantName,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 17.0,
@@ -100,7 +81,7 @@ class AddMyPlantCard extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(plant.harvestTime,
+                            Text(desc,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 15.0,

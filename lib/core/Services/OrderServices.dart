@@ -28,6 +28,13 @@ class OrderServices{
     });
   }
 
+  void createHydroOrder(Map<String, dynamic> data) {
+    var uuid = Uuid();
+    String id = uuid.v4();
+    data["id"] = id;
+    _firestore.collection(collection).document(id).setData(data);
+  }
+
   Future<List<OrderModel>> getUserOrders({String userId}) async =>
       _firestore
           .collection(collection)

@@ -2,22 +2,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Providers/PlantProvider.dart';
-import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/CardRecordDate.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/CardRecordDetailPlant.dart';
 import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
-import 'package:provider/provider.dart';
 
-class AddMyPlantList extends StatefulWidget {
+class ListRecordPlant extends StatefulWidget {
+  final String list;
+  ListRecordPlant({Key key, this.list}) : super(key: key);
   @override
-  _AddMyPlantListState createState() => _AddMyPlantListState();
+  _ListRecordPlantState createState() => _ListRecordPlantState();
 }
 
-class _AddMyPlantListState extends State<AddMyPlantList> {
-
-
+class _ListRecordPlantState extends State<ListRecordPlant> {
   @override
   Widget build(BuildContext context) {
-    final plantProvider = Provider.of<PlantProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,13 +29,17 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
         elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
-          'Choose Your Plant',
+        title: widget.list=="date"?Text(
+          'Plant Record',
+          style: CustomTextStyle.textFormFieldBold
+              .copyWith(color: Colors.white, fontSize: 21),
+        ):Text(
+          'Plant Record',
           style: CustomTextStyle.textFormFieldBold
               .copyWith(color: Colors.white, fontSize: 21),
         ),
       ),
-      body: ListView(
+      body: widget.list == "date" ? ListView(
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
@@ -56,12 +58,39 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: plantProvider.plants.length,
+                itemCount: 20,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
-                    child: AddMyPlantCard(
-                      plant: plantProvider.plants[index],
+                    child: WidgetListRecordDate(
+                      date: 'Januari 2020',
+                    ),
+                  );
+                },
+              )),
+        ],
+      ): Column(
+        children: <Widget>[
+          Container(
+              height: MediaQuery.of(context).size.height - 100.0,
+              //height: 20,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+              ),
+              width: MediaQuery.of(context).size.width,
+              //height: MediaQuery.of(context).size.height / 2,
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: 15,
+                itemBuilder: (BuildContext context, int index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: WidgetLIstRecordDetailPlant(
+                      plantName: 'Kangkung',
+                      desc: 'PH ideal 12, PPM Ide..',
                     ),
                   );
                   // return Card(

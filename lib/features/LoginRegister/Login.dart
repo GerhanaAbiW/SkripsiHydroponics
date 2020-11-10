@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                             GestureDetector(
                               onTap: () async {
                                 if (_formKey.currentState.validate()) {
-                                  if (!await user.signIn(
+                                  if (await user.signIn(
                                           _email.text, _password.text) ==
                                       true)
                                     changeScreenReplacement(

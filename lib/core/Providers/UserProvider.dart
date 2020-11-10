@@ -83,7 +83,7 @@ class UserProvider with ChangeNotifier {
         _firestore.collection('users').document(user.user.uid).setData({
           "name": name,
           "email": email,
-          "role": "admin",
+          "role": "user",
           "uid": user.user.uid,
           "stripeId": ""
         });
@@ -158,11 +158,15 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<bool> addPlant(
-      {Plants plant, int qty}) async {
+      {Plants plant}) async {
     try {
+      var uuid = Uuid();
+      String myPlantId = uuid.v4();
       List<MyPlantsModel> myPlant = _userModel.myPlant;
 
       Map plantItem = {
+        "id" : myPlantId,
+        "PlantId":plant.id,
         "Plant": plant.plant,
         "Media": plant.media,
         "Image": plant.image,
@@ -219,7 +223,6 @@ class UserProvider with ChangeNotifier {
     //var user = await _auth.currentUser();
 
     _user.updateProfile(UserUpdateInfo()..displayName = name);
-    //_user.updateProfile(UserUpdateInfo()..photoUrl = image);
     _user.updateEmail(email);
     notifyListeners();
   }
