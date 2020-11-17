@@ -145,7 +145,7 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
                               FloatingActionButton(
                                 onPressed: () async {
                                   appProvider.changeIsLoading();
-                                  bool success = await userProvider.addPlant(
+                                  bool success = await userProvider.addMyPlant(
                                       plant: widget.plant);
                                   if (success) {
                                     _key.currentState.showSnackBar(SnackBar(

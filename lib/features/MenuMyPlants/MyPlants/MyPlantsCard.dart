@@ -22,7 +22,7 @@ class MyPlantListCard extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantStartRecord()));
+                    builder: (context) => PlantStartRecord(myPlantsModel: myPlantsModel)));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

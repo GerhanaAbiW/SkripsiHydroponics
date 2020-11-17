@@ -3,7 +3,9 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
+import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsUserRecord.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -116,8 +118,7 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> addToCart(
-      {ProductModel product, int qty}) async {
+  Future<bool> addToCart({ProductModel product, int qty}) async {
     try {
       var uuid = Uuid();
       String cartItemId = uuid.v4();
@@ -157,16 +158,15 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> addPlant(
-      {Plants plant}) async {
+  Future<bool> addMyPlant({Plants plant}) async {
     try {
       var uuid = Uuid();
       String myPlantId = uuid.v4();
       List<MyPlantsModel> myPlant = _userModel.myPlant;
 
       Map plantItem = {
-        "id" : myPlantId,
-        "PlantId":plant.id,
+        "id": myPlantId,
+        "PlantId": plant.id,
         "Plant": plant.plant,
         "Media": plant.media,
         "Image": plant.image,
@@ -191,6 +191,7 @@ class UserProvider with ChangeNotifier {
       return false;
     }
   }
+
   Future<bool> deleteMyPlant({MyPlantsModel plantItem}) async {
     print("THE PRODUC IS: ${plantItem.toString()}");
 
@@ -202,6 +203,71 @@ class UserProvider with ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> addMyPlantRecord({
+    MyPlantsModel myPlants,
+    bool mediaSemai,
+    bool waktuSemai,
+    bool jenisPupuk,
+    bool dosisPupuk,
+    bool waktuPupuk,
+    bool waktuPanen,
+    bool phIdeal,
+    bool ppmIdeal,
+  }) async {
+    try {
+      var uuid = Uuid();
+      String myPlantId = uuid.v4();
+      List<MyPlantsRecordModel> myPlant = _userModel.myPlantsRecord;
+
+      Map plantItem = {
+        "id": myPlantId,
+        "PlantId": myPlants.id,
+        "Plant": myPlants.plant,
+        "Media": myPlants.media,
+        "Image": myPlants.image,
+        "PPM": myPlants.ppm,
+        "PH": myPlants.ph,
+        "FertilizerType": myPlants.fertilizerType,
+        "TimeOfFertilizer": myPlants.timeOfFertilizer,
+        "DosageOfFertilizer": myPlants.dosageFertilizer,
+        "HarvestTime": myPlants.harvestTime,
+        "PestType": myPlants.pestsType,
+        "RecordMedia": mediaSemai,
+        "RecordPPM": ppmIdeal,
+        "RecordPH": phIdeal,
+        "RecordFertilizerType": jenisPupuk,
+        "RecordTimeOfFertilizer": waktuPupuk,
+        "RecordDosageFertilizer": dosisPupuk,
+        "RecordHarvestTime": waktuPanen,
+        "RecordPestsType": waktuSemai
+      };
+
+      MyPlantsRecordModel item = MyPlantsRecordModel.fromMap(plantItem);
+//      if(!itemExists){
+      print("CART ITEMS ARE: ${myPlant.toString()}");
+      _userServices.addMyPlantRecord(userId: _user.uid, plantItem: item);
+//      }
+
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+
+  Future<bool> deleteMyPlantRecord({MyPlantsRecordModel plantItem}) async {
+    print("THE PRODUC IS: ${plantItem.toString()}");
+
+    try {
+      _userServices.deleteMyPlantRecord(userId: _user.uid, plantItem: plantItem);
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+
   getOrders() async {
     orders = await _orderServices.getUserOrders(userId: _user.uid);
     notifyListeners();

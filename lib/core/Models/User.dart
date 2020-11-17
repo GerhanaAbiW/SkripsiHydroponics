@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
-import 'package:hydroponics/core/Models/Order.dart';
+import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
+
 
 
 
@@ -14,6 +15,7 @@ class UserModel {
   static const STRIPE_ID = "stripeId";
   static const CART = "cart";
   static const MyPlants = "myPlants";
+  static const MyPlantsRecord = "myPlantsRecord";
 
 
 
@@ -38,6 +40,8 @@ class UserModel {
   // public variables
   List<CartItemModel> cart;
   List<MyPlantsModel> myPlant;
+  List<MyPlantsRecordModel> myPlantsRecord;
+
 
   int totalCartPrice;
 
@@ -51,6 +55,7 @@ class UserModel {
     _stripeId = snapshot.data[STRIPE_ID] ?? "";
     cart = _convertCartItems(snapshot.data[CART]?? []);
     myPlant = _convertMyPlants(snapshot.data[MyPlants]?? []);
+    myPlantsRecord = _convertMyPlantsRecord(snapshot.data[MyPlantsRecord]?? []);
     totalCartPrice = snapshot.data[CART] == null ? 0 :getTotalPrice(cart: snapshot.data[CART]);
 
   }
@@ -72,7 +77,13 @@ class UserModel {
   }
 
 
-
+  List<MyPlantsRecordModel> _convertMyPlantsRecord(List plantRecord){
+    List<MyPlantsRecordModel> convertedPlantRecord = [];
+    for(Map plantRecordItem in plantRecord){
+      convertedPlantRecord.add(MyPlantsRecordModel.fromMap(plantRecordItem));
+    }
+    return convertedPlantRecord;
+  }
 
   int getTotalPrice({List cart}){
     if(cart == null){

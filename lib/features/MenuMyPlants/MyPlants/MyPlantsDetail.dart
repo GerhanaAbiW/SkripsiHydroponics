@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/MyPlants.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
+import 'package:provider/provider.dart';
 
 var greenColor = Color(0xFF8BC34A);
 var darkGreenColor = Color(0xFF689F38);
@@ -9,12 +13,15 @@ var productImage =
 //'https://i.pinimg.com/originals/8f/bf/44/8fbf441fa92b29ebd0f324effbd4e616.png';
 
 class PlantStartRecord extends StatefulWidget {
+  final MyPlantsModel myPlantsModel;
+
+  const PlantStartRecord({Key key, this.myPlantsModel}) : super(key: key);
+
   @override
   _PlantStartRecordState createState() => _PlantStartRecordState();
 }
 
 class _PlantStartRecordState extends State<PlantStartRecord> {
-  @override
   bool mediaSemai = true;
   bool waktuSemai = true;
   bool jenisPupuk = true;
@@ -23,8 +30,13 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
   bool waktuPanen = true;
   bool phIdeal = true;
   bool ppmIdeal = true;
+  final _key = GlobalKey<ScaffoldState>();
+  @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
+      key: _key,
         backgroundColor: greenColor,
         body: ListView(
           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +71,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.fromLTRB(40, 10, 60, 10),
-                                child: Text('Bayam',
+                                child: Text(widget.myPlantsModel.plant,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: darkGreenColor,
@@ -76,7 +88,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                               height: MediaQuery.of(context).size.height / 4.5,
                               width: MediaQuery.of(context).size.width / 2,
                               child: Image.network(
-                                productImage,
+                                widget.myPlantsModel.image,
                                 height: 30,
                                 width: 30,
                                 fit: BoxFit.contain,
@@ -99,338 +111,76 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      mediaSemai = !mediaSemai;
-                                    });
-                                  },
-                                  child: Container(
-                                    // width: 17, //ScreenUtil().setWidth(16),
-                                    // height: 17, //ScreenUtil().setWidth(16),
-                                    //   child: Image(
-                                    //       image: isTrue
-                                    //           ? AssetImage('images/pupuk.jpeg')
-                                    //           : AssetImage('images/bayam.jpeg')),
-                                    // ),
-                                    child: Icon(
-                                      mediaSemai
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Media Semai : Rockwoll',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(mediaSemai, "Media Semai",
+                              widget.myPlantsModel.media),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waktuSemai = !waktuSemai;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      waktuSemai
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Waktu Semai : 15 - 20 Hari',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(waktuSemai, "Waktu Semai",
+                              widget.myPlantsModel.media),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      jenisPupuk = !jenisPupuk;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      jenisPupuk
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Jenis Pupuk : Urea, TSP, dan KCL',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(jenisPupuk, "Jenis Pupuk",
+                              widget.myPlantsModel.fertilizerType),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      dosisPupuk = !dosisPupuk;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      dosisPupuk
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Dosis Pupuk : 1 Sendok Makan',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(dosisPupuk, "Dosis Pupuk",
+                              widget.myPlantsModel.dosageFertilizer),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waktuPupuk = !waktuPupuk;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      waktuPupuk
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text:
-                                          'Waktu Pupuk : 20, 30, 40 Hari Setelah Tanam',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(waktuPupuk, "Waktu Pemupukan",
+                              widget.myPlantsModel.timeOfFertilizer),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waktuPanen = !waktuPanen;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      waktuPanen
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text:
-                                          'Waktu Panen : 2,5 - 3 Bulan (75 - 90 Hari',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(waktuPanen, "Waktu Panen",
+                              widget.myPlantsModel.harvestTime),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      ppmIdeal = !ppmIdeal;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      ppmIdeal
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'PPM Ideal : 1750 - 2100',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
-                          ),
+                          Characteristics(
+                              ppmIdeal, "PPM Ideal", widget.myPlantsModel.ppm),
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      phIdeal = !phIdeal;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Icon(
-                                      phIdeal
-                                          ? Icons.radio_button_unchecked
-                                          : Icons.radio_button_checked,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Flexible(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'PH Ideal : 6,5 - 7,0',
-                                      style: TextStyle(
-                                          color: black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                              ),
-                              // ),
-                            ],
+                          Characteristics(
+                              phIdeal, "PH Ideal", widget.myPlantsModel.ph),
+                          SizedBox(
+                            height: 20,
                           ),
                           SizedBox(
                             height: 40,
                           ),
                           Center(
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () async {
+                                appProvider.changeIsLoading();
+                                bool success =
+                                    await userProvider.addMyPlantRecord(
+                                        myPlants: widget.myPlantsModel,
+                                        waktuPanen: waktuPanen,
+                                        waktuPupuk: waktuPupuk,
+                                        waktuSemai: waktuSemai,
+                                        phIdeal: phIdeal,
+                                        dosisPupuk: dosisPupuk,
+                                        ppmIdeal: ppmIdeal,
+                                        jenisPupuk: jenisPupuk);
+                                if (success) {
+                                  _key.currentState.showSnackBar(SnackBar(
+                                      content: Text("Added to Cart!")));
+                                  userProvider.reloadUserModel();
+                                  appProvider.changeIsLoading();
+                                  return;
+                                } else {
+                                  _key.currentState.showSnackBar(SnackBar(
+                                      content: Text("Not added to Cart!")));
+                                  appProvider.changeIsLoading();
+                                  return;
+                                }
+                              },
                               child: Container(
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.all(10),
@@ -568,6 +318,53 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
             // )
           ],
         ));
+  }
+
+  // ignore: non_constant_identifier_names
+  Widget Characteristics(
+      bool btn, String characteristic, String characteristicPlant) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                btn = !btn;
+              });
+            },
+            child: Container(
+              // width: 17, //ScreenUtil().setWidth(16),
+              // height: 17, //ScreenUtil().setWidth(16),
+              //   child: Image(
+              //       image: isTrue
+              //           ? AssetImage('images/pupuk.jpeg')
+              //           : AssetImage('images/bayam.jpeg')),
+              // ),
+              child: Icon(
+                btn ? Icons.radio_button_unchecked : Icons.radio_button_checked,
+                size: 18,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 8,
+        ),
+        Flexible(
+          child: RichText(
+            text: TextSpan(
+                text: '$characteristic : $characteristicPlant',
+                style: TextStyle(
+                    color: black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.normal)),
+          ),
+        ),
+        // ),
+      ],
+    );
   }
 }
 

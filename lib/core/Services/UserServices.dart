@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
+import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/Models/User.dart';
 
 class UserServices{
@@ -34,12 +35,22 @@ class UserServices{
   }
   void addMyPlant({String userId, MyPlantsModel plantItem}){
     _firestore.collection(collection).document(userId).updateData({
-      "cart": FieldValue.arrayUnion([plantItem.toMap()])
+      "myPlants": FieldValue.arrayUnion([plantItem.toMap()])
     });
   }
   void deleteMyPlant({String userId, MyPlantsModel plantItem}){
     _firestore.collection(collection).document(userId).updateData({
-      "cart": FieldValue.arrayRemove([plantItem.toMap()])
+      "myPlants": FieldValue.arrayRemove([plantItem.toMap()])
+    });
+  }
+  void addMyPlantRecord({String userId, MyPlantsRecordModel plantItem}){
+    _firestore.collection(collection).document(userId).updateData({
+      "myPlantsRecord": FieldValue.arrayUnion([plantItem.toMap()])
+    });
+  }
+  void deleteMyPlantRecord({String userId, MyPlantsRecordModel plantItem}){
+    _firestore.collection(collection).document(userId).updateData({
+      "myPlantsRecord": FieldValue.arrayRemove([plantItem.toMap()])
     });
   }
 }

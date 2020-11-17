@@ -1,6 +1,6 @@
-import 'package:hydroponics/core/Models/Plant.dart';
 
-class MyPlantsRecord{
+
+class MyPlantsRecordModel{
   static const ID = "id";
   static const PlantID = "PlantId";
   static const PLANT = "Plant";
@@ -13,6 +13,14 @@ class MyPlantsRecord{
   static const DosageOfFertilizer = "DosageOfFertilizer";
   static const HarvestTime = "HarvestTime";
   static const PestsType = "PestType";
+  static const RecordMedia = "RecordMedia";
+  static const RecordPPM = "RecordPPM";
+  static const RecordPH = "RecordPH";
+  static const RecordFertilizerType = "RecordFertilizerType";
+  static const RecordTimeOfFertilizer = "RecordTimeOfFertilizer";
+  static const RecordDosageFertilizer = "RecordDosageFertilizer";
+  static const RecordHarvestTime = "RecordHarvestTime";
+  static const RecordPestsType = "RecordPestsType";
 
   String _id;
   String _plantId;
@@ -28,14 +36,14 @@ class MyPlantsRecord{
   String _pestsType;
 
 
-  bool _checkMedia;
-  bool _checkPPM;
-  bool _checkPH;
-  bool _checkFertilizerType;
-  bool _checkTimeOfFertilizer;
-  bool _checkDosageFertilizer;
-  bool _checkHarvestTime;
-  bool _checkPestsType;
+  bool _recordMedia;
+  bool _recordPPM;
+  bool _recordPH;
+  bool _recordFertilizerType;
+  bool _recordTimeOfFertilizer;
+  bool _recordDosageFertilizer;
+  bool _recordHarvestTime;
+  bool _recordPestsType;
 
 
 
@@ -64,24 +72,24 @@ class MyPlantsRecord{
 
   String get pestsType => _pestsType;
 
-  bool get checkPPM => _checkPPM;
+  bool get recordPPM => _recordPPM;
 
-  bool get checkPH => _checkPH;
+  bool get recordPH => _recordPH;
 
-  bool get checkFertilizerType => _checkFertilizerType;
+  bool get recordFertilizerType => _recordFertilizerType;
 
-  bool get checkTimeOfFertilizer => _checkTimeOfFertilizer;
+  bool get recordTimeOfFertilizer => _recordTimeOfFertilizer;
 
-  bool get checkDosageFertilizer => _checkDosageFertilizer;
+  bool get recordDosageFertilizer => _recordDosageFertilizer;
 
-  bool get checkHarvestTime => _checkHarvestTime;
+  bool get recordHarvestTime => _recordHarvestTime;
 
-  bool get checkPestsType => _checkPestsType;
+  bool get recordPestsType => _recordPestsType;
 
-  bool get checkMedia => _checkMedia;
+  bool get recordMedia => _recordMedia;
 
 
-  MyPlantsRecord.fromMap(Map data){
+  MyPlantsRecordModel.fromMap(Map data){
     _id = data[ID];
     _plantId = data[PlantID];
     _plant =  data[PLANT];
@@ -94,6 +102,14 @@ class MyPlantsRecord{
     _pestsType = data[PestsType];
     _fertilizerType = data[FertilizerType];
     _timeOfFertilizer = data[TimeOfFertilizer];
+    _recordMedia = data[RecordMedia];
+    _recordPPM=data[RecordPPM];
+    _recordPH=data[RecordPH];
+    _recordFertilizerType=data[RecordFertilizerType];
+    _recordTimeOfFertilizer=data[RecordTimeOfFertilizer];
+    _recordDosageFertilizer=data[RecordDosageFertilizer];
+    _recordHarvestTime=data[RecordHarvestTime];
+    _recordPestsType=data[RecordPestsType];
   }
 
   Map toMap() => {
@@ -108,8 +124,22 @@ class MyPlantsRecord{
     HarvestTime: _harvestTime,
     MEDIA:_media,
     FertilizerType: _fertilizerType,
-    TimeOfFertilizer : _timeOfFertilizer
+    TimeOfFertilizer : _timeOfFertilizer,
+    RecordPPM : _recordPPM,
 
+    RecordPH :_recordPH,
+
+    RecordFertilizerType : _recordFertilizerType,
+
+    RecordTimeOfFertilizer : _recordTimeOfFertilizer,
+
+    RecordDosageFertilizer : _recordDosageFertilizer,
+
+    RecordHarvestTime : _recordHarvestTime,
+
+    RecordPestsType : _recordPestsType,
+
+    RecordMedia :  _recordMedia,
   };
 
 
