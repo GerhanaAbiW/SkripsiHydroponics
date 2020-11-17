@@ -67,7 +67,7 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
               child: Text(
                 "Gambar Refrensi",
                 style: new TextStyle(
-                    fontWeight: FontWeight.w700, color: Colors.black),
+                    fontWeight: FontWeight.w700, color: Colors.green),
               ),
             ),
             FlatButton(

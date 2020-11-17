@@ -9,8 +9,6 @@ import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
 
 var blueOrder = Color(0xFF03A9F4);
 
-
-
 class HydroOrderList extends StatefulWidget {
   @override
   _HydroOrderListState createState() => _HydroOrderListState();
@@ -21,21 +19,21 @@ class _HydroOrderListState extends State<HydroOrderList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   List<HydroList> listSection = [
-    HydroList("Small", "images/hydro2.jpeg", "10x20x30", "Rp.10.000","2 - 4 tingkatan","4 - 6 lubang"),
-    HydroList("Medium", "images/bayam.jpeg", "10x50x30", "Rp.10.000","2 - 4 tingkatan","4 - 6 lubang"),
-    HydroList("Large", "images/bayam.jpeg", "10x20x90", "Rp.10.000","2 - 4 tingkatan","4 - 6 lubang"),
-    HydroList("Custom", "images/bayam.jpeg", "10x20x20","Rp.10.000","2 - 4 tingkatan","4 - 6 lubang")
+    HydroList("Small", "images/hydro2.jpeg", "10x20x30", "Rp 100.000",
+        "2 - 4 tingkatan", "4 - 6 lubang"),
+    HydroList("Medium", "images/bayam.jpeg", "10x50x30", "Rp 150.000",
+        "2 - 4 tingkatan", "4 - 6 lubang"),
+    HydroList("Large", "images/bayam.jpeg", "10x20x90", "Rp 250.000",
+        "2 - 4 tingkatan", "4 - 6 lubang"),
+    HydroList("Custom", "images/bayam.jpeg", "10x20x20", "> Rp 300.000",
+        "2 - 4 tingkatan", "4 - 6 lubang")
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -58,8 +56,13 @@ class _HydroOrderListState extends State<HydroOrderList> {
       body: ListView(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text("ini kasi text apa kek"),
+            padding: const EdgeInsets.only(
+                top: 16.0, left: 8, right: 8, bottom: 10.0),
+            child: Text(
+              "Kamu Bisa Tentukan Set Starter Kit Untuk Tanaman Hidroponikmu!",
+              style: CustomTextStyle.textFormFieldBold
+                  .copyWith(color: Colors.blueGrey, fontSize: 21),
+            ),
           ),
           SizedBox(height: 16),
           CardListOrder(
@@ -88,13 +91,19 @@ class CardListOrder extends StatelessWidget {
               child: Card(
                 elevation: 20.0,
                 child: GestureDetector(
-                  onTap: (){
-                    if(list[index].type=="Small"||list[index].type=="Medium"||list[index].type=="Large"){
-                      changeScreen(context, HydroOrderDetail(hydroList: list[index],));
-                    }else{
+                  onTap: () {
+                    if (list[index].type == "Small" ||
+                        list[index].type == "Medium" ||
+                        list[index].type == "Large") {
+                      changeScreen(
+                          context,
+                          HydroOrderDetail(
+                            hydroList: list[index],
+                          ));
+                    } else {
                       changeScreen(context, HydroOrderCustomDetail());
                     }
-                      },
+                  },
                   child: ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(5.0), //or 15.0

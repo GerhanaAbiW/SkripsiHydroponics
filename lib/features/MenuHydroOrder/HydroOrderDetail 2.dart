@@ -39,13 +39,12 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
     Provider.of<UserProvider>(context);
     _getTipeLahan();
   }
+
   void validateAndUpload(String userId) async {
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
       orderServices.createHydroOrder({
         "userId": userId,
-
-
       });
       _formKey.currentState.reset();
       setState(() => isLoading = false);
@@ -90,7 +89,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
               child: Text(
                 "Gambar Refrensi",
                 style: new TextStyle(
-                    fontWeight: FontWeight.w700, color: Colors.black),
+                    fontWeight: FontWeight.w700, color: Colors.green),
               ),
             ),
             FlatButton(

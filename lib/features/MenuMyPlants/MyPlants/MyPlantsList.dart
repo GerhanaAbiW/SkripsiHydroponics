@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
@@ -18,7 +19,6 @@ class MyPlantsList extends StatefulWidget {
 }
 
 class _MyPlantsListState extends State<MyPlantsList> {
-
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -36,7 +36,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                   icon: Icon(Icons.arrow_back),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.pop(context);
+                    changeScreen(context, DashBoard());
                   },
                 ),
                 Container(
@@ -141,7 +141,8 @@ class _MyPlantsListState extends State<MyPlantsList> {
                                   child: SlidableDrawerDismissal(),
                                 ),
                                 child: MyPlantListCard(
-                                  myPlantsModel: userProvider.userModel.myPlant[index],
+                                  myPlantsModel:
+                                      userProvider.userModel.myPlant[index],
                                   // ),
                                 ),
                               ),

@@ -16,7 +16,11 @@ class WidgetListRecordDate extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
             onTap: () {
-              changeScreen(context, ListRecordPlant(list: "plant",));
+              changeScreen(
+                  context,
+                  ListRecordPlant(
+                    list: "plant",
+                  ));
             },
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

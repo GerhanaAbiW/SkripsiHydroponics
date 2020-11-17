@@ -6,8 +6,7 @@ import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
 
 class HydroOrderDetail extends StatefulWidget {
- final HydroList hydroList;
-
+  final HydroList hydroList;
 
   const HydroOrderDetail({Key key, this.hydroList}) : super(key: key);
 
@@ -118,7 +117,8 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                 width: 250.0,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage(widget.hydroList.image))),
+                                        image: AssetImage(
+                                            widget.hydroList.image))),
                               )))),
                   Positioned(
                     top: 375.0,
@@ -140,10 +140,13 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                           fontFamily: 'AbrilFatFace',
                                           fontSize: 20.0,
                                           color: Color(0xFF03A9F4))),
-                                  Text("*Description",
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text("Description Product",
                                       style: TextStyle(
                                           fontFamily: 'AbrilFatFace',
-                                          fontSize: 11.0,
+                                          fontSize: 18.0,
                                           color: Colors.grey))
                                 ],
                               ),
@@ -154,7 +157,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                       color: Color(0xFF03A9F4)))
                             ],
                           ),
-                          SizedBox(height: 10.0),
+                          SizedBox(height: 4.0),
                           Text('luas maximum : ${widget.hydroList.area}',
                               style: TextStyle(
                                   fontSize: 12.0, color: Colors.grey)),
@@ -195,6 +198,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                           style: TextStyle(
                                             fontFamily: 'AbrilFatFace',
                                             fontSize: 20.0,
+                                            color: Colors.green,
                                           )),
                                       Text(
                                           '*Di mohon untuk mengisi data yang sesuai',
@@ -265,6 +269,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                             ],
                           ),
                         ),
+                        SizedBox(height: 30),
                         Center(
                           child: GestureDetector(
                             onTap: () {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuLearning/Article/WidgetArticleList.dart';
 import 'package:hydroponics/features/MenuLearning/Video/WidgetVideoList.dart';
+import 'package:provider/provider.dart';
 
 var blueColor = Color(0xFF3232FF);
 var darkBlueColor = Color(0xFF3F51B5);
@@ -13,7 +15,11 @@ class MenuLearning extends StatefulWidget {
 }
 
 class _MenuLearningState extends State<MenuLearning> {
-
+  void initState() {
+    //super.initState();
+    Provider.of<ArticleProvider>(context, listen: false).articles;
+    //Provider.of<ContactUsViewModel>(context, listen: false).init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +77,11 @@ class _MenuLearningState extends State<MenuLearning> {
           body: TabBarView(children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: WidgetArticleList(
-
-              ),
+              child: WidgetArticleList(),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: WidgetVideoList(
-
-              ),
+              child: WidgetVideoList(),
             )
           ]),
         ));

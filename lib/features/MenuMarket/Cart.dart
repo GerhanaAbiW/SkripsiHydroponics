@@ -59,7 +59,7 @@ class _CartPageState extends State<CartPage> {
               child: Container(
                   child: Column(children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height - 150,
+                  height: MediaQuery.of(context).size.height - 200,
                   child: ListView(
                     children: <Widget>[
                       createHeader(),

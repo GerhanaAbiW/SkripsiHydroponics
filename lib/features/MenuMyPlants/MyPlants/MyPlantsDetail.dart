@@ -22,7 +22,7 @@ class PlantStartRecord extends StatefulWidget {
 }
 
 class _PlantStartRecordState extends State<PlantStartRecord> {
-  bool mediaSemai = true;
+  bool mediaSemai = false;
   bool waktuSemai = true;
   bool jenisPupuk = true;
   bool dosisPupuk = true;
@@ -36,7 +36,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
-      key: _key,
+        key: _key,
         backgroundColor: greenColor,
         body: ListView(
           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -361,8 +361,8 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                     fontSize: 18.0,
                     fontWeight: FontWeight.normal)),
           ),
+          //),
         ),
-        // ),
       ],
     );
   }
