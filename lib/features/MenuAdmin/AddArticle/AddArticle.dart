@@ -101,7 +101,7 @@ class _AddArticleViewState extends State<AddArticleView> {
             "date": dateController.text,
             "description": descController.text,
             "image": imageUrl1,
-            "CreatedAt" : DateTime.now().microsecondsSinceEpoch
+
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);

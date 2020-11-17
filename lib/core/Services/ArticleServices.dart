@@ -10,6 +10,7 @@ class ArticleService {
     var id = Uuid();
     String articleId = id.v1();
     data["id"] = articleId;
+    data["createdAt"] = FieldValue.serverTimestamp();
     _firestore.collection(collection).document(articleId).setData(data);
   }
 

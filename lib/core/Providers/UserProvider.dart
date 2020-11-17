@@ -85,7 +85,7 @@ class UserProvider with ChangeNotifier {
         _firestore.collection('users').document(user.user.uid).setData({
           "name": name,
           "email": email,
-          "role": "user",
+          "role": "admin",
           "uid": user.user.uid,
           "stripeId": ""
         });

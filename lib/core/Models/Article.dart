@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Article {
   static const ID = "id";
   static const TITLE = "title";
-  static const DATE = "dateTime";
+  static const DATE = "date";
   static const IMAGE = "image";
   static const AUTHOR = "author";
   static const DESCRIPTION = "description";
