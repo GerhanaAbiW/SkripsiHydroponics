@@ -21,6 +21,7 @@ class MyPlantsRecordModel{
   static const RecordDosageFertilizer = "RecordDosageFertilizer";
   static const RecordHarvestTime = "RecordHarvestTime";
   static const RecordPestsType = "RecordPestsType";
+  static const DATE = "dateTime";
 
   String _id;
   String _plantId;
@@ -34,6 +35,7 @@ class MyPlantsRecordModel{
   String _dosageFertilizer;
   String _harvestTime;
   String _pestsType;
+  String _date;
 
 
   bool _recordMedia;
@@ -44,6 +46,7 @@ class MyPlantsRecordModel{
   bool _recordDosageFertilizer;
   bool _recordHarvestTime;
   bool _recordPestsType;
+
 
 
 
@@ -71,6 +74,7 @@ class MyPlantsRecordModel{
   String get harvestTime => _harvestTime;
 
   String get pestsType => _pestsType;
+  String get date => _date;
 
   bool get recordPPM => _recordPPM;
 
@@ -87,6 +91,9 @@ class MyPlantsRecordModel{
   bool get recordPestsType => _recordPestsType;
 
   bool get recordMedia => _recordMedia;
+
+
+
 
 
   MyPlantsRecordModel.fromMap(Map data){
@@ -110,6 +117,8 @@ class MyPlantsRecordModel{
     _recordDosageFertilizer=data[RecordDosageFertilizer];
     _recordHarvestTime=data[RecordHarvestTime];
     _recordPestsType=data[RecordPestsType];
+    _date = data[DATE];
+
   }
 
   Map toMap() => {
@@ -140,6 +149,8 @@ class MyPlantsRecordModel{
     RecordPestsType : _recordPestsType,
 
     RecordMedia :  _recordMedia,
+    DATE:_date
+
   };
 
 

@@ -37,7 +37,6 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
     } else {
       setState(() => isLoading = false);
 
-//        Fluttertoast.showToast(msg: 'all the images must be provided');
     }
   }
 
@@ -45,13 +44,10 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
     {
       'value': 'Vertikal',
       'label': 'Vertikal',
-      // 'icon': Icon(Icons.stop),
     },
     {
       'value': 'Horizontal',
       'label': 'Horizontal',
-      // 'icon': Icon(Icons.fiber_manual_record),
-      // 'textStyle': TextStyle(color: Colors.red),
     },
   ];
 
@@ -216,13 +212,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                 textHint: "Masukkan Luas Lahan",
                                 //controller: prodcutDescriptionController,
                               ),
-                              //),
-                              // Column(
-                              //     crossAxisAlignment: CrossAxisAlignment.start,
-                              //children: <Widget>[
 
-                              // ]),
-                              //Container(
                               SizedBox(height: 16),
                               FormTextField(
                                 textLabel: "jumlah Lubang",

@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 
 class VideoService {
   Firestore _firestore = Firestore.instance;
-  String collection = 'Videos';
+  String collection = 'videos';
 
   void uploadVideo(Map<String, dynamic> data) {
     var id = Uuid();

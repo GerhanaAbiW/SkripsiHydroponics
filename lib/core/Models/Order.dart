@@ -7,13 +7,14 @@ class OrderModel {
   static const USER_ID = "userId";
   static const TOTAL = "total";
   static const STATUS = "status";
-  static const CREATED_AT = "createdAt";
+  static const DATE_TIME = "dateTime";
+
 
   String _id;
   String _description;
   String _userId;
   String _status;
-  int _createdAt;
+  String _dateTime;
   int _total;
 
 //  getters
@@ -27,7 +28,7 @@ class OrderModel {
 
   int get total => _total;
 
-  int get createdAt => _createdAt;
+  String get dateTime => _dateTime;
 
   // public variable
   List cart;
@@ -39,7 +40,8 @@ class OrderModel {
     _total = snapshot.data[TOTAL];
     _status = snapshot.data[STATUS];
     _userId = snapshot.data[USER_ID];
-    _createdAt = snapshot.data[CREATED_AT];
+    _dateTime = snapshot.data[DATE_TIME];
     cart = snapshot.data[CART];
+
   }
 }

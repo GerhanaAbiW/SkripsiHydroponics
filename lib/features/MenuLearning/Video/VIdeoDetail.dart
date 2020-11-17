@@ -4,7 +4,7 @@ import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
-import 'package:hydroponics/features/MenuLearning/Article/WidgetArticleList.dart';
+import 'package:hydroponics/features/MenuLearning/Article/ArticleList.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 

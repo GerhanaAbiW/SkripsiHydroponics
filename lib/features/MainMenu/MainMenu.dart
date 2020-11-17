@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
-import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
-import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
-import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
-import 'package:hydroponics/features/MenuMarket/ProductDetail.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
-import 'package:hydroponics/features/MenuHydroOrder/Gmaps/GmapsLocation.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOderList.dart';
 import 'package:provider/provider.dart';
 
@@ -128,7 +122,6 @@ class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin
                     MenuLearning()),
                 MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342,
                     MyPlantsList()),
-                // MyItems(Icons.account_box, "Penjual", 0xFFF4511E, MenuAdmin()),
               ],
               staggeredTiles: [
                 StaggeredTile.extent(1, 150.0),

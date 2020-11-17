@@ -176,7 +176,8 @@ class UserProvider with ChangeNotifier {
         "TimeOfFertilizer": plant.timeOfFertilizer,
         "DosageOfFertilizer": plant.dosageFertilizer,
         "HarvestTime": plant.harvestTime,
-        "PestType": plant.pestsType
+        "PestType": plant.pestsType,
+        "CreatedAt" : DateTime.now().microsecondsSinceEpoch
       };
 
       MyPlantsModel item = MyPlantsModel.fromMap(plantItem);

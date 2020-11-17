@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/MainMenu/MainMenu.dart';
 import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle.dart';
 import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
 
@@ -85,8 +82,6 @@ class _MenuAdminState extends State<MenuAdmin> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: greenTosca,
-        //elevation: 0.0,
-        //automaticallyImplyLeading: false,
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(widget.drawerItem[_selectedDrawerIndex].title,
@@ -98,14 +93,6 @@ class _MenuAdminState extends State<MenuAdmin> {
           data: Theme.of(context).copyWith(canvasColor: greenTosca),
           child: Drawer(
               child: Column(children: <Widget>[
-            // SizedBox(
-            //   height: 30,
-            // ),
-            // Container(
-            //   width: MediaQuery.of(context).size.width,
-            //   child: DrawerHeader(child: new CircleAvatar()),
-            //   color: Colors.tealAccent,
-            // ),
             SizedBox(height: 50,),
             Expanded(child: Container(child: Column(children: drawerOptions))),
             Container(

@@ -61,11 +61,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                     1, //MediaQuery.of(context).size.width / 1,
               ),
             ),
-            // Image.network(
-            //             "${widget.}",
-            //             height: MediaQuery.of(context).size.height / 4,
-            //             width: MediaQuery.of(context).size.width / 1,
-            //           ),
             SizedBox(
               height: 30,
             ),
@@ -124,39 +119,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
               ),
             ),
-            // Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: <Widget>[
-            //       productDropDown(
-            //           textTitle: "Tipe Lahan",
-            //           hintText: "Masukkan Type Lahan",
-            //           selectedItem: _currentTipeLahan,
-            //           dropDownItems: typelahanDropdown,
-            //           changedDropDownItems: changeSelectedCategory),
-            //     ]),
-            // Container(
-            //   child: productTextField(
-            //     textTitle: "jumlah Lubang",
-            //     textHint: "Masukkan Jumlah Lubang Tanaman",
-            //     //controller: prodcutDescriptionController,
-            //   ),
-            // ),
-            // Container(
-            //   child: productTextField(
-            //     textType: TextInputType.number,
-            //     textTitle: "Nomor HP",
-            //     textHint: "Masukkan Nomor HP Anda",
-            //     //controller: prodcutDescriptionController,
-            //   ),
-            // ),
-            // Container(
-            //   child: productTextField(
-            //       textType: TextInputType.multiline,
-            //       textTitle: "Alamat",
-            //       textHint: "Masukkan Alamat Anda",
-            //       //controller: prodcutDescriptionController,
-            //       height: 180.0),
-            // ),
             SizedBox(
               height: 40,
             ),
@@ -188,11 +150,9 @@ class _OrderDetailsState extends State<OrderDetails> {
   }
 
   _getTipeLahan() {
-    //List<DocumentSnapshot> data = await _categoryService.getCategories();
     print(lahanType.length);
     setState(() {
       typelahanDropdown = getLahanDropdown();
-      //_currentCategory = categories[0];
     });
   }
 

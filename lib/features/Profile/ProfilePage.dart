@@ -153,7 +153,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                           color: Colors.black,
                                           iconSize: 24,
                                           onPressed: () {
-                                            changeScreenReplacement(
+                                            changeScreen(
                                                 context, EditProfilePage());
                                           },
                                         )

@@ -12,6 +12,8 @@ class Plants {
   static const DosageOfFertilizer = "DosageOfFertilizer";
   static const HarvestTime = "HarvestTime";
   static const PestsType = "PestType";
+  static const DATE = "dateTime";
+
 
 
   String _id;
@@ -25,6 +27,7 @@ class Plants {
   String _dosageFertilizer;
   String _harvestTime;
   String _pestsType;
+  String _date;
 
 //  getters
   String get id => _id;
@@ -38,6 +41,8 @@ class Plants {
   String get dosageFertilizer => _dosageFertilizer;
   String get harvestTime => _harvestTime;
   String get pestsType => _pestsType;
+  String get date => _date;
+
 
 //  named constructure
   Plants.fromSnapshot(DocumentSnapshot snapshot) {
@@ -53,5 +58,7 @@ class Plants {
     _timeOfFertilizer = data[TimeOfFertilizer];
     _harvestTime = data[HarvestTime];
     _pestsType = data[PestsType];
+    _date = data[DATE];
+
   }
 }

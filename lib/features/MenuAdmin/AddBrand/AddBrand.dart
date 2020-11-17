@@ -67,10 +67,6 @@ class _AddBrandState extends State<AddBrand> {
             return Card(
               elevation: 10.0,
               child: ListTile(
-//                leading: CircleAvatar(
-//                  radius: 30,
-//                  backgroundImage: ExactAssetImage(myList[index]),
-//                ),
                 title: Text(brandModel.brand[index], style: TextStyle(fontSize: 14)),
                 subtitle: Text(phones[index], style: TextStyle(fontSize: 10)),
                 trailing: Icon(Icons.tag_faces),
@@ -103,7 +99,6 @@ class _AddBrandState extends State<AddBrand> {
           if(brandController.text != null){
             _brandService.createBrand(brandController.text);
           }
-//          Fluttertoast.showToast(msg: 'brand added');
           Navigator.pop(context);
         }, child: Text('ADD')),
         FlatButton(onPressed: (){

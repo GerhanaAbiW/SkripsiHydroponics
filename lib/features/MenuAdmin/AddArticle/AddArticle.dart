@@ -2,12 +2,9 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Services/ArticleServices.dart';
-import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/core/constants/Costumized_Text_Field.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class AddArticleView extends StatefulWidget {
@@ -29,7 +26,6 @@ class _AddArticleViewState extends State<AddArticleView> {
     });
   }
 
-
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController articleController = TextEditingController();
@@ -39,19 +35,8 @@ class _AddArticleViewState extends State<AddArticleView> {
   ArticleService articleService = ArticleService();
   DateTime selectedDate = DateTime.now();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(1901, 1),
-        lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-        dateController.value = TextEditingValue(
-            text: DateFormat('dd/MM/yyyy').format(picked).toString());
-      });
-  }
+
+
 
   void myAlert() {
     showDialog(
@@ -104,7 +89,7 @@ class _AddArticleViewState extends State<AddArticleView> {
         final FirebaseStorage storage = FirebaseStorage.instance;
         final String picture1 =
             "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-        StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image);
+        StorageUploadTask task1 = storage.ref().child("Articles").child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
             await task1.onComplete.then((snapshot) => snapshot);
 
@@ -116,6 +101,7 @@ class _AddArticleViewState extends State<AddArticleView> {
             "date": dateController.text,
             "description": descController.text,
             "image": imageUrl1,
+            "CreatedAt" : DateTime.now().microsecondsSinceEpoch
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);
@@ -123,8 +109,6 @@ class _AddArticleViewState extends State<AddArticleView> {
         });
       } else {
         setState(() => isLoading = false);
-
-//        Fluttertoast.showToast(msg: 'all the images must be provided');
       }
     }
   }
@@ -141,11 +125,6 @@ class _AddArticleViewState extends State<AddArticleView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                // Text(
-                //   'Lengkapi Data Untuk Article',
-                //   style: CustomTextStyle.textFormFieldBold
-                //       .copyWith(color: Colors.black, fontSize: 15),
-                // ),
                 SizedBox(
                   height: 16,
                 ),
@@ -189,20 +168,13 @@ class _AddArticleViewState extends State<AddArticleView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        // decoration: BoxDecoration(bord),
                         width: MediaQuery.of(context).size.width / 3,
                         height: 50.0,
                         child: FlatButton(
                           shape: CircleBorder(
-                              // borderRadius: BorderRadius.circular(2000.0),
                               side: BorderSide(color: Colors.white)),
                           color: GreenTosca,
                           child: Icon(Icons.camera_alt, color: white),
-                          // child: Center(
-                          //     child: Text(
-                          //   'Choose Image',
-                          //   textAlign: TextAlign.center,
-                          // )),
                           onPressed: () {
                             myAlert();
                           },
@@ -221,61 +193,6 @@ class _AddArticleViewState extends State<AddArticleView> {
                 SizedBox(
                   height: 16,
                 ),
-//                 TextFormField(
-//                   controller: titleController,
-//                   keyboardType: TextInputType.text,
-//                   textInputAction: TextInputAction.next,
-//                   autofocus: false,
-// //                          focusNode: _focusNode,
-// //                          onFieldSubmitted: (_) {
-// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
-// //                          },
-//                   validator: (val) {
-//                     if (val.length == 0) {
-//                       return "Email cannot be empty";
-//                     } else {
-//                       return null;
-//                     }
-//                   },
-//                   // validator: (value) => emptyValidation(value),
-//                   decoration: CommonStyle.textFieldStyle(
-//                       labelTextStr: "Judul Artikel",
-//                       hintTextStr: "Masukkan Judul Artikel"),
-//                 ),
-//
-//                 GestureDetector(
-//                   onTap: () => _selectDate(context),
-//                   child: AbsorbPointer(
-//                     child: TextFormField(
-//                       controller: dateController,
-//                       autofocus: false,
-//                       textInputAction: TextInputAction.next,
-//                       keyboardType: TextInputType.datetime,
-//                       decoration: InputDecoration(
-//                         labelText: 'Tanggal Terbit',
-//                         labelStyle: TextStyle(color: Colors.green),
-//                         hintText: 'Tanggal Terbit',
-//                         focusedBorder: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(10.0),
-//                           borderSide: BorderSide(
-//                             color: Colors.green,
-//                           ),
-//                         ),
-//                         enabledBorder: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(10.0),
-//                           borderSide: BorderSide(
-//                             color: Colors.blue,
-//                             width: 2.0,
-//                           ),
-//                         ),
-//                         suffixIcon: Icon(
-//                           Icons.calendar_today,
-//                           color: Colors.green,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
                 DateFormField(
                     textLabel: 'Tanggal Terbit',
                     textHint: 'Tanggal Terbit',
@@ -287,27 +204,6 @@ class _AddArticleViewState extends State<AddArticleView> {
                     textLabel: "Pengarang",
                     textHint: "Masukkan Nama Pengarang",
                     controller: authorController),
-//                 TextFormField(
-//                   controller: authorController,
-//                   keyboardType: TextInputType.text,
-//                   textInputAction: TextInputAction.next,
-//                   autofocus: false,
-// //                          focusNode: _focusNode,
-// //                          onFieldSubmitted: (_) {
-// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
-// //                          },
-//                   validator: (val) {
-//                     if (val.length == 0) {
-//                       return "Email cannot be empty";
-//                     } else {
-//                       return null;
-//                     }
-//                   },
-//                   // validator: (value) => emptyValidation(value),
-//                   decoration: CommonStyle.textFieldStyle(
-//                       labelTextStr: "Pengarang",
-//                       hintTextStr: "Masukkan Nama Pengarang"),
-//                 ),
                 SizedBox(
                   height: 16,
                 ),
@@ -316,54 +212,9 @@ class _AddArticleViewState extends State<AddArticleView> {
                     textHint: "Masukkan Isi Konten",
                     textLabel: "Konten",
                     height: 10),
-//                 TextFormField(
-//                   controller: descController,
-//                   keyboardType: TextInputType.multiline,
-//                   maxLines: 10,
-//                   minLines: 1,
-
-//                   textInputAction: TextInputAction.next,
-
-//                   autofocus: false,
-// //                          focusNode: _focusNode,
-// //                          onFieldSubmitted: (_) {
-// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
-// //                          },
-//                   validator: (val) {
-//                     if (val.length == 0) {
-//                       return "Email cannot be empty";
-//                     } else {
-//                       return null;
-//                     }
-//                   },
-//                   // validator: (value) => emptyValidation(value),
-//                   decoration: DescCommonStyle.textFieldStyle(
-//                       labelTextStr: "Konten",
-//                       hintTextStr: "Masukkan Isi Konten"),
-//                 ),
                 SizedBox(
                   height: 16,
                 ),
-//                 TextFormField(
-//                   controller: titleController,
-//                   keyboardType: TextInputType.text,
-//                   textInputAction: TextInputAction.next,
-//                   autofocus: false,
-// //                          focusNode: _focusNode,
-// //                          onFieldSubmitted: (_) {
-// //                            FocusScope.of(context).requestFocus(_focusScopeNode);
-// //                          },
-//                   validator: (val) {
-//                     if (val.length == 0) {
-//                       return "Email cannot be empty";
-//                     } else {
-//                       return null;
-//                     }
-//                   },
-//                   // validator: (value) => emptyValidation(value),
-//                   decoration: CommonStyle.textFieldStyle(
-//                       labelTextStr: "Username", hintTextStr: "Enter Username"),
-//                 ),
                 SizedBox(
                   height: 40,
                 ),
@@ -399,55 +250,4 @@ class _AddArticleViewState extends State<AddArticleView> {
   }
 }
 
-class CommonStyle {
-  static InputDecoration textFieldStyle(
-      {String labelTextStr = "", String hintTextStr = ""}) {
-    return InputDecoration(
-      contentPadding: EdgeInsets.all(12),
-      labelText: labelTextStr,
-      labelStyle: TextStyle(color: Colors.green),
-      hintText: hintTextStr,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(
-          color: Colors.green,
-        ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(
-          color: Colors.blue,
-          width: 2.0,
-        ),
-      ),
-    );
-  }
-}
 
-class DescCommonStyle {
-  static InputDecoration textFieldStyle(
-      {String labelTextStr = "", String hintTextStr = ""}) {
-    return InputDecoration(
-      contentPadding:
-          new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
-
-      //contentPadding: EdgeInsets.only(),
-      labelText: labelTextStr,
-      labelStyle: TextStyle(color: Colors.green),
-      hintText: hintTextStr,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(
-          color: Colors.green,
-        ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(
-          color: Colors.blue,
-          width: 2.0,
-        ),
-      ),
-    );
-  }
-}

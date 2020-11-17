@@ -4,7 +4,6 @@ import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-
 import 'package:hydroponics/features/LoginRegister/Register.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   //for visibile
   bool _passwordVisible;
+
   @override
   void initState() {
     _passwordVisible = false;
@@ -133,7 +133,6 @@ class _LoginPageState extends State<LoginPage> {
                                       color: Color(0xff19803d),
                                     ),
                                     onPressed: () {
-                                      // Update the state i.e. toogle the state of passwordVisible variable
                                       setState(() {
                                         _passwordVisible = !_passwordVisible;
                                       });

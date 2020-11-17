@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
@@ -17,6 +16,7 @@ class _AddPlantViewState extends State<AddPlantView> {
   Radius topLeft;
   File _image;
   bool isLoading = false;
+
   Future getImage(ImageSource media) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: media);
@@ -24,6 +24,7 @@ class _AddPlantViewState extends State<AddPlantView> {
       _image = File(pickedFile.path);
     });
   }
+
   PlantService _plantService = PlantService();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -37,6 +38,7 @@ class _AddPlantViewState extends State<AddPlantView> {
   TextEditingController waktuPupukController = TextEditingController();
   TextEditingController waktuPanenController = TextEditingController();
   TextEditingController jenisHamaController = TextEditingController();
+
   void myAlert() {
     showDialog(
         context: context,
@@ -88,7 +90,7 @@ class _AddPlantViewState extends State<AddPlantView> {
         final FirebaseStorage storage = FirebaseStorage.instance;
         final String picture1 =
             "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-        StorageUploadTask task1 = storage.ref().child(picture1).putFile(_image);
+        StorageUploadTask task1 = storage.ref().child("Plants").child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
             await task1.onComplete.then((snapshot) => snapshot);
 
@@ -104,7 +106,8 @@ class _AddPlantViewState extends State<AddPlantView> {
             "TimeOfFertilizer": waktuPupukController.text,
             "DosageOfFertilizer": dosisPupukController.text,
             "HarvestTime": waktuPanenController.text,
-            "PestType": jenisHamaController.text
+            "PestType": jenisHamaController.text,
+            "CreatedAt" : DateTime.now().microsecondsSinceEpoch
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);
@@ -112,8 +115,6 @@ class _AddPlantViewState extends State<AddPlantView> {
         });
       } else {
         setState(() => isLoading = false);
-
-//        Fluttertoast.showToast(msg: 'all the images must be provided');
       }
     }
   }
@@ -121,8 +122,6 @@ class _AddPlantViewState extends State<AddPlantView> {
   @override
   void initState() {
     super.initState();
-
-    // Provider.of<NewPatientRegistrationViewModel>(context, listen: false).init();
   }
 
   @override
@@ -192,11 +191,6 @@ class _AddPlantViewState extends State<AddPlantView> {
                                 Icons.camera_alt,
                                 color: white,
                               ),
-                              // child: Center(
-                              //     child: Text(
-                              //   'Choose Image',
-                              //   textAlign: TextAlign.center,
-                              // )),
                               onPressed: () {
                                 myAlert();
                               },
@@ -295,14 +289,6 @@ class _AddPlantViewState extends State<AddPlantView> {
                         height: 40,
                         decoration: BoxDecoration(
                           color: GreenTosca,
-                          // gradient: LinearGradient(
-                          //     colors: [
-                          //       GreenTosca,
-                          //       green,
-                          //       CustomColors.COLOR_GREEN
-                          //     ],
-                          //     end: Alignment.centerLeft,
-                          //     begin: Alignment.centerRight),
                           borderRadius: BorderRadius.all(
                             Radius.circular(100),
                           ),

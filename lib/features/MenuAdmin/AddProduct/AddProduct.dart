@@ -1,14 +1,10 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/BrandServices.dart';
 import 'package:hydroponics/core/Services/CategoryServices.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
-
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,55 +25,41 @@ class _AddProductsState extends State<AddProducts> {
   TextEditingController quatityController = TextEditingController();
   TextEditingController prodcutDescriptionController = TextEditingController();
   final productPriceController = TextEditingController();
-  //List<DocumentSnapshot> brands = <DocumentSnapshot>[];
-  //List<DocumentSnapshot> categories = <DocumentSnapshot>[];
   List<String> brands = ['A', 'B', 'C', 'D'];
   final List<Map<String, dynamic>> brandItems = [
     {
       'value': 'A',
       'label': 'A',
-      // 'icon': Icon(Icons.stop),
     },
     {
       'value': 'B',
       'label': 'B',
-      // 'icon': Icon(Icons.fiber_manual_record),
-      // 'textStyle': TextStyle(color: Colors.red),
     },
     {
       'value': 'C',
       'label': 'C',
-      // 'enable': false,
-      // 'icon': Icon(Icons.grade),
-    },{
+    },
+    {
       'value': 'D',
       'label': 'D',
-      // 'enable': false,
-      // 'icon': Icon(Icons.grade),
     },
   ];
   final List<Map<String, dynamic>> categoryItems = [
     {
       'value': 'Alat',
       'label': 'Alat',
-      // 'icon': Icon(Icons.stop),
     },
     {
       'value': 'Bibit',
       'label': 'Bibit',
-      // 'icon': Icon(Icons.fiber_manual_record),
-      // 'textStyle': TextStyle(color: Colors.red),
     },
     {
       'value': 'Pupuk',
       'label': 'Pupuk',
-      // 'enable': false,
-      // 'icon': Icon(Icons.grade),
-    },{
+    },
+    {
       'value': 'Obat',
       'label': 'Obat',
-      // 'enable': false,
-      // 'icon': Icon(Icons.grade),
     },
   ];
   List<String> categories = ['Bibit', 'Obat', 'Pupuk', 'Alat'];
@@ -90,27 +72,13 @@ class _AddProductsState extends State<AddProducts> {
   List<File> tempImageList;
 
   bool isLoading = false;
+
   @override
   void initState() {
-//    _getCategories();
     _getCategories();
     _getBrands();
-//    _getBrands();
   }
 
-//  List<DropdownMenuItem<String>> getCategoriesDropdown() {
-//    List<DropdownMenuItem<String>> items = new List();
-//    for (int i = 0; i < categories.length; i++) {
-//      setState(() {
-//        items.insert(
-//            0,
-//            DropdownMenuItem(
-//                child: Text(categories[i].data['category']),
-//                value: categories[i].data['category']));
-//      });
-//    }
-//    return items;
-//  }
   List<DropdownMenuItem<String>> getCategoriesDropdown() {
     List<DropdownMenuItem<String>> items = new List();
     for (int i = 0; i < categories.length; i++) {
@@ -122,20 +90,6 @@ class _AddProductsState extends State<AddProducts> {
     return items;
   }
 
-//
-//  List<DropdownMenuItem<String>> getBrandsDropDown() {
-//    List<DropdownMenuItem<String>> items = new List();
-//    for (int i = 0; i < brands.length; i++) {
-//      setState(() {
-//        items.insert(
-//            0,
-//            DropdownMenuItem(
-//                child: Text(brands[i].data['brand']),
-//                value: brands[i].data['brand']));
-//      });
-//    }
-//    return items;
-//  }
   List<DropdownMenuItem<String>> getBrandsDropDown() {
     List<DropdownMenuItem<String>> items = new List();
     for (int i = 0; i < brands.length; i++) {
@@ -241,7 +195,6 @@ class _AddProductsState extends State<AddProducts> {
                           dropDownItems: brandItems,
                           changedDropDownItems: changeSelectedBrand),
                     ],
-
                   ),
                 ],
               ),
@@ -260,41 +213,18 @@ class _AddProductsState extends State<AddProducts> {
     );
   }
 
-//  _getCategories() async {
-//    List<DocumentSnapshot> data = await _categoryService.getCategories();
-//    print(data.length);
-//    setState(() {
-//      categories = data;
-//      categoriesDropDown = getCategoriesDropdown();
-//      _currentCategory = categories[0].data['category'];
-//    });
-//  }
   _getCategories() {
     //List<DocumentSnapshot> data = await _categoryService.getCategories();
     print(categories.length);
     setState(() {
       categoriesDropDown = getCategoriesDropdown();
-      //_currentCategory = categories[0];
     });
   }
 
-//
-//  _getBrands() async {
-//    List<DocumentSnapshot> data = await _brandService.getBrands();
-//    print(data.length);
-//    setState(() {
-//      brands = data;
-//      brandsDropDown = getBrandsDropDown();
-//      _currentBrand = brands[0].data['brand'];
-//    });
-//  }
   _getBrands() async {
-    //List<DocumentSnapshot> data = await _brandService.getBrands();
     print(brands.length);
     setState(() {
-      //brands = data;
       brandsDropDown = getBrandsDropDown();
-      //_currentBrand = brands[0];
     });
   }
 
@@ -318,7 +248,7 @@ class _AddProductsState extends State<AddProducts> {
             final String picture =
                 "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
             StorageReference reference =
-                FirebaseStorage.instance.ref().child(picture).child(rannum);
+                FirebaseStorage.instance.ref().child("Products").child(picture).child(rannum);
             StorageUploadTask uploadTask = reference.putFile(imageList[i]);
             StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
             String _url = await downloadUrl.ref.getDownloadURL();
@@ -334,20 +264,17 @@ class _AddProductsState extends State<AddProducts> {
             "quantity": int.parse(quatityController.text),
             "brand": _currentBrand,
             "category": _currentCategory,
+            "CreatedAt" : DateTime.now().microsecondsSinceEpoch
           });
 
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, MenuAdmin());
-          //Navigator.pop(context);
-          //        });
-
         } else {
           setState(() => isLoading = false);
         }
       } else {
         setState(() => isLoading = false);
-//        Fluttertoast.showToast(msg: 'all the images must be provided');
       }
     }
   }
@@ -357,20 +284,13 @@ class _AddProductsState extends State<AddProducts> {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     File file = File(pickedFile.path);
     if (file != null) {
-      //imagesMap[imagesMap.length] = file;
       List<File> imageFile = new List();
       imageFile.add(file);
-      //imageList = new List.from(imageFile);
+
       if (tempImageList == null) {
         tempImageList = new List.from(imageFile, growable: true);
       } else {
         for (int s = 0; s < imageFile.length; s++) {
-//          if (imageFile.length <= 2) {
-//            s++;
-//            tempImageList.add(file);
-//          }else if(imageFile.length > 2){
-//            showSnackBar("Product Images cannot be empty", scaffoldKey);
-//          }
           tempImageList.add(file);
         }
       }
@@ -381,7 +301,6 @@ class _AddProductsState extends State<AddProducts> {
   }
 
   removeImage(int index) async {
-    //imagesMap.remove(index);
     imageList.removeAt(index);
     setState(() {});
   }

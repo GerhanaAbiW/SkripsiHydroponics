@@ -46,7 +46,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                         changeScreen(
                             context,
                             ListRecordPlant(
-                              list: "date",
+                             list: userProvider.userModel.myPlantsRecord,
                             ));
                       },
                       child: Row(
@@ -112,40 +112,12 @@ class _MyPlantsListState extends State<MyPlantsList> {
                               //duration: const Duration(milliseconds: 3000),
                               // child: SlideAnimation(
                               // verticalOffset: 100.0,
-                              child: Slidable(
-                                key: ValueKey(index),
-                                actionPane: SlidableDrawerActionPane(),
-                                secondaryActions: <Widget>[
-                                  IconSlideAction(
-                                    caption: "Update",
-                                    color: Colors.grey.shade300,
-                                    icon: Icons.edit,
-                                    closeOnTap: false,
-                                    onTap: () {},
-                                  ),
-                                  IconSlideAction(
-                                    caption: "Delete",
-                                    color: Colors.red.shade300,
-                                    icon: Icons.edit,
-                                    closeOnTap: true,
-                                    onTap: () {
-                                      Fluttertoast.showToast(
-                                          msg: "Delete Successfull",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          backgroundColor: Colors.red,
-                                          textColor: Colors.white);
-                                    },
-                                  ),
-                                ],
-                                dismissal: SlidableDismissal(
-                                  child: SlidableDrawerDismissal(),
-                                ),
                                 child: MyPlantListCard(
                                   myPlantsModel:
                                       userProvider.userModel.myPlant[index],
                                   // ),
                                 ),
-                              ),
+
                             );
                           }),
                     ),
@@ -188,14 +160,6 @@ class _MyPlantsListState extends State<MyPlantsList> {
           ),
         ),
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar: BottomAppBar(
-      //   color: Color(0xFF8BC34A),
-      //   child: Container(
-      //     height: 35,
-      //     color: Color(0xFF8BC34A),
-      //   ),
-      //),
     );
   }
 }

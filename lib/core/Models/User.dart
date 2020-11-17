@@ -27,6 +27,7 @@ class UserModel {
   int _priceSum = 0;
 
 
+
 //  getters
   String get name => _name;
 
@@ -36,6 +37,7 @@ class UserModel {
   String get id => _id;
 
   String get stripeId => _stripeId;
+
 
   // public variables
   List<CartItemModel> cart;

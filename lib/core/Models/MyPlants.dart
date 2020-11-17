@@ -11,6 +11,8 @@ class MyPlantsModel {
   static const DosageOfFertilizer = "DosageOfFertilizer";
   static const HarvestTime = "HarvestTime";
   static const PestsType = "PestType";
+  static const DATE = "dateTime";
+
 
   String _id;
   String _plantId;
@@ -24,6 +26,8 @@ class MyPlantsModel {
   String _dosageFertilizer;
   String _harvestTime;
   String _pestsType;
+  String _date;
+
 
 //  getters
   String get id => _id;
@@ -49,6 +53,8 @@ class MyPlantsModel {
   String get harvestTime => _harvestTime;
 
   String get pestsType => _pestsType;
+  String get date => _date;
+
 
   MyPlantsModel.fromMap(Map data){
     _id = data[ID];
@@ -63,6 +69,9 @@ class MyPlantsModel {
     _pestsType = data[PestsType];
     _fertilizerType = data[FertilizerType];
     _timeOfFertilizer = data[TimeOfFertilizer];
+    _date = data[DATE];
+
+
   }
 
   Map toMap() => {
@@ -77,7 +86,10 @@ class MyPlantsModel {
     HarvestTime: _harvestTime,
     MEDIA:_media,
     FertilizerType: _fertilizerType,
-    TimeOfFertilizer : _timeOfFertilizer
+    TimeOfFertilizer : _timeOfFertilizer,
+    DATE:_date
+
+
 
   };
 }

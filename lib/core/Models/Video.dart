@@ -9,12 +9,14 @@ class Video {
   static const DESCRIPTION = "description";
 
 
+
   String _id;
   String _title;
   String _date;
   String _video;
   String _author;
   String _description;
+
 
 //  getters
   String get id => _id;
@@ -23,6 +25,7 @@ class Video {
   String get video => _video;
   String get author => _author;
   String get description => _description;
+
 
 //  named constructure
   Video.fromSnapshot(DocumentSnapshot snapshot) {
@@ -33,5 +36,6 @@ class Video {
     _video = data[VIDEO];
     _author = data[AUTHOR];
     _description = data[DESCRIPTION];
+
   }
 }

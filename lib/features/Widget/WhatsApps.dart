@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
-import 'package:url_launcher/url_launcher.dart';
-// import 'package:flutter_launch/flutter_launch.dart';
 
 class WhatsApps extends StatefulWidget {
   @override
@@ -20,24 +18,7 @@ class _WhatsAppsState extends State<WhatsApps> {
   //     print("Whatsapp não instalado");
   //   }
   // }
-  void whatsAppOpen(
-      {@required String phone,
-        @required String message,
-      }) async {
-    String url() {
-      if (Platform.isIOS) {
-        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
-      } else {
-        return "whatsapp://send?   phone=$phone&text=${Uri.parse(message)}";
-      }
-    }
 
-    if (await canLaunch(url())) {
-      await launch(url());
-    } else {
-      throw 'Could not launch ${url()}';
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

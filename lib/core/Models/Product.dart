@@ -10,6 +10,8 @@ class ProductModel{
   static const QUANTITY = "quantity";
   static const BRAND = "brand";
   static const RATING = "rating";
+  static const DATE = "dateTime";
+
 
 
   String _id;
@@ -21,6 +23,8 @@ class ProductModel{
   int _quantity;
   int _price;
   int _rating;
+  String _date;
+
 
 
   String get id => _id;
@@ -40,6 +44,8 @@ class ProductModel{
   int get price => _price;
 
   int get rating => _rating;
+  String get date => _date;
+
 
 
 
@@ -53,6 +59,8 @@ class ProductModel{
     _category = snapshot.data[CATEGORY];
     _name = snapshot.data[NAME];
     _picture = snapshot.data[PICTURE];
+    _date = snapshot[DATE];
+
 
   }
 }

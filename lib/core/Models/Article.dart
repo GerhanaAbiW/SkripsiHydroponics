@@ -3,10 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Article {
   static const ID = "id";
   static const TITLE = "title";
-  static const DATE = "date";
+  static const DATE = "dateTime";
   static const IMAGE = "image";
   static const AUTHOR = "author";
   static const DESCRIPTION = "description";
+
+
 
   String _id;
   String _title;
@@ -15,6 +17,7 @@ class Article {
   String _author;
   String _description;
 
+
 //  getters
   String get id => _id;
   String get title => _title;
@@ -22,6 +25,7 @@ class Article {
   String get image => _image;
   String get author => _author;
   String get description => _description;
+
 
 //  named constructure
   Article.fromSnapshot(DocumentSnapshot snapshot) {
@@ -32,5 +36,6 @@ class Article {
     _image = data[IMAGE];
     _author = data[AUTHOR];
     _description = data[DESCRIPTION];
+
   }
 }

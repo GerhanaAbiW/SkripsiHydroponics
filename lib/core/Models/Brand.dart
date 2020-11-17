@@ -5,9 +5,11 @@ class BrandModel {
   static const BRAND = "brand";
   static const IMAGE = "image";
 
+
   int _id;
   String _brand;
   String _image;
+
 
   //  getters
   int get id => _id;
@@ -16,9 +18,11 @@ class BrandModel {
 
   String get image => _image;
 
+
   BrandModel.fromSnapshot(DocumentSnapshot snapshot){
     _id = snapshot.data[ID];
     _brand = snapshot.data[BRAND];
     _image = snapshot.data[IMAGE];
+
   }
 }

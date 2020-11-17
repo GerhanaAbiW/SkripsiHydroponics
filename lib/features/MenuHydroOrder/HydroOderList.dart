@@ -5,7 +5,6 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuHydroOrder/DetailType.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCustomDetail.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
-import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
 
 var blueOrder = Color(0xFF03A9F4);
 
@@ -120,10 +119,6 @@ class CardListOrder extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // CircleAvatar(
-                    //   radius: 10,
-                    //   backgroundImage: ExactAssetImage(list[index].image),
-                    // ),
 
                     title: Padding(
                       padding: const EdgeInsets.only(top: 10.0),
@@ -163,26 +158,7 @@ class CardListOrder extends StatelessWidget {
                           ]),
                     ),
 
-                    // title: Padding(
-                    //   padding: const EdgeInsets.only(bottom: 20, top: 10),
-                    //   child: Text(list[index].type,
-                    //       style: TextStyle(
-                    //         fontFamily: 'Montserrat',
-                    //         fontSize: 20.0,
-                    //         fontWeight: FontWeight.bold,
-                    //         color: Colors.blueAccent,
-                    //       )),
-                    // ),
 
-                    // subtitle: Padding(
-                    //   padding: const EdgeInsets.only(top: 0.0),
-                    //   child: Text(list[index].price,
-                    //       style: TextStyle(
-                    //           fontWeight: FontWeight.bold,
-                    //           color: Colors.blueAccent,
-                    //           fontFamily: 'Montserrat',
-                    //           fontSize: 10)),
-                    // ),
                     trailing: Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: Icon(

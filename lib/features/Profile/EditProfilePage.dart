@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/Profile/ProfilePage.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +49,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             color: Colors.white,
             onPressed: () {
               Navigator.pop(context);
-            },
+                },
           ),
           backgroundColor: darkGreenColor,
           elevation: 0,

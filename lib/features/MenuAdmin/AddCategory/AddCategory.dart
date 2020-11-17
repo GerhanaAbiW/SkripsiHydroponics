@@ -68,10 +68,6 @@ class _AddCategoryState extends State<AddCategory> {
             return Card(
               elevation: 10.0,
               child: ListTile(
-//                leading: CircleAvatar(
-//                  radius: 30,
-//                  backgroundImage: ExactAssetImage(categoryModel.image[index]),
-//                ),
                 title: Text(categoryModel.category[index], style: TextStyle(fontSize: 14)),
                 subtitle: Text(phones[index], style: TextStyle(fontSize: 10)),
                 trailing: Icon(Icons.tag_faces),
