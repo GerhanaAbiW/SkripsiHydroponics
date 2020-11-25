@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
-import 'package:hydroponics/features/MenuHydroOrder/DetailType.dart';
+import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
 
 class HydroOrderDetail extends StatefulWidget {
-  final HydroList hydroList;
+  final HydroType hydroType;
 
-  const HydroOrderDetail({Key key, this.hydroList}) : super(key: key);
+  const HydroOrderDetail({Key key, this.hydroType}) : super(key: key);
 
   @override
   _HydroOrderDetailState createState() => _HydroOrderDetailState();
@@ -21,6 +21,11 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
     setState(() => _currentTipeLahan = selectedTipeLahan);
   }
 
+  TextEditingController jumlahPipa = TextEditingController();
+  TextEditingController jumlahLubangController = TextEditingController();
+  TextEditingController nomorHpController = TextEditingController();
+  TextEditingController alamatController = new TextEditingController();
+
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   OrderServices orderServices = OrderServices();
@@ -30,6 +35,15 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
       setState(() => isLoading = true);
       orderServices.createHydroOrder({
         "userId": userId,
+        "address" : alamatController.text,
+        "phone" : nomorHpController.text,
+        "holeQuantity" : jumlahLubangController.text,
+        "pipeQuantity" : jumlahPipa.text,
+        "hydroType" : widget.hydroType.type,
+        "image" : widget.hydroType.image,
+        "price" : widget.hydroType.price,
+        "landType" : _currentTipeLahan
+
       });
       _formKey.currentState.reset();
       setState(() => isLoading = false);
@@ -104,7 +118,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                       left: 15.0,
                       right: 15.0,
                       child: Hero(
-                          tag: widget.hydroList.image,
+                          tag: widget.hydroType.image,
                           child: RotationTransition(
                               turns: AlwaysStoppedAnimation(360),
                               child: Container(
@@ -114,7 +128,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            widget.hydroList.image))),
+                                            widget.hydroType.image))),
                               )))),
                   Positioned(
                     top: 375.0,
@@ -131,7 +145,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text("HydroType: ${widget.hydroList.type}",
+                                  Text("HydroType: ${widget.hydroType.type}",
                                       style: TextStyle(
                                           fontFamily: 'AbrilFatFace',
                                           fontSize: 20.0,
@@ -146,7 +160,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                           color: Colors.grey))
                                 ],
                               ),
-                              Text(widget.hydroList.price,
+                              Text("Rp.${widget.hydroType.price}",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 24.0,
@@ -154,15 +168,18 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                             ],
                           ),
                           SizedBox(height: 4.0),
-                          Text('luas maximum : ${widget.hydroList.area}',
+                          Text('Luas Maximum : ${widget.hydroType.area}',
+                              style: TextStyle(
+                                  fontSize: 12.0, color: Colors.grey)),
+                          Text('Tipe Lahan Tanam : ${widget.hydroType.landType}',
                               style: TextStyle(
                                   fontSize: 12.0, color: Colors.grey)),
                           Text(
-                              "Tingkat Paralon Minimum - Maximum : ${widget.hydroList.paralon}",
+                              "Tingkat Paralon Minimum - Maximum : ${widget.hydroType.pipeQty}",
                               style: TextStyle(
                                   fontSize: 12.0, color: Colors.grey)),
                           Text(
-                              'Jumlah Lubang tanam Minimum - Maximum : ${widget.hydroList.holeQty}',
+                              'Jumlah Lubang tanam Minimum - Maximum : ${widget.hydroType.holeQty}',
                               style:
                                   TextStyle(fontSize: 12.0, color: Colors.grey))
                         ],
@@ -206,18 +223,13 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20.0),
-                              FormTextField(
-                                textLabel: "Luas Lahan",
-                                textHint: "Masukkan Luas Lahan",
-                                //controller: prodcutDescriptionController,
-                              ),
 
-                              SizedBox(height: 16),
+                              SizedBox(height: 20),
                               FormTextField(
                                 textLabel: "jumlah Lubang",
                                 textHint: "Masukkan Jumlah Lubang Tanaman",
-                                //controller: prodcutDescriptionController,
+                                controller: jumlahLubangController,
+                                textType: TextInputType.number
                               ),
                               //),
                               //Container(
@@ -226,7 +238,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                 textType: TextInputType.number,
                                 textLabel: "Nomor HP",
                                 textHint: "Masukkan Nomor HP Anda",
-                                //controller: prodcutDescriptionController,
+                                controller: nomorHpController,
                               ),
                               //),
                               // Container(
@@ -249,7 +261,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                   textType: TextInputType.multiline,
                                   textLabel: "Alamat",
                                   textHint: "Masukkan Alamat Anda",
-                                  //controller: prodcutDescriptionController,
+                                  controller: alamatController,
                                   height: 20.0),
                               // Container(
                               //   child: Text(

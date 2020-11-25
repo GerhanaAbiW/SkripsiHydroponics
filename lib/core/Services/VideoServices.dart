@@ -12,6 +12,7 @@ class VideoService {
     var id = Uuid();
     String videoId = id.v1();
     data["id"] = videoId;
+    data["createdAt"] = FieldValue.serverTimestamp();
     _firestore.collection(collection).document(videoId).setData(data);
   }
 
@@ -31,10 +32,10 @@ class VideoService {
         return listVideos;
       });
 
-  void editVideo(Map<String, dynamic> data) {
-    var id = Uuid();
-    String videoId = id.v1();
-    data["id"] = videoId;
+  void editVideo(Map<String, dynamic> data, String videoId) {
     _firestore.collection(collection).document(videoId).updateData(data);
+  }
+  void deleteVideo(String videoId) {
+    _firestore.collection(collection).document(videoId).delete();
   }
 }

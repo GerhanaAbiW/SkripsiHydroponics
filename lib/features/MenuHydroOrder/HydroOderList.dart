@@ -5,6 +5,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuHydroOrder/DetailType.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCustomDetail.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
+import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 
 var blueOrder = Color(0xFF03A9F4);
 
@@ -22,13 +23,13 @@ class _HydroOrderListState extends State<HydroOrderList> {
 
   List<HydroList> listSection = [
     HydroList("Small", "images/hydro2.jpeg", "10x20x30", "Rp 100.000",
-        "2 - 4 tingkatan", "4 - 6 lubang"),
+        "2 - 4 tingkatan", "4 - 6 lubang", "Horizontal/Vertical"),
     HydroList("Medium", "images/bayam.jpeg", "10x50x30", "Rp 150.000",
-        "2 - 4 tingkatan", "4 - 6 lubang"),
+        "2 - 4 tingkatan", "4 - 6 lubang","Horizontal/Vertical"),
     HydroList("Large", "images/bayam.jpeg", "10x20x90", "Rp 250.000",
-        "2 - 4 tingkatan", "4 - 6 lubang"),
+        "2 - 4 tingkatan", "4 - 6 lubang","Horizontal/Vertical"),
     HydroList("Custom", "images/bayam.jpeg", "10x20x20", "> Rp 300.000",
-        "2 - 4 tingkatan", "4 - 6 lubang")
+        "2 - 4 tingkatan", "4 - 6 lubang","Horizontal/Vertical")
   ];
 
   @override
@@ -97,10 +98,10 @@ class CardListOrder extends StatelessWidget {
                       changeScreen(
                           context,
                           HydroOrderDetail(
-                            hydroList: list[index],
+                              hydroType: types[index]
                           ));
                     } else {
-                      changeScreen(context, HydroOrderCustomDetail());
+                      changeScreen(context, HydroOrderCustomDetail(hydroType: types[index]));
                     }
                   },
                   child: ListTile(

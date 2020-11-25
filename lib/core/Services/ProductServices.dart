@@ -20,7 +20,16 @@ class ProductServices {
     var id = Uuid();
     String productId = id.v1();
     data["id"] = productId;
+    data["createdAt"] = FieldValue.serverTimestamp();
     _firestore.collection(collection).document(productId).setData(data);
+  }
+
+  void updateProduct(Map<String, dynamic> data, String productId) {
+    data["updatedAt"] = FieldValue.serverTimestamp();
+    _firestore.collection(collection).document(productId).updateData(data);
+  }
+  void deleteProduct(Map<String, dynamic> data, String productId) {
+    _firestore.collection(collection).document(productId).delete();
   }
 
   Future<List<ProductModel>> getProductsOfCategory({String category}) async =>

@@ -11,7 +11,7 @@ class MyPlantsModel {
   static const DosageOfFertilizer = "DosageOfFertilizer";
   static const HarvestTime = "HarvestTime";
   static const PestsType = "PestType";
-  static const DATE = "dateTime";
+  static const DATE = "Date";
 
 
   String _id;

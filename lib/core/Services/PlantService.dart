@@ -12,6 +12,7 @@ class PlantService {
     var id = Uuid();
     String plantId = id.v1();
     data["id"] = plantId;
+    data["createdAt"] = FieldValue.serverTimestamp();
     _firestore.collection(collection).document(plantId).setData(data);
   }
 
@@ -26,10 +27,10 @@ class PlantService {
         return listPlants;
       });
 
-  void editPlant(Map<String, dynamic> data) {
-    var id = Uuid();
-    String plantId = id.v1();
-    data["id"] = plantId;
+  void editPlant(Map<String, dynamic> data, String plantId) {
     _firestore.collection(collection).document(plantId).updateData(data);
+  }
+  void deletePlant(String plantId) {
+    _firestore.collection(collection).document(plantId).delete();
   }
 }

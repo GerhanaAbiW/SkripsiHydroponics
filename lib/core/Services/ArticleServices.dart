@@ -31,10 +31,10 @@ class ArticleService {
         return listArticles;
       });
 
-  void editArticle(Map<String, dynamic> data) {
-    var id = Uuid();
-    String articleId = id.v1();
-    data["id"] = articleId;
+  void editArticle(Map<String, dynamic> data, String articleId) {
     _firestore.collection(collection).document(articleId).updateData(data);
+  }
+  void deleteArticle(String articleId) {
+    _firestore.collection(collection).document(articleId).delete();
   }
 }

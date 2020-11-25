@@ -266,13 +266,13 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                       jenisPupuk: jenisPupuk);
                               if (success) {
                                 _key.currentState.showSnackBar(
-                                    SnackBar(content: Text("Added to Cart!")));
+                                    SnackBar(content: Text("Added to My Record Plants!")));
                                 userProvider.reloadUserModel();
                                 appProvider.changeIsLoading();
                                 return;
                               } else {
                                 _key.currentState.showSnackBar(SnackBar(
-                                    content: Text("Not added to Cart!")));
+                                    content: Text("Not added to My Record Plants!")));
                                 appProvider.changeIsLoading();
                                 return;
                               }

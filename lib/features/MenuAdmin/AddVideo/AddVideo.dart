@@ -47,7 +47,6 @@ class _AddVideoViewState extends State<AddVideoView> {
         "author": authorController.text,
         "date": dateController.text,
         "description": descController.text,
-        "CreatedAt" : DateTime.now().microsecondsSinceEpoch
       });
       _formKey.currentState.reset();
       setState(() => isLoading = false);

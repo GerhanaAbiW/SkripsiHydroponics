@@ -264,7 +264,6 @@ class _AddProductsState extends State<AddProducts> {
             "quantity": int.parse(quatityController.text),
             "brand": _currentBrand,
             "category": _currentCategory,
-            "CreatedAt" : DateTime.now().microsecondsSinceEpoch
           });
 
           _formKey.currentState.reset();

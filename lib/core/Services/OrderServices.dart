@@ -22,17 +22,28 @@ class OrderServices{
       "id": id,
       "cart": convertedCart,
       "total": totalPrice,
-      "createdAt": DateTime.now().millisecondsSinceEpoch,
+      "createdAt": FieldValue.serverTimestamp(),
       "description": description,
       "status": status
     });
   }
 
+  void updateOrder(String id,Map<String, dynamic> data) {
+    data["updatedAt"] =  FieldValue.serverTimestamp();
+    _firestore.collection(collection).document(id).updateData(data);
+  } 
+  
   void createHydroOrder(Map<String, dynamic> data) {
     var uuid = Uuid();
     String id = uuid.v4();
     data["id"] = id;
+    data["createdAt"] =  FieldValue.serverTimestamp();
     _firestore.collection(collection).document(id).setData(data);
+  }
+
+  void updateHydroOrder(String id,Map<String, dynamic> data) {
+    data["updatedAt"] =  FieldValue.serverTimestamp();
+    _firestore.collection(collection).document(id).updateData(data);
   }
 
   Future<List<OrderModel>> getUserOrders({String userId}) async =>
@@ -60,4 +71,5 @@ class OrderServices{
         return orders;
       });
 
+  
 }

@@ -107,7 +107,6 @@ class _AddPlantViewState extends State<AddPlantView> {
             "DosageOfFertilizer": dosisPupukController.text,
             "HarvestTime": waktuPanenController.text,
             "PestType": jenisHamaController.text,
-            "CreatedAt" : DateTime.now().microsecondsSinceEpoch
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);

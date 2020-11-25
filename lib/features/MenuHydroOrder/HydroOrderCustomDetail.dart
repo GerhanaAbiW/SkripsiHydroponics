@@ -1,238 +1,217 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Providers/UserProvider.dart';
-import 'package:hydroponics/features/Widget/AppTools.dart';
-import 'package:provider/provider.dart';
-
-var blueOrder = Color(0xFF03A9F4);
+import 'package:flutter/services.dart';
+import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 
 class HydroOrderCustomDetail extends StatefulWidget {
+
+  final HydroType hydroType;
+
+  HydroOrderCustomDetail({this.hydroType});
+
+  @override
   _HydroOrderCustomDetailState createState() => _HydroOrderCustomDetailState();
 }
 
 class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
-  final List<Map<String, dynamic>> areaItems = [
-    {
-      'value': 'Vertikal',
-      'label': 'Vertikal',
-      // 'icon': Icon(Icons.stop),
-    },
-    {
-      'value': 'Horizontal',
-      'label': 'Horizontal',
-      // 'icon': Icon(Icons.fiber_manual_record),
-      // 'textStyle': TextStyle(color: Colors.red),
-    },
-  ];
-  @override
-  List<DropdownMenuItem<String>> typelahanDropdown =
-      <DropdownMenuItem<String>>[];
-  List<String> lahanType = ['Vertical', 'Horizontal'];
-  String _currentTipeLahan;
-
-  void initState() {
-    _getTipeLahan();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserProvider>(
-      builder: (context, model, child) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: blueOrder,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text(
-            'Order Custom Area',
-            style: CustomTextStyle.textFormFieldBold
-                .copyWith(color: Colors.white, fontSize: 21),
-          ),
-        ),
-        body: ListView(
-          // child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "Gambar Refrensi",
-                style: new TextStyle(
-                    fontWeight: FontWeight.w700, color: Colors.green),
-              ),
-            ),
-            FlatButton(
-              padding: EdgeInsets.all(0),
-              child: Container(
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: Container(
-                        width: 300,
-                        height: 300, //ScreenUtil().setWidth(88),
-                        child: model.profileImage != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: const Radius.circular(2.0),
-                                    topRight: const Radius.circular(2.0)
-                                    //ScreenUtil().setWidth(44)
-                                    ),
-                                child: Image.memory(
-                                  model.profileImage,
-                                  fit: BoxFit.cover,
-                                  height: 300, //ScreenUtil().setWidth(88),
-                                ),
-                              )
-                            : model.imageUrl != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: const Radius.circular(2.0),
-                                        topRight: const Radius.circular(2.0)),
-                                    child: Image.network(
-                                      model.imageUrl,
-                                      fit: BoxFit.cover,
-                                      height:
-                                          // ScreenUtil().setWidth(88),
-                                          300,
-                                    ),
-                                  )
-                                : Image.asset(
-                                    "images/no-image-icon-blue.png",
-                                  ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 30.0,
+                      right: 30.0,
+                      top: 60.0,
+                    ),
+                    height: 520.0,
+                    color: Color(0xFF32A060),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 30.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Icon(
+                              Icons.shopping_cart,
+                              size: 30.0,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20.0),
+                        Text(
+                         " widget.plant.category.toUpperCase()",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          "widget.plant.name",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 40.0),
+                        Text(
+                          'FROM',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          "{widget.plant.price}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 40.0),
+                        Text(
+                          'SIZE',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          "widget.plant.size",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 40.0),
+                        RawMaterialButton(
+                          padding: EdgeInsets.all(20.0),
+                          shape: CircleBorder(),
+                          elevation: 2.0,
+                          fillColor: Colors.black,
+                          child: Icon(
+                            Icons.add_shopping_cart,
+                            color: Colors.white,
+                            size: 35.0,
+                          ),
+                          onPressed: () => print('Add to cart'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    right: 20.0,
+                    bottom: 30.0,
+                    child: Hero(
+                      tag: "widget.plant.imageUrl",
+                      child: Image(
+                        height: 280.0,
+                        width: 280.0,
+                        image: AssetImage("widget.plant.imageUrl"),
+                        fit: BoxFit.cover,
                       ),
-//Container(width: 24, child: Icon(Icons.camera_alt))
-                      // Image.asset('images/asset_profile/ic_about_us.png'),
-                      // ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                height: 400.0,
+                transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 30.0,
+                        right: 30.0,
+                        top: 40.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'All to know...',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            "widget.plant.description",
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                        vertical: 40.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Details',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            'Plant height: 35-45cm',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Text(
+                            'Nursery pot width: 12cm',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              onPressed: () {
-                print("Pressed");
-                model.selectImage();
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  //Container(
-                  FormTextField(
-                    textLabel: "Luas Lahan",
-                    textHint: "Masukkan Luas Lahan",
-                    //controller: prodcutDescriptionController,
-                  ),
-                  //),
-                  // Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //children: <Widget>[
-
-                  // ]),
-                  //Container(
-                  SizedBox(height: 16),
-                  FormTextField(
-                    textLabel: "jumlah Lubang",
-                    textHint: "Masukkan Jumlah Lubang Tanaman",
-                    //controller: prodcutDescriptionController,
-                  ),
-                  //),
-                  //Container(
-                  SizedBox(height: 16),
-                  FormTextField(
-                    textType: TextInputType.number,
-                    textLabel: "Nomor HP",
-                    textHint: "Masukkan Nomor HP Anda",
-                    //controller: prodcutDescriptionController,
-                  ),
-                  //),
-                  // Container(
-                  //   child:
-                  SizedBox(height: 16),
-                  DropdownForm(
-                      textLabel: "Tipe Lahan",
-                      textHint: "Masukkan Type Lahan",
-                      selectedItem: _currentTipeLahan,
-                      dropDownItems: areaItems,
-                      changedDropDownItems: changeSelectedCategory),
-                  SizedBox(height: 16),
-                  MultilineFormTextField(
-                      textType: TextInputType.multiline,
-                      textLabel: "Alamat",
-                      textHint: "Masukkan Alamat Anda",
-                      //controller: prodcutDescriptionController,
-                      height: 20.0),
-
-                  // ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Center(
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(10),
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: blueOrder),
-                  child: Text(
-                    'ORDER',
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            )
-          ],
+            ],
+          ),
         ),
       ),
-      //)
     );
   }
-
-  _getTipeLahan() {
-    //List<DocumentSnapshot> data = await _categoryService.getCategories();
-    print(lahanType.length);
-    setState(() {
-      typelahanDropdown = getLahanDropdown();
-      //_currentCategory = categories[0];
-    });
-  }
-
-  changeSelectedCategory(String selectedTipeLahan) {
-    setState(() => _currentTipeLahan = selectedTipeLahan);
-  }
-
-  List<DropdownMenuItem<String>> getLahanDropdown() {
-    List<DropdownMenuItem<String>> items = new List();
-    for (int i = 0; i < lahanType.length; i++) {
-      setState(() {
-        items.insert(0,
-            DropdownMenuItem(child: Text(lahanType[i]), value: lahanType[i]));
-      });
-    }
-    return items;
-  }
-
-  var border = OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(4)),
-      borderSide: BorderSide(width: 1, color: Colors.grey));
 }

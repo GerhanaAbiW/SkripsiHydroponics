@@ -10,7 +10,7 @@ class ProductModel{
   static const QUANTITY = "quantity";
   static const BRAND = "brand";
   static const RATING = "rating";
-  static const DATE = "dateTime";
+  static const DATE = "date";
 
 
 

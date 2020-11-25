@@ -7,8 +7,9 @@ class HydroList {
   String price;
   String paralon;
   String holeQty;
+  String landType;
 
 
-  HydroList(this.type, this.image, this.area, this.price, this.holeQty,this.paralon);
+  HydroList(this.type, this.image, this.area, this.price, this.holeQty,this.paralon, this.landType);
 }
 

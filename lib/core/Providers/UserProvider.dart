@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsUserRecord.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -177,7 +176,8 @@ class UserProvider with ChangeNotifier {
         "DosageOfFertilizer": plant.dosageFertilizer,
         "HarvestTime": plant.harvestTime,
         "PestType": plant.pestsType,
-        "CreatedAt" : DateTime.now().microsecondsSinceEpoch
+        "Date" : DateTime.now().toString(),
+        "CreatedAt" : FieldValue.serverTimestamp()
       };
 
       MyPlantsModel item = MyPlantsModel.fromMap(plantItem);
@@ -241,7 +241,10 @@ class UserProvider with ChangeNotifier {
         "RecordTimeOfFertilizer": waktuPupuk,
         "RecordDosageFertilizer": dosisPupuk,
         "RecordHarvestTime": waktuPanen,
-        "RecordPestsType": waktuSemai
+        "RecordPestsType": waktuSemai,
+        "Date" : DateTime.now().toString(),
+        "CreatedAt" : FieldValue.serverTimestamp()
+
       };
 
       MyPlantsRecordModel item = MyPlantsRecordModel.fromMap(plantItem);

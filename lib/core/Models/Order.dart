@@ -7,7 +7,7 @@ class OrderModel {
   static const USER_ID = "userId";
   static const TOTAL = "total";
   static const STATUS = "status";
-  static const DATE_TIME = "dateTime";
+  static const DATE_TIME = "date";
 
 
   String _id;
