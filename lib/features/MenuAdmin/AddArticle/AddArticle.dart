@@ -5,8 +5,6 @@ import 'package:hydroponics/core/Services/ArticleServices.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-
 class AddArticleView extends StatefulWidget {
   @override
   _AddArticleViewState createState() => _AddArticleViewState();
@@ -138,7 +136,7 @@ class _AddArticleViewState extends State<AddArticleView> {
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
-                                  "images/no-image-icon.png",
+                                  "images/no_image_icon.png",
                                   fit: BoxFit.contain,
                                   width: MediaQuery.of(context).size.width,
                                   height:

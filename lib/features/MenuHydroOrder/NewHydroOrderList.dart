@@ -19,7 +19,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(initialIndex: 0, length: 5, vsync: this);
+    _tabController = TabController(initialIndex: 0, length: 4, vsync: this);
     _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
   }
 

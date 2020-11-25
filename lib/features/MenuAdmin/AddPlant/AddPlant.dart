@@ -146,7 +146,7 @@ class _AddPlantViewState extends State<AddPlantView> {
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: Image.asset(
-                                    "images/no-image-icon.png",
+                                    "images/no_image_icon.png",
                                     fit: BoxFit.contain,
                                     width: MediaQuery.of(context).size.width,
                                     height:

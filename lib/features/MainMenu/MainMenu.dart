@@ -5,10 +5,10 @@ import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
+import 'package:hydroponics/features/MenuHydroOrder/NewHydroOrderList.dart';
 import 'package:hydroponics/features/MenuLearning/MenuLearning.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
-import 'package:hydroponics/features/MenuHydroOrder/HydroOderList.dart';
 import 'package:provider/provider.dart';
 
 class MainMenu extends StatefulWidget {
@@ -93,7 +93,7 @@ class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin
                 MyItems(
                     Icons.shopping_cart, "Market", 0xFF03A9F4, MenuMarket()),
                 MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4,
-                    HydroOrderList()),
+                    NewHydroOrderList()),
                 MyItems(Icons.library_books, "Learning", 0xFF3F51B5,
                     MenuLearning()),
                 MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342,
@@ -117,7 +117,7 @@ class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin
                 MyItems(
                     Icons.shopping_cart, "Market", 0xFF03A9F4, MenuMarket()),
                 MyItems(Icons.shopping_basket, "Hydro Order", 0xFF03A9F4,
-                    HydroOrderList()),
+                    NewHydroOrderList()),
                 MyItems(Icons.library_books, "Learning", 0xFF3F51B5,
                     MenuLearning()),
                 MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342,

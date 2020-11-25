@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Article.dart';
-import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Services/ArticleServices.dart';
-import 'package:hydroponics/core/Services/ProductServices.dart';
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
+
 
 class ArticleProvider with ChangeNotifier {
   List<Article> _articles = [];
