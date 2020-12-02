@@ -45,6 +45,8 @@ class ProductServices {
         return products;
       });
 
+
+
   Future<List<ProductModel>> searchProducts({String productName}) {
     // code to convert the first character to uppercase
     //String searchKey = productName[0].toUpperCase() + productName.substring(1);

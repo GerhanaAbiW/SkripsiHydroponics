@@ -12,14 +12,14 @@ class NewHydroOrderList extends StatefulWidget {
 
 class _NewHydroOrderListState extends State<NewHydroOrderList>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  // TabController _tabController;
   PageController _pageController;
   int _selectedPage = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(initialIndex: 0, length: 4, vsync: this);
+    // _tabController = TabController(initialIndex: 0, length: 5, vsync: this);
     _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
   }
 
@@ -42,7 +42,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
       },
       child: GestureDetector(
         onTap: () {
-          if(index<2){
+          if(index<3){
             changeScreen(context, HydroOrderDetail(
               hydroType: types[index],
             ));
@@ -126,21 +126,21 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
                 ],
               ),
             ),
-            Positioned(
-              bottom: 4.0,
-              child: RawMaterialButton(
-                padding: EdgeInsets.all(15.0),
-                shape: CircleBorder(),
-                elevation: 2.0,
-                fillColor: Colors.black,
-                child: Icon(
-                  Icons.add_shopping_cart,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                onPressed: () => print('Add to cart'),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 4.0,
+            //   child: RawMaterialButton(
+            //     padding: EdgeInsets.all(15.0),
+            //     shape: CircleBorder(),
+            //     elevation: 2.0,
+            //     fillColor: Colors.black,
+            //     child: Icon(
+            //       Icons.add_shopping_cart,
+            //       color: Colors.white,
+            //       size: 30.0,
+            //     ),
+            //     onPressed: () => print('Add to cart'),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -159,88 +159,101 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Icon(
-                    Icons.menu,
-                    size: 30.0,
-                    color: Colors.grey,
+                  GestureDetector(
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 30.0,
+                      color: Colors.grey,
+                    ),
+                    onTap: ()=>Navigator.pop(context),
                   ),
-                  Icon(
-                    Icons.shopping_cart,
-                    size: 30.0,
-                    color: Colors.black,
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'HydroOrder',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                ],
+            //       Icon(
+            //         Icons.shopping_cart,
+            //         size: 30.0,
+            //         color: Colors.black,
+            //       ),
+                 ],
               ),
-            ),
-            SizedBox(height: 20.0),
+             ),
+
+            SizedBox(height: 10.0),
             Padding(
               padding: EdgeInsets.only(left: 30.0),
               child: Text(
-                'Top Picks',
+                'Choose type of hydroland that you want ',
                 style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
-            TabBar(
-              controller: _tabController,
-              indicatorColor: Colors.transparent,
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey.withOpacity(0.6),
-              labelPadding: EdgeInsets.symmetric(horizontal: 35.0),
-              isScrollable: true,
-              tabs: <Widget>[
-                Tab(
-                  child: Text(
-                    'Top',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Outdoor',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Indoor',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'New Arrivals',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Limited Edition',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // TabBar(
+            //   controller: _tabController,
+            //   indicatorColor: Colors.transparent,
+            //   labelColor: Colors.black,
+            //   unselectedLabelColor: Colors.grey.withOpacity(0.6),
+            //   labelPadding: EdgeInsets.symmetric(horizontal: 35.0),
+            //   isScrollable: true,
+            //   tabs: <Widget>[
+            //     Tab(
+            //       child: Text(
+            //         'Top',
+            //         style: TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //     Tab(
+            //       child: Text(
+            //         'Outdoor',
+            //         style: TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //     Tab(
+            //       child: Text(
+            //         'Indoor',
+            //         style: TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //     Tab(
+            //       child: Text(
+            //         'New Arrivals',
+            //         style: TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //     Tab(
+            //       child: Text(
+            //         'Limited Edition',
+            //         style: TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: 20.0),
             Container(
               height: 500.0,

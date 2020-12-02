@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMarket/ProductDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
@@ -40,11 +42,16 @@ class _ProductsState extends State<Products> {
 
 
 
-class NewProductCard extends StatelessWidget {
+class NewProductCard extends StatefulWidget {
   final ProductModel product;
 
   const NewProductCard({Key key, this.product}) : super(key: key);
 
+  @override
+  _NewProductCardState createState() => _NewProductCardState();
+}
+
+class _NewProductCardState extends State<NewProductCard> {
   getRatingStar(rating, index) {
     if (index <= rating) {
       return Icon(
@@ -60,119 +67,139 @@ class NewProductCard extends StatelessWidget {
       );
     }
   }
-
-
+  bool favorite = false;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        changeScreen(
-            context,
-            ProductDetails(
-              product: product,
-            ));
-      },
-      child: Container(
-        height: 200,
-        // width: 200,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10)),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey[300],
-                  offset: Offset(-2, -1),
-                  blurRadius: 5),
-            ]),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                        child: Align(
-                      alignment: Alignment.center,
-                      child: Loading(),
-                    )),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image: product.picture[0],
-                        height: MediaQuery.of(context).size.height,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomText(
-                    text: product.name ?? "id null",
+    final user = Provider.of<UserProvider>(context);
+      return GestureDetector(
+        onTap: () {
+          changeScreen(
+              context,
+              ProductDetails(
+                product: widget.product,
+              ));
+        },
+        child: Container(
+          height: 200,
+          // width: 200,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[300],
+                    offset: Offset(-2, -1),
+                    blurRadius: 5),
+              ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Loading(),
+                          )),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: widget.product.picture[0],
+                          height: MediaQuery.of(context).size.height,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: GestureDetector(
-                          onTap: () {
-
-                          },
-                          child: Icon(
-                            Icons.favorite,
-                            size: 18,
-                          )),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: GestureDetector(
-                          onTap: () {
-                          },
-                          child: Icon(
-                            Icons.add_shopping_cart,
-                            size: 18,
-                          )),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                getRatingStar(product.rating, 1),
-                getRatingStar(product.rating, 2),
-                getRatingStar(product.rating, 3),
-                getRatingStar(product.rating, 4),
-                getRatingStar(product.rating, 5),
-                SizedBox(width: 3.0),
-                Text(product.rating.roundToDouble().toString(),
-                    style: TextStyle(fontSize: 14.0, color: Color(0xFF199693))),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: CustomText(
-                text: "\$${product.price}",
-                weight: FontWeight.bold,
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomText(
+                      text: widget.product.name ?? "id null",
+                    ),
+                  ),
+                  // Row(
+                  //   children: <Widget>[
+                      // Padding(
+                      //   padding: EdgeInsets.all(8),
+                      //   child: favorite==true?GestureDetector(
+                      //       onTap: () {
+                      //         setState(() {
+                      //           favorite = false;
+                      //         });
+                      //         // user.removeFromFavoriteProduct(product: widget.product)
+                      //       },
+                      //       child: Icon(
+                      //         Icons.favorite,
+                      //         color: Colors.red,
+                      //         size: 18,
+                      //       )):
+                      //   GestureDetector(
+                      //       onTap: () {
+                      //         user.addToFavoriteProduct(product: widget.product);
+                      //         setState(() {
+                      //           favorite = true;
+                      //         });
+                      //       },
+                      //       child: Icon(
+                      //         Icons.favorite,
+                      //         color: Colors.grey,
+                      //         size: 18,
+                      //       ))
+                      // ),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: GestureDetector(
+                            onTap: () {
+                              user.addToCart(product: widget.product, qty: 1);
+                            },
+                            child: Icon(
+                              Icons.add_shopping_cart,
+                              size: 18,
+                            )),
+                      )
+                  //   ],
+                  // ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  getRatingStar(widget.product.rating, 1),
+                  getRatingStar(widget.product.rating, 2),
+                  getRatingStar(widget.product.rating, 3),
+                  getRatingStar(widget.product.rating, 4),
+                  getRatingStar(widget.product.rating, 5),
+                  SizedBox(width: 3.0),
+                  Text(widget.product.rating.roundToDouble().toString(),
+                      style: TextStyle(fontSize: 14.0, color: Color(0xFF199693))),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: CustomText(
+                  text: "\$${widget.product.price}",
+                  weight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+
+
+
   }
 }
 

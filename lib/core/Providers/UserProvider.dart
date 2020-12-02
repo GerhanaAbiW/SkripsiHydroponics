@@ -1,9 +1,13 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
+import 'package:hydroponics/core/Models/Payment.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
+import 'package:hydroponics/core/Services/PaymentService.dart';
+import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -22,16 +26,15 @@ import 'package:http/http.dart' as http;
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
-  Uint8List profileImage;
-  String imageUrl;
-  http.MultipartFile image;
-  PickedFile pickedImage;
+
 
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
   UserServices _userServices = UserServices();
   OrderServices _orderServices = OrderServices();
+  PaymentServices _paymentServices = PaymentServices();
+  ProductServices _productServices = ProductServices();
   Firestore _firestore = Firestore.instance;
   UserModel _userModel;
 
@@ -44,6 +47,7 @@ class UserProvider with ChangeNotifier {
 
   // public variables
   List<OrderModel> orders = [];
+  List<PaymentModel> payments = [];
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
@@ -51,13 +55,7 @@ class UserProvider with ChangeNotifier {
 
   //init() async {}
 
-  selectImage() async {
-    pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
 
-    profileImage = await pickedImage.readAsBytes();
-
-    notifyListeners();
-  }
 
   Future<bool> signIn(String email, String password) async {
     try {
@@ -149,6 +147,105 @@ class UserProvider with ChangeNotifier {
 
     try {
       _userServices.removeFromCart(userId: _user.uid, cartItem: cartItem);
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+
+  Future<bool> addToCart2({FavoriteProductModel product, int qty}) async {
+    try {
+      var uuid = Uuid();
+      String cartItemId = uuid.v4();
+      List<CartItemModel> cart = _userModel.cart;
+
+      Map cartItem = {
+        "id": cartItemId,
+        "name": product.name,
+        "image": product.picture[0],
+        "productId": product.id,
+        "price": product.price,
+        "quantity": qty,
+      };
+
+      CartItemModel item = CartItemModel.fromMap(cartItem);
+//      if(!itemExists){
+      print("CART ITEMS ARE: ${cart.toString()}");
+      _userServices.addToCart(userId: _user.uid, cartItem: item);
+//      }
+
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+
+  Future<bool> addToFavoriteProduct({ProductModel product}) async {
+    try {
+      var uuid = Uuid();
+      String favoriteItemId = uuid.v4();
+      List<FavoriteProductModel> favorite = _userModel.favorite;
+      bool fav = true;
+
+      Map favoriteItem = {
+        "id" : favoriteItemId,
+        "productID" : product.id,
+        "name": product.name,
+        "price": product.price,
+        "picture": product.picture,
+        "description": product.description,
+        "rating": product.rating,
+        "quantity": product.quantity,
+        "brand": product.brand,
+        "category": product.category,
+      };
+
+      FavoriteProductModel item = FavoriteProductModel.fromMap(favoriteItem);
+//      if(!itemExists){
+      print("CART ITEMS ARE: ${favorite.toString()}");
+
+      _userServices.addToFavorite(userId: _user.uid, favoriteProductModel: item);
+      _productServices.updateProduct({
+        "id" : product.id,
+        "name": product.name,
+        "price": product.price,
+        "picture": product.picture,
+        "description": product.description,
+        "rating": product.rating,
+        "quantity": product.quantity,
+        "brand": product.brand,
+        "category": product.category,
+        //"favorite": fav
+      }, product.id);
+//      }
+
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+
+  Future<bool> removeFromFavoriteProduct({FavoriteProductModel product}) async {
+    print("THE PRODUC IS: ${product.toString()}");
+    bool fav = false;
+
+    try {
+      _userServices.removeFromFavorite(userId: _user.uid, favoriteProductModel: product);
+      _productServices.updateProduct({
+        "id" : product.id,
+        "name": product.name,
+        "price": product.price,
+        "picture": product.picture,
+        "description": product.description,
+        "rating": product.rating,
+        "quantity": product.quantity,
+        "brand": product.brand,
+        "category": product.category,
+        //"favorite": fav
+      }, product.id);
       return true;
     } catch (e) {
       print("THE ERROR ${e.toString()}");
@@ -276,15 +373,21 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  getPayments() async {
+    payments = await _paymentServices.getUserPayments(userId: _user.uid);
+    notifyListeners();
+  }
+
   Future<void> reloadUserModel() async {
     _userModel = await _userServices.getUserById(_user.uid);
     notifyListeners();
   }
 
-  Future<void> updateUser(String name, String email) async {
+  Future<void> updateUser(String name, String email, String img) async {
     _firestore.collection('users').document(_user.uid).updateData({
       "name": name,
       "email": email,
+      "userPicture" : img,
       "role": "user",
       "uid": _user.uid,
       "stripeId": ""

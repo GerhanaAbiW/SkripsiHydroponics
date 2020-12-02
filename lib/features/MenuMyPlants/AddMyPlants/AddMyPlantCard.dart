@@ -106,6 +106,7 @@ class AddMyPlantCard extends StatelessWidget {
                           ]),
                     )
                   ])),
+
                 ],
               ))),
     );

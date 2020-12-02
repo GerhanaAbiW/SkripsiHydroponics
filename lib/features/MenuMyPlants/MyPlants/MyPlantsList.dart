@@ -22,7 +22,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final appProvider = Provider.of<AppProvider>(context);
+
     return Scaffold(
       backgroundColor: Color(0xFF8BC34A),
       body: Column(

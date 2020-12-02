@@ -64,7 +64,7 @@ class _DashBoardState extends State<DashBoard> {
                 activeColor: Color(0xFF689F38)),
             BottomNavyBarItem(
                 icon: Icon(Icons.message),
-                title: Text('Messages'),
+                title: Text('Payment'),
                 activeColor: Colors.pink),
             BottomNavyBarItem(
                 icon: Icon(Icons.assignment),

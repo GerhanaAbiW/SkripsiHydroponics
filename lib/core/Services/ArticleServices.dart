@@ -14,13 +14,7 @@ class ArticleService {
     _firestore.collection(collection).document(articleId).setData(data);
   }
 
-//  Future<List<Article>> getListArticles() =>
-//      _firestore.collection(collection).getDocuments().then((snap) {
-//        List<Article> listArticles = [];
-//        snap.documents.map(
-//            (snapshot) => listArticles.add(Article.fromSnapshot(snapshot)));
-//        return listArticles;
-//      });
+
 
   Future<List<Article>> getListArticles() async =>
       _firestore.collection(collection).getDocuments().then((result) {

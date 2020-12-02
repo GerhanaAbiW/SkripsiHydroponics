@@ -1,23 +1,23 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Models/Product.dart';
+import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:provider/provider.dart';
 
-class ProductDetails extends StatefulWidget {
-  final ProductModel product;
+class FavoriteProductDetails extends StatefulWidget {
+  final FavoriteProductModel product;
 
-  const ProductDetails({Key key, this.product}) : super(key: key);
+  const FavoriteProductDetails({Key key, this.product}) : super(key: key);
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _FavoriteProductDetailsState createState() => _FavoriteProductDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _FavoriteProductDetailsState extends State<FavoriteProductDetails> {
   final _key = GlobalKey<ScaffoldState>();
   int qty = 0;
 
@@ -52,7 +52,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed: () {
-            changeScreen(context, MenuMarket());
+            backScreen(context);
           },
         ),
         backgroundColor: Color(0xFF2b961f),
@@ -251,7 +251,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
             child:
-                new Text("product name", style: TextStyle(color: Colors.grey)),
+            new Text("product name", style: TextStyle(color: Colors.grey)),
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
@@ -262,7 +262,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
             child:
-                new Text("product brand", style: TextStyle(color: Colors.grey)),
+            new Text("product brand", style: TextStyle(color: Colors.grey)),
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
@@ -289,7 +289,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: new MaterialButton(
               onPressed: () async {
                 appProvider.changeIsLoading();
-                bool success = await userProvider.addToCart(
+                bool success = await userProvider.addToCart2(
                     product: widget.product, qty: qty);
                 if (success) {
                   _key.currentState
@@ -321,88 +321,3 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 }
-
-//class SimilarProduct extends StatefulWidget {
-//  @override
-//  _SimilarProductState createState() => _SimilarProductState();
-//}
-//
-//class _SimilarProductState extends State<SimilarProduct> {
-//  var productList = [
-//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-//    {"name": "Bayam", "picture": "images/bayam.jpeg", "price": "Rp.100"},
-//  ];
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return GridView.builder(
-//      itemCount: productList.length,
-//      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-//        crossAxisCount: 2,
-//      ),
-//      itemBuilder: (BuildContext context, int index) {
-//        return SimilarSinglePoduct(
-//          productPicture: productList[index]["picture"],
-//          productName: productList[index]["name"],
-//          productPrice: productList[index]["price"],
-//        );
-//      },
-//    );
-//  }
-//}
-//
-//class SimilarSinglePoduct extends StatelessWidget {
-//  final productPicture;
-//  final productName;
-//  final productPrice;
-//
-//  SimilarSinglePoduct(
-//      {this.productPicture, this.productName, this.productPrice});
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Card(
-//      child: Hero(
-//          tag: new Text("ProductDetail"),
-//          child: Material(
-//              child: InkWell(
-//            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-//                builder: (context) => new ProductDetails(
-//                      //parsing data
-//                      productDetailName: productName,
-//                      productDetailPicture: productPicture,
-//                      productDetailPrice: productPrice,
-//                    ))),
-//            child: GridTile(
-//              footer: Container(
-//                color: Colors.white70,
-//                child: ListTile(
-//                  leading: Text(
-//                    productName,
-//                    style: TextStyle(fontWeight: FontWeight.bold),
-//                  ),
-//                  title: Text(
-//                    "\$$productPrice",
-//                    style: TextStyle(
-//                        color: Colors.green, fontWeight: FontWeight.w800),
-//                  ),
-//                  subtitle: Text(
-//                    "\$$productPrice",
-//                    style: TextStyle(
-//                        color: Colors.black54,
-//                        fontWeight: FontWeight.w800,
-//                        decoration: TextDecoration.lineThrough),
-//                  ),
-//                ),
-//              ),
-//              child: Image.asset(
-//                productPicture,
-//                fit: BoxFit.cover,
-//              ),
-//            ),
-//          ))),
-//    );
-//  }
-//}

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
+import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class MyPlantListCard extends StatelessWidget {
   final MyPlantsModel myPlantsModel;
@@ -9,6 +13,7 @@ class MyPlantListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Container(
       //width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
@@ -51,7 +56,24 @@ class MyPlantListCard extends StatelessWidget {
                             //       )
                             //     :
 
-                            Image.asset("images/plant.png"),
+                        Stack(
+                          children: <Widget>[
+                            Positioned.fill(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Loading(),
+                                )),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: FadeInImage.memoryNetwork(
+                                placeholder: kTransparentImage,
+                                image: myPlantsModel.image,
+                                height: MediaQuery.of(context).size.height,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     // Padding(
@@ -90,6 +112,9 @@ class MyPlantListCard extends StatelessWidget {
                           ]),
                     )
                   ])),
+                  GestureDetector(child: Icon(Icons.delete, color: Colors.red,),onTap: (){
+                    userProvider.deleteMyPlant(plantItem: myPlantsModel);
+                  },)
                 ],
               ))),
     );

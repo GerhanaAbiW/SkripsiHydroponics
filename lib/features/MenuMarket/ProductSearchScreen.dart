@@ -3,7 +3,6 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuLearning/Article/ArticleDetail.dart';
 import 'package:hydroponics/features/MenuMarket/Cart.dart';
 import 'package:hydroponics/features/MenuMarket/Market.dart';
 import 'package:hydroponics/features/MenuMarket/Product.dart';

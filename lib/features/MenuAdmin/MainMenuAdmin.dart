@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuAdmin/AddArticle/AddArticle.dart';
-import 'package:hydroponics/features/MenuAdmin/AddPlant/AddPlant.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageArticle/ArticleList.dart';
+import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantList.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductList.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoList.dart';
 
-import 'package:hydroponics/features/MenuAdmin/AddProduct/AddProduct.dart';
-import 'package:hydroponics/features/MenuAdmin/AddVideo/AddVideo.dart';
 
 import 'package:hydroponics/features/MenuAdmin/OrderList/ListOrder.dart';
 import 'package:hydroponics/features/MenuAdmin/OrderList/OrderDetails.dart';
@@ -29,14 +29,15 @@ class MenuAdmin extends StatefulWidget {
   _MenuAdminState createState() => _MenuAdminState();
   final drawerItem = [
     DrawerItem("Dashbord", Icons.home, IconThemeData(color: Colors.black)),
-    DrawerItem("Add Product", Icons.shopping_basket,
+    DrawerItem("Manage Product", Icons.shopping_basket,
         IconThemeData(color: Colors.redAccent)),
     DrawerItem(
-        "Add Artcile", Icons.border_color, IconThemeData(color: Colors.black)),
-    DrawerItem("Add Video", Icons.videocam, IconThemeData(color: Colors.black)),
+        "Manage Artcile", Icons.border_color, IconThemeData(color: Colors.black)),
+    DrawerItem("Manage Video", Icons.videocam, IconThemeData(color: Colors.black)),
     DrawerItem(
-        "Add Plant", Icons.local_florist, IconThemeData(color: Colors.black)),
+        "Manage Plant", Icons.local_florist, IconThemeData(color: Colors.black)),
     DrawerItem("Order List", Icons.list, IconThemeData(color: Colors.black)),
+    DrawerItem("Payment List", Icons.list, IconThemeData(color: Colors.black)),
   ];
 }
 
@@ -48,13 +49,13 @@ class _MenuAdminState extends State<MenuAdmin> {
       case 0:
         return NewAdminDashboard();
       case 1:
-        return AddProducts();
+        return ProductList();
       case 2:
-        return AddArticleView();
+        return ArticleList();
       case 3:
-        return AddVideoView();
+        return VideoList();
       case 4:
-        return AddPlantView();
+        return PlantList();
       case 5:
         return ListOrder();
       default:

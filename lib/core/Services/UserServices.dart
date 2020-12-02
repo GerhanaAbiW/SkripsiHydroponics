@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/Models/User.dart';
@@ -33,6 +34,20 @@ class UserServices{
       "cart": FieldValue.arrayRemove([cartItem.toMap()])
     });
   }
+
+  void addToFavorite({String userId, FavoriteProductModel favoriteProductModel}){
+    _firestore.collection(collection).document(userId).updateData({
+      "favoriteProduct": FieldValue.arrayUnion([favoriteProductModel.toMap()])
+    });
+  }
+
+
+  void removeFromFavorite({String userId, FavoriteProductModel favoriteProductModel}){
+    _firestore.collection(collection).document(userId).updateData({
+      "favoriteProduct": FieldValue.arrayRemove([favoriteProductModel.toMap()])
+    });
+  }
+
   void addMyPlant({String userId, MyPlantsModel plantItem}){
     _firestore.collection(collection).document(userId).updateData({
       "myPlants": FieldValue.arrayUnion([plantItem.toMap()])

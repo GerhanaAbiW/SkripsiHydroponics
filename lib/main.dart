@@ -4,6 +4,7 @@ import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Providers/BrandProvider.dart';
 import 'package:hydroponics/core/Providers/CategoryProvider.dart';
 import 'package:hydroponics/core/Providers/OrderProvider.dart';
+import 'package:hydroponics/core/Providers/PaymentProvider.dart';
 import 'package:hydroponics/core/Providers/PlantProvider.dart';
 
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
@@ -27,6 +28,7 @@ void main() {
       ChangeNotifierProvider.value(value: PlantProvider.initialize()),
       ChangeNotifierProvider.value(value: AppProvider()),
       ChangeNotifierProvider.value(value: OrderProvider.initialize()),
+      ChangeNotifierProvider.value(value: PaymentProvider.initialize()),
       ChangeNotifierProvider.value(value: ArticleProvider.initialize()),
       ChangeNotifierProvider.value(value: VideoProvider.initialize()),
       ChangeNotifierProvider.value(value: CategoryProvider.initialize()),

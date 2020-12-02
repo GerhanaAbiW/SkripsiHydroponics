@@ -6,7 +6,9 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/Profile/ChangePassword.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
+import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'AboutUsPage.dart';
 import 'EditProfilePage.dart';
@@ -22,7 +24,6 @@ class NewProfilePage extends StatefulWidget {
 
 class _NewProfilePageState extends State<NewProfilePage> {
   List<ListProfileSection> listSection = new List();
-  UserModel user;
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       resizeToAvoidBottomPadding: true,
@@ -165,9 +167,9 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                   ),
                                   CustomText(
                                       text:
-                                          user?.name ?? "username loading..."),
+                                          user.userModel?.name ?? "username loading..."),
                                   CustomText(
-                                      text: user?.email ?? "email loading..."),
+                                      text: user.userModel?.email ?? "email loading..."),
                                   SizedBox(
                                     height: 16,
                                   ),
@@ -188,12 +190,31 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                   border: Border.all(
                                       color: Colors.grey.shade400, width: 2),
                                   shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "images/asset_profile/deku.jpeg"),
-                                      fit: BoxFit.contain)),
+                                  // image: DecorationImage(
+                                  //     image: AssetImage(
+                                  //         "images/asset_profile/deku.jpeg"),
+                                  //     fit: BoxFit.contain)
+                              ),
                               width: 100,
                               height: 100,
+                              child: Stack(
+                                children: <Widget>[
+                                  Positioned.fill(
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Loading(),
+                                      )),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: FadeInImage.memoryNetwork(
+                                      placeholder: kTransparentImage,
+                                      image: user.userModel.userPicture,
+                                      height: MediaQuery.of(context).size.height,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ],

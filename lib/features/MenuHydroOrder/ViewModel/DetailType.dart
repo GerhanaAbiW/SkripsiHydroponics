@@ -16,13 +16,14 @@ class HydroType {
 final List<HydroType> types = [
   HydroType(
     type: "Small",
-    image: "images/hydro2.jpeg",
+    image: "images/hydro1.jpeg",
     area: 'Outdoor',
     price: 25,
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
     pipeQty: "2 - 4 tingkatan",
-    description: ""
+    description:    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
+
 
   ),
   HydroType(
@@ -33,21 +34,23 @@ final List<HydroType> types = [
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
     pipeQty: "2 - 4 tingkatan",
-    description: ""
+    description:    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
+
   ),
   HydroType(
     type: "Large",
-    image: "images/hydro2.jpeg",
+    image: "images/ficus.png",
     area: 'Outdoor',
     price: 25,
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
     pipeQty: "2 - 4 tingkatan",
-    description: ""
+    description:     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
+
   ),
   HydroType(
     type: "Custom",
-    image: "images/hydro2.jpeg",
+    image: "images/bayam.jpeg",
     area: 'Outdoor',
     price: 25,
     holeQty: "4 - 6 lubang",

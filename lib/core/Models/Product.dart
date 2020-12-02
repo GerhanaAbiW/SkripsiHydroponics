@@ -11,6 +11,7 @@ class ProductModel{
   static const BRAND = "brand";
   static const RATING = "rating";
   static const DATE = "date";
+  // static const FAVORITE = "favorite";
 
 
 
@@ -24,6 +25,7 @@ class ProductModel{
   int _price;
   int _rating;
   String _date;
+  // bool _favorite;
 
 
 
@@ -46,6 +48,8 @@ class ProductModel{
   int get rating => _rating;
   String get date => _date;
 
+  // bool get favorite => _favorite;
+
 
 
 
@@ -53,14 +57,16 @@ class ProductModel{
   ProductModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
     _brand = snapshot.data[BRAND];
-    _description = snapshot.data[DESCRIPTION] ?? " ";
+    _description = snapshot.data[DESCRIPTION];
     _price = snapshot.data[PRICE].floor();
     _rating = snapshot.data[RATING];
     _category = snapshot.data[CATEGORY];
     _name = snapshot.data[NAME];
     _picture = snapshot.data[PICTURE];
     _date = snapshot[DATE];
+    // _favorite = snapshot[FAVORITE];
 
 
   }
+
 }

@@ -64,25 +64,6 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
                       plant: plantProvider.plants[index],
                     ),
                   );
-                  // return Card(
-                  //     elevation: 10.0,
-                  //     child: InkWell(
-                  //       onTap: () {
-                  //         Navigator.of(context).push(MaterialPageRoute(
-                  //             builder: (context) => MyPlantsDetail()));
-                  //       },
-                  //       child: ListTile(
-                  //         leading: CircleAvatar(
-                  //           radius: 30,
-                  //           backgroundImage:
-                  //               ExactAssetImage("images/plant.png"),
-                  //         ),
-                  //         title: Text(title[index],
-                  //             style: TextStyle(fontSize: 14)),
-                  //         subtitle:
-                  //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                  //       ),
-                  //     ));
                 },
               )),
         ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/MenuLearning/Article/ArticleList.dart';
-import 'package:hydroponics/features/MenuLearning/Video/VideoList.dart';
+import 'package:hydroponics/features/MenuLearning/LearningArticle/LearningArticleList.dart';
+import 'package:hydroponics/features/MenuLearning/LearningVideo/LearningVideoList.dart';
 import 'package:provider/provider.dart';
 
 var blueColor = Color(0xFF3232FF);
@@ -77,11 +77,11 @@ class _MenuLearningState extends State<MenuLearning> {
           body: TabBarView(children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: WidgetArticleList(),
+              child: LearningArticleList(),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: WidgetVideoList(),
+              child: LearningVideoList(),
             )
           ]),
         ));

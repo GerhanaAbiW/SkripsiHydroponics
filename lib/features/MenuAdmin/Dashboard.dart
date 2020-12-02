@@ -14,12 +14,12 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   _getData() {
     var piedata = [
-      new Task('Girls', 35.8, Color(0xff3366cc)),
-      new Task('Women', 8.3, Color(0xff990099)),
-      new Task('Pants', 10.8, Color(0xff109618)),
-      new Task('Formal', 15.6, Color(0xfffdbe19)),
-      new Task('Shoes', 19.2, Color(0xffff9900)),
-      new Task('Other', 10.3, Color(0xffdc3912)),
+      new Task('Bibit', 35.8, Color(0xff3366cc)),
+      new Task('Obat', 8.3, Color(0xff990099)),
+      new Task('Pupuk', 10.8, Color(0xff109618)),
+      new Task('Alat', 15.6, Color(0xfffdbe19)),
+      new Task('HydroOrder', 19.2, Color(0xffff9900)),
+      //new Task('Other', 10.3, Color(0xffdc3912)),
     ];
 
     _seriesPieData.add(
@@ -74,7 +74,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                         color1: Colors.blue,
                         icon: Icons.person_outline,
                         value: 1265,
-                        title: 'Users',
+                        title: 'Customer',
                       ),
                       SmallCard(
                         color2: Colors.indigo,
