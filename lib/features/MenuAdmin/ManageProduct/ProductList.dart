@@ -27,7 +27,7 @@ class _ProductListState extends State<ProductList> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-            child: SearchProduct(widget: ProductSearchScreen(),search: "Search",)
+            child: SearchProduct(widget: ProductSearchScreen(),search: "Search Product..",)
           ),
           Container(
               height: MediaQuery.of(context).size.height - 200.0,

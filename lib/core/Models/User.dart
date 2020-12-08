@@ -11,6 +11,10 @@ import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 class UserModel {
   static const ID = "uid";
   static const NAME = "name";
+  static const DOB = "dob";
+  static const GENDER = "gender";
+  static const ADDRESS = "address";
+  static const PHONE = "phone";
   static const EMAIL = "email";
   static const ROLE = "role";
   static const USER_PICTURE = "userPicture";
@@ -23,10 +27,14 @@ class UserModel {
 
 
   String _name;
+  String _address;
+  String _phone;
   String _email;
+  String _dob;
   String _role;
   String _userPicture;
   String _id;
+  String _gender;
   String _stripeId;
   int _priceSum = 0;
 
@@ -34,6 +42,10 @@ class UserModel {
 
 //  getters
   String get name => _name;
+  String get dob => _dob;
+  String get gender => _gender;
+  String get phone => _phone;
+  String get address => _address;
 
   String get email => _email;
   String get role => _role;
@@ -57,7 +69,10 @@ class UserModel {
 
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     _name = snapshot.data[NAME];
+    _phone = snapshot.data[PHONE];
+    _address = snapshot.data[ADDRESS];
     _email = snapshot.data[EMAIL];
+    _dob = snapshot.data[DOB];
     _role = snapshot.data[ROLE];
     _userPicture = snapshot.data[USER_PICTURE];
     _id = snapshot.data[ID];

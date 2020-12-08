@@ -12,12 +12,12 @@ import 'package:hydroponics/features/Widget/AppTools.dart';
 
 class VideoCard extends StatelessWidget {
   final Video video;
-  final String idUrl;
-  const VideoCard({Key key, this.video, this.idUrl}) : super(key: key);
+
+  const VideoCard({Key key, this.video}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    String idUrl = video.video.substring(video.video.length - 11);
     VideoService _videoService = VideoService();
     return Container(
       // width: MediaQuery.of(context).size.width,

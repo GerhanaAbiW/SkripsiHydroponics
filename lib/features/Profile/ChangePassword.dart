@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,9 @@ import 'package:provider/provider.dart';
 var darkGreenColor = Color(0xFF689F38);
 
 class ChangePasswordPage extends StatefulWidget {
+  // final UserModel user;
+  //
+  // const ChangePasswordPage({Key key, this.user}) : super(key: key);
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
@@ -78,7 +82,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 child: GestureDetector(
                   onTap: () async{
                     if(_formKey.currentState.validate()){
-                      await user.resetPassword(_password.text);
+                      if(await user.resetPassword(_password.text)==true){
+                        user.signOut(context);
+                      }
                     }
                   //   if (_formKey.currentState.validate()) {
                   //     if (await user.sendPasswordResetEmail(

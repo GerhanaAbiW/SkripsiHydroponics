@@ -40,7 +40,7 @@ class OrdersScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: ListView.builder(
+              child: userProvider.orders.length==0||userProvider.orders.length==null?Text("no data"):ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: userProvider.orders.length, //plantProvider.plants.length,

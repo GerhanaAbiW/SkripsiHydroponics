@@ -38,7 +38,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
     });
   }
   void visibleBtnRecord(){
-    if(isAfter(DateTime.parse(widget.myPlantsModel.harvestDay))==true || isAtSameMomentAs(DateTime.parse(widget.myPlantsModel.harvestDay))==true){
+    if(DateTime.now().isAfter(DateTime.parse(widget.myPlantsModel.harvestDay))==true || DateTime.now().isAtSameMomentAs(DateTime.parse(widget.myPlantsModel.harvestDay))==true){
       setState(() {
         btnRecord = false;
       });
@@ -163,11 +163,11 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                       "Waktu Semai: ${widget.myPlantsModel.seedingTime}"),
                                   Checkbox(
                                       activeColor: Colors.greenAccent,
-                                      value: mediaSemai,
+                                      value: waktuSemai,
                                       onChanged: (bool value) {
                                         print(value);
                                         setState(() {
-                                          mediaSemai = value;
+                                          waktuSemai = value;
                                         });
                                       }),
                                 ]),

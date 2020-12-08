@@ -33,7 +33,7 @@ class SearchVideo extends StatelessWidget {
                 ),
                 //fillColor: Colors.greenAccent[600],
                 hintStyle: new TextStyle(color: Colors.green[600]),
-                hintText: "Search Plant...",
+                hintText: "Search Video...",
               ),
               autofocus: false,
             ),

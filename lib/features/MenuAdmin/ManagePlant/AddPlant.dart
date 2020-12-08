@@ -143,7 +143,7 @@ class _AddPlantState extends State<AddPlant> {
             backScreen(context);
           },
         ),
-        title: Text("Search",
+        title: Text("Add Plant",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),

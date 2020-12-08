@@ -72,7 +72,7 @@ flutter:
   assets:
     - images/plant.png
     - images/asset_profile/User_Profile_Green.png
-    - images/facebook.png
+    - images/facebook.jpg
     - images/whatsapp.png
     - images/no_data_grey.png
     - images/not_found.png

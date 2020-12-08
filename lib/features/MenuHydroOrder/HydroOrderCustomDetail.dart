@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 
@@ -15,7 +16,32 @@ class HydroOrderCustomDetail extends StatefulWidget {
 class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
   TextEditingController nomorHpController = TextEditingController();
   TextEditingController alamatController = new TextEditingController();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  OrderServices orderServices = OrderServices();
+  void validateAndUpload(String userId) async {
+    if (_formKey.currentState.validate()) {
+      setState(() => isLoading = true);
+      orderServices.createHydroOrder({
+        "userId": userId,
+        "address" : alamatController.text,
+        "phone" : nomorHpController.text,
+        "holeQuantity" : null,
+        "pipeQuantity" : null,
+        "hydroType" : widget.hydroType.type,
+        "image" : widget.hydroType.image,
+        "price" : widget.hydroType.intPrice,
+        "landType" : null
 
+      });
+      _formKey.currentState.reset();
+      setState(() => isLoading = false);
+      Navigator.pop(context);
+    } else {
+      setState(() => isLoading = false);
+
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,31 +231,34 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                         horizontal: 30.0,
                         vertical: 20.0,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Custom Order Form',
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.w600,
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Custom Order Form',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10.0),
-                          FormTextField(
-                            textType: TextInputType.number,
-                            textLabel: "Nomor HP",
-                            textHint: "Masukkan Nomor HP Anda",
-                            controller: nomorHpController,
-                          ),
-                          SizedBox(height: 10),
-                          MultilineFormTextField(
-                              textType: TextInputType.multiline,
-                              textLabel: "Alamat",
-                              textHint: "Masukkan Alamat Anda",
-                              controller: alamatController,
-                              height: 20.0),
-                        ],
+                            SizedBox(height: 10.0),
+                            FormTextField(
+                              textType: TextInputType.number,
+                              textLabel: "Nomor HP",
+                              textHint: "Masukkan Nomor HP Anda",
+                              controller: nomorHpController,
+                            ),
+                            SizedBox(height: 10),
+                            MultilineFormTextField(
+                                textType: TextInputType.multiline,
+                                textLabel: "Alamat",
+                                textHint: "Masukkan Alamat Anda",
+                                controller: alamatController,
+                                height: 20.0),
+                          ],
+                        ),
                       ),
                     ),
                   ],
