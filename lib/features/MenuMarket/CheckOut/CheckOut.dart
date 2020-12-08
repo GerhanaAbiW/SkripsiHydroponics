@@ -15,7 +15,7 @@ import 'package:transparent_image/transparent_image.dart';
 class CheckOutPage extends StatefulWidget {
   final List<CartItemModel> cart;
 
-  CheckOutPage({Key key, this.cart}) : super(key: key);
+  const CheckOutPage({Key key, this.cart}) : super(key: key);
 
   @override
   _CheckOutPageState createState() => _CheckOutPageState();
@@ -35,13 +35,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+            icon: Icon(Icons.arrow_back),
+            color: Colors.white,
+            onPressed: () {
+              backScreen(context);
+            },
+          ),
+          backgroundColor: Color(0xFF2b961f),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
           title: Text(
-            "Order",
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            'Check Out',
+            style: CustomTextStyle.textFormFieldBold
+                .copyWith(color: Colors.white, fontSize: 21),
           ),
         ),
         body: Builder(builder: (context) {

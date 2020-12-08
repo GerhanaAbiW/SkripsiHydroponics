@@ -7,11 +7,21 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/UserOrderCard.dart';
 import 'package:provider/provider.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
+  @override
+  _OrdersScreenState createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context,listen: false).getOrders();
+  }
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    userProvider.getOrders();
+    //userProvider.getOrders();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreenTosca,
@@ -76,4 +86,6 @@ class OrdersScreen extends StatelessWidget {
       ),
     );
   }
+
+
 }

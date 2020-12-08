@@ -58,7 +58,7 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
                 width: MediaQuery.of(context).size.width,
                 //height: MediaQuery.of(context).size.height / 2,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                child: ListView.builder(
+                child: list.length==0||list.length==null?Text("no data"):ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: list.length,
