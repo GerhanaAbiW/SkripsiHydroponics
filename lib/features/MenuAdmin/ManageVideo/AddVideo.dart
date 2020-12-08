@@ -117,7 +117,7 @@ class _AddVideoState extends State<AddVideo> {
                   FormTextField(
                       textLabel: "Creator",
                       textHint: "Masukkan Nama Creator",
-                      controller: titleController),
+                      controller: authorController),
                   SizedBox(
                     height: 16,
                   ),
@@ -161,5 +161,3 @@ class _AddVideoState extends State<AddVideo> {
     );
   }
 }
-
-

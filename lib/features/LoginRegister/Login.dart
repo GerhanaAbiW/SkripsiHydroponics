@@ -182,15 +182,21 @@ class _LoginPageState extends State<LoginPage> {
                                         style: TextStyle(color: Colors.black)),
                                     TextSpan(
                                         recognizer: new TapGestureRecognizer()
-                                          ..onTap = () => changeScreenReplacement(
-                                              context, RegisterPage()),
+                                          ..onTap = () =>
+                                              changeScreenReplacement(
+                                                  context, RegisterPage()),
                                         text: "Register",
                                         style: TextStyle(color: green)),
                                   ]),
                                 ),
+                                SizedBox(
+                                  height: 40,
+                                ),
                                 GestureDetector(
-                                  onTap: ()=> changeScreen(context, ForgotPassword()),
-                                    child: Text("Forgot Passsword ? ",style: TextStyle(color: green)))
+                                    onTap: () =>
+                                        changeScreen(context, ForgotPassword()),
+                                    child: Text("Forgot Passsword? ",
+                                        style: TextStyle(color: green)))
                               ],
                             )
                           ],

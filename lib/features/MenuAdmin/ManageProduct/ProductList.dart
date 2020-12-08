@@ -13,7 +13,6 @@ import 'package:hydroponics/features/Widget/SearchProduct.dart';
 import 'package:hydroponics/features/Widget/SearchVideo.dart';
 import 'package:provider/provider.dart';
 
-
 class ProductList extends StatefulWidget {
   @override
   _ProductListState createState() => _ProductListState();
@@ -24,55 +23,56 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
     return ListView(
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          Container(
-            child: SearchProduct(widget: ProductSearchScreen(),search: "Search",)
-          ),
-          Container(
-              height: MediaQuery.of(context).size.height - 200.0,
-              //height: 20,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-              ),
-              width: MediaQuery.of(context).size.width,
-              //height: MediaQuery.of(context).size.height / 2,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: productProvider.productsSearched.length<1?Text("not Found"):ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: productProvider.productsSearched.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: ProductCard(
-                      productModel: productProvider.productsSearched[index],
-                    ),
-                  );
-                  // return Card(
-                  //     elevation: 10.0,
-                  //     child: InkWell(
-                  //       onTap: () {
-                  //         Navigator.of(context).push(MaterialPageRoute(
-                  //             builder: (context) => MyPlantsDetail()));
-                  //       },
-                  //       child: ListTile(
-                  //         leading: CircleAvatar(
-                  //           radius: 30,
-                  //           backgroundImage:
-                  //               ExactAssetImage("images/plant.png"),
-                  //         ),
-                  //         title: Text(title[index],
-                  //             style: TextStyle(fontSize: 14)),
-                  //         subtitle:
-                  //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                  //       ),
-                  //     ));
-                },
-              )),
-        ],
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        Container(
+            child: SearchProduct(
+          widget: ProductSearchScreen(),
+          search: "Search",
+        )),
+        Container(
+            height: MediaQuery.of(context).size.height - 200.0,
+            //height: 20,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+            ),
+            width: MediaQuery.of(context).size.width,
+            //height: MediaQuery.of(context).size.height / 2,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: productProvider.products.length,
+              itemBuilder: (BuildContext context, int index) {
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: ProductCard(
+                    productModel: productProvider.products[index],
+                  ),
+                );
+                // return Card(
+                //     elevation: 10.0,
+                //     child: InkWell(
+                //       onTap: () {
+                //         Navigator.of(context).push(MaterialPageRoute(
+                //             builder: (context) => MyPlantsDetail()));
+                //       },
+                //       child: ListTile(
+                //         leading: CircleAvatar(
+                //           radius: 30,
+                //           backgroundImage:
+                //               ExactAssetImage("images/plant.png"),
+                //         ),
+                //         title: Text(title[index],
+                //             style: TextStyle(fontSize: 14)),
+                //         subtitle:
+                //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                //       ),
+                //     ));
+              },
+            )),
+      ],
     );
   }
 }
-

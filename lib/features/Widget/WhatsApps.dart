@@ -298,7 +298,8 @@ class _WhatsAppsState extends State<WhatsApps> {
           ? InkWell(
               splashColor: Colors.teal.shade200,
               onTap: () {
-                FlutterOpenWhatsapp.sendSingleMessage("085728248887", "Hello");
+                FlutterOpenWhatsapp.sendSingleMessage(
+                    "+6285728248887", "Hello");
               },
               child: Container(
                 margin: EdgeInsets.only(left: 16, right: 12),
