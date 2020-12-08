@@ -15,6 +15,15 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool _passwordVisible;
+  bool _confirmPasswordVisible;
+
+  @override
+  void initState() {
+    _passwordVisible = false;
+    _confirmPasswordVisible = false;
+  }
+
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
   TextEditingController _email = TextEditingController();
@@ -51,11 +60,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         Positioned(
                             bottom: 20,
                             right: 20,
-                            child: Text(
-                              "Register",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            )),
+                            child: Text("Register",
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold))),
                         Center(
                           child: Image.asset("images/plant.png"),
                         ),
@@ -130,22 +139,38 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             padding: EdgeInsets.only(left: 10),
                             child: TextFormField(
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "The password field cannot be empty";
-                                } else if (value.length < 6) {
-                                  return "the password has to be at least 6 characters long";
-                                }
-                                return null;
-                              },
-                              controller: _password,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Password",
-                                prefixIcon: Icon(Icons.vpn_key,
-                                    color: Color(0xff19803d)),
-                              ),
-                            ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "the password has to be at least 6 characters long";
+                                  }
+                                  return null;
+                                },
+                                controller: _password,
+                                obscureText: !_passwordVisible,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Password',
+                                  prefixIcon: Icon(
+                                    Icons.vpn_key,
+                                    color: Color(0xff19803d),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      // Based on passwordVisible state choose the icon
+                                      _passwordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Color(0xff19803d),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordVisible = !_passwordVisible;
+                                      });
+                                    },
+                                  ),
+                                )),
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 10),
@@ -156,22 +181,39 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             padding: EdgeInsets.only(left: 10),
                             child: TextFormField(
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "The password field cannot be empty";
-                                } else if (value != _password.text) {
-                                  return "Confirm Password Doesnt Match";
-                                }
-                                return null;
-                              },
-                              controller: _cPassword,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "ConfirmPassword",
-                                prefixIcon: Icon(Icons.vpn_key,
-                                    color: Color(0xff19803d)),
-                              ),
-                            ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "the password has to be at least 6 characters long";
+                                  }
+                                  return null;
+                                },
+                                controller: _cPassword,
+                                obscureText: !_confirmPasswordVisible,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Confirm Password',
+                                  prefixIcon: Icon(
+                                    Icons.vpn_key,
+                                    color: Color(0xff19803d),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      // Based on passwordVisible state choose the icon
+                                      _confirmPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Color(0xff19803d),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _confirmPasswordVisible =
+                                            !_confirmPasswordVisible;
+                                      });
+                                    },
+                                  ),
+                                )),
                           ),
                           SizedBox(
                             height: 30.0,
@@ -180,8 +222,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: InkWell(
                               onTap: () async {
                                 if (_formKey.currentState.validate()) {
-                                  if (await user.signUp(_name.text,
-                                          _email.text, _password.text) ==
+                                  if (await user.signUp(_name.text, _email.text,
+                                          _password.text) ==
                                       true) {
                                     changeScreenReplacement(
                                         context, LoginPage());

@@ -189,17 +189,17 @@ class _NewProfilePageState extends State<NewProfilePage> {
                             alignment: Alignment.topCenter,
                             child: user.userModel.userPicture == null
                                 ? Container(
-                                width: 100,
-                                height: 100,
+                                    width: 100,
+                                    height: 100,
                                     decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.shade400, width: 2),
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "images/asset_profile/placeholderprofile.png"),
-                                        fit: BoxFit.contain)
-                                  ))
+                                        border: Border.all(
+                                            color: Colors.grey.shade400,
+                                            width: 2),
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "images/asset_profile/placeholderprofile.png"),
+                                            fit: BoxFit.contain)))
                                 : Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(

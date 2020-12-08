@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/FavoriteProduct.dart';
@@ -26,8 +25,6 @@ import 'package:http/http.dart' as http;
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
-
-
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
@@ -55,8 +52,6 @@ class UserProvider with ChangeNotifier {
 
   //init() async {}
 
-
-
   Future<bool> signIn(String email, String password) async {
     try {
       _status = Status.Authenticating;
@@ -73,7 +68,6 @@ class UserProvider with ChangeNotifier {
 
   Future<bool> signUp(String name, String email, String password) async {
     try {
-
       _status = Status.Authenticating;
       notifyListeners();
       await _auth
@@ -85,7 +79,7 @@ class UserProvider with ChangeNotifier {
           "role": "admin",
           "uid": user.user.uid,
           "stripeId": "",
-          "userPicture" : null
+          "userPicture": null
         });
       });
       return true;
@@ -123,8 +117,6 @@ class UserProvider with ChangeNotifier {
       List<CartItemModel> cart = _userModel.cart;
 
       Map cartItem = {
-        "id": cartItemId,
-        "name": product.name,
         "image": product.picture[0],
         "productId": product.id,
         "price": product.price,
@@ -192,8 +184,8 @@ class UserProvider with ChangeNotifier {
       bool fav = true;
 
       Map favoriteItem = {
-        "id" : favoriteItemId,
-        "productID" : product.id,
+        "id": favoriteItemId,
+        "productID": product.id,
         "name": product.name,
         "price": product.price,
         "picture": product.picture,
@@ -208,9 +200,10 @@ class UserProvider with ChangeNotifier {
 //      if(!itemExists){
       print("CART ITEMS ARE: ${favorite.toString()}");
 
-      _userServices.addToFavorite(userId: _user.uid, favoriteProductModel: item);
+      _userServices.addToFavorite(
+          userId: _user.uid, favoriteProductModel: item);
       _productServices.updateProduct({
-        "id" : product.id,
+        "id": product.id,
         "name": product.name,
         "price": product.price,
         "picture": product.picture,
@@ -235,9 +228,10 @@ class UserProvider with ChangeNotifier {
     bool fav = false;
 
     try {
-      _userServices.removeFromFavorite(userId: _user.uid, favoriteProductModel: product);
+      _userServices.removeFromFavorite(
+          userId: _user.uid, favoriteProductModel: product);
       _productServices.updateProduct({
-        "id" : product.id,
+        "id": product.id,
         "name": product.name,
         "price": product.price,
         "picture": product.picture,
@@ -275,9 +269,9 @@ class UserProvider with ChangeNotifier {
         "HarvestTime": plant.harvestTime,
         "PestType": plant.pestsType,
         "SeedingTime": plant.seedingTime,
-        "HarvestDay" : harvestDay,
-        "Date" : DateTime.now().toString(),
-        "CreatedAt" : FieldValue.serverTimestamp()
+        "HarvestDay": harvestDay,
+        "Date": DateTime.now().toString(),
+        "CreatedAt": FieldValue.serverTimestamp()
       };
 
       MyPlantsModel item = MyPlantsModel.fromMap(plantItem);
@@ -342,9 +336,8 @@ class UserProvider with ChangeNotifier {
         "RecordDosageFertilizer": dosisPupuk,
         "RecordHarvestTime": waktuPanen,
         "RecordPestsType": waktuSemai,
-        "Date" : DateTime.now().toString(),
-        "CreatedAt" : FieldValue.serverTimestamp()
-
+        "Date": DateTime.now().toString(),
+        "CreatedAt": FieldValue.serverTimestamp()
       };
 
       MyPlantsRecordModel item = MyPlantsRecordModel.fromMap(plantItem);
@@ -364,7 +357,8 @@ class UserProvider with ChangeNotifier {
     print("THE PRODUC IS: ${plantItem.toString()}");
 
     try {
-      _userServices.deleteMyPlantRecord(userId: _user.uid, plantItem: plantItem);
+      _userServices.deleteMyPlantRecord(
+          userId: _user.uid, plantItem: plantItem);
       return true;
     } catch (e) {
       print("THE ERROR ${e.toString()}");
@@ -391,7 +385,7 @@ class UserProvider with ChangeNotifier {
     _firestore.collection('users').document(_user.uid).updateData({
       "name": name,
       "email": email,
-      "userPicture" : img,
+      "userPicture": img,
       "role": "user",
       "uid": _user.uid,
       "stripeId": ""

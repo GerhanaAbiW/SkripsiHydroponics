@@ -16,9 +16,6 @@ import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.
 
 import 'package:hydroponics/features/MenuAdmin/DashBoard/Dashboard.dart';
 
-
-
-
 class DrawerItem {
   String title;
   IconData icon;
@@ -33,14 +30,17 @@ class MenuAdmin extends StatefulWidget {
   @override
   _MenuAdminState createState() => _MenuAdminState();
   final drawerItem = [
-    DrawerItem("Dashbord", Icons.home, IconThemeData(color: Colors.black), NewAdminDashboard(), "DashBoard"),
+    DrawerItem("Dashboard", Icons.home, IconThemeData(color: Colors.black),
+        NewAdminDashboard(), "DashBoard"),
     DrawerItem("Manage Product", Icons.shopping_basket,
         IconThemeData(color: Colors.redAccent), AddProducts(), "Add Product"),
-    DrawerItem(
-        "Manage Artcile", Icons.border_color, IconThemeData(color: Colors.black), AddArticle(), "Add Article"),
-    DrawerItem("Manage Video", Icons.videocam, IconThemeData(color: Colors.black), AddVideo(), "AddVideo"),
-    DrawerItem("Manage Plant", Icons.local_florist, IconThemeData(color: Colors.black), AddPlant(), "AddPlant"),
-   // DrawerItem("Order List", Icons.list, IconThemeData(color: Colors.black), ListOrder(), "Order List"),
+    DrawerItem("Manage Article", Icons.border_color,
+        IconThemeData(color: Colors.black), AddArticle(), "Add Article"),
+    DrawerItem("Manage Video", Icons.videocam,
+        IconThemeData(color: Colors.black), AddVideo(), "AddVideo"),
+    DrawerItem("Manage Plant", Icons.local_florist,
+        IconThemeData(color: Colors.black), AddPlant(), "AddPlant"),
+    // DrawerItem("Order List", Icons.list, IconThemeData(color: Colors.black), ListOrder(), "Order List"),
     //DrawerItem("Payment List", Icons.list, IconThemeData(color: Colors.black), PaymentList(), "Payment List"),
   ];
 }
@@ -83,42 +83,47 @@ class _MenuAdminState extends State<MenuAdmin> {
       ));
     }
     return Scaffold(
-      appBar: _selectedDrawerIndex==0 || _selectedDrawerIndex>5?AppBar(
-        backgroundColor: greenTosca,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text(widget.drawerItem[_selectedDrawerIndex].title,
-            style: CustomTextStyle.textFormFieldBold
-                .copyWith(color: Colors.white, fontSize: 21)),
-      ):AppBar(
-        backgroundColor: greenTosca,
-        title: Text(widget.drawerItem[_selectedDrawerIndex].title,
-            style: CustomTextStyle.textFormFieldBold
-                .copyWith(color: Colors.white, fontSize: 21)),
-        actions: <Widget>[
-          Center(
-            child: Text(
-              widget.drawerItem[_selectedDrawerIndex].text,
-              style: TextStyle(color: white),
+      appBar: _selectedDrawerIndex == 0 || _selectedDrawerIndex > 5
+          ? AppBar(
+              backgroundColor: greenTosca,
+              centerTitle: true,
+              iconTheme: IconThemeData(color: Colors.white),
+              title: Text(widget.drawerItem[_selectedDrawerIndex].title,
+                  style: CustomTextStyle.textFormFieldBold
+                      .copyWith(color: Colors.white, fontSize: 21)),
+            )
+          : AppBar(
+              backgroundColor: greenTosca,
+              title: Text(widget.drawerItem[_selectedDrawerIndex].title,
+                  style: CustomTextStyle.textFormFieldBold
+                      .copyWith(color: Colors.white, fontSize: 21)),
+              actions: <Widget>[
+                Center(
+                  child: Text(
+                    widget.drawerItem[_selectedDrawerIndex].text,
+                    style: TextStyle(color: white),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.add_circle_outline,
+                    color: white,
+                  ),
+                  onPressed: () {
+                    changeScreen(context,
+                        widget.drawerItem[_selectedDrawerIndex].widget);
+                  },
+                )
+              ],
             ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.add_circle_outline,
-              color: white,
-            ),
-            onPressed: () {
-              changeScreen(context, widget.drawerItem[_selectedDrawerIndex].widget);
-            },
-          )
-        ],
-      ),
       drawer: Container(
         child: Theme(
           data: Theme.of(context).copyWith(canvasColor: greenTosca),
           child: Drawer(
               child: Column(children: <Widget>[
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Expanded(child: Container(child: Column(children: drawerOptions))),
             Container(
               color: Colors.black.withOpacity(0.3),
@@ -128,7 +133,8 @@ class _MenuAdminState extends State<MenuAdmin> {
                   children: <Widget>[
                     Divider(),
                     GestureDetector(
-                      onTap: () => changeScreenReplacement(context, DashBoard()),
+                      onTap: () =>
+                          changeScreenReplacement(context, DashBoard()),
                       child: ListTile(
                         leading: Icon(
                           Icons.exit_to_app,

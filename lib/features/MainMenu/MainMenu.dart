@@ -12,12 +12,12 @@ import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:provider/provider.dart';
 
 class MainMenu extends StatefulWidget {
-
   @override
   _MainMenuState createState() => _MainMenuState();
 }
 
-class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin {
+class _MainMenuState extends State<MainMenu>
+    with SingleTickerProviderStateMixin {
   Material MyItems(IconData icon, String heading, int color, Widget widget) {
     return Material(
       color: Colors.white,
@@ -98,7 +98,7 @@ class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin
                     MenuLearning()),
                 MyItems(Icons.local_florist, "MyPlants", 0xFF7CB342,
                     MyPlantsList()),
-                MyItems(Icons.account_box, "Penjual", 0xFFF4511E, MenuAdmin()),
+                MyItems(Icons.account_box, "Admin", 0xFFF4511E, MenuAdmin()),
               ],
               staggeredTiles: [
                 StaggeredTile.extent(1, 150.0),

@@ -32,16 +32,46 @@ class _AboutPageState extends State<AboutPage> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.fromLTRB(8, 20, 8, 8),
-          child: Text(
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n\nLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. \nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. \nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. \n\nThe point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page \neditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.\n Various versions have evolved over the years, sometimes by accident, sometimes on purpose\n (injected humour and the like).",
-            style: CustomTextStyle.textFormFieldMedium
-                .copyWith(fontSize: 16, color: Colors.grey.shade800),
+        child:
+
+            //color: Colors.white,
+            //padding: EdgeInsets.fromLTRB(8, 20, 8, 8),
+            Padding(
+          padding: const EdgeInsets.fromLTRB(8, 20, 8, 8),
+          child: Column(
+            children: <Widget>[
+              Text(
+                "HydroAsik.corp",
+                style: CustomTextStyle.textFormFieldBold
+                    .copyWith(fontSize: 20, color: Colors.grey.shade800),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "HydroAsik hadir untuk bisa menjadi partner anda dalam belajar menanam secara hidroponik. Anda bisa menemukan berbagai tips dan trik ber hidroponik di Aplikasi ini. ",
+                style: CustomTextStyle.textFormFieldMedium
+                    .copyWith(fontSize: 18, color: Colors.grey.shade800),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                "Kami juga menyediakan semua kebutuhan anda dalam belajar menanam sayuran daun hidroponik kesukaan anda. kami berharap Aplikasi ini bisa menjadi wahana belajar anda dalam dunia hidroponik. Untuk melengkapi belajar anda tentu saja kami juga menyediakan berbagai kebutuhan alat bahan hidroponik yang lengkap dan murah.Semua kebutuhan mengenai hidroponik ada disini seperti netpot, nutrisi hidroponik,starterkit hidroponik, paket pemula hidroponik, fertigasi dll.",
+                style: CustomTextStyle.textFormFieldMedium
+                    .copyWith(fontSize: 18, color: Colors.grey.shade800),
+              ),
+              SizedBox(height: 16),
+              Text(
+                "Semoga bermanfaat, mari belajar hidroponik bersama kami",
+                style: CustomTextStyle.textFormFieldMedium
+                    .copyWith(fontSize: 18, color: Colors.grey.shade800),
+              ),
+            ],
           ),
         ),
       ),
+      //),
     );
   }
 }

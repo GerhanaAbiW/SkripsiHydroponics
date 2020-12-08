@@ -10,7 +10,6 @@ import 'package:hydroponics/features/Widget/WhatsApps.dart';
 import 'package:provider/provider.dart';
 
 class DashBoard extends StatefulWidget {
-
   @override
   _DashBoardState createState() => _DashBoardState();
 }
@@ -36,29 +35,31 @@ class _DashBoardState extends State<DashBoard> {
     final user = Provider.of<UserProvider>(context);
     return Scaffold(
         body: SizedBox.expand(
-          child: user.userModel.role == "user"?PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() => _currentIndex = index);
-            },
-            children: <Widget>[
-              MainMenu(),
-              NewProfilePage(),
-              WhatsApps(),
-              OrdersScreen()
-            ],
-          ):PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() => _currentIndex = index);
-            },
-            children: <Widget>[
-              MainMenu(),
-              NewProfilePage(),
-              WhatsApps(),
-              ListOrder(),
-            ],
-          ),
+          child: user.userModel.role == "user"
+              ? PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() => _currentIndex = index);
+                  },
+                  children: <Widget>[
+                    MainMenu(),
+                    NewProfilePage(),
+                    WhatsApps(),
+                    OrdersScreen()
+                  ],
+                )
+              : PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() => _currentIndex = index);
+                  },
+                  children: <Widget>[
+                    MainMenu(),
+                    NewProfilePage(),
+                    WhatsApps(),
+                    ListOrder(),
+                  ],
+                ),
         ),
         bottomNavigationBar: BottomNavyBar(
           selectedIndex: _currentIndex,
@@ -78,8 +79,8 @@ class _DashBoardState extends State<DashBoard> {
                 title: Text('Profile'),
                 activeColor: Color(0xFF689F38)),
             BottomNavyBarItem(
-                icon: Icon(Icons.message),
-                title: Text('Payment'),
+                icon: Icon(Icons.phone),
+                title: Text('Contact Us'),
                 activeColor: Colors.pink),
             BottomNavyBarItem(
                 icon: Icon(Icons.assignment),
