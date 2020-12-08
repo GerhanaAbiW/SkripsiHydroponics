@@ -39,15 +39,15 @@ class _ProductListState extends State<ProductList> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: productProvider.productsSearched.length<1?Text("not Found"):ListView.builder(
+              child: productProvider.products.length==0||productProvider.products.length==null?Text("no data"):ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: productProvider.productsSearched.length,
+                itemCount: productProvider.products.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
                     child: ProductCard(
-                      productModel: productProvider.productsSearched[index],
+                      productModel: productProvider.products[index],
                     ),
                   );
                   // return Card(

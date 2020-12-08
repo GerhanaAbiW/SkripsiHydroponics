@@ -28,7 +28,7 @@ class ProductServices {
     data["updatedAt"] = FieldValue.serverTimestamp();
     _firestore.collection(collection).document(productId).updateData(data);
   }
-  void deleteProduct(Map<String, dynamic> data, String productId) {
+  void deleteProduct(String productId) {
     _firestore.collection(collection).document(productId).delete();
   }
 

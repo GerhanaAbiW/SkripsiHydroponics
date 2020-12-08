@@ -234,12 +234,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                 color: Colors.green,
               ),
               onPressed: () {}),
-          new IconButton(
-              icon: Icon(
-                Icons.favorite_border,
-                color: Colors.red,
-              ),
-              onPressed: () {})
+          // new IconButton(
+          //     icon: Icon(
+          //       Icons.favorite_border,
+          //       color: Colors.red,
+          //     ),
+          //     onPressed: () {})
         ]),
         Divider(),
         new ListTile(

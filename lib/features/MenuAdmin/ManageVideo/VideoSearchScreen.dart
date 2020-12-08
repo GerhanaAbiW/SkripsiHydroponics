@@ -69,6 +69,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
                     position: index,
                     child: VideoCard(
                       video: videoProvider.videosSearched[index],
+                      idUrl: idUrl,
                     ),
                   );
                   // return Card(

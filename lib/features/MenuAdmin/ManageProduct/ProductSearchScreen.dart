@@ -58,12 +58,12 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: productProvider.products.length,
+                itemCount: productProvider.productsSearched.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
+                  return productProvider.productsSearched.length<1?Text("Not Found"):AnimationConfiguration.staggeredList(
                     position: index,
                     child: ProductCard(
-                      productModel: productProvider.products[index],
+                      productModel: productProvider.productsSearched[index],
                     ),
                   );
                   // return Card(

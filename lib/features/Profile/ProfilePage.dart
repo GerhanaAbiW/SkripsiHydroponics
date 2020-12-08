@@ -198,7 +198,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                "images/asset_profile/placeholderprofile.png"),
+                                                "images/asset_profile/User_Profile_Green.png"),
                                             fit: BoxFit.contain)))
                                 : Container(
                                     decoration: BoxDecoration(

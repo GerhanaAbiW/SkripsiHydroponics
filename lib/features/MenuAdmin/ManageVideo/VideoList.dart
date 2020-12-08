@@ -38,7 +38,7 @@ class _VideoListState extends State<VideoList> {
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child: ListView.builder(
+            child: videoProvider.videos.length==0||videoProvider.videos==null?Text("no data"):ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: videoProvider.videos.length,
@@ -52,6 +52,7 @@ class _VideoListState extends State<VideoList> {
                   position: index,
                   child: VideoCard(
                     video: videoProvider.videos[index],
+                    idUrl: idUrl,
                   ),
                 );
                 // return Card(
