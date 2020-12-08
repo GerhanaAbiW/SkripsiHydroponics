@@ -12,7 +12,8 @@ class CartCard extends StatefulWidget {
   final CartItemModel cart;
   final GlobalKey<ScaffoldState> keys;
   final List<int> totals;
-  const CartCard({Key key, this.cart,this.keys, this.totals}) : super(key: key);
+  const CartCard({Key key, this.cart, this.keys, this.totals})
+      : super(key: key);
   @override
   _CartCardState createState() => _CartCardState();
 }
@@ -20,28 +21,31 @@ class CartCard extends StatefulWidget {
 class _CartCardState extends State<CartCard> {
   int qty;
   int total;
- // int pricePerItems;
+  final _key = GlobalKey<ScaffoldState>();
+  // int pricePerItems;
 
   @override
   void initState() {
     qty = widget.cart.quantity;
     super.initState();
   }
-  void addQty(){
+
+  void addQty() {
     setState(() {
       qty += 1;
     });
-    total = qty*widget.cart.price;
+    total = qty * widget.cart.price;
     widget.totals.add(total);
-
   }
-  void minusQty(){
+
+  void minusQty() {
     setState(() {
       qty -= 1;
     });
-    total = qty*widget.cart.price;
+    total = qty * widget.cart.price;
     widget.totals.add(total);
   }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -69,9 +73,9 @@ class _CartCardState extends State<CartCard> {
                   children: <Widget>[
                     Positioned.fill(
                         child: Align(
-                          alignment: Alignment.center,
-                          child: Loading(),
-                        )),
+                      alignment: Alignment.center,
+                      child: Loading(),
+                    )),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: ClipRRect(
@@ -126,7 +130,7 @@ class _CartCardState extends State<CartCard> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
                                   GestureDetector(
-                                    onTap: () =>minusQty(),
+                                    onTap: () => minusQty(),
                                     child: Container(
                                       width: 24,
                                       height: 24,
@@ -148,7 +152,7 @@ class _CartCardState extends State<CartCard> {
                                     child: Text(
                                       "$qty",
                                       style:
-                                      CustomTextStyle.textFormFieldSemiBold,
+                                          CustomTextStyle.textFormFieldSemiBold,
                                     ),
                                   ),
                                   GestureDetector(
@@ -192,7 +196,7 @@ class _CartCardState extends State<CartCard> {
               onTap: () async {
                 appProvider.changeIsLoading();
                 bool success =
-                await userProvider.removeFromCart(cartItem: widget.cart);
+                    await userProvider.removeFromCart(cartItem: widget.cart);
                 if (success) {
                   userProvider.reloadUserModel();
                   print("Item remove from cart");

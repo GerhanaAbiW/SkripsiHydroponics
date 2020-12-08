@@ -26,8 +26,7 @@ class _ListOrderState extends State<ListOrder> {
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             child: order.orders.length == 0 || order.orders.length == null
-                ? //Text("no data")
-                Image.asset('images/login/no_data_grey.png')
+                ? Text("no data")
                 : ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,

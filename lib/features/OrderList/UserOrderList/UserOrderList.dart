@@ -16,8 +16,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context,listen: false).getOrders();
+    Provider.of<UserProvider>(context, listen: false).getOrders();
   }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -90,6 +91,4 @@ class _OrdersScreenState extends State<OrdersScreen> {
       ),
     );
   }
-
-
 }

@@ -7,6 +7,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/features/MenuMarket/Cart/CartCard.dart';
 import 'package:hydroponics/features/MenuMarket/Cart/CartFooter.dart';
+import 'package:hydroponics/features/MenuMarket/Cart/CartList.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 import 'package:hydroponics/features/MenuMarket/CheckOut/CheckOut.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
@@ -41,7 +42,7 @@ class _CartPageState extends State<CartPage> {
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed: () {
-           backScreen(context);
+            backScreen(context);
           },
         ),
         backgroundColor: Color(0xFF2b961f),
@@ -65,20 +66,28 @@ class _CartPageState extends State<CartPage> {
                     children: <Widget>[
                       createHeader(),
                       createSubTitle(userProvider.userModel.cart.length),
-                      Container(
-                        child: userProvider.userModel.cart.length==null||userProvider.userModel.cart.length==0?Text("no data"):ListView.builder(
-                          shrinkWrap: true,
-                          primary: false,
-                          itemBuilder: (context, index) {
-                            return CartCard(
-                              cart: userProvider.userModel.cart[index],
-                              keys: _key,
-                            );
-                          },
-                          itemCount: userProvider.userModel.cart.length,
-                        ),
+                      // Container(
+                      //   child: userProvider.userModel.cart.length == null ||
+                      //           userProvider.userModel.cart.length == 0
+                      //       ? Text("no data")
+                      //       : ListView.builder(
+                      //           shrinkWrap: true,
+                      //           primary: false,
+                      //           itemBuilder: (context, index) {
+                      //             return CartCard(
+                      //               cart: userProvider.userModel.cart[index],
+                      //               keys: _key,
+                      //               totals: totals,
+                      //             );
+                      //           },
+                      //           itemCount: userProvider.userModel.cart.length,
+                      //         ),
+                      // ),
+                      CartList(
+                        cart: userProvider.userModel.cart,
+                        keys: _key,
+                        totals: totals,
                       ),
-                      // CartList(cartList: userProvider.userModel.cart, keys: _key,),
                       CartFooter(),
                       // createCartList(userProvider.userModel.cart),
                       // footer(
@@ -94,7 +103,11 @@ class _CartPageState extends State<CartPage> {
                     child: ButtonButtom(
                         buttonText: 'Checkout',
                         onPressed: () {
-                          changeScreen(context, CheckOutPage(cart: userProvider.userModel.cart,));
+                          changeScreen(
+                              context,
+                              CheckOutPage(
+                                cart: userProvider.userModel.cart,
+                              ));
                         }),
                   ),
                 ),
