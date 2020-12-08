@@ -78,8 +78,11 @@ class UserProvider with ChangeNotifier {
           "email": email,
           "role": "admin",
           "uid": user.user.uid,
-          "stripeId": "",
-          "userPicture": null
+          "userPicture": null,
+          "address":null,
+          "phone":null,
+          "gender":null,
+          "dob":null,
         });
       });
       return true;
@@ -111,17 +114,17 @@ class UserProvider with ChangeNotifier {
   }
   Future <bool>resetPassword(String password) async {
     try{
-
+      _user.updatePassword(password);
         //Create an instance of the current user.
-        FirebaseUser user = await FirebaseAuth.instance.currentUser();
-
-        //Pass in the password to updatePassword.
-        user.updatePassword(password).then((_){
-          print("Succesfull changed password");
-        }).catchError((error){
-          print("Password can't be changed" + error.toString());
-          //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
-        });
+        // FirebaseUser user = await FirebaseAuth.instance.currentUser();
+        //
+        // //Pass in the password to updatePassword.
+        // user.updatePassword(password).then((_){
+        //   print("Succesfull changed password");
+        // }).catchError((error){
+        //   print("Password can't be changed" + error.toString());
+        //   //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
+        // });
 
       return true;
     }catch(e){
@@ -424,7 +427,7 @@ class UserProvider with ChangeNotifier {
     });
     //var user = await _auth.currentUser();
 
-    //_user.updateProfile(UserUpdateInfo()..displayName = name);
+   // _user.updateProfile(UserUpdateInfo()..);
     _user.updateEmail(email);
     notifyListeners();
   }

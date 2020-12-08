@@ -40,38 +40,42 @@ class OrdersScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: userProvider.orders.length, //plantProvider.plants.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: CardMyListOrder(
-                     orders: userProvider.orders[index],
-                    ),
-                  );
-                  // return Card(
-                  //     elevation: 10.0,
-                  //     child: InkWell(
-                  //       onTap: () {
-                  //         Navigator.of(context).push(MaterialPageRoute(
-                  //             builder: (context) => MyPlantsDetail()));
-                  //       },
-                  //       child: ListTile(
-                  //         leading: CircleAvatar(
-                  //           radius: 30,
-                  //           backgroundImage:
-                  //               ExactAssetImage("images/plant.png"),
-                  //         ),
-                  //         title: Text(title[index],
-                  //             style: TextStyle(fontSize: 14)),
-                  //         subtitle:
-                  //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                  //       ),
-                  //     ));
-                },
-              )),
+              child: userProvider.orders.length == 0 ||
+                      userProvider.orders.length == null
+                  ? Image.asset('images/no_data_grey.png')
+                  : ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: userProvider
+                          .orders.length, //plantProvider.plants.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          child: CardMyListOrder(
+                            orders: userProvider.orders[index],
+                          ),
+                        );
+                        // return Card(
+                        //     elevation: 10.0,
+                        //     child: InkWell(
+                        //       onTap: () {
+                        //         Navigator.of(context).push(MaterialPageRoute(
+                        //             builder: (context) => MyPlantsDetail()));
+                        //       },
+                        //       child: ListTile(
+                        //         leading: CircleAvatar(
+                        //           radius: 30,
+                        //           backgroundImage:
+                        //               ExactAssetImage("images/plant.png"),
+                        //         ),
+                        //         title: Text(title[index],
+                        //             style: TextStyle(fontSize: 14)),
+                        //         subtitle:
+                        //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                        //       ),
+                        //     ));
+                      },
+                    )),
         ],
       ),
     );

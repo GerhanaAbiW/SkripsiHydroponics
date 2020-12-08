@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
@@ -16,6 +17,9 @@ import 'package:transparent_image/transparent_image.dart';
 var darkGreenColor = Color(0xFF689F38);
 
 class EditProfilePage extends StatefulWidget {
+  // final UserModel user;
+  //
+  // const EditProfilePage({Key key, this.user}) : super(key: key);
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -159,7 +163,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         )
                             : Image.asset(
-                                'images/asset_profile/placeholderprofile.png'),
+                            "images/asset_profile/User_Profile_Green.png"),
                       ),
                       Container(width: 24, child: Icon(Icons.camera_alt)
                           // Image.asset('images/asset_profile/ic_about_us.png'),
@@ -260,7 +264,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   children: <Widget>[
                     FormTextField(
                       textLabel: "Nama",
-                      textHint: "Masukkan Nama Anda",
+                      textHint: model.userModel.name==null?"Masukkan Nama Anda":model.userModel.name,
                       controller: nameController,
                     ),
 
@@ -294,13 +298,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     SizedBox(height: 16),
                     DateFormField(
                         textLabel: "Tanggal Lahir",
-                        textHint: "Masukkan Tanggal Lahir Anda",
+                        textHint: model.userModel.dob==null?"Masukkan Tanggal Lahir Anda":model.userModel.dob,
                         controller: dateController),
 
                     SizedBox(height: 16),
                     FormTextField(
                         textLabel: "Jenis Kelamin",
-                        textHint: "Masukkan Jenis Kelamin Anda",
+                        textHint: model.userModel.gender==null?"Masukkan Jenis Kelamin Anda":model.userModel.gender,
                         controller: jenisKelaminController),
 
                     // Container(
@@ -320,7 +324,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     FormTextField(
                       textType: TextInputType.emailAddress,
                       textLabel: "Email",
-                      textHint: "Masukkan Email Anda",
+                      textHint: model.userModel.email==null?"Masukkan Email Anda": model.userModel.email,
                       controller: emailController,
                     ),
 
@@ -361,14 +365,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     FormTextField(
                       textType: TextInputType.number,
                       textLabel: "Nomor HP",
-                      textHint: "Masukkan Nomor HP Anda",
+                      textHint: model.userModel.phone==null?"Masukkan Nomor HP Anda":model.userModel.phone,
                       controller: nomorHPController,
                     ),
                     SizedBox(height: 16),
                     MultilineFormTextField(
                         textType: TextInputType.multiline,
                         textLabel: "Alamat",
-                        textHint: "Masukkan Alamat Anda",
+                        textHint: model.userModel.address==null?"Masukkan Alamat Anda":model.userModel.address,
                         controller: alamatController,
                         height: 180.0),
                   ],

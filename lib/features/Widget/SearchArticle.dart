@@ -33,7 +33,7 @@ class SearchArticle extends StatelessWidget {
                 ),
                 //fillColor: Colors.greenAccent[600],
                 hintStyle: new TextStyle(color: Colors.green[600]),
-                hintText: "Search Plant...",
+                hintText: "Search Article...",
               ),
               autofocus: false,
             ),

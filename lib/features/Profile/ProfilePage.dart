@@ -35,8 +35,8 @@ class _NewProfilePageState extends State<NewProfilePage> {
   }
 
   void createListItem() {
-    listSection.add(createSection("Notifications", Icons.notifications,
-        Colors.blue.shade800, NotificationPage()));
+    // listSection.add(createSection("Notifications", Icons.notifications,
+    //     Colors.blue.shade800, NotificationPage()));
     // listSection.add(createSection(
     //     "Payment Method", Icons.payment, Colors.teal.shade800, null));
     listSection.add(createSection("Change Password", Icons.lock,
@@ -198,7 +198,8 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                "images/asset_profile/User_Profile_Green.png"),
+                                                'images/asset_profile/placeholderprofile.png'
+                                                ),
                                             fit: BoxFit.contain)))
                                 : Container(
                                     decoration: BoxDecoration(

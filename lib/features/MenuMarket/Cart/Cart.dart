@@ -65,16 +65,18 @@ class _CartPageState extends State<CartPage> {
                     children: <Widget>[
                       createHeader(),
                       createSubTitle(userProvider.userModel.cart.length),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        itemBuilder: (context, index) {
-                          return CartCard(
-                            cart: userProvider.userModel.cart[index],
-                            keys: _key,
-                          );
-                        },
-                        itemCount: userProvider.userModel.cart.length,
+                      Container(
+                        child: userProvider.userModel.cart.length==null||userProvider.userModel.cart.length==0?Text("no data"):ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemBuilder: (context, index) {
+                            return CartCard(
+                              cart: userProvider.userModel.cart[index],
+                              keys: _key,
+                            );
+                          },
+                          itemCount: userProvider.userModel.cart.length,
+                        ),
                       ),
                       // CartList(cartList: userProvider.userModel.cart, keys: _key,),
                       CartFooter(),

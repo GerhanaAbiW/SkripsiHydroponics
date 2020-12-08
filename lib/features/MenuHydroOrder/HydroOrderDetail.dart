@@ -42,7 +42,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
         "pipeQuantity" : jumlahPipa.text,
         "hydroType" : widget.hydroType.type,
         "image" : widget.hydroType.image,
-        "price" : widget.hydroType.price,
+        "price" : widget.hydroType.intPrice,
         "landType" : _currentTipeLahan
 
       });

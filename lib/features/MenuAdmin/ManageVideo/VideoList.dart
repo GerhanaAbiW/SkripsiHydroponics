@@ -52,7 +52,7 @@ class _VideoListState extends State<VideoList> {
                   position: index,
                   child: VideoCard(
                     video: videoProvider.videos[index],
-                    idUrl: idUrl,
+
                   ),
                 );
                 // return Card(

@@ -14,32 +14,35 @@ class _ListOrderState extends State<ListOrder> {
   @override
   Widget build(BuildContext context) {
     final order = Provider.of<OrderProvider>(context);
-    return  ListView(
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-              ),
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: order.orders.length, //plantProvider.plants.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: OrderCard(
-                      orderModel: order.orders[index],
-                    ),
-                  );
-                },
-              )),
-        ],
-
+    return ListView(
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+            ),
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+            child: order.orders.length == 0 || order.orders.length == null
+                ? //Text("no data")
+                Image.asset('images/login/no_data_grey.png')
+                : ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount:
+                        order.orders.length, //plantProvider.plants.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        child: OrderCard(
+                          orderModel: order.orders[index],
+                        ),
+                      );
+                    },
+                  )),
+      ],
     );
   }
 }

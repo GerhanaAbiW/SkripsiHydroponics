@@ -119,7 +119,7 @@ class _UpdateVideoState extends State<UpdateVideo> {
                   FormTextField(
                       textLabel: "Creator",
                       textHint: widget.video.author,
-                      controller: titleController),
+                      controller: authorController),
                   SizedBox(
                     height: 16,
                   ),

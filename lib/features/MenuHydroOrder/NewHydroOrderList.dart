@@ -88,7 +88,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
                           ),
                         ),
                         Text(
-                          '\$${types[index].price}',
+                          types[index].price,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,
@@ -271,29 +271,29 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
                 },
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(30.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    types[_selectedPage].description,
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(30.0),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: <Widget>[
+            //       Text(
+            //         'Description',
+            //         style: TextStyle(
+            //           fontSize: 22.0,
+            //           fontWeight: FontWeight.w600,
+            //         ),
+            //       ),
+            //       SizedBox(height: 10.0),
+            //       Text(
+            //         types[_selectedPage].description,
+            //         style: TextStyle(
+            //           color: Colors.black87,
+            //           fontSize: 16.0,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

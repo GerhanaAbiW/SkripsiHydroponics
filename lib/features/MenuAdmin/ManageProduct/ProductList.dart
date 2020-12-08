@@ -28,7 +28,7 @@ class _ProductListState extends State<ProductList> {
         Container(
             child: SearchProduct(
           widget: ProductSearchScreen(),
-          search: "Search",
+          search: "Search Product..",
         )),
         Container(
             height: MediaQuery.of(context).size.height - 200.0,
