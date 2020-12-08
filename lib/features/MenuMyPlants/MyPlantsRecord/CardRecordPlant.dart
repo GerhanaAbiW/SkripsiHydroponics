@@ -7,8 +7,9 @@ import 'package:transparent_image/transparent_image.dart';
 
 class WidgetLIstRecordDetailPlant extends StatefulWidget {
   final MyPlantsRecordModel model;
+  final bool header;
 
-  WidgetLIstRecordDetailPlant({this.model});
+  WidgetLIstRecordDetailPlant({this.model, this.header});
 
   @override
   _WidgetLIstRecordDetailPlantState createState() =>
@@ -27,32 +28,35 @@ class _WidgetLIstRecordDetailPlantState
             child: Column(
               children: <Widget>[
                 //untuk header
-                Container(
-                 // color: Colors.green,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding:EdgeInsets.symmetric(horizontal:10.0),
-                        child:Container(
-                          height:1.0,
-                          width: MediaQuery.of(context).size.width,
-                          color:Colors.black,),),
-                      Text(
-                        "20 januari 2020",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold
-                          // decoration: TextDecoration.underline,
+                Offstage(
+                  offstage: widget.header,
+                  child: Container(
+                   // color: Colors.green,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding:EdgeInsets.symmetric(horizontal:10.0),
+                          child:Container(
+                            height:1.0,
+                            width: MediaQuery.of(context).size.width,
+                            color:Colors.black,),),
+                        Text(
+                          widget.model.date,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold
+                            // decoration: TextDecoration.underline,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:EdgeInsets.symmetric(horizontal:10.0),
-                        child:Container(
-                          height:1.0,
-                          width: MediaQuery.of(context).size.width,
-                          color:Colors.black,),),
-                    ],
+                        Padding(
+                          padding:EdgeInsets.symmetric(horizontal:10.0),
+                          child:Container(
+                            height:1.0,
+                            width: MediaQuery.of(context).size.width,
+                            color:Colors.black,),),
+                      ],
+                    ),
                   ),
                 ),
                 Row(

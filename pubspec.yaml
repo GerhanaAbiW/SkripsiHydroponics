@@ -71,6 +71,8 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - images/plant.png
+    - images/no_data_grey.png
+    - images/not_found.png
     - images/play_button.png
     - images/no_image_icon.png
     - images/no_image_icon_blue.png
