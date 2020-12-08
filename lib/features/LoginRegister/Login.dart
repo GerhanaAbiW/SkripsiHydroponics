@@ -4,6 +4,7 @@ import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/LoginRegister/ForgotPassword.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
@@ -172,18 +173,25 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               height: 20,
                             ),
-                            RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "Don't have an account?",
-                                    style: TextStyle(color: Colors.black)),
-                                TextSpan(
-                                    recognizer: new TapGestureRecognizer()
-                                      ..onTap = () => changeScreenReplacement(
-                                          context, RegisterPage()),
-                                    text: "Register",
-                                    style: TextStyle(color: green)),
-                              ]),
+                            Column(
+                              children: [
+                                RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                        text: "Don't have an account ? ",
+                                        style: TextStyle(color: Colors.black)),
+                                    TextSpan(
+                                        recognizer: new TapGestureRecognizer()
+                                          ..onTap = () => changeScreenReplacement(
+                                              context, RegisterPage()),
+                                        text: "Register",
+                                        style: TextStyle(color: green)),
+                                  ]),
+                                ),
+                                GestureDetector(
+                                  onTap: ()=> changeScreen(context, ForgotPassword()),
+                                    child: Text("Forgot Passsword ? ",style: TextStyle(color: green)))
+                              ],
                             )
                           ],
                         ),

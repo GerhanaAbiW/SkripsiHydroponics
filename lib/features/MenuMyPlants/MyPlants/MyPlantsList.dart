@@ -22,7 +22,6 @@ class _MyPlantsListState extends State<MyPlantsList> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-
     return Scaffold(
       backgroundColor: Color(0xFF8BC34A),
       body: Column(
@@ -46,7 +45,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                         changeScreen(
                             context,
                             ListRecordPlant(
-                             list: userProvider.userModel.myPlantsRecord,
+                             // list: userProvider.userModel.myPlantsRecord,
                             ));
                       },
                       child: Row(
