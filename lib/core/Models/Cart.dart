@@ -28,6 +28,8 @@ class CartItemModel {
   int get quantity => _quantity;
 
 
+
+
   CartItemModel.fromMap(Map data){
     _id = data[ID];
     _name =  data[NAME];

@@ -4,7 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/CardRecordPlant.dart';
-import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:hydroponics/features/Widget/SearchPlant.dart';
 
 class ListRecordPlant extends StatefulWidget {
   final List<MyPlantsRecordModel> list;

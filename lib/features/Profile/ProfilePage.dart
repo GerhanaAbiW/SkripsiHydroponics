@@ -12,6 +12,7 @@ import 'package:transparent_image/transparent_image.dart';
 
 import 'AboutUsPage.dart';
 import 'EditProfilePage.dart';
+
 //import 'InviteFriendsPage.dart';
 import 'NotificationPage.dart';
 
@@ -166,10 +167,11 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                     height: 8,
                                   ),
                                   CustomText(
-                                      text:
-                                          user.userModel?.name ?? "username loading..."),
+                                      text: user.userModel?.name ??
+                                          "username loading..."),
                                   CustomText(
-                                      text: user.userModel?.email ?? "email loading..."),
+                                      text: user.userModel?.email ??
+                                          "email loading..."),
                                   SizedBox(
                                     height: 16,
                                   ),
@@ -185,37 +187,54 @@ class _NewProfilePageState extends State<NewProfilePage> {
                           ),
                           Align(
                             alignment: Alignment.topCenter,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade400, width: 2),
-                                  shape: BoxShape.circle,
-                                  // image: DecorationImage(
-                                  //     image: AssetImage(
-                                  //         "images/asset_profile/deku.jpeg"),
-                                  //     fit: BoxFit.contain)
-                              ),
-                              width: 100,
-                              height: 100,
-                              child: Stack(
-                                children: <Widget>[
-                                  Positioned.fill(
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Loading(),
-                                      )),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: FadeInImage.memoryNetwork(
-                                      placeholder: kTransparentImage,
-                                      image: user.userModel.userPicture,
-                                      height: MediaQuery.of(context).size.height,
-                                      fit: BoxFit.cover,
+                            child: user.userModel.userPicture == null
+                                ? Container(
+                                width: 100,
+                                height: 100,
+                                    decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey.shade400, width: 2),
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "images/asset_profile/placeholderprofile.png"),
+                                        fit: BoxFit.contain)
+                                  ))
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade400,
+                                          width: 2),
+                                      shape: BoxShape.circle,
+                                      // image: DecorationImage(
+                                      //     image: AssetImage(
+                                      //         "images/asset_profile/deku.jpeg"),
+                                      //     fit: BoxFit.contain)
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
+                                    width: 100,
+                                    height: 100,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Positioned.fill(
+                                            child: Align(
+                                          alignment: Alignment.center,
+                                          child: Loading(),
+                                        )),
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: FadeInImage.memoryNetwork(
+                                            placeholder: kTransparentImage,
+                                            image: user.userModel.userPicture,
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
                           ),
                         ],
                       ),

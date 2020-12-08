@@ -6,8 +6,11 @@ import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/PlantProvider.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductCard.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductSearchScreen.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
-import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:hydroponics/features/Widget/SearchPlant.dart';
+import 'package:hydroponics/features/Widget/SearchProduct.dart';
+import 'package:hydroponics/features/Widget/SearchVideo.dart';
 import 'package:provider/provider.dart';
 
 
@@ -20,32 +23,11 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
-    return Scaffold(
-      appBar:AppBar(
-        title: Text('Product'),
-        actions: <Widget>[
-          Center(
-            child: Text(
-              'Add Product',
-              style: TextStyle(color: green),
-            ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.add_circle_outline,
-              color: green,
-            ),
-            onPressed: () {
-
-            },
-          )
-        ],
-      ),
-      body: ListView(
+    return ListView(
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-            child: SearchListAddPlantWidget(),
+            child: SearchProduct(widget: ProductSearchScreen(),search: "Search",)
           ),
           Container(
               height: MediaQuery.of(context).size.height - 200.0,
@@ -57,15 +39,15 @@ class _ProductListState extends State<ProductList> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: ListView.builder(
+              child: productProvider.productsSearched.length<1?Text("not Found"):ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: productProvider.products.length,
+                itemCount: productProvider.productsSearched.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
                     position: index,
                     child: ProductCard(
-                      productModel: productProvider.products[index],
+                      productModel: productProvider.productsSearched[index],
                     ),
                   );
                   // return Card(
@@ -90,7 +72,6 @@ class _ProductListState extends State<ProductList> {
                 },
               )),
         ],
-      ),
     );
   }
 }

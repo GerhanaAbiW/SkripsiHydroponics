@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/BrandServices.dart';
 import 'package:hydroponics/core/Services/CategoryServices.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -104,111 +106,127 @@ class _AddProductsState extends State<AddProducts> {
 
   @override
   Widget build(BuildContext context) {
-    return new SingleChildScrollView(
-      child: Form(
-        key: _formKey,
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new SizedBox(
-              height: 10.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: new RaisedButton.icon(
-                  color: Colors.green,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius:
-                          new BorderRadius.all(new Radius.circular(15.0))),
-                  onPressed: () => pickImage(),
-                  icon: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                  label: new Text(
-                    "Add Images",
-                    style: new TextStyle(color: Colors.white),
-                  )),
-            ),
-            new SizedBox(
-              height: 10.0,
-            ),
-            MultiImagePickerList(
-                imageList: imageList,
-                removeNewImage: (index) {
-                  removeImage(index);
-                }),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  FormTextField(
-                      textLabel: "Product Title",
-                      textHint: "Enter Product Title",
-                      controller: productNameController),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  FormTextField(
-                      textLabel: "Product Price",
-                      textHint: "Enter Product Price",
-                      textType: TextInputType.number,
-                      controller: productPriceController),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  FormTextField(
-                      textLabel: "Product Description",
-                      textHint: "Enter Description",
-                      controller: prodcutDescriptionController,
-                      height: 180.0),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      FormTextField(
-                          textLabel: "Product Quantity",
-                          textHint: "Enter Product Quantity",
-                          textType: TextInputType.number,
-                          controller: quatityController),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      DropdownForm(
-                          textLabel: "Product Category",
-                          textHint: "Please choose the category",
-                          selectedItem: _currentCategory,
-                          dropDownItems: categoryItems,
-                          changedDropDownItems: changeSelectedCategory),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      DropdownForm(
-                          textLabel: "Product Brand",
-                          textHint: "Please choose the brand",
-                          selectedItem: _currentBrand,
-                          dropDownItems: brandItems,
-                          changedDropDownItems: changeSelectedBrand),
-                    ],
-                  ),
-                ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: greenTosca,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            backScreen(context);
+          },
+        ),
+        title: Text("Add Product",
+            style: CustomTextStyle.textFormFieldBold
+                .copyWith(color: Colors.white, fontSize: 21)),
+      ),
+      body: new SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new SizedBox(
+                height: 10.0,
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            appButton(
-                btnTxt: "Add Product",
-                onBtnclicked: addNewProducts,
-                btnPadding: 20.0,
-                btnColor: Colors.white),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new RaisedButton.icon(
+                    color: Colors.green,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius:
+                            new BorderRadius.all(new Radius.circular(15.0))),
+                    onPressed: () => pickImage(),
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    label: new Text(
+                      "Add Images",
+                      style: new TextStyle(color: Colors.white),
+                    )),
+              ),
+              new SizedBox(
+                height: 10.0,
+              ),
+              MultiImagePickerList(
+                  imageList: imageList,
+                  removeNewImage: (index) {
+                    removeImage(index);
+                  }),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    FormTextField(
+                        textLabel: "Product Title",
+                        textHint: "Enter Product Title",
+                        controller: productNameController),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    FormTextField(
+                        textLabel: "Product Price",
+                        textHint: "Enter Product Price",
+                        textType: TextInputType.number,
+                        controller: productPriceController),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    FormTextField(
+                        textLabel: "Product Description",
+                        textHint: "Enter Description",
+                        controller: prodcutDescriptionController,
+                        height: 180.0),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        FormTextField(
+                            textLabel: "Product Quantity",
+                            textHint: "Enter Product Quantity",
+                            textType: TextInputType.number,
+                            controller: quatityController),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        DropdownForm(
+                            textLabel: "Product Category",
+                            textHint: "Please choose the category",
+                            selectedItem: _currentCategory,
+                            dropDownItems: categoryItems,
+                            changedDropDownItems: changeSelectedCategory),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        DropdownForm(
+                            textLabel: "Product Brand",
+                            textHint: "Please choose the brand",
+                            selectedItem: _currentBrand,
+                            dropDownItems: brandItems,
+                            changedDropDownItems: changeSelectedBrand),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              appButton(
+                  btnTxt: "Add Product",
+                  onBtnclicked: addNewProducts,
+                  btnPadding: 20.0,
+                  btnColor: Colors.white),
+            ],
+          ),
         ),
       ),
     );

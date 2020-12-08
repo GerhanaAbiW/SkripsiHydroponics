@@ -12,6 +12,8 @@ class Plants {
   static const DosageOfFertilizer = "DosageOfFertilizer";
   static const HarvestTime = "HarvestTime";
   static const PestsType = "PestType";
+  static const SeedTime = "SeedingTime";
+  static const HarvestDay = "HarvestDay";
   static const DATE = "date";
 
 
@@ -22,10 +24,12 @@ class Plants {
   String _ppm;
   String _ph;
   String _image;
+  String _seedingTime;
   String _fertilizerType;
   String _timeOfFertilizer;
   String _dosageFertilizer;
   String _harvestTime;
+  int _harvestDay;
   String _pestsType;
   String _date;
 
@@ -34,12 +38,15 @@ class Plants {
   String get plant => _plant;
   String get image => _image;
   String get media => _media;
+  String get seedingTime => _seedingTime;
   String get ppm => _ppm;
   String get ph => _ph;
   String get fertilizerType => _fertilizerType;
   String get timeOfFertilizer => _timeOfFertilizer;
   String get dosageFertilizer => _dosageFertilizer;
   String get harvestTime => _harvestTime;
+
+  int get harvestDay => _harvestDay;
   String get pestsType => _pestsType;
   String get date => _date;
 
@@ -57,6 +64,8 @@ class Plants {
     _fertilizerType = data[FertilizerType];
     _timeOfFertilizer = data[TimeOfFertilizer];
     _harvestTime = data[HarvestTime];
+    _harvestDay = data[HarvestDay];
+    _seedingTime = data[SeedTime];
     _pestsType = data[PestsType];
     _date = data[DATE];
 

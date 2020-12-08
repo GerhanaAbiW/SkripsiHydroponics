@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddPlantsDetails.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -38,8 +38,8 @@ class AddMyPlantCard extends StatelessWidget {
                           border: Border.all(),
                         ),
                         child:
-                            // plantPicture != null
-                            //     ? ClipRRect(
+                            // plantPicture != null ?
+                            //     ClipRRect(
                             //         borderRadius: BorderRadius.circular(
                             //             44), //ScreenUtil().setWidth(44)),
                             //         child: Image.network(

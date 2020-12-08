@@ -1,10 +1,14 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/ArticleServices.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
+
 class AddArticle extends StatefulWidget {
   @override
   _AddArticleState createState() => _AddArticleState();
@@ -113,133 +117,149 @@ class _AddArticleState extends State<AddArticle> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                SizedBox(
-                  height: 16,
-                ),
-                Center(
-                  child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: greenTosca,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            backScreen(context);
+          },
+        ),
+        title: Text("Add Article",
+            style: CustomTextStyle.textFormFieldBold
+                .copyWith(color: Colors.white, fontSize: 21)),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: EdgeInsets.all(24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Center(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 16, top: 16, right: 16),
+                          child: _image == null
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(
+                                    "images/no_image_icon.png",
+                                    fit: BoxFit.contain,
+                                    width: MediaQuery.of(context).size.width,
+                                    height:
+                                        MediaQuery.of(context).size.height / 3,
+                                  ),
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.file(
+                                    _image,
+                                    fit: BoxFit.contain,
+                                    width: MediaQuery.of(context).size.width,
+                                    height:
+                                        MediaQuery.of(context).size.height / 3,
+                                  ),
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Padding(
-                        padding:
-                            const EdgeInsets.only(left: 16, top: 16, right: 16),
-                        child: _image == null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  "images/no_image_icon.png",
-                                  fit: BoxFit.contain,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height / 3,
-                                ),
-                              )
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.file(
-                                  _image,
-                                  fit: BoxFit.contain,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height / 3,
-                                ),
-                              ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: 50.0,
+                          child: FlatButton(
+                            shape: CircleBorder(
+                                side: BorderSide(color: Colors.white)),
+                            color: GreenTosca,
+                            child: Icon(Icons.camera_alt, color: white),
+                            onPressed: () {
+                              myAlert();
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: 50.0,
-                        child: FlatButton(
-                          shape: CircleBorder(
-                              side: BorderSide(color: Colors.white)),
-                          color: GreenTosca,
-                          child: Icon(Icons.camera_alt, color: white),
-                          onPressed: () {
-                            myAlert();
-                          },
+                  SizedBox(
+                    height: 16,
+                  ),
+                  FormTextField(
+                      textLabel: "Judul Article ",
+                      textHint: "Masukkan Judul Article",
+                      controller: titleController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  DateFormField(
+                      textLabel: 'Tanggal Terbit',
+                      textHint: 'Tanggal Terbit',
+                      controller: dateController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  FormTextField(
+                      textLabel: "Pengarang",
+                      textHint: "Masukkan Nama Pengarang",
+                      controller: authorController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  MultilineFormTextField(
+                      controller: descController,
+                      textHint: "Masukkan Isi Konten",
+                      textLabel: "Konten",
+                      height: 10),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      validateAndUpload();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: GreenTosca,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(80),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                FormTextField(
-                    textLabel: "Judul Article ",
-                    textHint: "Masukkan Judul Article",
-                    controller: titleController),
-                SizedBox(
-                  height: 16,
-                ),
-                DateFormField(
-                    textLabel: 'Tanggal Terbit',
-                    textHint: 'Tanggal Terbit',
-                    controller: dateController),
-                SizedBox(
-                  height: 16,
-                ),
-                FormTextField(
-                    textLabel: "Pengarang",
-                    textHint: "Masukkan Nama Pengarang",
-                    controller: authorController),
-                SizedBox(
-                  height: 16,
-                ),
-                MultilineFormTextField(
-                    controller: descController,
-                    textHint: "Masukkan Isi Konten",
-                    textLabel: "Konten",
-                    height: 10),
-                SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    validateAndUpload();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: GreenTosca,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(80),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Add Article",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Add Article",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

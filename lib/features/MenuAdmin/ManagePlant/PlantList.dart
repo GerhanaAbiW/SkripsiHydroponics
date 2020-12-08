@@ -5,9 +5,11 @@ import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/PlantProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
-import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantDetail.dart';
+import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantCard.dart';
+import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantSearchScreen.dart';
+import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantUpdate.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
-import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:hydroponics/features/Widget/SearchPlant.dart';
 import 'package:provider/provider.dart';
 
 class PlantList extends StatefulWidget {
@@ -16,125 +18,59 @@ class PlantList extends StatefulWidget {
 }
 
 class _PlantListState extends State<PlantList> {
-  PlantService _plantService = PlantService();
 
   @override
   Widget build(BuildContext context) {
     final plantProvider = Provider.of<PlantProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Articles'),
-        actions: <Widget>[
-          Center(
-            child: Text(
-              'Add Article',
-              style: TextStyle(color: green),
+    return ListView(
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        Container(
+          child: SearchPlant(widget: PlantSearchScreen(),)
+        ),
+        Container(
+            height: MediaQuery.of(context).size.height - 200.0,
+            //height: 20,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
             ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.add_circle_outline,
-              color: green,
-            ),
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2,
-          child: AnimationLimiter(
+            width: MediaQuery.of(context).size.width,
+            //height: MediaQuery.of(context).size.height / 2,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: plantProvider.plants.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 100, //MediaQuery.of(context).size.height,
-                  child: Card(
-                      elevation: 10.0,
-                      child: InkWell(
-                          onTap: () {
-                            changeScreen(context, PlantDetail());
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Container(
-                                  child: Row(children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: 70,
-                                          //ScreenUtil().setWidth(60),
-                                          height: 60,
-                                          //ScreenUtil().setWidth(60),
-                                          decoration: new BoxDecoration(
-                                            shape: BoxShape.rectangle,
-                                            border: Border.all(),
-                                          ),
-                                          child: plantProvider
-                                              .plants[index].image !=
-                                              null
-                                              ? Image.network(
-                                            '${plantProvider.plants[index].image}',
-                                            fit: BoxFit.fill,
-                                          )
-                                              : Image.asset("images/bayam.jpeg")),
-                                    ),
-                                    SizedBox(width: 3.0),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            new Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  0.6,
-                                              child: Text(
-                                                  plantProvider
-                                                      .plants[index].plant,
-                                                  style: TextStyle(
-                                                      fontFamily: 'Montserrat',
-                                                      fontSize: 15.0,
-                                                      fontWeight: FontWeight.bold)),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Text(
-                                                  plantProvider
-                                                      .plants[index].date,
-                                                  style: TextStyle(
-                                                      fontFamily: 'Montserrat',
-                                                      fontSize: 15.0,
-                                                      color: Colors.grey)),
-                                            )
-                                          ]),
-                                    )
-                                  ])),
-                              GestureDetector(
-                                child: Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                                onTap: () {
-                                  _plantService.deletePlant(
-                                      plantProvider.plants[index].id);
-                                },
-                              )
-                            ],
-                          ))),
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: PlantCard(
+                    plant: plantProvider.plants[index],
+                  ),
                 );
+                // return Card(
+                //     elevation: 10.0,
+                //     child: InkWell(
+                //       onTap: () {
+                //         Navigator.of(context).push(MaterialPageRoute(
+                //             builder: (context) => MyPlantsDetail()));
+                //       },
+                //       child: ListTile(
+                //         leading: CircleAvatar(
+                //           radius: 30,
+                //           backgroundImage:
+                //               ExactAssetImage("images/plant.png"),
+                //         ),
+                //         title: Text(title[index],
+                //             style: TextStyle(fontSize: 14)),
+                //         subtitle:
+                //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                //       ),
+                //     ));
               },
-            ),
-          )),
+            )),
+      ],
     );
   }
 }

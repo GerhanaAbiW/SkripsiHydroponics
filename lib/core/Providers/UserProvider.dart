@@ -73,6 +73,7 @@ class UserProvider with ChangeNotifier {
 
   Future<bool> signUp(String name, String email, String password) async {
     try {
+
       _status = Status.Authenticating;
       notifyListeners();
       await _auth
@@ -83,7 +84,8 @@ class UserProvider with ChangeNotifier {
           "email": email,
           "role": "admin",
           "uid": user.user.uid,
-          "stripeId": ""
+          "stripeId": "",
+          "userPicture" : null
         });
       });
       return true;
@@ -253,7 +255,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> addMyPlant({Plants plant}) async {
+  Future<bool> addMyPlant({Plants plant, String harvestDay}) async {
     try {
       var uuid = Uuid();
       String myPlantId = uuid.v4();
@@ -272,6 +274,8 @@ class UserProvider with ChangeNotifier {
         "DosageOfFertilizer": plant.dosageFertilizer,
         "HarvestTime": plant.harvestTime,
         "PestType": plant.pestsType,
+        "SeedingTime": plant.seedingTime,
+        "HarvestDay" : harvestDay,
         "Date" : DateTime.now().toString(),
         "CreatedAt" : FieldValue.serverTimestamp()
       };

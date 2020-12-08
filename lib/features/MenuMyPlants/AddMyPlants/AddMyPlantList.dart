@@ -4,7 +4,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Providers/PlantProvider.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
-import 'package:hydroponics/features/Widget/SearchListAddPlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantSearchScreen.dart';
+import 'package:hydroponics/features/Widget/SearchPlant.dart';
 import 'package:provider/provider.dart';
 
 class AddMyPlantList extends StatefulWidget {
@@ -41,7 +42,7 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-            child: SearchListAddPlantWidget(),
+            child: SearchPlant(widget: AddMyPlantSearchScreen(),),
           ),
           Container(
               height: MediaQuery.of(context).size.height - 200.0,

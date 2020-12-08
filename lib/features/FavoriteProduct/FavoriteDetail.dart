@@ -5,7 +5,7 @@ import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuMarket/Market.dart';
+import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteProductDetails extends StatefulWidget {

@@ -4,7 +4,6 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/FavoriteProduct/FavoriteCard.dart';
-import 'package:hydroponics/features/MyOrders/CardMyOrders.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteList extends StatefulWidget {

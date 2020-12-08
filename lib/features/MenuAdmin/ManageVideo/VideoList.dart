@@ -7,7 +7,9 @@ import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/AddVideo.dart';
-import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoDetail.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoCard.dart';
+import 'package:hydroponics/features/Widget/SearchPlant.dart';
+import 'package:hydroponics/features/Widget/SearchVideo.dart';
 import 'package:provider/provider.dart';
 
 class VideoList extends StatefulWidget {
@@ -16,38 +18,29 @@ class VideoList extends StatefulWidget {
 }
 
 class _VideoListState extends State<VideoList> {
-  VideoService _videoService = VideoService();
+  String idUrl;
   @override
   Widget build(BuildContext context) {
-    String idUrl;
     final videoProvider = Provider.of<VideoProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Videos'),
-        actions: <Widget>[
-          Center(
-            child: Text(
-              'Add Video',
-              style: TextStyle(color: green),
+    return  ListView(
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        Container(
+          child: SearchVideo()
+        ),
+        Container(
+            height: MediaQuery.of(context).size.height - 200.0,
+            //height: 20,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
             ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.add_circle_outline,
-              color: green,
-            ),
-            onPressed: () {
-              changeScreen(context, AddVideo());
-            },
-          )
-        ],
-      ),
-      body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2,
-          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
-          child: AnimationLimiter(
+            width: MediaQuery.of(context).size.width,
+            //height: MediaQuery.of(context).size.height / 2,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: videoProvider.videos.length,
               itemBuilder: (BuildContext context, int index) {
                 if (videoProvider.videos[index].video != null &&
@@ -55,196 +48,34 @@ class _VideoListState extends State<VideoList> {
                   idUrl = videoProvider.videos[index].video
                       .substring(videoProvider.videos[index].video.length - 11);
                 }
-                //return AnimationConfiguration.staggeredList(
-                //   position: index,
-                //   duration: const Duration(milliseconds: 3000),
-                // child: SlideAnimation(
-                //   verticalOffset: 100.0,
-                //   child: Slidable(
-                //       key: ValueKey(index),
-                //       actionPane: SlidableDrawerActionPane(),
-                //       secondaryActions: <Widget>[
-                //         IconSlideAction(
-                //           caption: "Update",
-                //           color: Colors.grey.shade300,
-                //           icon: Icons.edit,
-                //           closeOnTap: false,
-                //           onTap: () {},
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: VideoCard(
+                    video: videoProvider.videos[index],
+                  ),
+                );
+                // return Card(
+                //     elevation: 10.0,
+                //     child: InkWell(
+                //       onTap: () {
+                //         Navigator.of(context).push(MaterialPageRoute(
+                //             builder: (context) => MyPlantsDetail()));
+                //       },
+                //       child: ListTile(
+                //         leading: CircleAvatar(
+                //           radius: 30,
+                //           backgroundImage:
+                //               ExactAssetImage("images/plant.png"),
                 //         ),
-                //         IconSlideAction(
-                //           caption: "Delete",
-                //           color: Colors.red.shade300,
-                //           icon: Icons.edit,
-                //           closeOnTap: true,
-                //           onTap: () {
-                //             Fluttertoast.showToast(
-                //                 msg: "Delete Successfull",
-                //                 toastLength: Toast.LENGTH_SHORT,
-                //                 backgroundColor: Colors.red,
-                //                 textColor: Colors.white);
-                //           },
-                //         ),
-                //       ],
-                //       dismissal: SlidableDismissal(
-                //         child: SlidableDrawerDismissal(),
+                //         title: Text(title[index],
+                //             style: TextStyle(fontSize: 14)),
+                //         subtitle:
+                //             Text(desc[index], style: TextStyle(fontSize: 10)),
                 //       ),
-                return Container(
-                  // width: MediaQuery.of(context).size.width,
-                    height: 100, //MediaQuery.of(context).size.height / 9,
-                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
-                    child: Card(
-                      //padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-                      elevation: 10.0,
-                      child: InkWell(
-                          onTap: () {
-//              Navigator.of(context).push(MaterialPageRoute(
-//                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
-//              ));
-                           changeScreen(context, VideoDetail());
-                          },
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Container(
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                              width: 70, //ScreenUtil().setWidth(60),
-                                              height: 60, //ScreenUtil().setWidth(60),
-                                              decoration: new BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                border: Border.all(),
-                                              ),
-                                              child:
-                                              // plantPicture != null
-                                              //     ? ClipRRect(
-                                              //         borderRadius: BorderRadius.circular(
-                                              //             44), //ScreenUtil().setWidth(44)),
-                                              //         child: Image.network(
-                                              //           plantPicture,
-                                              //           fit: BoxFit.fitHeight,
-                                              //           height: 60, //ScreenUtil().setWidth(60),
-                                              //         ),
-                                              //       )
-                                              //     :
-
-                                              Stack(
-                                                children: <Widget>[
-                                                  Image.network(
-                                                    "https://img.youtube.com/vi/$idUrl/0.jpg",
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                  Positioned.fill(
-                                                    child: Align(
-                                                      alignment: Alignment.center,
-                                                      child: Image.asset(
-                                                          "images/play_button.png"),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )),
-                                        ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(8.0),
-                                        //   child: Hero(
-                                        //     tag: imgPath,
-                                        //     child: CircleAvatar(
-                                        //       radius: 30,
-                                        //       backgroundImage: ExactAssetImage(imgPath),
-                                        //     ),
-                                        //   ),
-                                        // ),
-                                        SizedBox(width: 10.0),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          // child: Column(
-                                          //     crossAxisAlignment:
-                                          //         CrossAxisAlignment.start,
-                                          //     children: [
-                                          //       // SizedBox(
-                                          //       //   height: 10,
-                                          //       // ),
-                                          //       SizedBox(width: 3.0),
-                                          // Padding(
-                                          //   padding:
-                                          //       const EdgeInsets.all(8.0),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                new Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      0.6,
-                                                  child: Text(
-                                                      videoProvider
-                                                          .videos[index].title,
-                                                      style: TextStyle(
-                                                          fontFamily: 'Montserrat',
-                                                          fontSize: 15.0,
-                                                          fontWeight:
-                                                          FontWeight.bold)),
-                                                ),
-                                                // Text(videoProvider.videos[index].title,
-                                                //     style: TextStyle(
-                                                //       fontFamily: 'Montserrat',
-                                                //       fontSize: 17.0,
-                                                //       fontWeight: FontWeight.bold,
-                                                //     )),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      bottom: 8.0),
-                                                  child: Text(
-                                                      videoProvider
-                                                          .videos[index].date,
-                                                      style: TextStyle(
-                                                          fontFamily: 'Montserrat',
-                                                          fontSize: 15.0,
-                                                          color: Colors.grey)),
-                                                )
-                                              ]),
-                                          //)
-                                          // ]//)
-                                        ),
-                                      ],
-                                    )),
-                                GestureDetector(child: Icon(Icons.delete, color: Colors.red,),onTap: (){
-                                  _videoService.deleteVideo(videoProvider.videos[index].id);
-                                },)])),
-                    ));
-                // child: Card(
-                //   elevation: 10.0,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       changeScreen(context, ArticleDetail());
-                //     },
-                //     child: ListTile(
-                //       leading: CircleAvatar(
-                //         radius: 30,
-                //         backgroundImage: ExactAssetImage(images[index]),
-                //       ),
-                //       title: Text(title[index],
-                //           style: TextStyle(fontSize: 14)),
-                //       subtitle: Text(phones[index],
-                //           style: TextStyle(fontSize: 10)),
-                //       //trailing: Icon(Icons.tag_faces),
-                //     ),
-                //   ),
-                // ),
-                //),
-                // ),
-                //);
+                //     ));
               },
-            ),
-          )),
+            )),
+      ],
     );
   }
 }

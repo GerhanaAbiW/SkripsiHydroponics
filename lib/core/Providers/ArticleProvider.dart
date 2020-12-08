@@ -5,6 +5,7 @@ import 'package:hydroponics/core/Services/ArticleServices.dart';
 
 class ArticleProvider with ChangeNotifier {
   List<Article> _articles = [];
+  List<Article> _articlesSearched = [];
   ArticleService _articleService = ArticleService();
 
   ArticleProvider.initialize() {
@@ -13,10 +14,17 @@ class ArticleProvider with ChangeNotifier {
 
 //  getter
   List<Article> get articles => _articles;
+  List<Article> get articlesSearched => _articlesSearched;
 
 //  methods
   void _getListArticles() async {
     _articles = await _articleService.getListArticles();
+    notifyListeners();
+  }
+
+  Future search({String articleTitle})async{
+    _articlesSearched = await _articleService.searchArticles(articleTitle: articleTitle);
+    print("THE NUMBER OF PRODUCTS DETECTED IS: ${_articlesSearched.length}");
     notifyListeners();
   }
 

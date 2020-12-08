@@ -31,4 +31,24 @@ class ArticleService {
   void deleteArticle(String articleId) {
     _firestore.collection(collection).document(articleId).delete();
   }
+  Future<List<Article>> searchArticles({String articleTitle}) {
+    // code to convert the first character to uppercase
+    //String searchKey = productName[0].toUpperCase() + productName.substring(1);
+    String searchKey = articleTitle[0].toLowerCase() + articleTitle.substring(1);
+    return _firestore
+        .collection(collection)
+        .orderBy("title")
+        .startAt([searchKey])
+        .endAt([searchKey + '\uf8ff'])
+        .getDocuments()
+        .then((result) {
+      List<Article> articles = [];
+      for (DocumentSnapshot product in result.documents) {
+        articles.add(Article.fromSnapshot(product));
+      }
+
+      return articles;
+
+    });
+  }
 }

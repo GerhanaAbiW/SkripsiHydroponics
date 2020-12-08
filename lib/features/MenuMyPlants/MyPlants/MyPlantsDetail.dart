@@ -18,7 +18,6 @@ class PlantStartRecord extends StatefulWidget {
 
 class _PlantStartRecordState extends State<PlantStartRecord> {
   bool mediaSemai = false;
-
   bool waktuSemai = false;
   bool jenisPupuk = false;
   bool dosisPupuk = false;
@@ -28,11 +27,33 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
   bool ppmIdeal = false;
 
   final _key = GlobalKey<ScaffoldState>();
+  DateTime record;
+  external bool isAfter(DateTime other);
+  external bool isAtSameMomentAs(DateTime other);
+  bool btnRecord = true;
 
   void changeSelected(bool btn) {
     setState(() {
       btn = !btn;
     });
+  }
+  void visibleBtnRecord(){
+    if(isAfter(record)==true || isAtSameMomentAs(record)==true){
+      setState(() {
+        btnRecord = false;
+      });
+    }else{
+      setState(() {
+        btnRecord = true;
+      });
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    record = DateTime.parse(widget.myPlantsModel.harvestDay);
+    visibleBtnRecord();
   }
 
   @override
@@ -121,6 +142,25 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                 children: <Widget>[
                                   Text(
                                       "Media Semai: ${widget.myPlantsModel.media}"),
+                                  Checkbox(
+                                      activeColor: Colors.greenAccent,
+                                      value: mediaSemai,
+                                      onChanged: (bool value) {
+                                        print(value);
+                                        setState(() {
+                                          mediaSemai = value;
+                                        });
+                                      }),
+                                ]),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                      "Waktu Semai: ${widget.myPlantsModel.seedingTime}"),
                                   Checkbox(
                                       activeColor: Colors.greenAccent,
                                       value: mediaSemai,
@@ -249,45 +289,48 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                         SizedBox(
                           height: 40,
                         ),
-                        Center(
-                          child: GestureDetector(
-                            onTap: () async {
-                              appProvider.changeIsLoading();
-                              bool success =
-                                  await userProvider.addMyPlantRecord(
-                                      myPlants: widget.myPlantsModel,
-                                      waktuPanen: waktuPanen,
-                                      waktuPupuk: waktuPupuk,
-                                      waktuSemai: waktuSemai,
-                                      mediaSemai: mediaSemai,
-                                      phIdeal: phIdeal,
-                                      dosisPupuk: dosisPupuk,
-                                      ppmIdeal: ppmIdeal,
-                                      jenisPupuk: jenisPupuk);
-                              if (success) {
-                                _key.currentState.showSnackBar(
-                                    SnackBar(content: Text("Added to My Record Plants!")));
-                                userProvider.reloadUserModel();
+                        Offstage(
+                          offstage: btnRecord,
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: () async {
                                 appProvider.changeIsLoading();
-                                return;
-                              } else {
-                                _key.currentState.showSnackBar(SnackBar(
-                                    content: Text("Not added to My Record Plants!")));
-                                appProvider.changeIsLoading();
-                                return;
-                              }
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(10),
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: darkGreenColor),
-                              child: Text(
-                                'Record',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 22),
+                                bool success =
+                                    await userProvider.addMyPlantRecord(
+                                        myPlants: widget.myPlantsModel,
+                                        waktuPanen: waktuPanen,
+                                        waktuPupuk: waktuPupuk,
+                                        waktuSemai: waktuSemai,
+                                        mediaSemai: mediaSemai,
+                                        phIdeal: phIdeal,
+                                        dosisPupuk: dosisPupuk,
+                                        ppmIdeal: ppmIdeal,
+                                        jenisPupuk: jenisPupuk);
+                                if (success) {
+                                  _key.currentState.showSnackBar(
+                                      SnackBar(content: Text("Added to My Record Plants!")));
+                                  userProvider.reloadUserModel();
+                                  appProvider.changeIsLoading();
+                                  return;
+                                } else {
+                                  _key.currentState.showSnackBar(SnackBar(
+                                      content: Text("Not added to My Record Plants!")));
+                                  appProvider.changeIsLoading();
+                                  return;
+                                }
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.all(10),
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: darkGreenColor),
+                                child: Text(
+                                  'Record',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 22),
+                                ),
                               ),
                             ),
                           ),

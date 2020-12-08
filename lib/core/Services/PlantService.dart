@@ -33,4 +33,24 @@ class PlantService {
   void deletePlant(String plantId) {
     _firestore.collection(collection).document(plantId).delete();
   }
+  Future<List<Plants>> searchPlants({String plant}) {
+    // code to convert the first character to uppercase
+    //String searchKey = productName[0].toUpperCase() + productName.substring(1);
+    String searchKey = plant[0].toLowerCase() + plant.substring(1);
+    return _firestore
+        .collection(collection)
+        .orderBy("Plant")
+        .startAt([searchKey])
+        .endAt([searchKey + '\uf8ff'])
+        .getDocuments()
+        .then((result) {
+      List<Plants> plants = [];
+      for (DocumentSnapshot product in result.documents) {
+        plants.add(Plants.fromSnapshot(product));
+      }
+
+      return plants;
+
+    });
+  }
 }

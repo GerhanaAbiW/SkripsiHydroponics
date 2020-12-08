@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageArticle/AddArticle.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageArticle/ArticleList.dart';
+import 'package:hydroponics/features/MenuAdmin/ManagePlant/AddPlant.dart';
 import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantList.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageProduct/AddProduct.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductList.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageVideo/AddVideo.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoList.dart';
 
+import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 
-import 'package:hydroponics/features/MenuAdmin/OrderList/ListOrder.dart';
-import 'package:hydroponics/features/MenuAdmin/OrderList/OrderDetails.dart';
-
-import 'package:hydroponics/features/MenuAdmin/Dashboard.dart';
+import 'package:hydroponics/features/MenuAdmin/DashBoard/Dashboard.dart';
 
 
 
@@ -20,24 +23,25 @@ class DrawerItem {
   String title;
   IconData icon;
   IconThemeData iconThemeData;
+  Widget widget;
+  String text;
 
-  DrawerItem(this.title, this.icon, this.iconThemeData);
+  DrawerItem(this.title, this.icon, this.iconThemeData, this.widget, this.text);
 }
 
 class MenuAdmin extends StatefulWidget {
   @override
   _MenuAdminState createState() => _MenuAdminState();
   final drawerItem = [
-    DrawerItem("Dashbord", Icons.home, IconThemeData(color: Colors.black)),
+    DrawerItem("Dashbord", Icons.home, IconThemeData(color: Colors.black), NewAdminDashboard(), "DashBoard"),
     DrawerItem("Manage Product", Icons.shopping_basket,
-        IconThemeData(color: Colors.redAccent)),
+        IconThemeData(color: Colors.redAccent), AddProducts(), "Add Product"),
     DrawerItem(
-        "Manage Artcile", Icons.border_color, IconThemeData(color: Colors.black)),
-    DrawerItem("Manage Video", Icons.videocam, IconThemeData(color: Colors.black)),
-    DrawerItem(
-        "Manage Plant", Icons.local_florist, IconThemeData(color: Colors.black)),
-    DrawerItem("Order List", Icons.list, IconThemeData(color: Colors.black)),
-    DrawerItem("Payment List", Icons.list, IconThemeData(color: Colors.black)),
+        "Manage Artcile", Icons.border_color, IconThemeData(color: Colors.black), AddArticle(), "Add Article"),
+    DrawerItem("Manage Video", Icons.videocam, IconThemeData(color: Colors.black), AddVideo(), "AddVideo"),
+    DrawerItem("Manage Plant", Icons.local_florist, IconThemeData(color: Colors.black), AddPlant(), "AddPlant"),
+   // DrawerItem("Order List", Icons.list, IconThemeData(color: Colors.black), ListOrder(), "Order List"),
+    //DrawerItem("Payment List", Icons.list, IconThemeData(color: Colors.black), PaymentList(), "Payment List"),
   ];
 }
 
@@ -56,8 +60,6 @@ class _MenuAdminState extends State<MenuAdmin> {
         return VideoList();
       case 4:
         return PlantList();
-      case 5:
-        return ListOrder();
       default:
         return new Text("Error");
     }
@@ -81,13 +83,35 @@ class _MenuAdminState extends State<MenuAdmin> {
       ));
     }
     return Scaffold(
-      appBar: AppBar(
+      appBar: _selectedDrawerIndex==0 || _selectedDrawerIndex>5?AppBar(
         backgroundColor: greenTosca,
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(widget.drawerItem[_selectedDrawerIndex].title,
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
+      ):AppBar(
+        backgroundColor: greenTosca,
+        title: Text(widget.drawerItem[_selectedDrawerIndex].title,
+            style: CustomTextStyle.textFormFieldBold
+                .copyWith(color: Colors.white, fontSize: 21)),
+        actions: <Widget>[
+          Center(
+            child: Text(
+              widget.drawerItem[_selectedDrawerIndex].text,
+              style: TextStyle(color: white),
+            ),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.add_circle_outline,
+              color: white,
+            ),
+            onPressed: () {
+              changeScreen(context, widget.drawerItem[_selectedDrawerIndex].widget);
+            },
+          )
+        ],
       ),
       drawer: Container(
         child: Theme(

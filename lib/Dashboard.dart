@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MainMenu/MainMenu.dart';
-import 'package:hydroponics/features/MyOrders/MyOrders.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderList.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/UserOrderList.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 import 'package:hydroponics/features/Widget/WhatsApps.dart';
+import 'package:provider/provider.dart';
 
 class DashBoard extends StatefulWidget {
 
@@ -30,9 +33,10 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     return Scaffold(
         body: SizedBox.expand(
-          child: PageView(
+          child: user.userModel.role == "user"?PageView(
             controller: _pageController,
             onPageChanged: (index) {
               setState(() => _currentIndex = index);
@@ -42,6 +46,17 @@ class _DashBoardState extends State<DashBoard> {
               NewProfilePage(),
               WhatsApps(),
               OrdersScreen()
+            ],
+          ):PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => _currentIndex = index);
+            },
+            children: <Widget>[
+              MainMenu(),
+              NewProfilePage(),
+              WhatsApps(),
+              ListOrder(),
             ],
           ),
         ),

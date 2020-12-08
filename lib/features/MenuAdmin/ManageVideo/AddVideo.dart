@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:intl/intl.dart';
 
@@ -58,84 +60,100 @@ class _AddVideoState extends State<AddVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  'Lengkapi Data Untuk Video',
-                  style: CustomTextStyle.textFormFieldBold
-                      .copyWith(color: Colors.black, fontSize: 15),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                FormTextField(
-                    textLabel: "Link Video",
-                    textHint: "Masukkan Link Video",
-                    controller: linkController),
-                SizedBox(
-                  height: 16,
-                ),
-                FormTextField(
-                    textLabel: "Judul Video",
-                    textHint: "Masukkan Judul Video",
-                    controller: titleController),
-                SizedBox(
-                  height: 16,
-                ),
-                DateFormField(
-                    textLabel: 'Tanggal Video',
-                    textHint: 'Tanggal Video',
-                    controller: dateController),
-                SizedBox(
-                  height: 16,
-                ),
-                FormTextField(
-                    textLabel: "Creator",
-                    textHint: "Masukkan Nama Creator",
-                    controller: titleController),
-                SizedBox(
-                  height: 16,
-                ),
-                MultilineFormTextField(
-                    controller: descController,
-                    textHint: "Masukkan Deskripsi Video",
-                    textLabel: "Deskripsi Video",
-                    height: 10),
-                SizedBox(
-                  height: 40,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    validateAndUpload();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: GreenTosca,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(80),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: greenTosca,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            backScreen(context);
+          },
+        ),
+        title: Text("Add Video",
+            style: CustomTextStyle.textFormFieldBold
+                .copyWith(color: Colors.white, fontSize: 21)),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: EdgeInsets.all(24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'Lengkapi Data Untuk Video',
+                    style: CustomTextStyle.textFormFieldBold
+                        .copyWith(color: Colors.black, fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  FormTextField(
+                      textLabel: "Link Video",
+                      textHint: "Masukkan Link Video",
+                      controller: linkController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  FormTextField(
+                      textLabel: "Judul Video",
+                      textHint: "Masukkan Judul Video",
+                      controller: titleController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  DateFormField(
+                      textLabel: 'Tanggal Video',
+                      textHint: 'Tanggal Video',
+                      controller: dateController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  FormTextField(
+                      textLabel: "Creator",
+                      textHint: "Masukkan Nama Creator",
+                      controller: titleController),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  MultilineFormTextField(
+                      controller: descController,
+                      textHint: "Masukkan Deskripsi Video",
+                      textLabel: "Deskripsi Video",
+                      height: 10),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      validateAndUpload();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: GreenTosca,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(80),
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Add Video",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Add Video",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

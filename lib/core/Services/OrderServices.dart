@@ -8,7 +8,7 @@ class OrderServices{
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
 
-  void createOrder({String userId ,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
+  void createOrder({String userId ,String description,String status ,List<CartItemModel> cart, int totalPrice, int totalQtyProduct}) {
     var uuid = Uuid();
     String id = uuid.v4();
     List<Map> convertedCart = [];
@@ -21,7 +21,8 @@ class OrderServices{
       "userId": userId,
       "id": id,
       "cart": convertedCart,
-      "total": totalPrice,
+      "totalPrice": totalPrice,
+      "totalQuantityProduct" : totalQtyProduct,
       "createdAt": FieldValue.serverTimestamp(),
       "description": description,
       "status": status
@@ -58,6 +59,20 @@ class OrderServices{
         }
         return orders;
       });
+
+  Future<List<OrderModel>> getBuyers() async =>
+      _firestore
+          .collection(collection)
+          .where("status", isEqualTo: "Accepted")
+          .getDocuments()
+          .then((result) {
+        List<OrderModel> orders = [];
+        for (DocumentSnapshot order in result.documents) {
+          orders.add(OrderModel.fromSnapshot(order));
+        }
+        return orders;
+      });
+
 
   Future<List<OrderModel>> getAdminOrders() async =>
       _firestore

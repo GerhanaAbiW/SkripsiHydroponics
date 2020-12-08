@@ -5,7 +5,8 @@ class OrderModel {
   static const DESCRIPTION = "description";
   static const CART = "cart";
   static const USER_ID = "userId";
-  static const TOTAL = "total";
+  static const TOTAL_PRICE = "totalPrice";
+  static const TOTAL_QUANTITY_PRODUCT = "totalQuantityProduct";
   static const STATUS = "status";
   static const DATE_TIME = "date";
 
@@ -15,7 +16,8 @@ class OrderModel {
   String _userId;
   String _status;
   String _dateTime;
-  int _total;
+  int _totalPrice;
+  int _totalQuantityProduct;
 
 //  getters
   String get id => _id;
@@ -26,10 +28,11 @@ class OrderModel {
 
   String get status => _status;
 
-  int get total => _total;
+  int get totalPrice => _totalPrice;
 
   String get dateTime => _dateTime;
 
+  int get totalQuantityProduct => _totalQuantityProduct;
   // public variable
   List cart;
 
@@ -37,11 +40,15 @@ class OrderModel {
   OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
     _description = snapshot.data[DESCRIPTION];
-    _total = snapshot.data[TOTAL];
+    _totalPrice = snapshot.data[TOTAL_PRICE];
     _status = snapshot.data[STATUS];
     _userId = snapshot.data[USER_ID];
     _dateTime = snapshot.data[DATE_TIME];
+    _totalQuantityProduct = snapshot.data[TOTAL_QUANTITY_PRODUCT];
     cart = snapshot.data[CART];
 
+
   }
+
+
 }

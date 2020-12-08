@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hydroponics/core/Models/Article.dart';
-import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Models/Video.dart';
 import 'package:uuid/uuid.dart';
 
@@ -37,5 +35,25 @@ class VideoService {
   }
   void deleteVideo(String videoId) {
     _firestore.collection(collection).document(videoId).delete();
+  }
+  Future<List<Video>> searchVideos({String videoTitle}) {
+    // code to convert the first character to uppercase
+    //String searchKey = productName[0].toUpperCase() + productName.substring(1);
+    String searchKey = videoTitle[0].toLowerCase() + videoTitle.substring(1);
+    return _firestore
+        .collection(collection)
+        .orderBy("title")
+        .startAt([searchKey])
+        .endAt([searchKey + '\uf8ff'])
+        .getDocuments()
+        .then((result) {
+      List<Video> videos = [];
+      for (DocumentSnapshot product in result.documents) {
+        videos.add(Video.fromSnapshot(product));
+      }
+
+      return videos;
+
+    });
   }
 }
