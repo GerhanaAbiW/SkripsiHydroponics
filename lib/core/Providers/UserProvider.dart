@@ -152,6 +152,8 @@ class UserProvider with ChangeNotifier {
       List<CartItemModel> cart = _userModel.cart;
 
       Map cartItem = {
+        "id" : cartItemId,
+        "name" : product.name,
         "image": product.picture[0],
         "productId": product.id,
         "price": product.price,
@@ -416,14 +418,17 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUser(String name, String email, String img) async {
+  Future<void> updateUser({String name, String email, String img, String role, String address, String phone, String gender, String dob}) async {
     _firestore.collection('users').document(_user.uid).updateData({
       "name": name,
       "email": email,
       "userPicture": img,
       "role": "user",
+      "phone": phone,
+      "dob": dob,
+      "gender": gender,
       "uid": _user.uid,
-      "stripeId": ""
+      "updateAt": FieldValue.serverTimestamp()
     });
     //var user = await _auth.currentUser();
 

@@ -41,7 +41,7 @@ class _CartPageState extends State<CartPage> {
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed: () {
-            changeScreen(context, MenuMarket());
+           backScreen(context);
           },
         ),
         backgroundColor: Color(0xFF2b961f),
@@ -94,7 +94,7 @@ class _CartPageState extends State<CartPage> {
                     child: ButtonButtom(
                         buttonText: 'Checkout',
                         onPressed: () {
-                          changeScreen(context, CheckOutPage());
+                          changeScreen(context, CheckOutPage(cart: userProvider.userModel.cart,));
                         }),
                   ),
                 ),

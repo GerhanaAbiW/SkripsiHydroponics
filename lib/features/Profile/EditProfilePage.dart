@@ -33,6 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController nomorHPController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
+
   Future getImage(ImageSource media) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: media);
@@ -40,14 +41,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
       _image = File(pickedFile.path);
     });
   }
+
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   void myAlert() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             title: Text('Please choose media to select'),
             content: Container(
               height: MediaQuery.of(context).size.height / 6,
@@ -83,6 +86,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         });
   }
+
   @override
   Widget build(BuildContext context) {
     // final user = Provider.of<UserProvider>(context,listen: false);
@@ -110,7 +114,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             color: Colors.white,
             onPressed: () {
               Navigator.pop(context);
-                },
+            },
           ),
           backgroundColor: darkGreenColor,
           elevation: 0,
@@ -142,28 +146,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         height: 150,
                         child: model.userModel.userPicture != null
                             ? ClipRRect(
-                          borderRadius: BorderRadius.circular(44.0),
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned.fill(
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Loading(),
-                                  )),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: FadeInImage.memoryNetwork(
-                                  placeholder: kTransparentImage,
-                                  image: model.userModel.userPicture,
-                                  height: MediaQuery.of(context).size.height,
-                                  fit: BoxFit.cover,
+                                borderRadius: BorderRadius.circular(44.0),
+                                child: Stack(
+                                  children: <Widget>[
+                                    Positioned.fill(
+                                        child: Align(
+                                      alignment: Alignment.center,
+                                      child: Loading(),
+                                    )),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: FadeInImage.memoryNetwork(
+                                        placeholder: kTransparentImage,
+                                        image: model.userModel.userPicture,
+                                        height:
+                                            MediaQuery.of(context).size.height,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               )
-                            ],
-                          ),
-                        )
                             : Image.asset(
-                            "images/asset_profile/User_Profile_Green.png"),
+                                "images/asset_profile/User_Profile_Green.png"),
                       ),
                       Container(width: 24, child: Icon(Icons.camera_alt)
                           // Image.asset('images/asset_profile/ic_about_us.png'),
@@ -264,7 +269,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   children: <Widget>[
                     FormTextField(
                       textLabel: "Nama",
-                      textHint: model.userModel.name==null?"Masukkan Nama Anda":model.userModel.name,
+                      textHint: model.userModel.name == null
+                          ? "Masukkan Nama Anda"
+                          : model.userModel.name,
                       controller: nameController,
                     ),
 
@@ -298,13 +305,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     SizedBox(height: 16),
                     DateFormField(
                         textLabel: "Tanggal Lahir",
-                        textHint: model.userModel.dob==null?"Masukkan Tanggal Lahir Anda":model.userModel.dob,
+                        textHint: model.userModel.dob == null
+                            ? "Masukkan Tanggal Lahir Anda"
+                            : model.userModel.dob,
                         controller: dateController),
 
                     SizedBox(height: 16),
                     FormTextField(
                         textLabel: "Jenis Kelamin",
-                        textHint: model.userModel.gender==null?"Masukkan Jenis Kelamin Anda":model.userModel.gender,
+                        textHint: model.userModel.gender == null
+                            ? "Masukkan Jenis Kelamin Anda"
+                            : model.userModel.gender,
                         controller: jenisKelaminController),
 
                     // Container(
@@ -324,7 +335,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     FormTextField(
                       textType: TextInputType.emailAddress,
                       textLabel: "Email",
-                      textHint: model.userModel.email==null?"Masukkan Email Anda": model.userModel.email,
+                      textHint: model.userModel.email == null
+                          ? "Masukkan Email Anda"
+                          : model.userModel.email,
                       controller: emailController,
                     ),
 
@@ -365,14 +378,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     FormTextField(
                       textType: TextInputType.number,
                       textLabel: "Nomor HP",
-                      textHint: model.userModel.phone==null?"Masukkan Nomor HP Anda":model.userModel.phone,
+                      textHint: model.userModel.phone == null
+                          ? "Masukkan Nomor HP Anda"
+                          : model.userModel.phone,
                       controller: nomorHPController,
                     ),
                     SizedBox(height: 16),
                     MultilineFormTextField(
                         textType: TextInputType.multiline,
                         textLabel: "Alamat",
-                        textHint: model.userModel.address==null?"Masukkan Alamat Anda":model.userModel.address,
+                        textHint: model.userModel.address == null
+                            ? "Masukkan Alamat Anda"
+                            : model.userModel.address,
                         controller: alamatController,
                         height: 180.0),
                   ],
@@ -400,21 +417,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               Center(
                 child: GestureDetector(
-                  onTap: () async{
+                  onTap: () async {
                     if (_formKey.currentState.validate()) {
                       setState(() => isLoading = true);
                       if (_image != null) {
                         String imageUrl1;
-                        final FirebaseStorage storage = FirebaseStorage.instance;
+                        final FirebaseStorage storage =
+                            FirebaseStorage.instance;
                         final String picture1 =
                             "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-                        StorageUploadTask task1 = storage.ref().child("UserPicture").child(picture1).putFile(_image);
+                        StorageUploadTask task1 = storage
+                            .ref()
+                            .child("UserPicture")
+                            .child(picture1)
+                            .putFile(_image);
                         StorageTaskSnapshot snapshot1 =
-                        await task1.onComplete.then((snapshot) => snapshot);
+                            await task1.onComplete.then((snapshot) => snapshot);
 
                         task1.onComplete.then((snapshot3) async {
                           imageUrl1 = await snapshot1.ref.getDownloadURL();
-                          model.updateUser(nameController.text,emailController.text,imageUrl1);
+                          model.updateUser(
+                              img: imageUrl1,
+                              name: nameController.text,
+                              role: model.userModel.role,
+                              dob: dateController.text,
+                              phone: nomorHPController.text,
+                              gender: jenisKelaminController.text,
+                              address: alamatController.text,
+                              email: emailController.text);
                           _formKey.currentState.reset();
                           setState(() => isLoading = false);
                           Navigator.pop(context);
@@ -465,7 +495,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  // var border = OutlineInputBorder(
-  //     borderRadius: BorderRadius.all(Radius.circular(4)),
-  //     borderSide: BorderSide(width: 1, color: Colors.grey));
+// var border = OutlineInputBorder(
+//     borderRadius: BorderRadius.all(Radius.circular(4)),
+//     borderSide: BorderSide(width: 1, color: Colors.grey));
 }
