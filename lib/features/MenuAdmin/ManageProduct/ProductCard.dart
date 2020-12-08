@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/Services/ProductServices.dart';
+import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductUpdate.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -13,6 +15,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductServices productService = ProductServices();
     return Container(
       // width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
@@ -22,7 +25,7 @@ class ProductCard extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-               // changeScreen(context, MyPlantsDetail(plant: plant,));
+                changeScreen(context, UpdateProduct(product: productModel,));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,6 +110,15 @@ class ProductCard extends StatelessWidget {
                               ]),
                         )
                       ])),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                    onTap: () {
+                      productService.deleteProduct(productModel.id);
+                    },
+                  )
                 ],
               ))),
     );

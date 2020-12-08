@@ -146,7 +146,7 @@ class _UpdateVideoState extends State<UpdateVideo> {
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        "Add Video",
+                        "Update Video",
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

@@ -37,7 +37,7 @@ class _ArticleListState extends State<ArticleList> {
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child: ListView.builder(
+            child: articleProvider.articles.length==0||articleProvider.articles.length==null?Text("no data"):ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: articleProvider.articles.length,

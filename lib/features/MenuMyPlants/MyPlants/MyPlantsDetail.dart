@@ -38,7 +38,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
     });
   }
   void visibleBtnRecord(){
-    if(isAfter(record)==true || isAtSameMomentAs(record)==true){
+    if(isAfter(DateTime.parse(widget.myPlantsModel.harvestDay))==true || isAtSameMomentAs(DateTime.parse(widget.myPlantsModel.harvestDay))==true){
       setState(() {
         btnRecord = false;
       });

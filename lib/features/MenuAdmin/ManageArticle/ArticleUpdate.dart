@@ -160,7 +160,7 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
                               ? ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.asset(
-                              "images/no_image_icon.png",
+                              widget.article.image,
                               fit: BoxFit.contain,
                               width: MediaQuery.of(context).size.width,
                               height:
