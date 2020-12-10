@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
@@ -15,8 +16,16 @@ import 'package:transparent_image/transparent_image.dart';
 
 class CheckOutPage extends StatefulWidget {
   final List<CartItemModel> cart;
+  final String address;
+  final String phone;
+  final int instalation;
+  final int delivery;
+  final int total;
+  final int totalQty;
 
-  const CheckOutPage({Key key, this.cart}) : super(key: key);
+  const CheckOutPage(
+      {Key key, this.cart, this.delivery, this.instalation, this.total, this.address, this.phone, this.totalQty})
+      : super(key: key);
 
   @override
   _CheckOutPageState createState() => _CheckOutPageState();
@@ -24,12 +33,37 @@ class CheckOutPage extends StatefulWidget {
 
 class _CheckOutPageState extends State<CheckOutPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   OrderServices _orderServices = OrderServices();
+  bool del = false;
+  bool ins = false;
+  double totals;
+  double tax;
+  String address;
+  String phone;
+
+  void getTotals() {
+    setState(() {
+      tax = widget.total * 0.01;
+      totals = widget.total + tax + widget.delivery + widget.instalation;
+    });
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    getTotals();
+  }
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final appProvider = Provider.of<AppProvider>(context);
+    // final appProvider = Provider.of<AppProvider>(context);
+
     return MaterialApp(
       home: Scaffold(
         key: _scaffoldKey,
@@ -59,7 +93,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                      selectedAddressSection(),
+                      selectedAddressSection(userProvider.userModel),
                       standardDelivery(),
                       checkoutItem(widget.cart),
                       priceSection()
@@ -73,30 +107,35 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                   child: ButtonButtom(
                     buttonText: 'Order Now',
-                    onPressed: () async {
-                      _orderServices.createOrder(
-                          userId: userProvider.user.uid,
-                          description: "Some random description",
-                          status: "complete",
-                          totalPrice: userProvider.userModel.totalCartPrice,
-                          cart: widget.cart);
-
-                      for (CartItemModel cartItem
-                          in userProvider.userModel.cart) {
-                        bool value = await userProvider.removeFromCart(
-                            cartItem: cartItem);
-                        if (value) {
-                          userProvider.reloadUserModel();
-                          print("Item added to cart");
-                          _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content: Text("Removed from Cart!")));
-                        } else {
-                          print("ITEM WAS NOT REMOVED");
+                    onPressed: () async{
+                      if(address!=null || phone !=null){
+                        _orderServices.createOrder(
+                            phone: phone,
+                            totalQtyProduct: widget.totalQty,
+                            address: address,
+                            userId: userProvider.userModel.id,
+                            description: "Some random description",
+                            status: "pending",
+                            totalPrice: totals,
+                            cart: widget.cart);
+                        for (CartItemModel cartItem in userProvider.userModel.cart) {
+                          bool value = await userProvider.removeFromCart(
+                              cartItem: cartItem);
+                          if (value) {
+                            userProvider.reloadUserModel();
+                            print("Item added to cart");
+                            _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(content: Text("Removed from Cart!")));
+                          } else {
+                            print("ITEM WAS NOT REMOVED");
+                          }
                         }
+                        _scaffoldKey.currentState.showSnackBar(
+                            SnackBar(content: Text("Order created!")));
+                        changeScreen(context, MenuMarket());
+                      }else{
+                        showSnackBar("Please Add Your Phone Number and Your Address ", _scaffoldKey);
                       }
-                      _scaffoldKey.currentState.showSnackBar(
-                          SnackBar(content: Text("Order created!")));
-                      changeScreen(context, MenuMarket());
                     },
                   ),
                 ),
@@ -178,7 +217,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
         elevation: 2);
   }
 
-  selectedAddressSection() {
+  selectedAddressSection(UserModel user) {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -203,7 +242,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "James Francois (Default)",
+                    user.name,
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
@@ -222,10 +261,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   )
                 ],
               ),
-              createAddressText(
-                  "431, Commerce House, Nagindas Master, Fort", 16),
-              createAddressText("Mumbai - 400023", 6),
-              createAddressText("Maharashtra", 6),
+              Container(
+                  child: address == null
+                      ? createAddressText("Address : No data", 16)
+                      : createAddressText(address, 16)),
+
+              // createAddressText("Mumbai - 400023", 6),
+              // createAddressText("Maharashtra", 6),
               SizedBox(
                 height: 6,
               ),
@@ -236,7 +278,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
-                      text: "02222673745",
+                      text: phone == null ? "No data" : phone,
                       style: CustomTextStyle.textFormFieldBold
                           .copyWith(color: Colors.black, fontSize: 12)),
                 ]),
@@ -276,34 +318,98 @@ class _CheckOutPageState extends State<CheckOutPage> {
             flex: 2,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      content: Stack(
+                        overflow: Overflow.visible,
+                        children: <Widget>[
+                          Positioned(
+                            right: -40.0,
+                            top: -40.0,
+                            child: InkResponse(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: CircleAvatar(
+                                child: Icon(Icons.close),
+                                backgroundColor: Colors.red,
+                              ),
+                            ),
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FormTextField(
+                                    controller: addressController,
+                                    textHint: "Add Your Adrress",
+                                    textLabel: "Input Address"
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FormTextField(
+                                    controller: phoneController,
+                                    textHint: "Add Your Phone Number",
+                                    textLabel: "Input Phone Number"
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: RaisedButton(
+                                    child: Text("Save"),
+                                    onPressed: () {
+                                      if (_formKey.currentState.validate()) {
+                                        setState(() {
+                                          address = addressController.text;
+                                          phone = phoneController.text;
+                                        });
+                                        _formKey.currentState.save();
+                                      }
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+            },
             child: Text(
-              "Edit / Change",
+              "Edit Address",
               style: CustomTextStyle.textFormFieldSemiBold
                   .copyWith(fontSize: 12, color: Colors.indigo.shade700),
             ),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
           ),
-          Spacer(
-            flex: 3,
-          ),
-          Container(
-            height: 20,
-            width: 1,
-            color: Colors.grey,
-          ),
-          Spacer(
-            flex: 3,
-          ),
-          FlatButton(
-            onPressed: () {},
-            child: Text("Add New Address",
-                style: CustomTextStyle.textFormFieldSemiBold
-                    .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-          ),
+          // Spacer(
+          //   flex: 3,
+          // ),
+          // Container(
+          //   height: 20,
+          //   width: 1,
+          //   color: Colors.grey,
+          // ),
+          // Spacer(
+          //   flex: 3,
+          // ),
+          // FlatButton(
+          //   onPressed: () {},
+          //   child: Text("Add New Address",
+          //       style: CustomTextStyle.textFormFieldSemiBold
+          //           .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
+          //   splashColor: Colors.transparent,
+          //   highlightColor: Colors.transparent,
+          // ),
           Spacer(
             flex: 2,
           ),
@@ -477,16 +583,23 @@ class _CheckOutPageState extends State<CheckOutPage> {
               SizedBox(
                 height: 8,
               ),
-              createPriceItem("Total MRP", "getFormattedCurrency(5197)",
+              // createPriceItem("Total MRP", "getFormattedCurrency(5197)",
+              //     Colors.grey.shade700),
+              // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
+              //     Colors.teal.shade300),
+
+              createPriceItem("Order Total", "Rp. " + widget.total.toString(),
                   Colors.grey.shade700),
-              createPriceItem("Bag discount", "getFormattedCurrency(3280)",
-                  Colors.teal.shade300),
               createPriceItem(
-                  "Tax", "getFormattedCurrency(96)", Colors.grey.shade700),
-              createPriceItem("Order Total", "getFormattedCurrency(2013)",
-                  Colors.grey.shade700),
-              createPriceItem(
-                  "Delievery Charges", "FREE", Colors.teal.shade300),
+                  "Tax (10%)", "Rp. " + tax.toString(), Colors.grey.shade700),
+              Container(
+                child: widget.instalation != 0
+                    ? createPriceItem("Instalation Delivery",
+                        "Rp. "+widget.instalation.toString(), Colors.teal.shade300)
+                    : createPriceItem("Delievery", "Rp. " + widget.delivery.toString(),
+                        Colors.teal.shade300),
+              ),
+
               SizedBox(
                 height: 8,
               ),
@@ -509,7 +622,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "getFormattedCurrency(2013)",
+                    "Rp. " + totals.toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

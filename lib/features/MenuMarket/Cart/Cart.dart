@@ -131,6 +131,12 @@ class _CartPageState extends State<CartPage> {
                                   context,
                                   CheckOutPage(
                                     cart: userProvider.userModel.cart,
+                                    instalation: 0,
+                                    totalQty: userProvider.userModel.cart.length,
+                                    delivery: 15000,
+                                    address: userProvider.userModel.address,
+                                    phone: userProvider.userModel.phone,
+                                    total: userProvider.userModel.totalCartPrice,
                                   ));
                             }),
                       ),
