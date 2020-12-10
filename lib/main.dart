@@ -12,7 +12,6 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Providers/VideoProvider.dart';
 
 import 'package:hydroponics/Dashboard.dart';
-import 'package:hydroponics/features/MenuMarket/Cart/ViewModel/CartViewModel.dart';
 
 import 'package:hydroponics/features/Widget/SplashScreen.dart';
 import 'package:provider/provider.dart';
