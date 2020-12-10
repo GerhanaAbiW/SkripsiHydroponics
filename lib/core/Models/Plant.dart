@@ -14,7 +14,7 @@ class Plants {
   static const PestsType = "PestType";
   static const SeedTime = "SeedingTime";
   static const HarvestDay = "HarvestDay";
-  static const DATE = "Date";
+  static const CreatedAt = "CreatedAt";
 
 
 
@@ -31,7 +31,7 @@ class Plants {
   String _harvestTime;
   int _harvestDay;
   String _pestsType;
-  String _date;
+  String _createdAt;
 
 //  getters
   String get id => _id;
@@ -48,7 +48,7 @@ class Plants {
 
   int get harvestDay => _harvestDay;
   String get pestsType => _pestsType;
-  String get date => _date;
+  String get createdAt => _createdAt;
 
 
 //  named constructure
@@ -67,7 +67,7 @@ class Plants {
     _harvestDay = data[HarvestDay];
     _seedingTime = data[SeedTime];
     _pestsType = data[PestsType];
-    _date = data[DATE];
+    _createdAt = data[CreatedAt];
 
   }
 }
