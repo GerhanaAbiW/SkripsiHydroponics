@@ -28,6 +28,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     setState(() {
       //brands = data;
       qtyDropDown = getQtyDropdown();
+      _currentQty = qtyDropDown[0].value;
       //_currentBrand = brands[0].data['brand'];
     });
   }

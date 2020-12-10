@@ -211,23 +211,7 @@ Widget UpdateDateFormField(
   );
 }
 
-Widget DropdownQty({
-  String textHint,
-  String selectedItem,
-  //double height,
-  //TextEditingController controller,
-  List<Map<String, dynamic>> dropDownItems,
-  ValueChanged<String> changedDropDownItems,
- // TextInputType textType
-}){
-  return SelectFormField(
-    enableInteractiveSelection: true,
-    hintText: textHint,
-    items: dropDownItems,
-    onChanged: changedDropDownItems,
 
-  );
-}
 
 Widget DropdownForm(
     {String textLabel,
