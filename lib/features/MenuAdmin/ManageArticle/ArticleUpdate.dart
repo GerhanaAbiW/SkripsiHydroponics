@@ -35,9 +35,19 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
-  TextEditingController articleController = TextEditingController();
   TextEditingController authorController = TextEditingController();
   TextEditingController dateController = new TextEditingController();
+
+
+  @override
+  void initState() {
+    super.initState();
+    titleController.text = widget.article.title;
+    descController.text = widget.article.description;
+    authorController.text = widget.article.author;
+    dateController.text = widget.article.date;
+
+  }
 
   ArticleService articleService = ArticleService();
   DateTime selectedDate = DateTime.now();

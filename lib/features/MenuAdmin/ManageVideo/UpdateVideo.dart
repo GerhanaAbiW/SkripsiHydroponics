@@ -35,6 +35,9 @@ class _UpdateVideoState extends State<UpdateVideo> {
     super.initState();
     linkController.text=widget.video.video;
     titleController.text=widget.video.title;
+    dateController.text=widget.video.date;
+    authorController.text=widget.video.author;
+    descController.text=widget.video.description;
   }
 
   Future<Null> _selectDate(BuildContext context) async {
