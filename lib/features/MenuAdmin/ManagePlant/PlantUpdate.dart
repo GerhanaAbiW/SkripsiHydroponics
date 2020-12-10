@@ -47,13 +47,29 @@ class _UpdatePlantState extends State<UpdatePlant> {
   TextEditingController waktuPanenhariController = TextEditingController();
   TextEditingController jenisHamaController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    namaTumbuhanController.text = widget.plant.plant;
+    mediaSemaiController.text = widget.plant.media;
+    waktuSemaiController.text = widget.plant.seedingTime;
+    phIdealController.text = widget.plant.ph;
+    ppmIdealController.text = widget.plant.ppm;
+    jenisPupukController.text = widget.plant.fertilizerType;
+    dosisPupukController.text = widget.plant.dosageFertilizer;
+    waktuPupukController.text = widget.plant.timeOfFertilizer;
+    waktuPanenController.text = widget.plant.harvestTime;
+    waktuPanenhariController.text = widget.plant.harvestDay.toString();
+    jenisHamaController.text = widget.plant.pestsType;
+  }
+
   void myAlert() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             title: Text('Please choose media to select'),
             content: Container(
               height: MediaQuery.of(context).size.height / 6,
@@ -99,9 +115,9 @@ class _UpdatePlantState extends State<UpdatePlant> {
         final String picture1 =
             "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
         StorageUploadTask task1 =
-        storage.ref().child("Plants").child(picture1).putFile(_image);
+            storage.ref().child("Plants").child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
-        await task1.onComplete.then((snapshot) => snapshot);
+            await task1.onComplete.then((snapshot) => snapshot);
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
@@ -118,12 +134,12 @@ class _UpdatePlantState extends State<UpdatePlant> {
             "HarvestTime": waktuPanenController.text,
             "HarvestDay": int.parse(waktuPanenhariController.text),
             "PestType": jenisHamaController.text,
-          },widget.plant.id);
+          }, widget.plant.id);
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           Navigator.pop(context);
         });
-      } else if(_image==null) {
+      } else if (_image == null) {
         _plantService.editPlant({
           "Plant": namaTumbuhanController.text,
           "Media": mediaSemaiController.text,
@@ -137,21 +153,16 @@ class _UpdatePlantState extends State<UpdatePlant> {
           "HarvestTime": waktuPanenController.text,
           "HarvestDay": int.parse(waktuPanenhariController.text),
           "PestType": jenisHamaController.text,
-          "CreatedAt" : widget.plant.createdAt,
-          "UpdateAt" : DateTime.now().toString()
-        },widget.plant.id);
+          "CreatedAt": widget.plant.createdAt,
+          "UpdateAt": DateTime.now().toString()
+        }, widget.plant.id);
         _formKey.currentState.reset();
         setState(() => isLoading = false);
         Navigator.pop(context);
-      }else{
+      } else {
         setState(() => isLoading = false);
       }
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -190,25 +201,27 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                 left: 16, top: 16, right: 16),
                             child: _image == null
                                 ? ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                widget.plant.image,
-                                fit: BoxFit.contain,
-                                width: MediaQuery.of(context).size.width,
-                                height:
-                                MediaQuery.of(context).size.height / 3,
-                              ),
-                            )
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      widget.plant.image,
+                                      fit: BoxFit.contain,
+                                      width: MediaQuery.of(context).size.width,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              3,
+                                    ),
+                                  )
                                 : ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.file(
-                                _image,
-                                fit: BoxFit.contain,
-                                width: MediaQuery.of(context).size.width,
-                                height:
-                                MediaQuery.of(context).size.height / 3,
-                              ),
-                            ),
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.file(
+                                      _image,
+                                      fit: BoxFit.contain,
+                                      width: MediaQuery.of(context).size.width,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              3,
+                                    ),
+                                  ),
                           ),
                         ],
                       ),
@@ -229,7 +242,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                               height: 50.0,
                               child: FlatButton(
                                 shape: CircleBorder(
-                                  // borderRadius: BorderRadius.circular(2000.0),
+                                    // borderRadius: BorderRadius.circular(2000.0),
                                     side: BorderSide(color: Colors.white)),
                                 color: GreenTosca,
                                 child: Icon(
@@ -252,64 +265,64 @@ class _UpdatePlantState extends State<UpdatePlant> {
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'Nama Tumbuhan',
-                        textHint: widget.plant.plant,
-                        controller: namaTumbuhanController,
-                        //value: widget.plant.plant
-                      ),
-                    new SizedBox(
-                      height: 16.0,
-                    ),
-                    FormTextField(
-                        textLabel: 'Media Semai',
-                        textHint: widget.plant.media,
-                        controller: mediaSemaiController,
-                     // value:widget.plant.media
+                      textLabel: 'Nama Tumbuhan',
+                      textHint: widget.plant.plant,
+                      controller: namaTumbuhanController,
+                      //value: widget.plant.plant
                     ),
                     new SizedBox(
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'Waktu Semai',
-                        textHint: widget.plant.seedingTime,
-                        controller: waktuSemaiController,
+                      textLabel: 'Media Semai',
+                      textHint: widget.plant.media,
+                      controller: mediaSemaiController,
+                      // value:widget.plant.media
+                    ),
+                    new SizedBox(
+                      height: 16.0,
+                    ),
+                    FormTextField(
+                      textLabel: 'Waktu Semai',
+                      textHint: widget.plant.seedingTime,
+                      controller: waktuSemaiController,
                       //value: widget.plant.seedingTime
                     ),
                     new SizedBox(
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'PH Ideal',
-                        textHint: widget.plant.ph,
-                        controller: phIdealController,
+                      textLabel: 'PH Ideal',
+                      textHint: widget.plant.ph,
+                      controller: phIdealController,
                       //value: widget.plant.ph
                     ),
                     new SizedBox(
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'PPM Ideal',
-                        textHint: widget.plant.ppm,
-                        controller: ppmIdealController,
+                      textLabel: 'PPM Ideal',
+                      textHint: widget.plant.ppm,
+                      controller: ppmIdealController,
                       //value: widget.plant.ppm
                     ),
                     new SizedBox(
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'Jenis Pupuk',
-                        textHint: widget.plant.fertilizerType,
-                        controller: jenisPupukController,
-                    //value:widget.plant.fertilizerType
+                      textLabel: 'Jenis Pupuk',
+                      textHint: widget.plant.fertilizerType,
+                      controller: jenisPupukController,
+                      //value:widget.plant.fertilizerType
                     ),
                     new SizedBox(
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'Dosis Pupuk',
-                        textHint: widget.plant.dosageFertilizer,
-                        controller: dosisPupukController,
-                   // value:widget.plant.dosageFertilizer
+                      textLabel: 'Dosis Pupuk',
+                      textHint: widget.plant.dosageFertilizer,
+                      controller: dosisPupukController,
+                      // value:widget.plant.dosageFertilizer
                     ),
                     new SizedBox(
                       height: 16.0,
@@ -323,10 +336,10 @@ class _UpdatePlantState extends State<UpdatePlant> {
                       height: 16.0,
                     ),
                     FormTextField(
-                        textLabel: 'Waktu Panen',
-                        textHint: widget.plant.harvestTime,
-                        controller: waktuPanenController,
-                     // value:widget.plant.harvestTime
+                      textLabel: 'Waktu Panen',
+                      textHint: widget.plant.harvestTime,
+                      controller: waktuPanenController,
+                      // value:widget.plant.harvestTime
                     ),
                     new SizedBox(
                       height: 16.0,

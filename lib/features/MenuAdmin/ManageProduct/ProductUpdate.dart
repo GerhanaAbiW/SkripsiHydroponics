@@ -15,7 +15,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class UpdateProduct extends StatefulWidget {
-
   final ProductModel product;
   const UpdateProduct({Key key, this.product}) : super(key: key);
   @override
@@ -32,6 +31,7 @@ class _UpdateProductState extends State<UpdateProduct> {
   TextEditingController productNameController = TextEditingController();
   TextEditingController quatityController = TextEditingController();
   TextEditingController prodcutDescriptionController = TextEditingController();
+
   final productPriceController = TextEditingController();
   List<String> brands = ['A', 'B', 'C', 'D'];
   final List<Map<String, dynamic>> brandItems = [
@@ -72,7 +72,7 @@ class _UpdateProductState extends State<UpdateProduct> {
   ];
   List<String> categories = ['Bibit', 'Obat', 'Pupuk', 'Alat'];
   List<DropdownMenuItem<String>> categoriesDropDown =
-  <DropdownMenuItem<String>>[];
+      <DropdownMenuItem<String>>[];
   List<DropdownMenuItem<String>> brandsDropDown = <DropdownMenuItem<String>>[];
   String _currentCategory;
   String _currentBrand;
@@ -87,6 +87,11 @@ class _UpdateProductState extends State<UpdateProduct> {
     _currentBrand = widget.product.brand;
     _getCategories();
     _getBrands();
+    productNameController.text = widget.product.name;
+    quatityController.text = widget.product.quantity.toString();
+    prodcutDescriptionController.text = widget.product.description;
+    productPriceController.text = widget.product.price.toString();
+    _currentCategory = widget.product.category;
   }
 
   List<DropdownMenuItem<String>> getCategoriesDropdown() {
@@ -138,7 +143,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                     color: Colors.green,
                     shape: new RoundedRectangleBorder(
                         borderRadius:
-                        new BorderRadius.all(new Radius.circular(15.0))),
+                            new BorderRadius.all(new Radius.circular(15.0))),
                     onPressed: () => pickImage(),
                     icon: Icon(
                       Icons.add,
@@ -175,7 +180,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                     FormTextField(
                         textLabel: "Product Price",
                         textHint: widget.product.price.toString(),
-                       // value: widget.product.price.toString(),
+                        // value: widget.product.price.toString(),
                         textType: TextInputType.number,
                         controller: productPriceController),
                     SizedBox(
@@ -183,7 +188,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                     ),
                     FormTextField(
                         textLabel: "Product Description",
-                       // value: widget.product.description,
+                        // value: widget.product.description,
                         textHint: widget.product.description,
                         controller: prodcutDescriptionController,
                         height: 180.0),
@@ -271,8 +276,11 @@ class _UpdateProductState extends State<UpdateProduct> {
             String rannum = Uuid().v1();
             final String picture =
                 "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-            StorageReference reference =
-            FirebaseStorage.instance.ref().child("Products").child(picture).child(rannum);
+            StorageReference reference = FirebaseStorage.instance
+                .ref()
+                .child("Products")
+                .child(picture)
+                .child(rannum);
             StorageUploadTask uploadTask = reference.putFile(imageList[i]);
             StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
             String _url = await downloadUrl.ref.getDownloadURL();
@@ -289,7 +297,7 @@ class _UpdateProductState extends State<UpdateProduct> {
             "brand": _currentBrand,
             "category": _currentCategory,
             // "favorite": favorite
-          },widget.product.id);
+          }, widget.product.id);
 
           _formKey.currentState.reset();
           setState(() => isLoading = false);
