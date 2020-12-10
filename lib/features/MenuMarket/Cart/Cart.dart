@@ -118,24 +118,24 @@ class _CartPageState extends State<CartPage> {
             ],
           ),
           Utils.getSizedBox(height: 8),
-          RaisedButton(
-            onPressed: () {
-              changeScreen(
-                  context,
-                  CheckOutPage(
-                    cart: cart,
-                  ));
-            },
-            color: Colors.green,
-            padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(24))),
-            child: Text(
-              "Checkout",
-              style: CustomTextStyle.textFormFieldSemiBold
-                  .copyWith(color: Colors.white),
-            ),
-          ),
+          // RaisedButton(
+          //   onPressed: () {
+          //     changeScreen(
+          //         context,
+          //         CheckOutPage(
+          //           cart: cart,
+          //         ));
+          //   },
+          //   color: Colors.green,
+          //   padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
+          //   shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.all(Radius.circular(24))),
+          //   child: Text(
+          //     "Checkout",
+          //     style: CustomTextStyle.textFormFieldSemiBold
+          //         .copyWith(color: Colors.white),
+          //   ),
+          // ),
           Utils.getSizedBox(height: 8),
         ],
       ),

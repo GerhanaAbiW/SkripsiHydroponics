@@ -110,27 +110,47 @@ class _ProductDetailsState extends State<ProductDetails> {
             Container(
               height: 50,
               color: Colors.white,
-              child: ListTile(
-                leading: new Text(
-                  widget.product.name,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-                title: new Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: new Text("\$${widget.product.price}"),
+              // child: ListTile(
+              //   leading: new
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.product.name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.0),
                     ),
-                    Expanded(
-                      child: new Text(
-                        "\$${widget.product.price}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red),
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "\Rp.${widget.product.price}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.red),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              //title: new Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //crossAxisAlignment: CrossAxisAlignment.end,
+              // children: <Widget>[
+              //   Expanded(
+              //     child: new Text(" "),
+              //   ),
+              //   Expanded(
+              //     child: new Text(
+              //       "\Rp.${widget.product.price}",
+              //       style: TextStyle(
+              //           fontWeight: FontWeight.bold, color: Colors.red),
+              //     ),
+              //   ),
+              // ],
+              // ),
             ),
+            //),
           ]),
         ),
         // Row(
@@ -243,7 +263,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         ]),
         Divider(),
         new ListTile(
-          title: new Text("Product Detail"),
+          title: new Text("Product description"),
           subtitle: new Text(widget.product.description),
         ),
         Divider(),
@@ -272,15 +292,18 @@ class _ProductDetailsState extends State<ProductDetails> {
         new Row(children: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
-            child: new Text("product condition",
+            child: new Text("stock available",
                 style: TextStyle(color: Colors.grey)),
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: new Text("New"),
+            child: new Text("6 nanti ambil dari stock"),
           )
         ]),
-        Divider(),
+        //Divider(),
+        SizedBox(
+          height: 30,
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -307,7 +330,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               color: Colors.green[700],
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              textColor: Colors.grey,
+              textColor: Colors.white,
               child: new Text("Buy Now"),
             ),
           ),
