@@ -21,7 +21,7 @@ class MyPlantsRecordModel{
   static const RecordDosageFertilizer = "RecordDosageFertilizer";
   static const RecordHarvestTime = "RecordHarvestTime";
   static const RecordPestsType = "RecordPestsType";
-  static const DATE = "date";
+  static const DATE = "Date";
 
   String _id;
   String _plantId;
@@ -74,6 +74,7 @@ class MyPlantsRecordModel{
   String get harvestTime => _harvestTime;
 
   String get pestsType => _pestsType;
+
   String get date => _date;
 
   bool get recordPPM => _recordPPM;

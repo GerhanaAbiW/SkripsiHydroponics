@@ -19,6 +19,7 @@ class _UpdateVideoState extends State<UpdateVideo> {
   Radius topLeft;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  //TextEditingController linkController = TextEditingController(text: "");
   TextEditingController linkController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
@@ -27,6 +28,14 @@ class _UpdateVideoState extends State<UpdateVideo> {
   VideoService videoService = VideoService();
   bool isLoading = false;
   DateTime selectedDate = DateTime.now();
+
+
+  @override
+  void initState() {
+    super.initState();
+    linkController.text=widget.video.video;
+    titleController.text=widget.video.title;
+  }
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -95,42 +104,42 @@ class _UpdateVideoState extends State<UpdateVideo> {
                   SizedBox(
                     height: 16,
                   ),
-                  UpdateFormTextField(
+                  FormTextField(
                       textLabel: "Link Video",
                       textHint: widget.video.video,
-                      value: widget.video.video,
+                      //value: widget.video.video,
                       controller: linkController),
                   SizedBox(
                     height: 16,
                   ),
-                  UpdateFormTextField(
+                  FormTextField(
                       textLabel: "Judul Video",
                       textHint: widget.video.title,
-                      value: widget.video.title,
+                      //value: widget.video.title,
                       controller: titleController),
                   SizedBox(
                     height: 16,
                   ),
-                  UpdateDateFormField(
+                  DateFormField(
                       textLabel: 'Tanggal Video',
                       textHint: widget.video.date,
-                      value: widget.video.date,
+                     // value: widget.video.date,
                       controller: dateController),
                   SizedBox(
                     height: 16,
                   ),
-                  UpdateFormTextField(
+                  FormTextField(
                       textLabel: "Creator",
-                      value: widget.video.author,
+                      //value: widget.video.author,
                       textHint: widget.video.author,
                       controller: authorController),
                   SizedBox(
                     height: 16,
                   ),
-                  UpdateMultilineFormTextField(
+                  MultilineFormTextField(
                       controller: descController,
                       textHint: widget.video.description,
-                      value:  widget.video.description,
+                     // value:  widget.video.description,
                       textLabel: "Deskripsi Video",
                       height: 10),
                   SizedBox(

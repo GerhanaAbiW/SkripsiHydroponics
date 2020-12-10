@@ -164,26 +164,26 @@ class _UpdateProductState extends State<UpdateProduct> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: <Widget>[
-                    UpdateFormTextField(
+                    FormTextField(
                         textLabel: "Product Name",
                         textHint: widget.product.name,
-                        value: widget.product.name,
+                        //value: widget.product.name,
                         controller: productNameController),
                     SizedBox(
                       height: 16,
                     ),
-                    UpdateFormTextField(
+                    FormTextField(
                         textLabel: "Product Price",
                         textHint: widget.product.price.toString(),
-                        value: widget.product.price.toString(),
+                       // value: widget.product.price.toString(),
                         textType: TextInputType.number,
                         controller: productPriceController),
                     SizedBox(
                       height: 16,
                     ),
-                    UpdateFormTextField(
+                    FormTextField(
                         textLabel: "Product Description",
-                        value: widget.product.description,
+                       // value: widget.product.description,
                         textHint: widget.product.description,
                         controller: prodcutDescriptionController,
                         height: 180.0),
@@ -193,9 +193,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        UpdateFormTextField(
+                        FormTextField(
                             textLabel: "Product Quantity",
-                            value: widget.product.quantity.toString(),
+                            //value: widget.product.quantity.toString(),
                             textHint: widget.product.quantity.toString(),
                             textType: TextInputType.number,
                             controller: quatityController),

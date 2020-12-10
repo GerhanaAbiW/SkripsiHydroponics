@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -15,16 +16,9 @@ import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class UserOrderDetail extends StatefulWidget {
-  final List<CartItemModel> cart;
-  final String address;
-  final String phone;
-  final int instalation;
-  final int delivery;
-  final int total;
-  final int totalQty;
-
+  final OrderModel order;
   const UserOrderDetail(
-      {Key key, this.cart, this.delivery, this.instalation, this.total, this.address, this.phone, this.totalQty})
+      {Key key, this.order})
       : super(key: key);
 
   @override
@@ -33,37 +27,18 @@ class UserOrderDetail extends StatefulWidget {
 
 class _UserOrderDetailState extends State<UserOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  OrderServices _orderServices = OrderServices();
-  bool del = false;
-  bool ins = false;
-  double totals;
-  double tax;
-  String address;
-  String phone;
-
-  void getTotals() {
-    setState(() {
-      tax = widget.total * 0.01;
-      totals = widget.total + tax + widget.delivery + widget.instalation;
-    });
-  }
 
 
 
   @override
   void initState() {
     super.initState();
-    getTotals();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    // final appProvider = Provider.of<AppProvider>(context);
-
     return MaterialApp(
       home: Scaffold(
         key: _scaffoldKey,
@@ -93,9 +68,9 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                      selectedAddressSection(userProvider.userModel),
+                      selectedAddressSection(),
                       standardDelivery(),
-                      checkoutItem(widget.cart),
+                      checkoutItem(widget.order.cart),
                       priceSection()
                     ],
                   ),
@@ -107,35 +82,8 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                   child: ButtonButtom(
                     buttonText: 'Order Now',
-                    onPressed: () async{
-                      if(address!=null || phone !=null){
-                        _orderServices.createOrder(
-                            phone: phone,
-                            totalQtyProduct: widget.totalQty,
-                            address: address,
-                            userId: userProvider.userModel.id,
-                            description: "Some random description",
-                            status: "pending",
-                            totalPrice: totals,
-                            cart: widget.cart);
-                        for (CartItemModel cartItem in userProvider.userModel.cart) {
-                          bool value = await userProvider.removeFromCart(
-                              cartItem: cartItem);
-                          if (value) {
-                            userProvider.reloadUserModel();
-                            print("Item added to cart");
-                            _scaffoldKey.currentState.showSnackBar(
-                                SnackBar(content: Text("Removed from Cart!")));
-                          } else {
-                            print("ITEM WAS NOT REMOVED");
-                          }
-                        }
-                        _scaffoldKey.currentState.showSnackBar(
-                            SnackBar(content: Text("Order created!")));
-                        changeScreen(context, MenuMarket());
-                      }else{
-                        showSnackBar("Please Add Your Phone Number and Your Address ", _scaffoldKey);
-                      }
+                    onPressed: () {
+
                     },
                   ),
                 ),
@@ -217,7 +165,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
         elevation: 2);
   }
 
-  selectedAddressSection(UserModel user) {
+  selectedAddressSection() {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -242,7 +190,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    user.name,
+                    "widget.order.name",
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
@@ -261,10 +209,8 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                   )
                 ],
               ),
-              Container(
-                  child: address == null
-                      ? createAddressText("Address : No data", 16)
-                      : createAddressText(address, 16)),
+              createAddressText("Address : "+ widget.order.userAddress, 16),
+
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -278,7 +224,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
-                      text: phone == null ? "No data" : phone,
+                      text: widget.order.phone,
                       style: CustomTextStyle.textFormFieldBold
                           .copyWith(color: Colors.black, fontSize: 12)),
                 ]),
@@ -286,12 +232,12 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               SizedBox(
                 height: 16,
               ),
-              Container(
-                color: Colors.grey.shade300,
-                height: 1,
-                width: double.infinity,
-              ),
-              addressAction()
+              // Container(
+              //   color: Colors.grey.shade300,
+              //   height: 1,
+              //   width: double.infinity,
+              // ),
+              //addressAction()
             ],
           ),
         ),
@@ -310,114 +256,114 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
     );
   }
 
-  addressAction() {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Spacer(
-            flex: 2,
-          ),
-          FlatButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      content: Stack(
-                        overflow: Overflow.visible,
-                        children: <Widget>[
-                          Positioned(
-                            right: -40.0,
-                            top: -40.0,
-                            child: GestureDetector(
-                              onTap: () {
-                                backScreen(context);
-                              },
-                              child: CircleAvatar(
-                                child: Icon(Icons.close),
-                                backgroundColor: Colors.red,
-                              ),
-                            ),
-                          ),
-                          Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: MultilineFormTextField(
-                                      controller: addressController,
-                                      textHint: "Add Your Adrress",
-                                      textLabel: "Input Address"
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: FormTextField(
-                                      controller: phoneController,
-                                      textHint: "Add Your Phone Number",
-                                      textLabel: "Input Phone Number"
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RaisedButton(
-                                    child: Text("Save"),
-                                    onPressed: () {
-                                      if (_formKey.currentState.validate()) {
-                                        setState(() {
-                                          address = addressController.text;
-                                          phone = phoneController.text;
-                                        });
-                                        _formKey.currentState.save();
-                                        backScreen(context);
-                                      }
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
-            },
-            child: Text(
-              "Edit Address",
-              style: CustomTextStyle.textFormFieldSemiBold
-                  .copyWith(fontSize: 12, color: Colors.indigo.shade700),
-            ),
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-          ),
-          // Spacer(
-          //   flex: 3,
-          // ),
-          // Container(
-          //   height: 20,
-          //   width: 1,
-          //   color: Colors.grey,
-          // ),
-          // Spacer(
-          //   flex: 3,
-          // ),
-          // FlatButton(
-          //   onPressed: () {},
-          //   child: Text("Add New Address",
-          //       style: CustomTextStyle.textFormFieldSemiBold
-          //           .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
-          //   splashColor: Colors.transparent,
-          //   highlightColor: Colors.transparent,
-          // ),
-          Spacer(
-            flex: 2,
-          ),
-        ],
-      ),
-    );
-  }
+  // addressAction() {
+  //   return Container(
+  //     child: Row(
+  //       children: <Widget>[
+  //         Spacer(
+  //           flex: 2,
+  //         ),
+  //         FlatButton(
+  //           onPressed: () {
+  //             showDialog(
+  //                 context: context,
+  //                 builder: (BuildContext context) {
+  //                   return AlertDialog(
+  //                     content: Stack(
+  //                       overflow: Overflow.visible,
+  //                       children: <Widget>[
+  //                         Positioned(
+  //                           right: -40.0,
+  //                           top: -40.0,
+  //                           child: GestureDetector(
+  //                             onTap: () {
+  //                               backScreen(context);
+  //                             },
+  //                             child: CircleAvatar(
+  //                               child: Icon(Icons.close),
+  //                               backgroundColor: Colors.red,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         Form(
+  //                           key: _formKey,
+  //                           child: Column(
+  //                             mainAxisSize: MainAxisSize.min,
+  //                             children: <Widget>[
+  //                               Padding(
+  //                                 padding: EdgeInsets.all(8.0),
+  //                                 child: MultilineFormTextField(
+  //                                     controller: addressController,
+  //                                     textHint: "Add Your Adrress",
+  //                                     textLabel: "Input Address"
+  //                                 ),
+  //                               ),
+  //                               Padding(
+  //                                 padding: EdgeInsets.all(8.0),
+  //                                 child: FormTextField(
+  //                                     controller: phoneController,
+  //                                     textHint: "Add Your Phone Number",
+  //                                     textLabel: "Input Phone Number"
+  //                                 ),
+  //                               ),
+  //                               Padding(
+  //                                 padding: const EdgeInsets.all(8.0),
+  //                                 child: RaisedButton(
+  //                                   child: Text("Save"),
+  //                                   onPressed: () {
+  //                                     if (_formKey.currentState.validate()) {
+  //                                       setState(() {
+  //                                         address = addressController.text;
+  //                                         phone = phoneController.text;
+  //                                       });
+  //                                       _formKey.currentState.save();
+  //                                       backScreen(context);
+  //                                     }
+  //                                   },
+  //                                 ),
+  //                               )
+  //                             ],
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   );
+  //                 });
+  //           },
+  //           child: Text(
+  //             "Edit Address",
+  //             style: CustomTextStyle.textFormFieldSemiBold
+  //                 .copyWith(fontSize: 12, color: Colors.indigo.shade700),
+  //           ),
+  //           splashColor: Colors.transparent,
+  //           highlightColor: Colors.transparent,
+  //         ),
+  //         // Spacer(
+  //         //   flex: 3,
+  //         // ),
+  //         // Container(
+  //         //   height: 20,
+  //         //   width: 1,
+  //         //   color: Colors.grey,
+  //         // ),
+  //         // Spacer(
+  //         //   flex: 3,
+  //         // ),
+  //         // FlatButton(
+  //         //   onPressed: () {},
+  //         //   child: Text("Add New Address",
+  //         //       style: CustomTextStyle.textFormFieldSemiBold
+  //         //           .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
+  //         //   splashColor: Colors.transparent,
+  //         //   highlightColor: Colors.transparent,
+  //         // ),
+  //         Spacer(
+  //           flex: 2,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   standardDelivery() {
     return Container(
@@ -589,15 +535,15 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. " + widget.total.toString(),
+              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}" ,
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (10%)", "Rp. " + tax.toString(), Colors.grey.shade700),
+                  "Tax (10%)", "Rp. " + widget.order.tax.toString(), Colors.grey.shade700),
               Container(
-                child: widget.instalation != 0
+                child: widget.order.delivery != 0
                     ? createPriceItem("Instalation Delivery",
-                    "Rp. "+widget.instalation.toString(), Colors.teal.shade300)
-                    : createPriceItem("Delievery", "Rp. " + widget.delivery.toString(),
+                    "Rp. "+widget.order.delivery.toString(), Colors.teal.shade300)
+                    : createPriceItem("Delievery", "Rp. " + widget.order.delivery.toString(),
                     Colors.teal.shade300),
               ),
 
@@ -623,7 +569,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + totals.toString(),
+                    "Rp. " + widget.order.totalPrice.toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
