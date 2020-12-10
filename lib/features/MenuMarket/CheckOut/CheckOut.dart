@@ -8,6 +8,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -68,10 +69,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 flex: 90,
               ),
               Expanded(
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  child: RaisedButton(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                  child: ButtonButtom(
+                    buttonText: 'Order Now',
                     onPressed: () async {
                       _orderServices.createOrder(
                           userId: userProvider.user.uid,
@@ -97,15 +98,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           SnackBar(content: Text("Order created!")));
                       changeScreen(context, MenuMarket());
                     },
-                    child: Text(
-                      "Place Order",
-                      style: CustomTextStyle.textFormFieldMedium.copyWith(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    color: Colors.greenAccent,
-                    textColor: Colors.white,
                   ),
                 ),
                 flex: 10,

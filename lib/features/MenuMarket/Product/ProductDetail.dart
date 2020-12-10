@@ -20,41 +20,40 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final _key = GlobalKey<ScaffoldState>();
-  String _currentQty;
-  List<DropdownMenuItem<String>> qtyDropDown = <DropdownMenuItem<String>>[];
-  _getQty()  {
-    // List<DocumentSnapshot> data = await _brandService.getBrands();
+  String _currentQty = '1';
+  //List<DropdownMenuItem<String>> qtyDropDown = <DropdownMenuItem<String>>[];
+  _getQty() {
+    //List<DocumentSnapshot> data = await _brandService.getBrands();
     // print(data.length);
     setState(() {
       //brands = data;
-      qtyDropDown = getQtyDropdown();
-      _currentQty = qtyDropDown[0].value;
+      // qtyDropDown = getQtyDropdown();
+      // _currentQty = qtyDropDown[1].value;
       //_currentBrand = brands[0].data['brand'];
     });
   }
+
   List<DropdownMenuItem<String>> getQtyDropdown() {
     List<DropdownMenuItem<String>> items = new List();
-    for (int i = 0; i < widget.product.quantity; i++) {
+    for (int i = 1; i < widget.product.quantity; i++) {
       setState(() {
-        String a = i.toString();
-        items.insert(
-            0,
-            DropdownMenuItem(
-                child: Text(a),
-                value: "1"));
+        items.insert(0,
+            DropdownMenuItem(child: Text(i.toString()), value: i.toString()));
       });
     }
     return items;
   }
-  changeSelectedQty(String selectedQty) {
-    setState(() => _currentQty = selectedQty);
-  }
+
+  // changeSelectedQty(String selectedQty) {
+  //   setState(() => _currentQty = selectedQty);
+  // }
+
   @override
   void initState() {
     super.initState();
     _getQty();
-
   }
+
   @override
   Widget build(BuildContext context) {
     final List imgList = widget.product.picture;
@@ -261,12 +260,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                     borderRadius: BorderRadius.circular(10.0),
                     color: Colors.cyan,
                     border: Border.all()),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    items: qtyDropDown,
-                    onChanged: changeSelectedQty,
-                    value: _currentQty),
-                ),
+                // child: DropdownButtonHideUnderline(
+                //   child: DropdownButton(
+                //       items: qtyDropDown,
+                //       onChanged: changeSelectedQty,
+                //       value: _currentQty),
+                // ),
               ),
             ),
             // MaterialButton(
