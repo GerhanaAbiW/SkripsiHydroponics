@@ -208,30 +208,33 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
                   SizedBox(
                     height: 16,
                   ),
-                  FormTextField(
+                  UpdateFormTextField(
                       textLabel: "Judul Article ",
                       textHint: "Masukkan Judul Article",
+                      value: widget.article.title,
                       controller: titleController),
                   SizedBox(
                     height: 16,
                   ),
-                  DateFormField(
+                  UpdateDateFormField(
                       textLabel: 'Tanggal Terbit',
                       textHint: 'Tanggal Terbit',
+                      value: widget.article.date,
                       controller: dateController),
                   SizedBox(
                     height: 16,
                   ),
-                  FormTextField(
+                  UpdateFormTextField(
                       textLabel: "Pengarang",
                       textHint: "Masukkan Nama Pengarang",
                       controller: authorController),
                   SizedBox(
                     height: 16,
                   ),
-                  MultilineFormTextField(
+                  UpdateMultilineFormTextField(
                       controller: descController,
                       textHint: "Masukkan Isi Konten",
+                      value: widget.article.description,
                       textLabel: "Konten",
                       height: 10),
                   SizedBox(
@@ -255,7 +258,7 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        "Add Article",
+                        "Update Article",
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

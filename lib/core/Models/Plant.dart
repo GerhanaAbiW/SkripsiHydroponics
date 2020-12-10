@@ -14,7 +14,7 @@ class Plants {
   static const PestsType = "PestType";
   static const SeedTime = "SeedingTime";
   static const HarvestDay = "HarvestDay";
-  static const DATE = "date";
+  static const DATE = "Date";
 
 
 

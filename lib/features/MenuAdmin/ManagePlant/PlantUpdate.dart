@@ -249,80 +249,96 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Nama Tumbuhan',
                         textHint: widget.plant.plant,
-                        controller: namaTumbuhanController),
+                        controller: namaTumbuhanController,
+                        value: widget.plant.plant),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Media Semai',
                         textHint: widget.plant.media,
-                        controller: mediaSemaiController),
+                        controller: mediaSemaiController,
+                      value:widget.plant.media
+                    ),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Waktu Semai',
                         textHint: widget.plant.seedingTime,
-                        controller: waktuSemaiController),
+                        controller: waktuSemaiController,
+                      value: widget.plant.seedingTime
+                    ),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'PH Ideal',
                         textHint: widget.plant.ph,
-                        controller: phIdealController),
+                        controller: phIdealController,
+                      value: widget.plant.ph
+                    ),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'PPM Ideal',
                         textHint: widget.plant.ppm,
-                        controller: ppmIdealController),
+                        controller: ppmIdealController,
+                      value: widget.plant.ppm
+                    ),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Jenis Pupuk',
                         textHint: widget.plant.fertilizerType,
-                        controller: jenisPupukController),
+                        controller: jenisPupukController,
+                    value:widget.plant.fertilizerType),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Dosis Pupuk',
                         textHint: widget.plant.dosageFertilizer,
-                        controller: dosisPupukController),
+                        controller: dosisPupukController,
+                    value:widget.plant.dosageFertilizer),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Waktu Pupuk',
                         textHint: widget.plant.timeOfFertilizer,
+                        value:  widget.plant.timeOfFertilizer,
                         controller: waktuPupukController),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Waktu Panen',
                         textHint: widget.plant.harvestTime,
-                        controller: waktuPanenController),
+                        controller: waktuPanenController,
+                      value:widget.plant.harvestTime
+                    ),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Waktu Panen Satuan Hari',
                         textHint: widget.plant.harvestDay.toString(),
                         controller: waktuPanenhariController,
+                        value: widget.plant.harvestDay.toString(),
                         textType: TextInputType.number),
                     new SizedBox(
                       height: 16.0,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: 'Jenis Hama',
                         textHint: widget.plant.pestsType,
+                        value: widget.plant.pestsType,
                         controller: jenisHamaController),
                     new SizedBox(
                       height: 16.0,
@@ -346,7 +362,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            "Add Plant",
+                            "Update Plant",
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
