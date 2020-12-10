@@ -22,7 +22,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   final _key = GlobalKey<ScaffoldState>();
   String _currentQty;
   List<DropdownMenuItem<String>> qtyDropDown = <DropdownMenuItem<String>>[];
-  _getQty() async {
+  _getQty()  {
     // List<DocumentSnapshot> data = await _brandService.getBrands();
     // print(data.length);
     setState(() {
@@ -34,13 +34,13 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
   List<DropdownMenuItem<String>> getQtyDropdown() {
     List<DropdownMenuItem<String>> items = new List();
-    for (int i = 1; i <= widget.product.quantity; i++) {
+    for (int i = 0; i < widget.product.quantity; i++) {
       setState(() {
         items.insert(
             0,
             DropdownMenuItem(
-                child: Text(i.toString()),
-                value: i.toString()));
+                child: Text("satu"),
+                value: "1"));
       });
     }
     return items;
