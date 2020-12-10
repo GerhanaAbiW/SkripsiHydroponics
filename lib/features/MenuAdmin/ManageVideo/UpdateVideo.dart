@@ -95,37 +95,42 @@ class _UpdateVideoState extends State<UpdateVideo> {
                   SizedBox(
                     height: 16,
                   ),
-                  FormTextField(
+                  UpdateFormTextField(
                       textLabel: "Link Video",
                       textHint: widget.video.video,
+                      value: widget.video.video,
                       controller: linkController),
                   SizedBox(
                     height: 16,
                   ),
-                  FormTextField(
+                  UpdateFormTextField(
                       textLabel: "Judul Video",
                       textHint: widget.video.title,
+                      value: widget.video.title,
                       controller: titleController),
                   SizedBox(
                     height: 16,
                   ),
-                  DateFormField(
+                  UpdateDateFormField(
                       textLabel: 'Tanggal Video',
                       textHint: widget.video.date,
+                      value: widget.video.date,
                       controller: dateController),
                   SizedBox(
                     height: 16,
                   ),
-                  FormTextField(
+                  UpdateFormTextField(
                       textLabel: "Creator",
+                      value: widget.video.author,
                       textHint: widget.video.author,
                       controller: authorController),
                   SizedBox(
                     height: 16,
                   ),
-                  MultilineFormTextField(
+                  UpdateMultilineFormTextField(
                       controller: descController,
                       textHint: widget.video.description,
+                      value:  widget.video.description,
                       textLabel: "Deskripsi Video",
                       height: 10),
                   SizedBox(

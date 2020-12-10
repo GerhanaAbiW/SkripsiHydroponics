@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -19,8 +20,39 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final _key = GlobalKey<ScaffoldState>();
-  int qty = 0;
+  String _currentQty;
+  List<DropdownMenuItem<String>> qtyDropDown = <DropdownMenuItem<String>>[];
+  _getQty() async {
+    // List<DocumentSnapshot> data = await _brandService.getBrands();
+    // print(data.length);
+    setState(() {
+      //brands = data;
+      qtyDropDown = getQtyDropdown();
+      //_currentBrand = brands[0].data['brand'];
+    });
+  }
+  List<DropdownMenuItem<String>> getQtyDropdown() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (int i = 1; i <= widget.product.quantity; i++) {
+      setState(() {
+        items.insert(
+            0,
+            DropdownMenuItem(
+                child: Text(i.toString()),
+                value: i.toString()));
+      });
+    }
+    return items;
+  }
+  changeSelectedQty(String selectedQty) {
+    setState(() => _currentQty = selectedQty);
+  }
+  @override
+  void initState() {
+    super.initState();
+    _getQty();
 
+  }
   @override
   Widget build(BuildContext context) {
     final List imgList = widget.product.picture;
@@ -199,34 +231,50 @@ class _ProductDetailsState extends State<ProductDetails> {
         // ),
         Row(children: <Widget>[
           Expanded(
-            child: MaterialButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: new Text("Quantity"),
-                        content: new Text("Choose the quantity"),
-                        actions: <Widget>[
-                          new MaterialButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(context);
-                              },
-                              child: new Text("close"))
-                        ],
-                      );
-                    });
-              },
-              color: Colors.white,
-              textColor: Colors.grey,
-              elevation: 0.2,
-              child: Row(children: <Widget>[
-                Expanded(
-                  child: new Text("Quantity"),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.cyan,
+                    border: Border.all()),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    items: qtyDropDown,
+                    onChanged: changeSelectedQty,
+                    value: _currentQty),
                 ),
-                new Icon(Icons.arrow_drop_down),
-              ]),
+              ),
             ),
+            // MaterialButton(
+            //   onPressed: () {
+            //     showDialog(
+            //         context: context,
+            //         builder: (context) {
+            //           return AlertDialog(
+            //             title: new Text("Quantity"),
+            //             content: new Text("Choose the quantity"),
+            //             actions: <Widget>[
+            //               new MaterialButton(
+            //                   onPressed: () {
+            //                     Navigator.of(context).pop(context);
+            //                   },
+            //                   child: new Text("close"))
+            //             ],
+            //           );
+            //         });
+            //   },
+            //   color: Colors.white,
+            //   textColor: Colors.grey,
+            //   elevation: 0.2,
+            //   child: Row(children: <Widget>[
+            //     Expanded(
+            //       child: new Text("Quantity"),
+            //     ),
+            //     new Icon(Icons.arrow_drop_down),
+            //   ]),
+            // ),
           ),
           new IconButton(
               icon: Icon(
@@ -290,7 +338,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               onPressed: () async {
                 appProvider.changeIsLoading();
                 bool success = await userProvider.addToCart(
-                    product: widget.product, qty: qty);
+                    product: widget.product, qty: int.parse(_currentQty));
                 if (success) {
                   _key.currentState
                       .showSnackBar(SnackBar(content: Text("Added to Cart!")));

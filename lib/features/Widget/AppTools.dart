@@ -74,6 +74,48 @@ Widget FormTextField(
   );
 }
 
+Widget UpdateFormTextField(
+    {String value,
+      String textLabel,
+      String textHint,
+      double height,
+      TextEditingController controller,
+      TextInputType textType}) {
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
+  textHint == null ? textHint = "Enter Hint" : textHint;
+  height == null ? height = 50.0 : height;
+  //height !=null
+
+  return new Padding(
+    padding: const EdgeInsets.only(left: 0, right: 0),
+    child: new TextFormField(
+      initialValue: value,
+      controller: controller,
+      keyboardType: textType == null ? TextInputType.text : textType,
+      decoration: new InputDecoration(
+        contentPadding: EdgeInsets.all(12),
+        //contentPadding: EdgeInsets.only(),
+        labelText: textLabel,
+        labelStyle: TextStyle(color: Colors.green),
+        hintText: textHint,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.green,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.blue,
+            width: 2.0,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 Widget DateFormField(
     {String textLabel,
     String textHint,
@@ -120,13 +162,79 @@ Widget DateFormField(
     ),
   );
 }
+Widget UpdateDateFormField(
+    {String textLabel,
+      String textHint,
+      String value,
+      double height,
+      TextEditingController controller,
+      TextInputType textType}) {
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
+  textHint == null ? textHint = "Enter Hint" : textHint;
+  height == null ? height = 50.0 : height;
+  //height !=null
+
+  return new Padding(
+    padding: const EdgeInsets.only(left: 0, right: 0),
+    child: new DateTimePicker(
+      initialValue: value,
+      firstDate: DateTime(1901, 1),
+      lastDate: DateTime(2100),
+      controller: controller,
+      dateMask: 'dd MMM, yyyy',
+      type: DateTimePickerType.date,
+      decoration: new InputDecoration(
+        contentPadding: EdgeInsets.all(12),
+        //contentPadding: EdgeInsets.only(),
+        suffixIcon: Icon(
+          Icons.calendar_today,
+          color: Colors.green,
+        ),
+        labelText: textLabel,
+        labelStyle: TextStyle(color: Colors.green),
+        hintText: textHint,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.green,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.blue,
+            width: 2.0,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget DropdownQty({
+  String textHint,
+  String selectedItem,
+  //double height,
+  //TextEditingController controller,
+  List<Map<String, dynamic>> dropDownItems,
+  ValueChanged<String> changedDropDownItems,
+ // TextInputType textType
+}){
+  return SelectFormField(
+    enableInteractiveSelection: true,
+    hintText: textHint,
+    items: dropDownItems,
+    onChanged: changedDropDownItems,
+
+  );
+}
 
 Widget DropdownForm(
     {String textLabel,
     String textHint,
     String selectedItem,
     double height,
-    TextEditingController controller,
+    //TextEditingController controller,
     List<Map<String, dynamic>> dropDownItems,
     ValueChanged<String> changedDropDownItems,
     TextInputType textType}) {
@@ -198,6 +306,52 @@ Widget MultilineFormTextField(
       decoration: new InputDecoration(
         contentPadding:
             new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
+
+        //contentPadding: EdgeInsets.only(),
+        labelText: textLabel,
+        labelStyle: TextStyle(color: Colors.green),
+        hintText: textHint,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.green,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.blue,
+            width: 2.0,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget UpdateMultilineFormTextField(
+    {String textLabel,
+      String textHint,
+      String value,
+      double height,
+      TextEditingController controller,
+      TextInputType textType}) {
+  textLabel == null ? textLabel = "Enter Title" : textLabel;
+  textHint == null ? textHint = "Enter Hint" : textHint;
+  //height == null ? height = 50.0 : height;
+  //height !=null
+
+  return new Padding(
+    padding: const EdgeInsets.only(left: 0, right: 0),
+    child: new TextFormField(
+      initialValue: value,
+      controller: controller,
+      keyboardType: textType == null ? TextInputType.text : textType,
+      maxLines: 5,
+      minLines: 1,
+      decoration: new InputDecoration(
+        contentPadding:
+        new EdgeInsets.symmetric(vertical: 35.0, horizontal: 10.0),
 
         //contentPadding: EdgeInsets.only(),
         labelText: textLabel,

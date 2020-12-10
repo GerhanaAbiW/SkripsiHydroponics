@@ -82,6 +82,8 @@ class _UpdateProductState extends State<UpdateProduct> {
 
   @override
   void initState() {
+    _currentCategory = widget.product.category;
+    _currentBrand = widget.product.brand;
     _getCategories();
     _getBrands();
   }
@@ -161,23 +163,26 @@ class _UpdateProductState extends State<UpdateProduct> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: <Widget>[
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: "Product Name",
                         textHint: widget.product.name,
+                        value: widget.product.name,
                         controller: productNameController),
                     SizedBox(
                       height: 16,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: "Product Price",
                         textHint: widget.product.price.toString(),
+                        value: widget.product.price.toString(),
                         textType: TextInputType.number,
                         controller: productPriceController),
                     SizedBox(
                       height: 16,
                     ),
-                    FormTextField(
+                    UpdateFormTextField(
                         textLabel: "Product Description",
+                        value: widget.product.description,
                         textHint: widget.product.description,
                         controller: prodcutDescriptionController,
                         height: 180.0),
@@ -187,8 +192,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        FormTextField(
+                        UpdateFormTextField(
                             textLabel: "Product Quantity",
+                            value: widget.product.quantity.toString(),
                             textHint: widget.product.quantity.toString(),
                             textType: TextInputType.number,
                             controller: quatityController),
@@ -219,7 +225,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                 height: 16,
               ),
               appButton(
-                  btnTxt: "Add Product",
+                  btnTxt: "Update Product",
                   onBtnclicked: addNewProducts,
                   btnPadding: 20.0,
                   btnColor: Colors.white),
