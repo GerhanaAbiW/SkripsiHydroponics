@@ -137,6 +137,8 @@ class _UpdatePlantState extends State<UpdatePlant> {
           "HarvestTime": waktuPanenController.text,
           "HarvestDay": int.parse(waktuPanenhariController.text),
           "PestType": jenisHamaController.text,
+          "CreatedAt" : widget.plant.createdAt,
+          "UpdateAt" : DateTime.now().toString()
         },widget.plant.id);
         _formKey.currentState.reset();
         setState(() => isLoading = false);

@@ -71,7 +71,7 @@ class PlantCard extends StatelessWidget {
                                   padding: const EdgeInsets.only(
                                       bottom: 8.0),
                                   child: Text(
-                                      plant.date,
+                                      plant.createdAt,
                                       style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontSize: 15.0,

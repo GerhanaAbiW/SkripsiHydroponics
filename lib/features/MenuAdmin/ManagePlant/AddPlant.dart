@@ -114,7 +114,7 @@ class _AddPlantState extends State<AddPlant> {
             "HarvestTime": waktuPanenController.text,
             "HarvestDay": int.parse(waktuPanenhariController.text),
             "PestType": jenisHamaController.text,
-            "Date" : DateTime.now().toString()
+            "CreatedAt" : DateTime.now().toString()
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);
