@@ -9,7 +9,9 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/ArticleServices.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
+import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ArticleUpdate extends StatefulWidget {
   final Article article;
@@ -125,6 +127,15 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
           Navigator.pop(context);
         });
       } else {
+        articleService.editArticle({
+          "title": titleController.text,
+          "author": authorController.text,
+          "date": dateController.text,
+          "description": descController.text,
+          "image": widget.article.image,
+
+        },widget.article.id);
+        _formKey.currentState.reset();
         setState(() => isLoading = false);
       }
     }
@@ -169,12 +180,23 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
                           child: _image == null
                               ? ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              widget.article.image,
-                              fit: BoxFit.contain,
-                              width: MediaQuery.of(context).size.width,
-                              height:
-                              MediaQuery.of(context).size.height / 3,
+                            child: Stack(
+                              children: <Widget>[
+                                Positioned.fill(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Loading(),
+                                    )),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: widget.article.image,
+                                    height: MediaQuery.of(context).size.height/3,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              ],
                             ),
                           )
                               : ClipRRect(
@@ -183,8 +205,7 @@ class _ArticleUpdateState extends State<ArticleUpdate> {
                               _image,
                               fit: BoxFit.contain,
                               width: MediaQuery.of(context).size.width,
-                              height:
-                              MediaQuery.of(context).size.height / 3,
+                              height: MediaQuery.of(context).size.height / 3,
                             ),
                           ),
                         ),
