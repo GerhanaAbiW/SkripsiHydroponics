@@ -36,10 +36,11 @@ class _ProductDetailsState extends State<ProductDetails> {
     List<DropdownMenuItem<String>> items = new List();
     for (int i = 0; i < widget.product.quantity; i++) {
       setState(() {
+        String a = i.toString();
         items.insert(
             0,
             DropdownMenuItem(
-                child: Text("satu"),
+                child: Text(a),
                 value: "1"));
       });
     }

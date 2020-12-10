@@ -22,6 +22,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   final _key = GlobalKey<ScaffoldState>();
+  int qty = 0;
   //List<int> totals;
 
   @override
@@ -110,7 +111,7 @@ class _CartPageState extends State<CartPage> {
               Container(
                 margin: EdgeInsets.only(right: 30),
                 child: Text(
-                  "\$" + total,
+                  "Rp. " + total,
                   style: CustomTextStyle.textFormFieldBlack.copyWith(
                       color: Colors.greenAccent.shade700, fontSize: 14),
                 ),
@@ -172,13 +173,13 @@ class _CartPageState extends State<CartPage> {
       shrinkWrap: true,
       primary: false,
       itemBuilder: (context, index) {
-        return createCartListItem(cart[index]);
+        return createCartListItem(cart[index],);
       },
       itemCount: cart.length,
     );
   }
 
-  createCartListItem(CartItemModel cart) {
+  createCartListItem(CartItemModel cart,) {
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
     int qty = cart.quantity;
@@ -264,7 +265,7 @@ class _CartPageState extends State<CartPage> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        qty -= 1;
+                                        qty = qty - 1;
                                       });
 
                                     },
@@ -295,7 +296,7 @@ class _CartPageState extends State<CartPage> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        qty += 1;
+                                        qty = qty+ 1;
                                       });
 
                                     },
