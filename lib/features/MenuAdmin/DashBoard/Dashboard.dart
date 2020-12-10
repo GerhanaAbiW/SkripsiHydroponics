@@ -13,6 +13,14 @@ class NewAdminDashboard extends StatefulWidget {
 class _NewAdminDashboardState extends State<NewAdminDashboard> {
   List<charts.Series<Task, String>> _seriesPieData;
 
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<OrderProvider>(context, listen: false); //.getRevenue();
+    _seriesPieData = List<charts.Series<Task, String>>();
+    _getData();
+  }
+
   _getData() {
     var piedata = [
       new Task('Bibit', 35.8, Color(0xff3366cc)),
@@ -34,15 +42,6 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
       ),
     );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Provider.of<OrderProvider>(context, listen: false).getRevenue();
-    _seriesPieData = List<charts.Series<Task, String>>();
-    _getData();
   }
 
   @override
@@ -111,17 +110,20 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            'Sales per category',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              'Sales per category',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: Center(
+            // child: Padding(
+            //   padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -133,6 +135,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                         blurRadius: 4)
                   ]),
               width: MediaQuery.of(context).size.width / 1.2,
+              height: MediaQuery.of(context).size.height - 550,
               child: Center(
                 child: ListTile(
                   title: charts.PieChart(_seriesPieData,
@@ -157,6 +160,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 ),
               ),
             ),
+            // ),
           ),
         )
       ],

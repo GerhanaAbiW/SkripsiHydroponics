@@ -42,12 +42,18 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
       },
       child: GestureDetector(
         onTap: () {
-          if(index<3){
-            changeScreen(context, HydroOrderDetail(
-              hydroType: types[index],
-            ));
-          }else{
-            changeScreen(context, HydroOrderCustomDetail(hydroType: types[index],));
+          if (index < 3) {
+            changeScreen(
+                context,
+                HydroOrderDetail(
+                  hydroType: types[index],
+                ));
+          } else {
+            changeScreen(
+                context,
+                HydroOrderCustomDetail(
+                  hydroType: types[index],
+                ));
           }
         },
         child: Stack(
@@ -167,28 +173,28 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
                       size: 30.0,
                       color: Colors.grey,
                     ),
-                    onTap: ()=>Navigator.pop(context),
+                    onTap: () => Navigator.pop(context),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      'HydroOrder',
+                      'Hydro Order',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-            //       Icon(
-            //         Icons.shopping_cart,
-            //         size: 30.0,
-            //         color: Colors.black,
-            //       ),
-                 ],
+                  //       Icon(
+                  //         Icons.shopping_cart,
+                  //         size: 30.0,
+                  //         color: Colors.black,
+                  //       ),
+                ],
               ),
-             ),
+            ),
 
-            SizedBox(height: 10.0),
+            SizedBox(height: 30.0),
             Padding(
               padding: EdgeInsets.only(left: 30.0),
               child: Text(
@@ -254,7 +260,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
             //     ),
             //   ],
             // ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 40.0),
             Container(
               height: 500.0,
               width: double.infinity,
