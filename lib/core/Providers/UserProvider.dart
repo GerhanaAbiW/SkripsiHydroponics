@@ -423,7 +423,7 @@ class UserProvider with ChangeNotifier {
       "name": name,
       "email": email,
       "userPicture": img,
-      "role": "user",
+      "role": role,
       "phone": phone,
       "dob": dob,
       "gender": gender,

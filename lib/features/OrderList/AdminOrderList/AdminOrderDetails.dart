@@ -39,9 +39,6 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    // final appProvider = Provider.of<AppProvider>(context);
-
     return MaterialApp(
       home: Scaffold(
         key: _scaffoldKey,
@@ -71,7 +68,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                      selectedAddressSection(userProvider.userModel),
+                      selectedAddressSection(),
                       standardDelivery(),
                       checkoutItem(widget.order.cart),
                       priceSection()
@@ -168,7 +165,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
         elevation: 2);
   }
 
-  selectedAddressSection(UserModel user) {
+  selectedAddressSection() {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -193,7 +190,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    user.name,
+                    "widget.order.name",
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),

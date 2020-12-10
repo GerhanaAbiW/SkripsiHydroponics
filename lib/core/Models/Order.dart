@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hydroponics/core/Models/Cart.dart';
 
 class OrderModel {
   static const ID = "id";
@@ -23,7 +24,7 @@ class OrderModel {
   double _tax;
   int _delivery;
   int _instalation;
-  String _userAddres;
+  String _userAddress;
   String _description;
   String _userId;
   String _status;
@@ -34,7 +35,7 @@ class OrderModel {
 //  getters
   String get id => _id;
   String get phone => _phone;
-  String get userAddress => _userAddres;
+  String get userAddress => _userAddress;
   int get delivery => _delivery;
 
   int get instalation => _instalation;
@@ -64,14 +65,20 @@ class OrderModel {
     _totalPrice = snapshot.data[TOTAL_PRICE];
     _status = snapshot.data[STATUS];
     _userId = snapshot.data[USER_ID];
-    _userAddres = snapshot.data[USER_ADDRESS];
+    _userAddress = snapshot.data[USER_ADDRESS];
     _dateTime = snapshot.data[DATE_TIME];
     _totalQuantityProduct = snapshot.data[TOTAL_QUANTITY_PRODUCT];
-    cart = snapshot.data[CART];
+    cart = _convertCartItems(snapshot.data[CART]?? []);
 
 
   }
-
+  List<CartItemModel> _convertCartItems(List cart){
+    List<CartItemModel> convertedCart = [];
+    for(Map cartItem in cart){
+      convertedCart.add(CartItemModel.fromMap(cartItem));
+    }
+    return convertedCart;
+  }
 
 
 }
