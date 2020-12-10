@@ -60,7 +60,7 @@ class Plants {
     _image = data[IMAGE];
     _ph = data[PH];
     _ppm = data[PPM];
-    _dosageFertilizer = data[_dosageFertilizer];
+    _dosageFertilizer = data[DosageOfFertilizer];
     _fertilizerType = data[FertilizerType];
     _timeOfFertilizer = data[TimeOfFertilizer];
     _harvestTime = data[HarvestTime];
