@@ -18,13 +18,12 @@ class CheckOutPage extends StatefulWidget {
   final List<CartItemModel> cart;
   final String address;
   final String phone;
-  final int instalation;
   final int delivery;
   final int total;
   final int totalQty;
 
   const CheckOutPage(
-      {Key key, this.cart, this.delivery, this.instalation, this.total, this.address, this.phone, this.totalQty})
+      {Key key, this.cart, this.delivery,this.total, this.address, this.phone, this.totalQty})
       : super(key: key);
 
   @override
@@ -47,7 +46,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   void getTotals() {
     setState(() {
       tax = widget.total * 0.01;
-      totals = widget.total + tax + widget.delivery + widget.instalation;
+      totals = widget.total + tax + widget.delivery;
     });
   }
 
@@ -116,6 +115,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                             userId: userProvider.userModel.id,
                             description: "Some random description",
                             status: "pending",
+                            tax: tax,
+                            instalation: 0,
                             totalPrice: totals,
                             cart: widget.cart);
                         for (CartItemModel cartItem in userProvider.userModel.cart) {
@@ -594,10 +595,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               createPriceItem(
                   "Tax (10%)", "Rp. " + tax.toString(), Colors.grey.shade700),
               Container(
-                child: widget.instalation != 0
-                    ? createPriceItem("Instalation Delivery",
-                        "Rp. "+widget.instalation.toString(), Colors.teal.shade300)
-                    : createPriceItem("Delievery", "Rp. " + widget.delivery.toString(),
+                child: createPriceItem("Delievery", "Rp. " + widget.delivery.toString(),
                         Colors.teal.shade300),
               ),
 

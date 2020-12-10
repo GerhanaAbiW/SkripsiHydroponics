@@ -135,7 +135,7 @@ class _AddPlantState extends State<AddPlant> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: greenTosca,
+        backgroundColor: GreenTosca,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

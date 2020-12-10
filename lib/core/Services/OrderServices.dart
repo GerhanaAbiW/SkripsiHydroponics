@@ -8,7 +8,8 @@ class OrderServices{
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
 
-  void createOrder({String userId ,String description,String status ,List<CartItemModel> cart, double totalPrice, int totalQtyProduct, String address, String phone }) {
+  void createOrder({String userId ,String description,String status ,List<CartItemModel> cart,
+    double totalPrice, int totalQtyProduct, String address, String phone, double tax, int instalation, int delivery}) {
     var uuid = Uuid();
     String id = uuid.v4();
     List<Map> convertedCart = [];
@@ -21,6 +22,9 @@ class OrderServices{
       "userId": userId,
       "phone" : phone,
       "userAddress" : address,
+      "paymentInstalation": instalation,
+      "paymentDelivery" : delivery,
+      "paymentTax": tax,
       "id": id,
       "cart": convertedCart,
       "totalPrice": totalPrice,

@@ -24,7 +24,7 @@ class _PlantSearchScreenState extends State<PlantSearchScreen> {
     final plantProvider = Provider.of<PlantProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: greenTosca,
+        backgroundColor: GreenTosca,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

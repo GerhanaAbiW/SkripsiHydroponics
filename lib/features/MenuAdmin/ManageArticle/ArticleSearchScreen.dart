@@ -23,7 +23,7 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
     final articleProvider = Provider.of<ArticleProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: greenTosca,
+        backgroundColor: GreenTosca,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
