@@ -5,7 +5,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 class OrderProvider with ChangeNotifier {
   List<OrderModel> _orders = [];
   List<OrderModel> _buyers = [];
-  int _revenue=0;
+  double _revenue=0;
   int _sales=0;
   OrderServices _orderServices = OrderServices();
 
@@ -18,7 +18,7 @@ class OrderProvider with ChangeNotifier {
   List<OrderModel> get orders => _orders;
   List<OrderModel> get buyers => _buyers;
   int get sales => _sales;
-  int get revenue => _revenue;
+  double get revenue => _revenue;
 
 //  methods
   void _getListOrders() async {

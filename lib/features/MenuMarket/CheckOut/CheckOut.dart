@@ -329,9 +329,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           Positioned(
                             right: -40.0,
                             top: -40.0,
-                            child: InkResponse(
+                            child: GestureDetector(
                               onTap: () {
-                                Navigator.of(context).pop();
+                               backScreen(context);
                               },
                               child: CircleAvatar(
                                 child: Icon(Icons.close),
@@ -346,7 +346,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                               children: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: FormTextField(
+                                  child: MultilineFormTextField(
                                     controller: addressController,
                                     textHint: "Add Your Adrress",
                                     textLabel: "Input Address"
@@ -371,6 +371,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                           phone = phoneController.text;
                                         });
                                         _formKey.currentState.save();
+                                        backScreen(context);
                                       }
                                     },
                                   ),

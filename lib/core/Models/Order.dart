@@ -20,7 +20,7 @@ class OrderModel {
   String _userId;
   String _status;
   String _dateTime;
-  int _totalPrice;
+  double _totalPrice;
   int _totalQuantityProduct;
 
 //  getters
@@ -34,7 +34,7 @@ class OrderModel {
 
   String get status => _status;
 
-  int get totalPrice => _totalPrice;
+  double get totalPrice => _totalPrice;
 
   String get dateTime => _dateTime;
 
