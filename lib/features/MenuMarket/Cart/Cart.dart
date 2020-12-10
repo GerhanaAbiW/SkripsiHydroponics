@@ -263,7 +263,10 @@ class _CartPageState extends State<CartPage> {
                                 children: <Widget>[
                                   GestureDetector(
                                     onTap: () {
-                                      qty -= 1;
+                                      setState(() {
+                                        qty -= 1;
+                                      });
+
                                     },
                                     child: Container(
                                       width: 24,
@@ -291,7 +294,10 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      qty += 1;
+                                      setState(() {
+                                        qty += 1;
+                                      });
+
                                     },
                                     child: Container(
                                       width: 24,
