@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/UserOrderDetail.dart';
 
 
 class CardMyListOrder extends StatelessWidget {
@@ -23,7 +24,7 @@ class CardMyListOrder extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => OrderDetails()));
+                    MaterialPageRoute(builder: (context) => UserOrderDetail()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

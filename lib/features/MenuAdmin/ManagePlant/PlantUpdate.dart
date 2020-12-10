@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
-import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
@@ -156,7 +156,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: greenTosca,
+        backgroundColor: GreenTosca,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

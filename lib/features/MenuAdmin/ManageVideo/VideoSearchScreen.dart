@@ -26,7 +26,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
     final videoProvider = Provider.of<VideoProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: greenTosca,
+        backgroundColor: GreenTosca,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

@@ -85,7 +85,7 @@ class _MenuAdminState extends State<MenuAdmin> {
     return Scaffold(
       appBar: _selectedDrawerIndex == 0 || _selectedDrawerIndex > 5
           ? AppBar(
-              backgroundColor: greenTosca,
+              backgroundColor: GreenTosca,
               centerTitle: true,
               iconTheme: IconThemeData(color: Colors.white),
               title: Text(widget.drawerItem[_selectedDrawerIndex].title,
@@ -93,7 +93,7 @@ class _MenuAdminState extends State<MenuAdmin> {
                       .copyWith(color: Colors.white, fontSize: 21)),
             )
           : AppBar(
-              backgroundColor: greenTosca,
+              backgroundColor: GreenTosca,
               title: Text(widget.drawerItem[_selectedDrawerIndex].title,
                   style: CustomTextStyle.textFormFieldBold
                       .copyWith(color: Colors.white, fontSize: 21)),
@@ -118,7 +118,7 @@ class _MenuAdminState extends State<MenuAdmin> {
             ),
       drawer: Container(
         child: Theme(
-          data: Theme.of(context).copyWith(canvasColor: greenTosca),
+          data: Theme.of(context).copyWith(canvasColor: GreenTosca),
           child: Drawer(
               child: Column(children: <Widget>[
             SizedBox(

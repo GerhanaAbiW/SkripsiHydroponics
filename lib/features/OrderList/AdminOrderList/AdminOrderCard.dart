@@ -17,7 +17,7 @@ class OrderCard extends StatelessWidget {
           child: InkWell(
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => OrderDetails()));
+                    MaterialPageRoute(builder: (context) => AdminOrderDetail()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
