@@ -38,10 +38,12 @@ class _AddMyPlantSearchScreenState extends State<AddMyPlantSearchScreen> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-            child: SearchPlant(widget: AddMyPlantSearchScreen(),),
+            child: SearchPlant(
+              widget: AddMyPlantSearchScreen(),
+            ),
           ),
           Container(
-              height: MediaQuery.of(context).size.height - 200.0,
+              height: MediaQuery.of(context).size.height - 300.0,
               //height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -50,19 +52,24 @@ class _AddMyPlantSearchScreenState extends State<AddMyPlantSearchScreen> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: plantProvider.plantsSearched.length<1?Text("Not Found"):ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: plantProvider.plantsSearched.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: AddMyPlantCard(
-                      plant: plantProvider.plantsSearched[index],
-                    ),
-                  );
-                },
-              )),
+              child: plantProvider.plantsSearched.length < 1
+                  ? Padding(
+                      padding: const EdgeInsets.all(125.0),
+                      child: Image.asset('images/not_found.png'),
+                    )
+                  : ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: plantProvider.plantsSearched.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          child: AddMyPlantCard(
+                            plant: plantProvider.plantsSearched[index],
+                          ),
+                        );
+                      },
+                    )),
         ],
       ),
     );

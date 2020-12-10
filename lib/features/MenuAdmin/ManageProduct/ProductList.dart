@@ -31,7 +31,7 @@ class _ProductListState extends State<ProductList> {
           search: "Search Product..",
         )),
         Container(
-            height: MediaQuery.of(context).size.height - 200.0,
+            height: MediaQuery.of(context).size.height - 300.0,
             //height: 20,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -42,7 +42,10 @@ class _ProductListState extends State<ProductList> {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             child: productProvider.products.length == 0 ||
                     productProvider.products.length == null
-                ? Text("no data")
+                ? Padding(
+                    padding: const EdgeInsets.all(125.0),
+                    child: Image.asset('images/not_found.png'),
+                  )
                 : ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,

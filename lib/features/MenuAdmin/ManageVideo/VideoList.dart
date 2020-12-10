@@ -22,14 +22,12 @@ class _VideoListState extends State<VideoList> {
   @override
   Widget build(BuildContext context) {
     final videoProvider = Provider.of<VideoProvider>(context);
-    return  ListView(
+    return ListView(
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
+        Container(child: SearchVideo()),
         Container(
-          child: SearchVideo()
-        ),
-        Container(
-            height: MediaQuery.of(context).size.height - 200.0,
+            height: MediaQuery.of(context).size.height - 300.0,
             //height: 20,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -38,50 +36,53 @@ class _VideoListState extends State<VideoList> {
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child: videoProvider.videos.length==0||videoProvider.videos==null?Text("no data"):ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: videoProvider.videos.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (videoProvider.videos[index].video != null &&
-                    videoProvider.videos[index].video != "") {
-                  idUrl = videoProvider.videos[index].video
-                      .substring(videoProvider.videos[index].video.length - 11);
-                }
-                return AnimationConfiguration.staggeredList(
-                  position: index,
-                  child: VideoCard(
-                    video: videoProvider.videos[index],
-
-                  ),
-                );
-                // return Card(
-                //     elevation: 10.0,
-                //     child: InkWell(
-                //       onTap: () {
-                //         Navigator.of(context).push(MaterialPageRoute(
-                //             builder: (context) => MyPlantsDetail()));
-                //       },
-                //       child: ListTile(
-                //         leading: CircleAvatar(
-                //           radius: 30,
-                //           backgroundImage:
-                //               ExactAssetImage("images/plant.png"),
-                //         ),
-                //         title: Text(title[index],
-                //             style: TextStyle(fontSize: 14)),
-                //         subtitle:
-                //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                //       ),
-                //     ));
-              },
-            )),
+            child:
+                videoProvider.videos.length == 0 || videoProvider.videos == null
+                    ? Padding(
+                        padding: const EdgeInsets.all(125.0),
+                        child: Image.asset('images/not_found.png'),
+                      )
+                    : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: videoProvider.videos.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (videoProvider.videos[index].video != null &&
+                              videoProvider.videos[index].video != "") {
+                            idUrl = videoProvider.videos[index].video.substring(
+                                videoProvider.videos[index].video.length - 11);
+                          }
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            child: VideoCard(
+                              video: videoProvider.videos[index],
+                            ),
+                          );
+                          // return Card(
+                          //     elevation: 10.0,
+                          //     child: InkWell(
+                          //       onTap: () {
+                          //         Navigator.of(context).push(MaterialPageRoute(
+                          //             builder: (context) => MyPlantsDetail()));
+                          //       },
+                          //       child: ListTile(
+                          //         leading: CircleAvatar(
+                          //           radius: 30,
+                          //           backgroundImage:
+                          //               ExactAssetImage("images/plant.png"),
+                          //         ),
+                          //         title: Text(title[index],
+                          //             style: TextStyle(fontSize: 14)),
+                          //         subtitle:
+                          //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                          //       ),
+                          //     ));
+                        },
+                      )),
       ],
     );
   }
 }
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_slidable/flutter_slidable.dart';

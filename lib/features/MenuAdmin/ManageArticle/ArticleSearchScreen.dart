@@ -18,26 +18,24 @@ class ArticleSearchScreen extends StatefulWidget {
 }
 
 class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     final articleProvider = Provider.of<ArticleProvider>(context);
-    return  Scaffold(
-       appBar: AppBar(
-          backgroundColor: greenTosca,
-          centerTitle: true,
-         leading: IconButton(
-           icon: Icon(Icons.arrow_back),
-           color: Colors.white,
-           onPressed: () {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: greenTosca,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
             backScreen(context);
-           },
-         ),
-          title: Text("Search",
-              style: CustomTextStyle.textFormFieldBold
-                  .copyWith(color: Colors.white, fontSize: 21)),
+          },
         ),
+        title: Text("Search",
+            style: CustomTextStyle.textFormFieldBold
+                .copyWith(color: Colors.white, fontSize: 21)),
+      ),
       body: ListView(
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
@@ -45,7 +43,7 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
             child: SearchArticle(),
           ),
           Container(
-              height: MediaQuery.of(context).size.height - 200.0,
+              height: MediaQuery.of(context).size.height - 300.0,
               //height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -54,39 +52,44 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: articleProvider.articlesSearched.length<1?Text("Not Found"):ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: articleProvider.articlesSearched.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
-                      position: index,
-                      child: ArticleCard(article: articleProvider.articlesSearched[index],)
-                  );
-                  // return Card(
-                  //     elevation: 10.0,
-                  //     child: InkWell(
-                  //       onTap: () {
-                  //         Navigator.of(context).push(MaterialPageRoute(
-                  //             builder: (context) => MyPlantsDetail()));
-                  //       },
-                  //       child: ListTile(
-                  //         leading: CircleAvatar(
-                  //           radius: 30,
-                  //           backgroundImage:
-                  //               ExactAssetImage("images/plant.png"),
-                  //         ),
-                  //         title: Text(title[index],
-                  //             style: TextStyle(fontSize: 14)),
-                  //         subtitle:
-                  //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                  //       ),
-                  //     ));
-                },
-              )),
+              child: articleProvider.articlesSearched.length < 1
+                  ? Padding(
+                      padding: const EdgeInsets.all(125.0),
+                      child: Image.asset('images/not_found.png'),
+                    )
+                  : ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: articleProvider.articlesSearched.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return AnimationConfiguration.staggeredList(
+                            position: index,
+                            child: ArticleCard(
+                              article: articleProvider.articlesSearched[index],
+                            ));
+                        // return Card(
+                        //     elevation: 10.0,
+                        //     child: InkWell(
+                        //       onTap: () {
+                        //         Navigator.of(context).push(MaterialPageRoute(
+                        //             builder: (context) => MyPlantsDetail()));
+                        //       },
+                        //       child: ListTile(
+                        //         leading: CircleAvatar(
+                        //           radius: 30,
+                        //           backgroundImage:
+                        //               ExactAssetImage("images/plant.png"),
+                        //         ),
+                        //         title: Text(title[index],
+                        //             style: TextStyle(fontSize: 14)),
+                        //         subtitle:
+                        //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                        //       ),
+                        //     ));
+                      },
+                    )),
         ],
       ),
     );
-
   }
 }

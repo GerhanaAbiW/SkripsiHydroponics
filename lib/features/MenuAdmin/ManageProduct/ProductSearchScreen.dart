@@ -14,7 +14,6 @@ import 'package:hydroponics/features/Widget/SearchProduct.dart';
 import 'package:hydroponics/features/Widget/SearchVideo.dart';
 import 'package:provider/provider.dart';
 
-
 class ProductSearchScreen extends StatefulWidget {
   @override
   _ProductSearchScreenState createState() => _ProductSearchScreenState();
@@ -43,10 +42,12 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-              child: SearchProduct(widget: ProductSearchScreen(),search: "Search",)
-          ),
+              child: SearchProduct(
+            widget: ProductSearchScreen(),
+            search: "Search",
+          )),
           Container(
-              height: MediaQuery.of(context).size.height - 200.0,
+              height: MediaQuery.of(context).size.height - 300.0,
               //height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -60,12 +61,18 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                 shrinkWrap: true,
                 itemCount: productProvider.productsSearched.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return productProvider.productsSearched.length<1?Text("Not Found"):AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: ProductCard(
-                      productModel: productProvider.productsSearched[index],
-                    ),
-                  );
+                  return productProvider.productsSearched.length < 1
+                      ? Padding(
+                          padding: const EdgeInsets.all(125.0),
+                          child: Image.asset('images/not_found.png'),
+                        )
+                      : AnimationConfiguration.staggeredList(
+                          position: index,
+                          child: ProductCard(
+                            productModel:
+                                productProvider.productsSearched[index],
+                          ),
+                        );
                   // return Card(
                   //     elevation: 10.0,
                   //     child: InkWell(
@@ -92,4 +99,3 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
     );
   }
 }
-

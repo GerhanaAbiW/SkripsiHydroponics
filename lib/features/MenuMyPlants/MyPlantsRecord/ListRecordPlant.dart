@@ -20,9 +20,12 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
   @override
   void initState() {
     super.initState();
-    list = Provider.of<UserProvider>(context,listen: false).userModel.myPlantsRecord;
-    list.sort((a,b) => a.date.compareTo(b.date));
+    list = Provider.of<UserProvider>(context, listen: false)
+        .userModel
+        .myPlantsRecord;
+    list.sort((a, b) => a.date.compareTo(b.date));
   }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -45,67 +48,71 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
               .copyWith(color: Colors.white, fontSize: 21),
         ),
       ),
-      body:
-          Padding(
-            padding: const EdgeInsets.only(top:8.0),
-            child: Container(
-                height: MediaQuery.of(context).size.height - 100.0,
-                //height: 20,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-                ),
-                width: MediaQuery.of(context).size.width,
-                //height: MediaQuery.of(context).size.height / 2,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                child: list.length==0||list.length==null?Text("no data"):ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: list.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if(list.length>1){
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        child: list[index].date == list[index-1].date?
-                        WidgetLIstRecordDetailPlant(
-                          model: list[index], header: true,
-                        ): WidgetLIstRecordDetailPlant(
-                          model: list[index], header: false,
-                        )
-                      );
-                    }else return
-                      AnimationConfiguration.staggeredList(
-                      position: index,
-                      child: WidgetLIstRecordDetailPlant(
-                        model: list[index], header: false,
-                      ),
-                    );
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Container(
+            height: MediaQuery.of(context).size.height - 300.0,
+            //height: 20,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+            ),
+            width: MediaQuery.of(context).size.width,
+            //height: MediaQuery.of(context).size.height / 2,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+            child: list.length == 0 || list.length == null
+                ? Padding(
+                    padding: const EdgeInsets.all(125.0),
+                    child: Image.asset('images/not_found.png'),
+                  )
+                : ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: list.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (list.length > 1) {
+                        return AnimationConfiguration.staggeredList(
+                            position: index,
+                            child: list[index].date == list[index - 1].date
+                                ? WidgetLIstRecordDetailPlant(
+                                    model: list[index],
+                                    header: true,
+                                  )
+                                : WidgetLIstRecordDetailPlant(
+                                    model: list[index],
+                                    header: false,
+                                  ));
+                      } else
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          child: WidgetLIstRecordDetailPlant(
+                            model: list[index],
+                            header: false,
+                          ),
+                        );
 
-                    // return Card(
-                    //     elevation: 10.0,
-                    //     child: InkWell(
-                    //       onTap: () {
-                    //         Navigator.of(context).push(MaterialPageRoute(
-                    //             builder: (context) => MyPlantsDetail()));
-                    //       },
-                    //       child: ListTile(
-                    //         leading: CircleAvatar(
-                    //           radius: 30,
-                    //           backgroundImage:
-                    //               ExactAssetImage("images/plant.png"),
-                    //         ),
-                    //         title: Text(title[index],
-                    //             style: TextStyle(fontSize: 14)),
-                    //         subtitle:
-                    //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                    //       ),
-                    //     ));
-                  },
-                )),
-          ),
-
+                      // return Card(
+                      //     elevation: 10.0,
+                      //     child: InkWell(
+                      //       onTap: () {
+                      //         Navigator.of(context).push(MaterialPageRoute(
+                      //             builder: (context) => MyPlantsDetail()));
+                      //       },
+                      //       child: ListTile(
+                      //         leading: CircleAvatar(
+                      //           radius: 30,
+                      //           backgroundImage:
+                      //               ExactAssetImage("images/plant.png"),
+                      //         ),
+                      //         title: Text(title[index],
+                      //             style: TextStyle(fontSize: 14)),
+                      //         subtitle:
+                      //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                      //       ),
+                      //     ));
+                    },
+                  )),
+      ),
     );
   }
-
-
 }
