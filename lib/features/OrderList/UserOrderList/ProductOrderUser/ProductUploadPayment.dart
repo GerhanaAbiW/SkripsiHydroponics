@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/UserOrderList.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,13 +30,15 @@ class _UploadPaymentState extends State<UploadPayment> {
         final FirebaseStorage storage = FirebaseStorage.instance;
         final String picture1 =
             "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-        StorageUploadTask task1 = storage.ref().child("Payment").child(picture1).putFile(_image);
+        StorageUploadTask task1 =
+            storage.ref().child("Payment").child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
-        await task1.onComplete.then((snapshot) => snapshot);
+            await task1.onComplete.then((snapshot) => snapshot);
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
-          _orderServices.updateOrder(status:"Proccess", id:widget.id, img: imageUrl1);
+          _orderServices.updateOrder(
+              status: "Proccess", id: widget.id, img: imageUrl1);
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, UserOrderList());
@@ -45,6 +48,7 @@ class _UploadPaymentState extends State<UploadPayment> {
       }
     }
   }
+
   Future getImage(ImageSource media) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: media);
@@ -138,11 +142,16 @@ class _UploadPaymentState extends State<UploadPayment> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text("Upload Your Transaction Payment Here"),
-                Icon(Icons.arrow_downward,color: Colors.blue,size: 24.0,),
+                Icon(
+                  Icons.arrow_downward,
+                  color: Colors.blue,
+                  size: 24.0,
+                ),
                 Container(
                   width: 120,
                   child: OutlineButton(
-                      borderSide: BorderSide(color: grey.withOpacity(0.5), width: 2.5),
+                      borderSide:
+                          BorderSide(color: grey.withOpacity(0.5), width: 2.5),
                       onPressed: () {
                         myAlert();
                       },
@@ -151,6 +160,7 @@ class _UploadPaymentState extends State<UploadPayment> {
               ],
             ),
             ButtonButtom(
+              color: darkYellowColor,
               buttonText: 'Upload Now',
               onPressed: () {
                 validateAndUpload();

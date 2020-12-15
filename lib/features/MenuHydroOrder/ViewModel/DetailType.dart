@@ -11,9 +11,18 @@ class HydroType {
   int instalationPrice;
   int deliveryPrice;
 
-  HydroType({
-    this.type, this.image, this.area, this.price, this.holeQty,this.pipeQty, this.landType, this.description, this.intPrice, this.deliveryPrice,this.instalationPrice
-  });
+  HydroType(
+      {this.type,
+      this.image,
+      this.area,
+      this.price,
+      this.holeQty,
+      this.pipeQty,
+      this.landType,
+      this.description,
+      this.intPrice,
+      this.deliveryPrice,
+      this.instalationPrice});
 }
 
 final List<HydroType> types = [
@@ -26,10 +35,10 @@ final List<HydroType> types = [
     price: "Rp. 250.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "3 tingkatan",
+    pipeQty: "3",
     intPrice: 250000,
-    description:    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
-
+    description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),
   HydroType(
     instalationPrice: 25000,
@@ -40,10 +49,10 @@ final List<HydroType> types = [
     price: "Rp. 500.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "6 tingkatan",
+    pipeQty: "6",
     intPrice: 500000,
-    description:    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
-
+    description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),
   HydroType(
     instalationPrice: 30000,
@@ -54,10 +63,10 @@ final List<HydroType> types = [
     price: "Rp. 750.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "9 tingkatan",
+    pipeQty: "9",
     intPrice: 750000,
-    description:     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
-
+    description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),
   HydroType(
     instalationPrice: 0,
@@ -71,6 +80,6 @@ final List<HydroType> types = [
     pipeQty: "Custom",
     intPrice: 0,
     description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),
 ];

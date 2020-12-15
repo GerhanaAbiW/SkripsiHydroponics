@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/HydroOrderUser/UserHydroOrderList.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/UserOrderList.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
@@ -15,7 +16,8 @@ class HydroOrderUploadPayment extends StatefulWidget {
   final String id;
   const HydroOrderUploadPayment({Key key, this.id}) : super(key: key);
   @override
-  _HydroOrderUploadPaymentState createState() => _HydroOrderUploadPaymentState();
+  _HydroOrderUploadPaymentState createState() =>
+      _HydroOrderUploadPaymentState();
 }
 
 class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
@@ -30,13 +32,15 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
         final FirebaseStorage storage = FirebaseStorage.instance;
         final String picture1 =
             "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-        StorageUploadTask task1 = storage.ref().child("Payment").child(picture1).putFile(_image);
+        StorageUploadTask task1 =
+            storage.ref().child("Payment").child(picture1).putFile(_image);
         StorageTaskSnapshot snapshot1 =
-        await task1.onComplete.then((snapshot) => snapshot);
+            await task1.onComplete.then((snapshot) => snapshot);
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
-          _orderServices.updateOrder(status:"Proccess", id:widget.id, img: imageUrl1);
+          _orderServices.updateOrder(
+              status: "Proccess", id: widget.id, img: imageUrl1);
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, UserHydroOrderList());
@@ -46,6 +50,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
       }
     }
   }
+
   Future getImage(ImageSource media) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: media);
@@ -61,7 +66,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
         builder: (BuildContext context) {
           return AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             title: Text('Please choose media to select'),
             content: Container(
               height: MediaQuery.of(context).size.height / 6,
@@ -139,11 +144,16 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text("Upload Your Transaction Payment Here"),
-                Icon(Icons.arrow_downward,color: Colors.blue,size: 24.0,),
+                Icon(
+                  Icons.arrow_downward,
+                  color: Colors.blue,
+                  size: 24.0,
+                ),
                 Container(
                   width: 120,
                   child: OutlineButton(
-                      borderSide: BorderSide(color: grey.withOpacity(0.5), width: 2.5),
+                      borderSide:
+                          BorderSide(color: grey.withOpacity(0.5), width: 2.5),
                       onPressed: () {
                         myAlert();
                       },
@@ -152,6 +162,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
               ],
             ),
             ButtonButtom(
+              color: darkYellowColor,
               buttonText: 'Upload Now',
               onPressed: () {
                 validateAndUpload();

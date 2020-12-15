@@ -233,7 +233,13 @@ class _ProductDetailsState extends State<ProductDetails> {
         //   ],
         // ),
         Row(children: <Widget>[
-         Text("Quantity : ", style: TextStyle(color: Colors.green, fontSize: 16.0),),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Quantity : ",
+              style: TextStyle(color: Colors.green, fontSize: 16.0),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -241,11 +247,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.cyan,
+                    color: Colors.grey[200],
                     border: Border.all()),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton(
-                    hint: Text("Please select the quantity", style: TextStyle(color: Colors.black, fontSize: 14.0)),
+                    hint: Text("Please select the quantity",
+                        style: TextStyle(color: Colors.black, fontSize: 14.0)),
                     dropdownColor: Colors.white,
                     icon: Icon(
                       Icons.arrow_drop_down,

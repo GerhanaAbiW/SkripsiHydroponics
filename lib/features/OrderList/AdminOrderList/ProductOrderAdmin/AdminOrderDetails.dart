@@ -16,6 +16,8 @@ import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+var darkYellowColor = Color(0xFFAB9208);
+
 class AdminOrderDetail extends StatefulWidget {
   final OrderModel order;
 
@@ -49,7 +51,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: Color(0xFF2b961f),
+          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -79,17 +81,18 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               Expanded(
                 child: widget.order.status == "Pending"
                     ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                             child: Container(
-                              width: MediaQuery.of(context).size.width/3.5,// double.infinity,
+                              width: MediaQuery.of(context).size.width /
+                                  3.5, // double.infinity,
                               // height: ScreenUtil().setHeight(38),
                               height: 40,
-                             margin: EdgeInsets.only(bottom: 24),
+                              margin: EdgeInsets.only(bottom: 24),
                               child: FlatButton(
-                                color: Color(0xFF2b961f),
+                                color: darkYellowColor, //Color(0xFF2b961f),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -110,12 +113,13 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                             child: Container(
-                              width: MediaQuery.of(context).size.width/3.5,// double.infinity,
+                              width: MediaQuery.of(context).size.width /
+                                  3.5, // double.infinity,
                               // height: ScreenUtil().setHeight(38),
                               height: 40,
                               margin: EdgeInsets.only(bottom: 24),
                               child: FlatButton(
-                                color: Color(0xFF2b961f),
+                                color: darkYellowColor, //Color(0xFF2b961f),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -143,7 +147,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                           height: 40,
                           margin: EdgeInsets.only(bottom: 24),
                           child: FlatButton(
-                            color: Color(0xFF2b961f),
+                            color: darkYellowColor, //Color(0xFF2b961f),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -443,8 +447,8 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
-          color: Colors.tealAccent.withOpacity(0.2)),
+              Border.all(color: Colors.limeAccent.withOpacity(0.4), width: 1),
+          color: Colors.limeAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -453,7 +457,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
             value: 1,
             groupValue: 1,
             onChanged: (isChecked) {},
-            activeColor: Colors.tealAccent.shade400,
+            activeColor: Colors.limeAccent.shade400,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -470,7 +474,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 height: 5,
               ),
               Text(
-                "Get it by 20 jul - 27 jul | Free Delivery",
+                "Exceeded the delivery limit time | Free Delivery",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -608,19 +612,23 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. "+ widget.order.totalPrice.toStringAsFixed(3),
+              createPriceItem(
+                  "Order Total",
+                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toStringAsFixed(3),
+              createPriceItem(
+                  "Tax (10%)",
+                  "Rp. " + widget.order.tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               Container(
-                child: widget.order.delivery != 0
+                child: widget.order.delivery != null
                     ? createPriceItem(
                         "Instalation Delivery",
                         "Rp. " + widget.order.delivery.toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
                         "Delievery",
-                        "Rp. " + widget.order.delivery.toString(),
+                        "Rp. -", // widget.order.delivery.toString(),
                         Colors.teal.shade300),
               ),
 
@@ -717,7 +725,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
         child: widget.order.imagePayment == null
             ? Text("Unpaid",
                 style: CustomTextStyle.textFormFieldMedium
-                    .copyWith(color: Colors.red, fontSize: 12))
+                    .copyWith(color: darkYellowColor, fontSize: 12))
             : Image.network(widget.order.imagePayment),
       ),
     ]));

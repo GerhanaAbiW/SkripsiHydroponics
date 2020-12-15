@@ -157,7 +157,9 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                           iconSize: 24,
                                           onPressed: () {
                                             changeScreen(
-                                                context, EditProfilePage());
+                                                context,
+                                                EditProfilePage(
+                                                    user: user.userModel));
                                           },
                                         )
                                       ],
@@ -198,8 +200,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                'images/asset_profile/placeholderprofile.png'
-                                                ),
+                                                'images/asset_profile/placeholderprofile.png'),
                                             fit: BoxFit.contain)))
                                 : Container(
                                     decoration: BoxDecoration(

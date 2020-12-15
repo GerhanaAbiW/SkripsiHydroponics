@@ -17,9 +17,8 @@ import 'package:transparent_image/transparent_image.dart';
 var darkGreenColor = Color(0xFF689F38);
 
 class EditProfilePage extends StatefulWidget {
-  // final UserModel user;
-  //
-  // const EditProfilePage({Key key, this.user}) : super(key: key);
+  final UserModel user;
+  const EditProfilePage({Key key, this.user}) : super(key: key);
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -40,6 +39,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     setState(() {
       _image = File(pickedFile.path);
     });
+  }
+
+  @override
+  void initState() {
+    nameController.text = widget.user.name;
+    emailController.text = widget.user.email;
+    jenisKelaminController.text = widget.user.gender;
+    dateController.text = widget.user.dob;
+    nomorHPController.text = widget.user.phone;
+    alamatController.text = widget.user.address;
   }
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();

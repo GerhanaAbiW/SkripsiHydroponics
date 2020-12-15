@@ -12,6 +12,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuHydroOrder/NewHydroOrderList.dart';
 import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
@@ -73,7 +74,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
     DateTime now = DateTime.now();
     DateFormat formatter = DateFormat('dd-MMM-yyyy');
     String date = formatter.format(now);
-    try{
+    try {
       hydroOrderServices.createHydroOrder({
         "userId": widget.userModel.id,
         "userName": widget.userModel.name,
@@ -91,14 +92,12 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
         "paymentDelivery": widget.hydroType.deliveryPrice,
         "paymentInstalation": widget.hydroType.instalationPrice,
         "status": "Pending",
-        "date" : date
+        "date": date
       });
       changeScreen(context, NewHydroOrderList());
-    }catch(e){
+    } catch (e) {
       print(e.toString());
     }
-
-
   }
 
   @override
@@ -145,6 +144,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                   child: ButtonButtom(
+                    color: green,
                     buttonText: 'Order Now',
                     onPressed: () {
                       validateAndUpload();
@@ -450,22 +450,22 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Standard Delivery",
+                "Your HydroOrder",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Get it by 20 jul - 27 jul | Free Delivery",
-                style: CustomTextStyle.textFormFieldMedium.copyWith(
-                  color: Colors.black,
-                  fontSize: 12,
-                ),
-              )
+              // SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   "Get it by 20 jul - 27 jul | Free Delivery",
+              //   style: CustomTextStyle.textFormFieldMedium.copyWith(
+              //     color: Colors.black,
+              //     fontSize: 12,
+              //   ),
+              // )
             ],
           ),
         ],
@@ -486,11 +486,15 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
           child: Row(
             children: <Widget>[
               Image.asset(widget.hydroType.image),
-              Text(widget.hydroType.type),
-              Text(widget.hydroType.landType),
-              Text("Pipe Quantity : " + widget.jmlPipa),
-              Text("Hole Quantity : " + widget.jmlLubang),
-              Text("Land Type : " + widget.landType),
+              Column(
+                children: <Widget>[
+                  Text(widget.hydroType.type),
+                  //Text(widget.landType),
+                  Text("Pipe Quantity : " + widget.hydroType.pipeQty),
+                  Text("Hole Quantity : " + widget.jmlLubang),
+                  Text("Land Type : " + widget.landType),
+                ],
+              ),
             ],
           )),
     );
@@ -543,8 +547,8 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
 
               createPriceItem("Hydro Order", "Rp. ${widget.hydroType.intPrice}",
                   Colors.grey.shade700),
-              createPriceItem(
-                  "Tax (15%)", "Rp. " + tax.toStringAsFixed(3), Colors.grey.shade700),
+              createPriceItem("Tax (15%)", "Rp. " + tax.toStringAsFixed(3),
+                  Colors.grey.shade700),
               createPriceItem(
                   "Instalation",
                   "Rp. " + widget.hydroType.instalationPrice.toString(),

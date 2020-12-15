@@ -15,8 +15,6 @@ class DashboardAdminOrder extends StatefulWidget {
 }
 
 class _DashboardAdminOrderState extends State<DashboardAdminOrder> {
-
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,16 +29,16 @@ class _DashboardAdminOrderState extends State<DashboardAdminOrder> {
             backgroundColor: darkYellowColor,
             elevation: 0,
             bottom: TabBar(
-                unselectedLabelColor: Colors.blue[900],
+                unselectedLabelColor: Colors.lime[900],
                 indicatorPadding: EdgeInsets.only(left: 30, right: 30),
                 indicator: ShapeDecoration(
-                  // color: Colors.lightBlue[900],
+                    // color: Colors.lightBlue[900],
                     gradient: LinearGradient(
-                        colors: [Colors.lightBlue[900], Colors.blue[200]]),
+                        colors: [Colors.lime[900], Colors.lime[200]]),
                     shape: BeveledRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                         side: BorderSide(
-                          color: Colors.lightBlue[900],
+                          color: Colors.lime[900],
                         ))),
                 tabs: [
                   Tab(

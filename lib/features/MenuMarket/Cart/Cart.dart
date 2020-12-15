@@ -4,6 +4,7 @@ import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/MenuMarket/CheckOut/CheckOut.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
@@ -126,16 +127,19 @@ class _CartPageState extends State<CartPage> {
                         padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                         child: ButtonButtom(
                             buttonText: 'Checkout',
+                            color: green,
                             onPressed: () {
                               changeScreen(
                                   context,
                                   CheckOutPage(
                                     cart: userProvider.userModel.cart,
-                                    totalQty: userProvider.userModel.cart.length,
+                                    totalQty:
+                                        userProvider.userModel.cart.length,
                                     delivery: 15000,
                                     address: userProvider.userModel.address,
                                     phone: userProvider.userModel.phone,
-                                    total: userProvider.userModel.totalCartPrice,
+                                    total:
+                                        userProvider.userModel.totalCartPrice,
                                   ));
                             }),
                       ),

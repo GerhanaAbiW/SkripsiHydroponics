@@ -74,8 +74,6 @@ Widget FormTextField(
   );
 }
 
-
-
 Widget DateFormField(
     {String textLabel,
     String textHint,
@@ -122,8 +120,6 @@ Widget DateFormField(
     ),
   );
 }
-
-
 
 Widget DropdownForm(
     {String textLabel,
@@ -224,7 +220,6 @@ Widget MultilineFormTextField(
     ),
   );
 }
-
 
 // Widget FormDropDown(
 //     {String selectedItem,
@@ -494,20 +489,22 @@ class ButtonButtom extends StatelessWidget {
   ButtonButtom(
       {@required this.buttonText,
       @required this.onPressed,
-      this.isDisabled = false});
+      this.isDisabled = false,
+      this.color});
   final String buttonText;
   final Function onPressed;
   final bool isDisabled;
+  final color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       // height: ScreenUtil().setHeight(38),
-      height: 40,
+      height: 50,
       margin: EdgeInsets.only(bottom: 24),
       child: FlatButton(
-        color: isDisabled ? Color(0xFF2b961f) : Color(0xFF2b961f),
+        color: color, //isDisabled ? Color(0xFF2b961f) : Color(0xFF2b961f),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
