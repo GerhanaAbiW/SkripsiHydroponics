@@ -368,6 +368,7 @@ class UserProvider with ChangeNotifier {
         "Image": myPlants.image,
         "PPM": myPlants.ppm,
         "PH": myPlants.ph,
+        "SeedingTime": myPlants.seedingTime,
         "FertilizerType": myPlants.fertilizerType,
         "TimeOfFertilizer": myPlants.timeOfFertilizer,
         "DosageOfFertilizer": myPlants.dosageFertilizer,

@@ -12,9 +12,6 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
-import 'package:hydroponics/features/Widget/Loading.dart';
-import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class AdminHydroOrderDetail extends StatefulWidget {
   final HydroOrderModel order;
@@ -406,7 +403,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Standard Delivery",
+                "Hydro Order",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
@@ -415,13 +412,13 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               SizedBox(
                 height: 5,
               ),
-              Text(
-                "Get it by 20 jul - 27 jul | Free Delivery",
-                style: CustomTextStyle.textFormFieldMedium.copyWith(
-                  color: Colors.black,
-                  fontSize: 12,
-                ),
-              )
+              // Text(
+              //   "Get it by 20 jul - 27 jul | Free Delivery",
+              //   style: CustomTextStyle.textFormFieldMedium.copyWith(
+              //     color: Colors.black,
+              //     fontSize: 12,
+              //   ),
+              // )
             ],
           ),
         ],
@@ -442,10 +439,15 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               borderRadius: BorderRadius.all(Radius.circular(4))),
           child: Row(children: <Widget>[
             Image.asset(widget.order.hydroImage),
-            Text(widget.order.hydroType),
-            Text("Pipe Quantity : " + widget.order.pipeQTY),
-            Text("Hole Quantity : " + widget.order.holeQTY),
-            Text("Land Type : " + widget.order.landType),
+            Column(
+              children: <Widget>[
+                Text(widget.order.hydroType),
+                Text("Pipe Quantity : " + widget.order.pipeQTY),
+                Text("Hole Quantity : " + widget.order.holeQTY),
+                Text("Land Type : " + widget.order.landType),
+              ],
+            ),
+
           ],)
       ),
     );
