@@ -23,7 +23,13 @@ class CheckOutPage extends StatefulWidget {
   final int totalQty;
 
   const CheckOutPage(
-      {Key key, this.cart, this.delivery,this.total, this.address, this.phone, this.totalQty})
+      {Key key,
+      this.cart,
+      this.delivery,
+      this.total,
+      this.address,
+      this.phone,
+      this.totalQty})
       : super(key: key);
 
   @override
@@ -49,8 +55,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
       totals = widget.total + tax + widget.delivery;
     });
   }
-
-
 
   @override
   void initState() {
@@ -102,50 +106,108 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 flex: 90,
               ),
               Expanded(
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                      child: ButtonButtom(
-                        buttonText: 'Order Now',
-                        onPressed: () async{
-                          if(address!=null || phone !=null){
-                            _orderServices.createOrder(
-                              userName: userProvider.userModel.name,
-                                phone: phone,
-                                totalQtyProduct: widget.totalQty,
-                                address: address,
-                                userId: userProvider.userModel.id,
-                                description: "Some random description",
-                                tax: tax,
-                                instalation: 0,
-                                totalPrice: totals,
-                                cart: widget.cart);
-                            for (CartItemModel cartItem in userProvider.userModel.cart) {
-                              bool value = await userProvider.removeFromCart(
-                                  cartItem: cartItem);
-                              if (value) {
-                                userProvider.reloadUserModel();
-                                print("Item added to cart");
-                                _scaffoldKey.currentState.showSnackBar(
-                                    SnackBar(content: Text("Removed from Cart!")));
-                              } else {
-                                print("ITEM WAS NOT REMOVED");
-                              }
-                            }
-                            _scaffoldKey.currentState.showSnackBar(
-                                SnackBar(content: Text("Order created!")));
-                            changeScreen(context, MenuMarket());
-                          }else{
-                            showSnackBar("Please Add Your Phone Number and Your Address ", _scaffoldKey);
-                          }
-                        },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                  child: Container(
+                    width: double.infinity,
+                    // height: ScreenUtil().setHeight(38),
+                    height: 40,
+                    margin: EdgeInsets.only(bottom: 24),
+                    child: FlatButton(
+                      color: Color(0xFF2b961f),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
+                      child: Text(
+                        "ORDER NOW",
+                        style: CustomTextStyle.textFormFieldSemiBold
+                            .copyWith(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        if (address != null || phone != null) {
+                          _orderServices.createOrder(
+                              userName: userProvider.userModel.name,
+                              phone: phone,
+                              totalQtyProduct: widget.totalQty,
+                              address: address,
+                              userId: userProvider.userModel.id,
+                              description: "Some random description",
+                              tax: tax,
+                              instalation: 0,
+                              totalPrice: totals,
+                              cart: widget.cart);
+                          for (CartItemModel cartItem
+                              in userProvider.userModel.cart) {
+                            bool value = await userProvider.removeFromCart(
+                                cartItem: cartItem);
+                            if (value) {
+                              userProvider.reloadUserModel();
+                              print("Item added to cart");
+                              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                  content: Text("Removed from Cart!")));
+                            } else {
+                              print("ITEM WAS NOT REMOVED");
+                            }
+                          }
+                          _scaffoldKey.currentState.showSnackBar(
+                              SnackBar(content: Text("Order created!")));
+                          changeScreen(context, MenuMarket());
+                        } else {
+                          showSnackBar(
+                              "Please Add Your Phone Number and Your Address ",
+                              _scaffoldKey);
+                        }
+                      },
                     ),
-                  ],
+                  ),
                 ),
                 flex: 10,
               )
+              // Expanded(
+              //   child: Row(
+              //     children: <Widget>[
+              //       Padding(
+              //         padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+              //         child: ButtonButtom(
+              //           buttonText: 'Order Now',
+              //           onPressed: () async{
+              //             if(address!=null || phone !=null){
+              //               _orderServices.createOrder(
+              //                 userName: userProvider.userModel.name,
+              //                   phone: phone,
+              //                   totalQtyProduct: widget.totalQty,
+              //                   address: address,
+              //                   userId: userProvider.userModel.id,
+              //                   description: "Some random description",
+              //                   tax: tax,
+              //                   instalation: 0,
+              //                   totalPrice: totals,
+              //                   cart: widget.cart);
+              //               for (CartItemModel cartItem in userProvider.userModel.cart) {
+              //                 bool value = await userProvider.removeFromCart(
+              //                     cartItem: cartItem);
+              //                 if (value) {
+              //                   userProvider.reloadUserModel();
+              //                   print("Item added to cart");
+              //                   _scaffoldKey.currentState.showSnackBar(
+              //                       SnackBar(content: Text("Removed from Cart!")));
+              //                 } else {
+              //                   print("ITEM WAS NOT REMOVED");
+              //                 }
+              //               }
+              //               _scaffoldKey.currentState.showSnackBar(
+              //                   SnackBar(content: Text("Order created!")));
+              //               changeScreen(context, MenuMarket());
+              //             }else{
+              //               showSnackBar("Please Add Your Phone Number and Your Address ", _scaffoldKey);
+              //             }
+              //           },
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              //   flex: 10,
+              // )
             ],
           );
         }),
@@ -336,7 +398,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                             top: -40.0,
                             child: GestureDetector(
                               onTap: () {
-                               backScreen(context);
+                                backScreen(context);
                               },
                               child: CircleAvatar(
                                 child: Icon(Icons.close),
@@ -352,18 +414,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: MultilineFormTextField(
-                                    controller: addressController,
-                                    textHint: "Add Your Adrress",
-                                    textLabel: "Input Address"
-                                  ),
+                                      controller: addressController,
+                                      textHint: "Add Your Adrress",
+                                      textLabel: "Input Address"),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: FormTextField(
-                                    controller: phoneController,
-                                    textHint: "Add Your Phone Number",
-                                    textLabel: "Input Phone Number"
-                                  ),
+                                      controller: phoneController,
+                                      textHint: "Add Your Phone Number",
+                                      textLabel: "Input Phone Number"),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -599,8 +659,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
               createPriceItem(
                   "Tax (10%)", "Rp. " + tax.toString(), Colors.grey.shade700),
               Container(
-                child: createPriceItem("Delievery", "Rp. " + widget.delivery.toString(),
-                        Colors.teal.shade300),
+                child: createPriceItem("Delievery",
+                    "Rp. " + widget.delivery.toString(), Colors.teal.shade300),
               ),
 
               SizedBox(

@@ -50,11 +50,13 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
   double totalPrice = 0;
 
   void getTax() {
-    tax = widget.hydroType.intPrice * 1.5;
-    totalPrice = tax +
-        widget.hydroType.intPrice +
-        widget.hydroType.instalationPrice +
-        widget.hydroType.deliveryPrice;
+    if (widget.hydroType.intPrice != 0) {
+      tax = widget.hydroType.intPrice * 1.5;
+      totalPrice = tax +
+          widget.hydroType.intPrice +
+          widget.hydroType.instalationPrice +
+          widget.hydroType.deliveryPrice;
+    }
   }
 
   @override
@@ -131,7 +133,9 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                   child: ButtonButtom(
                     buttonText: 'Order Now',
-                    onPressed: () {},
+                    onPressed: () {
+                      validateAndUpload();
+                    },
                   ),
                 ),
                 flex: 10,
@@ -237,7 +241,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "widget.order.name",
+                    widget.userModel.name,
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
@@ -524,7 +528,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. ${widget.hydroType.intPrice}",
+              createPriceItem("Hydro Order", "Rp. ${widget.hydroType.intPrice}",
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (15%)", "Rp. " + tax.toString(), Colors.grey.shade700),
