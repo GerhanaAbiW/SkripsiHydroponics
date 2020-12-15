@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hydroponics/core/Providers/OrderProvider.dart';
@@ -12,11 +13,57 @@ class NewAdminDashboard extends StatefulWidget {
 
 class _NewAdminDashboardState extends State<NewAdminDashboard> {
   List<charts.Series<Task, String>> _seriesPieData;
+  double _revenue = 0;
+  int _sales = 0;
+  int _bibit = 0;
+  int _obat = 0;
+  int _pupuk = 0;
+  int _alat = 0;
+  getRevenue() {
+    for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
+      _revenue =  Provider.of<OrderProvider>(context,listen: false).buyers[i].totalPrice + Provider.of<OrderProvider>(context,listen: false).buyers[i + 1].totalPrice;
+    }
+    //notifyListeners();
+    //return _revenue;
 
+  }
+
+
+  getSales() {
+    for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
+      _sales = Provider.of<OrderProvider>(context,listen: false).buyers[i].totalQuantityProduct + Provider.of<OrderProvider>(context,listen: false).buyers[i + 1].totalQuantityProduct;
+    }
+    //notifyListeners();
+    //return _sales;
+  }
+
+  getCategory() {
+    List<CartItemModel> cart;
+    for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
+      if (Provider.of<OrderProvider>(context,listen: false).buyers[i].cart != null || Provider.of<OrderProvider>(context,listen: false).buyers[i].cart != []) {
+        Provider.of<OrderProvider>(context,listen: false).buyers[i].cart = cart;
+        if (cart[i].productCategory == "Bibit") {
+          _bibit = _bibit + 1;
+        } else if (cart[i].productCategory == "Pupuk") {
+          _pupuk = _pupuk + 1;
+        } else if (cart[i].productCategory == "Obat") {
+          _obat = _obat + 1;
+        } else if (cart[i].productCategory == "Alat") {
+          _alat = _alat + 1;
+        }
+      }else{
+        print("haha");
+      }
+    }
+
+    //notifyListeners();
+  }
   @override
   void initState() {
     super.initState();
-
+    getRevenue();
+    getCategory();
+    getSales();
 
     _seriesPieData = List<charts.Series<Task, String>>();
     _getData();
@@ -64,7 +111,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                   text: 'Revenue\n',
                   style: TextStyle(fontSize: 35, color: Colors.grey)),
               TextSpan(
-                  text: '\Rp. ${order.revenue}',
+                  text: '\Rp. $_revenue',
                   style: TextStyle(
                       fontSize: 55,
                       color: Colors.black,
