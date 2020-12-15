@@ -225,7 +225,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    widget.order.userName,
+                    "widget.order.name",
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
@@ -453,23 +453,12 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
           elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
-<<<<<<< HEAD
           child: Row(
             children: <Widget>[
               Image.asset(widget.order.hydroImage),
               Text(widget.order.hydroType)
             ],
           )),
-=======
-          child: Row(children: <Widget>[
-            Image.asset(widget.order.hydroImage),
-            Text(widget.order.hydroType),
-            Text("Pipe Quantity : " + widget.order.pipeQTY),
-            Text("Hole Quantity : " + widget.order.holeQTY),
-            Text("Land Type : " + widget.order.landType),
-          ],)
-      ),
->>>>>>> 8c0af004bc2a6d846109c7f04cc34a6d4bc7a942
     );
   }
 
@@ -631,7 +620,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
         child: widget.order.imagePayment == null
             ? Text("Unpaid",
                 style: CustomTextStyle.textFormFieldMedium
-                    .copyWith(color: Colors.red, fontSize: 12))
+                    .copyWith(color: darkYellowColor, fontSize: 12))
             : Image.network(widget.order.imagePayment),
       ),
     ]));

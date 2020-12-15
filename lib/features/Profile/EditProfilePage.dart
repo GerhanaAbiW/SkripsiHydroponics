@@ -45,6 +45,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     nameController.text = widget.user.name;
     emailController.text = widget.user.email;
+    jenisKelaminController.text = widget.user.gender;
+    dateController.text = widget.user.dob;
+    nomorHPController.text = widget.user.phone;
+    alamatController.text = widget.user.address;
   }
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();

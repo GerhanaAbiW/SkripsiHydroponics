@@ -106,7 +106,7 @@ class ProductCard extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text("${productModel.price}",
+                            Text("Rp. {productModel.price}",
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 15.0,
