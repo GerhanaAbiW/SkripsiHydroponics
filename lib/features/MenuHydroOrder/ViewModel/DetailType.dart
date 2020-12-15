@@ -35,7 +35,7 @@ final List<HydroType> types = [
     price: "Rp. 250.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "2 - 4 tingkatan",
+    pipeQty: "3 tingkatan",
     intPrice: 250000,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
@@ -49,7 +49,7 @@ final List<HydroType> types = [
     price: "Rp. 500.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "2 - 4 tingkatan",
+    pipeQty: "6 tingkatan",
     intPrice: 500000,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
@@ -63,7 +63,7 @@ final List<HydroType> types = [
     price: "Rp. 750.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "2 - 4 tingkatan",
+    pipeQty: "9 tingkatan",
     intPrice: 750000,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
@@ -75,10 +75,10 @@ final List<HydroType> types = [
     image: "images/bayam.jpeg",
     area: 'Outdoor',
     price: "> Rp. 1000.000",
-    holeQty: "4 - 6 lubang",
+    holeQty: "Custom",
     landType: "Horizontal/Vertical",
-    pipeQty: "2 - 4 tingkatan",
-    intPrice: null,
+    pipeQty: "Custom",
+    intPrice: 0,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:provider/provider.dart';
 
 var greenColor = Color(0xFF8BC34A);
@@ -311,7 +313,8 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                       SnackBar(content: Text("Added to My Record Plants!")));
                                   userProvider.reloadUserModel();
                                   appProvider.changeIsLoading();
-                                  return;
+                                  userProvider.deleteMyPlant(plantItem: widget.myPlantsModel);
+                                  return changeScreen(context, MyPlantsList());
                                 } else {
                                   _key.currentState.showSnackBar(SnackBar(
                                       content: Text("Not added to My Record Plants!")));
