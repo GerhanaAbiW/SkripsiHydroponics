@@ -25,7 +25,7 @@ class _WidgetLIstRecordDetailPlantState
     return Container(
         child: InkWell(
             onTap: () {
-              changeScreen(context, MyPlantsRecordDetail());
+              changeScreen(context, MyPlantsRecordDetail(model: widget.model,));
             },
             child: Column(
               children: <Widget>[
