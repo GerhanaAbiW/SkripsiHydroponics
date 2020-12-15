@@ -77,6 +77,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               Expanded(
                 child: widget.order.status == "Pending"
                     ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),

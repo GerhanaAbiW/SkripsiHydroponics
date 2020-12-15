@@ -226,16 +226,21 @@ class _CartPageState extends State<CartPage> {
   }
 
   createCartList(List<CartItemModel> cart) {
-    return cart.length==0||cart==[]?Text("Nodata"):ListView.builder(
-      shrinkWrap: true,
-      primary: false,
-      itemBuilder: (context, index) {
-        return createCartListItem(
-          cart[index],
-        );
-      },
-      itemCount: cart.length,
-    );
+    return cart.length == 0 || cart == []
+        ? Padding(
+            padding: const EdgeInsets.all(125.0),
+            child: Image.asset('images/not_found.png'),
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            primary: false,
+            itemBuilder: (context, index) {
+              return createCartListItem(
+                cart[index],
+              );
+            },
+            itemCount: cart.length,
+          );
   }
 
   createCartListItem(

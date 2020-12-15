@@ -45,8 +45,8 @@ class _MyPlantsListState extends State<MyPlantsList> {
                         changeScreen(
                             context,
                             ListRecordPlant(
-                             // list: userProvider.userModel.myPlantsRecord,
-                            ));
+                                // list: userProvider.userModel.myPlantsRecord,
+                                ));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -103,22 +103,27 @@ class _MyPlantsListState extends State<MyPlantsList> {
                   child: Container(
                     height: MediaQuery.of(context).size.height - 250.0,
                     child: AnimationLimiter(
-                      child: userProvider.userModel.myPlant.length==0||userProvider.userModel.myPlant==[]?Text("Nodata"):ListView.builder(
-                          itemCount: userProvider.userModel.myPlant.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return AnimationConfiguration.staggeredList(
-                              position: index,
-                              //duration: const Duration(milliseconds: 3000),
-                              // child: SlideAnimation(
-                              // verticalOffset: 100.0,
-                                child: MyPlantListCard(
-                                  myPlantsModel:
-                                      userProvider.userModel.myPlant[index],
-                                  // ),
-                                ),
-
-                            );
-                          }),
+                      child: userProvider.userModel.myPlant.length == 0 ||
+                              userProvider.userModel.myPlant == []
+                          ? Padding(
+                              padding: const EdgeInsets.all(125.0),
+                              child: Image.asset('images/no_data_grey.png'),
+                            )
+                          : ListView.builder(
+                              itemCount: userProvider.userModel.myPlant.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  //duration: const Duration(milliseconds: 3000),
+                                  // child: SlideAnimation(
+                                  // verticalOffset: 100.0,
+                                  child: MyPlantListCard(
+                                    myPlantsModel:
+                                        userProvider.userModel.myPlant[index],
+                                    // ),
+                                  ),
+                                );
+                              }),
                     ),
                   ),
                 ),

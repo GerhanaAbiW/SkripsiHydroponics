@@ -22,14 +22,17 @@ class WidgetLIstRecordDetailPlant extends StatefulWidget {
 
 class _WidgetLIstRecordDetailPlantState
     extends State<WidgetLIstRecordDetailPlant> {
-
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Container(
         child: InkWell(
             onTap: () {
-              changeScreen(context, MyPlantsRecordDetail(model: widget.model,));
+              changeScreen(
+                  context,
+                  MyPlantsRecordDetail(
+                    model: widget.model,
+                  ));
             },
             child: Column(
               children: <Widget>[
@@ -143,7 +146,8 @@ class _WidgetLIstRecordDetailPlantState
                         ),
                       ),
                       onTap: () {
-                        userProvider.deleteMyPlantRecord(plantItem: widget.model);
+                        userProvider.deleteMyPlantRecord(
+                            plantItem: widget.model);
                       },
                     )
                   ],
