@@ -5,6 +5,7 @@ import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/features/MenuMarket/Cart/Cart.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
@@ -368,21 +369,27 @@ class _ProductDetailsState extends State<ProductDetails> {
             width: MediaQuery.of(context).size.width,
             child: new MaterialButton(
               onPressed: () async {
-                appProvider.changeIsLoading();
-                bool success = await userProvider.addToCart(
-                    product: widget.product, qty: int.parse(qty));
-                if (success) {
-                  _key.currentState
-                      .showSnackBar(SnackBar(content: Text("Added to Cart!")));
-                  userProvider.reloadUserModel();
+                if(qty!=null){
                   appProvider.changeIsLoading();
-                  return;
-                } else {
+                  bool success = await userProvider.addToCart(
+                      product: widget.product, qty: int.parse(qty));
+                  if (success) {
+                    _key.currentState
+                        .showSnackBar(SnackBar(content: Text("Added to Cart!")));
+                    userProvider.reloadUserModel();
+                    appProvider.changeIsLoading();
+                    return changeScreen(context, CartPage());
+                  } else {
+                    _key.currentState.showSnackBar(
+                        SnackBar(content: Text("Not added to Cart!")));
+                    appProvider.changeIsLoading();
+                    return;
+                  }
+                }else{
                   _key.currentState.showSnackBar(
-                      SnackBar(content: Text("Not added to Cart!")));
-                  appProvider.changeIsLoading();
-                  return;
+                      SnackBar(content: Text("Please Add Quantity Product")));
                 }
+
               },
               color: Colors.green[700],
               shape: RoundedRectangleBorder(
