@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Models/HydroOrderModel.dart';
@@ -356,7 +357,9 @@ class UserProvider with ChangeNotifier {
       var uuid = Uuid();
       String myPlantId = uuid.v4();
       List<MyPlantsRecordModel> myPlant = _userModel.myPlantsRecord;
-
+       DateTime now = DateTime.now();
+       DateFormat formatter = DateFormat('dd-MMM-yyyy');
+       String date = formatter.format(now);
       Map plantItem = {
         "id": myPlantId,
         "PlantId": myPlants.id,
@@ -378,7 +381,7 @@ class UserProvider with ChangeNotifier {
         "RecordDosageFertilizer": dosisPupuk,
         "RecordHarvestTime": waktuPanen,
         "RecordPestsType": waktuSemai,
-        "Date": DateTime.now().toString(),
+        "Date": date,
         "CreatedAt": FieldValue.serverTimestamp()
       };
 

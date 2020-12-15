@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/HydroOrderModel.dart';
@@ -11,6 +12,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
+import 'package:hydroponics/features/MenuHydroOrder/NewHydroOrderList.dart';
 import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
@@ -67,25 +69,36 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
 
   HydroOrderServices hydroOrderServices = HydroOrderServices();
 
-  void validateAndUpload() async {
-    hydroOrderServices.createHydroOrder({
-      "userId": widget.userModel.id,
-      "userName": widget.userModel.id,
-      "userAddress": widget.address,
-      "phone": widget.phone,
-      "holeQuantity": widget.jmlLubang,
-      "pipeQuantity": widget.jmlPipa,
-      "hydroType": widget.hydroType.type,
-      "hydroImage": widget.hydroType.image,
-      "price": widget.hydroType.intPrice,
-      "landType": widget.landType,
-      "totalPrice": totalPrice,
-      "imagePayment": null,
-      "paymentTax": tax,
-      "paymentDelivery": widget.hydroType.deliveryPrice,
-      "paymentInstalation": widget.hydroType.instalationPrice,
-      "status": "Order",
-    });
+  void validateAndUpload() {
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('dd-MMM-yyyy');
+    String date = formatter.format(now);
+    try{
+      hydroOrderServices.createHydroOrder({
+        "userId": widget.userModel.id,
+        "userName": widget.userModel.id,
+        "userAddress": widget.address,
+        "phone": widget.phone,
+        "holeQuantity": widget.jmlLubang,
+        "pipeQuantity": widget.jmlPipa,
+        "hydroType": widget.hydroType.type,
+        "hydroImage": widget.hydroType.image,
+        "price": widget.hydroType.intPrice,
+        "landType": widget.landType,
+        "totalPrice": totalPrice,
+        "imagePayment": null,
+        "paymentTax": tax,
+        "paymentDelivery": widget.hydroType.deliveryPrice,
+        "paymentInstalation": widget.hydroType.instalationPrice,
+        "status": "Order",
+        "date" : date
+      });
+      changeScreen(context, NewHydroOrderList());
+    }catch(e){
+      print(e.toString());
+    }
+
+
   }
 
   @override
@@ -531,7 +544,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
               createPriceItem("Hydro Order", "Rp. ${widget.hydroType.intPrice}",
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (15%)", "Rp. " + tax.toString(), Colors.grey.shade700),
+                  "Tax (15%)", "Rp. " + tax.toStringAsFixed(3), Colors.grey.shade700),
               createPriceItem(
                   "Instalation",
                   "Rp. " + widget.hydroType.instalationPrice.toString(),
@@ -563,7 +576,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + totalPrice.toString(),
+                    "Rp. " + totalPrice.toStringAsFixed(3),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

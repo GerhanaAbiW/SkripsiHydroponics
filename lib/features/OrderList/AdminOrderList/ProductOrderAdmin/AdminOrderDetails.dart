@@ -54,7 +54,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            'Check Out',
+            'Customer Product Order',
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21),
           ),
@@ -77,36 +77,90 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 flex: 90,
               ),
               Expanded(
-                child: widget.order.status=="Pending"?Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                      child: ButtonButtom(
-                        buttonText: 'Reject',
-                        onPressed: ()  {
-                          _orderServices.updateOrder(status:"Rejected", id:widget.order.id,img: widget.order.imagePayment);
-                        },
+                child: widget.order.status == "Pending"
+                    ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/3.5,// double.infinity,
+                              // height: ScreenUtil().setHeight(38),
+                              height: 40,
+                             margin: EdgeInsets.only(bottom: 24),
+                              child: FlatButton(
+                                color: Color(0xFF2b961f),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  "Reject",
+                                  style: CustomTextStyle.textFormFieldSemiBold
+                                      .copyWith(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  _orderServices.updateOrder(
+                                      status: "Rejected",
+                                      id: widget.order.id,
+                                      img: widget.order.imagePayment);
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/3.5,// double.infinity,
+                              // height: ScreenUtil().setHeight(38),
+                              height: 40,
+                              margin: EdgeInsets.only(bottom: 24),
+                              child: FlatButton(
+                                color: Color(0xFF2b961f),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  "Accept",
+                                  style: CustomTextStyle.textFormFieldSemiBold
+                                      .copyWith(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  _orderServices.updateOrder(
+                                      status: "Accepted",
+                                      id: widget.order.id,
+                                      img: widget.order.imagePayment);
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                        child: Container(
+                          width: double.infinity,
+                          // height: ScreenUtil().setHeight(38),
+                          height: 40,
+                          margin: EdgeInsets.only(bottom: 24),
+                          child: FlatButton(
+                            color: Color(0xFF2b961f),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              "Proccess Order",
+                              style: CustomTextStyle.textFormFieldSemiBold
+                                  .copyWith(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              _orderServices.updateOrder(
+                                  status: "Paid",
+                                  id: widget.order.id,
+                                  img: widget.order.imagePayment);
+                            },
+                          ),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                      child: ButtonButtom(
-                        buttonText: 'Accept',
-                        onPressed: () {
-                          _orderServices.updateOrder(status:"Accepted", id:widget.order.id,img:widget.order.imagePayment);
-                        },
-                      ),
-                    ),
-                  ],
-                ):      Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                  child: ButtonButtom(
-                    buttonText: 'Proccess Order',
-                    onPressed: () {
-                      _orderServices.updateOrder(status:"Paid", id:widget.order.id, img: widget.order.imagePayment);
-                    },
-                  ),
-                ),
                 flex: 10,
               )
             ],
@@ -210,7 +264,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "widget.order.name",
+                    widget.order.userName,
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
@@ -554,9 +608,9 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}",
+              createPriceItem("Order Total", "Rp. "+ widget.order.totalPrice.toStringAsFixed(3),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toString(),
+              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
@@ -592,7 +646,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + widget.order.totalPrice.toString(),
+                    "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
@@ -645,23 +699,27 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
       ),
     );
   }
+
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-          Text('Transaction Provement'),
-          Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.brown,
-                width: 10,
-              ),
-            ),
-            child: widget.order.imagePayment==null?Text("Unpaid",style: CustomTextStyle.textFormFieldMedium
-                .copyWith(color: Colors.red, fontSize: 12)) : Image.network(widget.order.imagePayment),
+      Text('Transaction Provement'),
+      Container(
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: Colors.brown,
+            width: 10,
           ),
-        ]));
+        ),
+        child: widget.order.imagePayment == null
+            ? Text("Unpaid",
+                style: CustomTextStyle.textFormFieldMedium
+                    .copyWith(color: Colors.red, fontSize: 12))
+            : Image.network(widget.order.imagePayment),
+      ),
+    ]));
   }
 }

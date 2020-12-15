@@ -11,6 +11,7 @@ import 'package:hydroponics/features/Profile/ProfilePage.dart';
 import 'package:hydroponics/features/Widget/WhatsApps.dart';
 import 'package:provider/provider.dart';
 
+var darkYellowColor = Color(0xFFAB9208);
 class DashBoard extends StatefulWidget {
   @override
   _DashBoardState createState() => _DashBoardState();
@@ -87,7 +88,7 @@ class _DashBoardState extends State<DashBoard> {
             BottomNavyBarItem(
                 icon: Icon(Icons.assignment),
                 title: Text('Orders'),
-                activeColor: Colors.blue),
+                activeColor: darkYellowColor),
           ],
         ));
   }

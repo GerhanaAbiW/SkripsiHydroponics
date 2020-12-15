@@ -46,7 +46,7 @@ class AdminOrderCard extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Text("${orderModel.totalPrice}",
+                            Text(orderModel.dateTime,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 17.0,
