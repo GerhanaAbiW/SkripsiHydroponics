@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/HydroOrderModel.dart';
 import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
@@ -763,7 +764,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
             width: 10,
           ),
         ),
-        child: Image.network(widget.order.imagePayment),
+        child: widget.order.imagePayment==null?Text("nodata"):Image.network(widget.order.imagePayment),
       ),
     ]));
   }

@@ -26,7 +26,7 @@ class UserHydroOrderCard extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => UserHydroOrderDetail()));
+                    MaterialPageRoute(builder: (context) => UserHydroOrderDetail(order: orders,)));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

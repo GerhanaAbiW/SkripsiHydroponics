@@ -24,7 +24,7 @@ class CardMyListOrder extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => UserOrderDetail()));
+                    MaterialPageRoute(builder: (context) => UserOrderDetail(order: orders,)));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

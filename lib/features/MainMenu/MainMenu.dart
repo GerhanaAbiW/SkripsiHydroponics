@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/OrderProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
@@ -71,6 +72,7 @@ class _MainMenuState extends State<MainMenu>
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
+    final order = Provider.of<OrderProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreenTosca,
