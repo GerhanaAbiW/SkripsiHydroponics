@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/Services/HydroOrderService.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
+import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCheckOut.dart';
 import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
+import 'package:provider/provider.dart';
 
 class HydroOrderCustomDetail extends StatefulWidget {
   final HydroType hydroType;
@@ -17,34 +22,12 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
   TextEditingController nomorHpController = TextEditingController();
   TextEditingController alamatController = new TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
-  OrderServices orderServices = OrderServices();
-  void validateAndUpload(String userId) async {
-    if (_formKey.currentState.validate()) {
-      setState(() => isLoading = true);
-      orderServices.createHydroOrder({
-        "userId": userId,
-        "address" : alamatController.text,
-        "phone" : nomorHpController.text,
-        "holeQuantity" : null,
-        "pipeQuantity" : null,
-        "hydroType" : widget.hydroType.type,
-        "image" : widget.hydroType.image,
-        "price" : widget.hydroType.intPrice,
-        "landType" : null
 
-      });
-      _formKey.currentState.reset();
-      setState(() => isLoading = false);
-      Navigator.pop(context);
-    } else {
-      setState(() => isLoading = false);
 
-    }
-  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<UserProvider>(
+        builder: (context, model, child) =>Scaffold(
       backgroundColor: Colors.white,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -257,6 +240,33 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                                 textHint: "Masukkan Alamat Anda",
                                 controller: alamatController,
                                 height: 20.0),
+                            SizedBox(height: 30),
+                            Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (_formKey.currentState.validate()) {
+
+                                    changeScreen(context, HydroOrderCheckOut(hydroType: widget.hydroType,jmlLubang: "-",jmlPipa: "-",address: alamatController.text,landType: "-",phone: nomorHpController.text,userModel: model.userModel,));
+                                    _formKey.currentState.reset();
+                                  } else {
+
+                                  }
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Color(0xFF03A9F4)),
+                                  child: Text(
+                                    'ORDER',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 22),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -268,6 +278,7 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
           ),
         ),
       ),
+        ),
     );
   }
 }

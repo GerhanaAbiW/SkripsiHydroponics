@@ -9,7 +9,7 @@ import 'package:hydroponics/core/Services/PlantService.dart';
 import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantCard.dart';
 import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantUpdate.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/SearchPlant.dart';
 import 'package:provider/provider.dart';
 

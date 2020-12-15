@@ -1,10 +1,12 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/FavoriteProduct.dart';
+import 'package:hydroponics/core/Models/HydroOrderModel.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/Models/Payment.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
+import 'package:hydroponics/core/Services/HydroOrderService.dart';
 import 'package:hydroponics/core/Services/PaymentService.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,6 +32,7 @@ class UserProvider with ChangeNotifier {
   Status _status = Status.Uninitialized;
   UserServices _userServices = UserServices();
   OrderServices _orderServices = OrderServices();
+  HydroOrderServices _hydroOrderServices = HydroOrderServices();
   PaymentServices _paymentServices = PaymentServices();
   ProductServices _productServices = ProductServices();
   Firestore _firestore = Firestore.instance;
@@ -44,6 +47,7 @@ class UserProvider with ChangeNotifier {
 
   // public variables
   List<OrderModel> orders = [];
+  List<HydroOrderModel> hydroOrders = [];
   List<PaymentModel> payments = [];
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
@@ -198,6 +202,7 @@ class UserProvider with ChangeNotifier {
         "productId": product.id,
         "price": product.price,
         "quantity": qty,
+        "productCategory" : product.category
       };
 
       CartItemModel item = CartItemModel.fromMap(cartItem);
@@ -405,6 +410,11 @@ class UserProvider with ChangeNotifier {
 
   getOrders() async {
     orders = await _orderServices.getUserOrders(userId: _user.uid);
+    notifyListeners();
+  }
+
+  getHydroOrders() async {
+    hydroOrders = await _hydroOrderServices.getUserOrders(userId: _user.uid);
     notifyListeners();
   }
 

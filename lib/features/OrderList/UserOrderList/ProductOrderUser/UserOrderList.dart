@@ -4,15 +4,15 @@ import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
-import 'package:hydroponics/features/OrderList/UserOrderList/UserOrderCard.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/UserOrderCard.dart';
 import 'package:provider/provider.dart';
 
-class OrdersScreen extends StatefulWidget {
+class UserOrderList extends StatefulWidget {
   @override
-  _OrdersScreenState createState() => _OrdersScreenState();
+  _UserOrderListState createState() => _UserOrderListState();
 }
 
-class _OrdersScreenState extends State<OrdersScreen> {
+class _UserOrderListState extends State<UserOrderList> {
   @override
   void initState() {
     super.initState();
@@ -23,19 +23,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     //userProvider.getOrders();
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GreenTosca,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          'My Orders',
-          style: CustomTextStyle.textFormFieldBold
-              .copyWith(color: Colors.white, fontSize: 21),
-        ),
-      ),
-      body: ListView(
+    return ListView(
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           // Container(
@@ -88,7 +76,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       },
                     )),
         ],
-      ),
+
     );
   }
 }

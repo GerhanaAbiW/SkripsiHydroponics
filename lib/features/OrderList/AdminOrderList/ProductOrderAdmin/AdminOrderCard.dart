@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/HydroOrderModel.dart';
 import 'package:hydroponics/core/Models/Order.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 
-class OrderCard extends StatelessWidget {
+class AdminOrderCard extends StatelessWidget {
   final OrderModel orderModel;
 
-  OrderCard({this.orderModel});
+  AdminOrderCard({this.orderModel});
 
   @override
   Widget build(BuildContext context) {

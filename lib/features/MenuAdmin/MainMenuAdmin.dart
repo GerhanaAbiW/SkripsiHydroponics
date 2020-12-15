@@ -12,7 +12,7 @@ import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductList.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/AddVideo.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoList.dart';
 
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 
 import 'package:hydroponics/features/MenuAdmin/DashBoard/Dashboard.dart';
 

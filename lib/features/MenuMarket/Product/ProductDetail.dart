@@ -20,38 +20,19 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final _key = GlobalKey<ScaffoldState>();
-  String _currentQty = '1';
-  //List<DropdownMenuItem<String>> qtyDropDown = <DropdownMenuItem<String>>[];
-  _getQty() {
-    //List<DocumentSnapshot> data = await _brandService.getBrands();
-    // print(data.length);
-    setState(() {
-      //brands = data;
-      // qtyDropDown = getQtyDropdown();
-      // _currentQty = qtyDropDown[1].value;
-      //_currentBrand = brands[0].data['brand'];
-    });
-  }
+  String qty;
+  List<String> listQty = [];
 
-  List<DropdownMenuItem<String>> getQtyDropdown() {
-    List<DropdownMenuItem<String>> items = new List();
-    for (int i = 1; i < widget.product.quantity; i++) {
-      setState(() {
-        items.insert(0,
-            DropdownMenuItem(child: Text(i.toString()), value: i.toString()));
-      });
+  void setListQty() {
+    for (int i = 1; i <= widget.product.quantity; i++) {
+      listQty.add(i.toString());
     }
-    return items;
   }
-
-  // changeSelectedQty(String selectedQty) {
-  //   setState(() => _currentQty = selectedQty);
-  // }
 
   @override
   void initState() {
     super.initState();
-    _getQty();
+    setListQty();
   }
 
   @override
@@ -251,6 +232,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         //   ],
         // ),
         Row(children: <Widget>[
+         Text("Quantity : ", style: TextStyle(color: Colors.green, fontSize: 16.0),),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -260,12 +242,31 @@ class _ProductDetailsState extends State<ProductDetails> {
                     borderRadius: BorderRadius.circular(10.0),
                     color: Colors.cyan,
                     border: Border.all()),
-                // child: DropdownButtonHideUnderline(
-                //   child: DropdownButton(
-                //       items: qtyDropDown,
-                //       onChanged: changeSelectedQty,
-                //       value: _currentQty),
-                // ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    hint: Text("Please select the quantity", style: TextStyle(color: Colors.black, fontSize: 14.0)),
+                    dropdownColor: Colors.white,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black87,
+                    ),
+                    iconSize: 36.0,
+                    isExpanded: true,
+                    style: TextStyle(color: Colors.black, fontSize: 22),
+                    value: qty,
+                    items: listQty.map((valueItem) {
+                      return DropdownMenuItem(
+                        child: Text(valueItem),
+                        value: valueItem,
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        qty = value;
+                      });
+                    },
+                  ),
+                ),
               ),
             ),
             // MaterialButton(
@@ -346,7 +347,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: new Text("6 nanti ambil dari stock"),
+            child: new Text(widget.product.quantity.toString()),
           )
         ]),
         //Divider(),
@@ -362,7 +363,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               onPressed: () async {
                 appProvider.changeIsLoading();
                 bool success = await userProvider.addToCart(
-                    product: widget.product, qty: int.parse(_currentQty));
+                    product: widget.product, qty: int.parse(qty));
                 if (success) {
                   _key.currentState
                       .showSnackBar(SnackBar(content: Text("Added to Cart!")));

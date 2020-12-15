@@ -8,7 +8,7 @@ import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductCard.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantCard.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/SearchPlant.dart';
 import 'package:hydroponics/features/Widget/SearchProduct.dart';
 import 'package:hydroponics/features/Widget/SearchVideo.dart';

@@ -10,31 +10,57 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class AdminOrderDetail extends StatefulWidget {
+class UserOrderDetail extends StatefulWidget {
   final OrderModel order;
-  const AdminOrderDetail(
-      {Key key, this.order})
-      : super(key: key);
+
+  const UserOrderDetail({Key key, this.order}) : super(key: key);
 
   @override
-  _AdminOrderDetailState createState() => _AdminOrderDetailState();
+  _UserOrderDetailState createState() => _UserOrderDetailState();
 }
 
-class _AdminOrderDetailState extends State<AdminOrderDetail> {
+class _UserOrderDetailState extends State<UserOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
+  OrderServices _orderServices = OrderServices();
+  bool btn = true;
+  bool img = true;
 
+  void visibleBtn() {
+    if (widget.order.status == "Accepted") {
+      setState(() {
+        btn = false;
+      });
+    } else {
+      setState(() {
+        btn = true;
+      });
+    }
+  }
 
+  void visibleImg() {
+    if (widget.order.imagePayment != null) {
+      setState(() {
+        img = false;
+      });
+    } else {
+      setState(() {
+        img = true;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-
+    visibleBtn();
+    visibleImg();
   }
 
   @override
@@ -68,23 +94,31 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
+                      selectedAddressSectionAdmin(),
                       selectedAddressSection(),
                       standardDelivery(),
                       checkoutItem(widget.order.cart),
-                      priceSection()
+                      priceSection(),
+                      Offstage(
+                        offstage: img,
+                        child: transactionProvement(),
+                      )
                     ],
                   ),
                 ),
                 flex: 90,
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                  child: ButtonButtom(
-                    buttonText: 'Order Now',
-                    onPressed: () {
-
-                    },
+                child: Offstage(
+                  offstage: btn,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                    child: ButtonButtom(
+                      buttonText: 'Upload Your Transaction',
+                      onPressed: () {
+                        changeScreen(context, UploadPayment());
+                      },
+                    ),
                   ),
                 ),
                 flex: 10,
@@ -129,7 +163,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -165,6 +199,89 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
         elevation: 2);
   }
 
+  selectedAddressSectionAdmin() {
+    return Container(
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
+          padding: EdgeInsets.only(left: 12, top: 8, right: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 6,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Please Pay Your Order Here",
+                    style: CustomTextStyle.textFormFieldSemiBold
+                        .copyWith(fontSize: 14),
+                  ),
+                  Container(
+                    padding:
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                    child: Text(
+                      "Seller Info",
+                      style: CustomTextStyle.textFormFieldBlack.copyWith(
+                          color: Colors.indigoAccent.shade200, fontSize: 8),
+                    ),
+                  )
+                ],
+              ),
+              createAddressText("Company Name : Hydroponic Market", 16),
+              createAddressText(
+                  "Company Adress : Hjwdjbwjdneifjiefrrmdmmkrorr", 16),
+              createAddressText("Bank Name : BCA", 16),
+              createAddressText("Bank Account Name : Gerhana Abi W", 16),
+
+              // createAddressText("Mumbai - 400023", 6),
+              // createAddressText("Maharashtra", 6),
+              SizedBox(
+                height: 6,
+              ),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Bank Account Number : ",
+                      style: CustomTextStyle.textFormFieldMedium
+                          .copyWith(fontSize: 12, color: Colors.grey.shade800)),
+                  TextSpan(
+                      text: "01934749373",
+                      style: CustomTextStyle.textFormFieldBold
+                          .copyWith(color: Colors.black, fontSize: 12)),
+                ]),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              // Container(
+              //   color: Colors.grey.shade300,
+              //   height: 1,
+              //   width: double.infinity,
+              // ),
+              //addressAction()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   selectedAddressSection() {
     return Container(
       margin: EdgeInsets.all(4),
@@ -196,21 +313,20 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     child: Text(
-                      "HOME",
+                      "Customer Info",
                       style: CustomTextStyle.textFormFieldBlack.copyWith(
                           color: Colors.indigoAccent.shade200, fontSize: 8),
                     ),
                   )
                 ],
               ),
-              createAddressText("Address : "+ widget.order.userAddress, 16),
-
+              createAddressText("Address : " + widget.order.userAddress, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -236,7 +352,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               //   color: Colors.grey.shade300,
               //   height: 1,
               //   width: double.infinity,
-             // ),
+              // ),
               //addressAction()
             ],
           ),
@@ -370,7 +486,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-          Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
+              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
           color: Colors.tealAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -451,9 +567,9 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               children: <Widget>[
                 Positioned.fill(
                     child: Align(
-                      alignment: Alignment.center,
-                      child: Loading(),
-                    )),
+                  alignment: Alignment.center,
+                  child: Loading(),
+                )),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
@@ -468,7 +584,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               ],
             ),
             decoration:
-            BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
+                BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
           ),
           SizedBox(
             width: 8,
@@ -535,16 +651,20 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}" ,
+              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}",
                   Colors.grey.shade700),
-              createPriceItem(
-                  "Tax (10%)", "Rp. " + widget.order.tax.toString(), Colors.grey.shade700),
+              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toString(),
+                  Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
-                    ? createPriceItem("Instalation Delivery",
-                    "Rp. "+widget.order.delivery.toString(), Colors.teal.shade300)
-                    : createPriceItem("Delievery", "Rp. " + widget.order.delivery.toString(),
-                    Colors.teal.shade300),
+                    ? createPriceItem(
+                        "Instalation Delivery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300)
+                    : createPriceItem(
+                        "Delievery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300),
               ),
 
               SizedBox(
@@ -621,5 +741,24 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
         ],
       ),
     );
+  }
+
+  transactionProvement() {
+    return Center(
+        child: Column(children: <Widget>[
+      Text('Transaction Provement'),
+      Container(
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: Colors.brown,
+            width: 10,
+          ),
+        ),
+        child: Image.network(widget.order.imagePayment),
+      ),
+    ]));
   }
 }
