@@ -469,11 +469,15 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
           child: Row(
             children: <Widget>[
               Image.asset(widget.hydroType.image),
-              Text(widget.hydroType.type),
-              Text(widget.hydroType.landType),
-              Text("Pipe Quantity : " + widget.jmlPipa),
-              Text("Hole Quantity : " + widget.jmlLubang),
-              Text("Land Type : " + widget.landType),
+              Column(
+                children: <Widget>[
+                  Text(widget.hydroType.type),
+                  //Text(widget.landType),
+                  Text("Pipe Quantity : " + widget.jmlPipa),
+                  Text("Hole Quantity : " + widget.jmlLubang),
+                  Text("Land Type : " + widget.landType),
+                ],
+              ),
             ],
           )),
     );

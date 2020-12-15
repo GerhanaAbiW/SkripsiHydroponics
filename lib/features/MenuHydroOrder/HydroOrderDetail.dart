@@ -139,7 +139,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                             color: Colors.grey))
                                   ],
                                 ),
-                                Text("Rp.${widget.hydroType.price}",
+                                Text("${widget.hydroType.price}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 24.0,
@@ -256,12 +256,19 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                             child: GestureDetector(
                               onTap: () {
                                 if (_formKey.currentState.validate()) {
-
-                                  changeScreen(context, HydroOrderCheckOut(hydroType: widget.hydroType,jmlLubang: jumlahLubangController.text,jmlPipa: jumlahPipa.text,address: alamatController.text,landType: _currentTipeLahan,phone: nomorHpController.text,userModel: model.userModel,));
+                                  changeScreen(
+                                      context,
+                                      HydroOrderCheckOut(
+                                        hydroType: widget.hydroType,
+                                        jmlLubang: jumlahLubangController.text,
+                                        jmlPipa: jumlahPipa.text,
+                                        address: alamatController.text,
+                                        landType: _currentTipeLahan,
+                                        phone: nomorHpController.text,
+                                        userModel: model.userModel,
+                                      ));
                                   _formKey.currentState.reset();
-                                } else {
-
-                                }
+                                } else {}
                               },
                               child: Container(
                                 alignment: Alignment.center,
