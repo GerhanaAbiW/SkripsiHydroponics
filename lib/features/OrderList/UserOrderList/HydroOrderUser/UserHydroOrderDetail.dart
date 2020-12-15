@@ -11,6 +11,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/HydroOrderUser/HydroOrderUploadPayment.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
@@ -45,6 +46,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       });
     }
   }
+
   void visibleImg() {
     if (widget.order.imagePayment != null) {
       setState(() {
@@ -56,6 +58,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       });
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -114,6 +117,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                     child: ButtonButtom(
+                      color: darkYellowColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
                         changeScreen(context, HydroOrderUploadPayment());
@@ -129,6 +133,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       ),
     );
   }
+
   checkoutHydroItem() {
     return Container(
       margin: EdgeInsets.all(4),
@@ -139,19 +144,21 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
           elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
-          child: Row(children: <Widget>[
-            Image.asset(widget.order.hydroImage),
-            Column(
-              children: <Widget>[
-                Text(widget.order.hydroType),
-                Text(widget.order.holeQTY),
-                Text(widget.order.landType),
-              ],
-            )
-          ],)
-      ),
+          child: Row(
+            children: <Widget>[
+              Image.asset(widget.order.hydroImage),
+              Column(
+                children: <Widget>[
+                  Text(widget.order.hydroType),
+                  Text(widget.order.holeQTY),
+                  Text(widget.order.landType),
+                ],
+              )
+            ],
+          )),
     );
   }
+
   showThankYouBottomSheet(BuildContext context) {
     return _scaffoldKey.currentState.showBottomSheet((context) {
       return Container(
@@ -185,7 +192,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -252,7 +259,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
@@ -335,7 +342,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
@@ -508,7 +515,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-          Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
+              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
           color: Colors.tealAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -547,10 +554,6 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       ),
     );
   }
-
-
-
-
 
   priceSection() {
     return Container(
@@ -597,20 +600,24 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. " +widget.order.totalPrice.toStringAsFixed(3),
+              createPriceItem(
+                  "Order Total",
+                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toStringAsFixed(3),
+              createPriceItem(
+                  "Tax (10%)",
+                  "Rp. " + widget.order.tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
                     ? createPriceItem(
-                    "Instalation Delivery",
-                    "Rp. " + widget.order.delivery.toString(),
-                    Colors.teal.shade300)
+                        "Instalation Delivery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300)
                     : createPriceItem(
-                    "Delievery",
-                    "Rp. " + widget.order.delivery.toString(),
-                    Colors.teal.shade300),
+                        "Delievery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300),
               ),
 
               SizedBox(
@@ -692,19 +699,19 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-          Text('Transaction Provement'),
-          Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.brown,
-                width: 10,
-              ),
-            ),
-            child: Image.network(widget.order.imagePayment),
+      Text('Transaction Provement'),
+      Container(
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: Colors.brown,
+            width: 10,
           ),
-        ]));
+        ),
+        child: Image.network(widget.order.imagePayment),
+      ),
+    ]));
   }
 }

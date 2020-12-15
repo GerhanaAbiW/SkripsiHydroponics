@@ -17,77 +17,74 @@ class ArticleCard extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-                changeScreen(context, ArticleUpdate(article: article,));
+                changeScreen(
+                    context,
+                    ArticleUpdate(
+                      article: article,
+                    ));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                       child: Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              width: 70,
-                              //ScreenUtil().setWidth(60),
-                              height: 60,
-                              //ScreenUtil().setWidth(60),
-                              decoration: new BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                border: Border.all(),
-                              ),
-                              child: article.image !=
-                                  null
-                                  ? Image.network(
-                                '${article.image}',
-                                fit: BoxFit.fill,
-                              )
-                                  : Image.asset("images/bayam.jpeg")),
-                        ),
-                        SizedBox(width: 3.0),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                new Container(
-                                  width: MediaQuery.of(context)
-                                      .size
-                                      .width *
-                                      0.6,
-                                  child: Text(
-                                      article.title,
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 8.0),
-                                  child: Text(
-                                      article.date,
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15.0,
-                                          color: Colors.grey)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          width: 70,
+                          //ScreenUtil().setWidth(60),
+                          height: 60,
+                          //ScreenUtil().setWidth(60),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            border: Border.all(),
+                          ),
+                          child: article.image != null
+                              ? Image.network(
+                                  '${article.image}',
+                                  fit: BoxFit.fill,
                                 )
-                              ]),
-                        )
-                      ])),
+                              : Image.asset("images/bayam.jpeg")),
+                    ),
+                    SizedBox(width: 3.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            new Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: Text(article.title,
+                                  style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(article.date,
+                                  style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 15.0,
+                                      color: Colors.grey)),
+                            )
+                          ]),
+                    )
+                  ])),
                   GestureDetector(
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.red,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
                     ),
                     onTap: () {
-                      _articleService.deleteArticle(
-                          article.id);
+                      _articleService.deleteArticle(article.id);
                     },
                   )
                 ],
@@ -95,4 +92,3 @@ class ArticleCard extends StatelessWidget {
     );
   }
 }
-

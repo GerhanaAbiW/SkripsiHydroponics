@@ -27,7 +27,8 @@ class MyPlantListCard extends StatelessWidget {
 //                  builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
 //              ));
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantStartRecord(myPlantsModel: myPlantsModel)));
+                    builder: (context) =>
+                        PlantStartRecord(myPlantsModel: myPlantsModel)));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,13 +57,13 @@ class MyPlantListCard extends StatelessWidget {
                             //       )
                             //     :
 
-                        Stack(
+                            Stack(
                           children: <Widget>[
                             Positioned.fill(
                                 child: Align(
-                                  alignment: Alignment.center,
-                                  child: Loading(),
-                                )),
+                              alignment: Alignment.center,
+                              child: Loading(),
+                            )),
                             Container(
                               width: MediaQuery.of(context).size.width,
                               child: FadeInImage.memoryNetwork(
@@ -112,9 +113,18 @@ class MyPlantListCard extends StatelessWidget {
                           ]),
                     )
                   ])),
-                  GestureDetector(child: Icon(Icons.delete, color: Colors.red,),onTap: (){
-                    userProvider.deleteMyPlant(plantItem: myPlantsModel);
-                  },)
+                  GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
+                    onTap: () {
+                      userProvider.deleteMyPlant(plantItem: myPlantsModel);
+                    },
+                  )
                 ],
               ))),
     );

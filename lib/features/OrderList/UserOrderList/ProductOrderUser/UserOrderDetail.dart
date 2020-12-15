@@ -10,6 +10,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
@@ -114,6 +115,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                     child: ButtonButtom(
+                      color: darkYellowColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
                         changeScreen(context, UploadPayment());
@@ -651,9 +653,13 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. " +widget.order.totalPrice.toStringAsFixed(3),
+              createPriceItem(
+                  "Order Total",
+                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toStringAsFixed(3),
+              createPriceItem(
+                  "Tax (10%)",
+                  "Rp. " + widget.order.tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
