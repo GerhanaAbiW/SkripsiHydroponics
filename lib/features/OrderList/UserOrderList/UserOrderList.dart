@@ -53,7 +53,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
               child: userProvider.orders.length == 0 ||
                       userProvider.orders.length == null
-                  ? Image.asset('images/no_data_grey.png')
+                  ? Padding(
+                      padding: const EdgeInsets.all(125.0),
+                      child: Image.asset('images/not_found.png'),
+                    )
                   : ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
