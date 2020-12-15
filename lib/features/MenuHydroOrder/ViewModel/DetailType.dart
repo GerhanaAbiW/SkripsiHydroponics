@@ -35,7 +35,7 @@ final List<HydroType> types = [
     price: "Rp. 250.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "3 tingkatan",
+    pipeQty: "3",
     intPrice: 250000,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
@@ -49,7 +49,7 @@ final List<HydroType> types = [
     price: "Rp. 500.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "6 tingkatan",
+    pipeQty: "6",
     intPrice: 500000,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
@@ -63,7 +63,7 @@ final List<HydroType> types = [
     price: "Rp. 750.000",
     holeQty: "4 - 6 lubang",
     landType: "Horizontal/Vertical",
-    pipeQty: "9 tingkatan",
+    pipeQty: "9",
     intPrice: 750000,
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',

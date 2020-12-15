@@ -477,7 +477,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                 children: <Widget>[
                   Text(widget.hydroType.type),
                   //Text(widget.landType),
-                  Text("Pipe Quantity : " + widget.jmlPipa),
+                  Text("Pipe Quantity : " + widget.hydroType.pipeQty),
                   Text("Hole Quantity : " + widget.jmlLubang),
                   Text("Land Type : " + widget.landType),
                 ],
