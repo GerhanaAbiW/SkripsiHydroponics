@@ -11,7 +11,7 @@ class OrderServices{
   Firestore _firestore = Firestore.instance;
 
   void createOrder({String userId, String userName,String description,List<CartItemModel> cart,
-    double totalPrice, int totalQtyProduct, String address, String phone, double tax, int instalation, int delivery}) {
+    double totalPrice, int totalQtyProduct,String estimatedDate, String address, String phone, double tax, int instalation, int delivery}) {
     var uuid = Uuid();
     String id = uuid.v4();
     List<Map> convertedCart = [];
@@ -32,6 +32,7 @@ class OrderServices{
       "paymentDelivery" : delivery,
       "paymentTax": tax,
       "id": id,
+      "estimatedDate" : estimatedDate,
       "imagePayment":null,
       "cart": convertedCart,
       "totalPrice": totalPrice,

@@ -19,9 +19,11 @@ class OrderModel {
   static const TOTAL_QUANTITY_PRODUCT = "totalQuantityProduct";
   static const STATUS = "status";
   static const DATE_TIME = "date";
+  static const ESTIMATED_Date = "estimatedDate";
 
 
   String _id;
+  String _estimatedDate;
   String _imagePayment;
   String _userName;
   String _phone;
@@ -42,6 +44,7 @@ class OrderModel {
 
 //  getters
   String get id => _id;
+  String get estimatedTime => _estimatedDate;
   String get imagePayment => _imagePayment;
   String get userName => _userName;
   String get phone => _phone;
@@ -67,6 +70,7 @@ class OrderModel {
 
   OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
+    _estimatedDate = snapshot.data[ESTIMATED_Date];
     _imagePayment = snapshot.data[IMAGE_PAYMENT];
     _userName = snapshot.data[USER_NAME];
     _instalation = snapshot.data[InstalationPayment];

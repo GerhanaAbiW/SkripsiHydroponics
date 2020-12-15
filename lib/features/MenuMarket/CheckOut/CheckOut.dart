@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/User.dart';
@@ -45,11 +46,17 @@ class _CheckOutPageState extends State<CheckOutPage> {
   bool del = false;
   bool ins = false;
   double totals;
-
+  String estimatedDate;
+  DateTime estimated;
   double tax;
   String address;
   String phone;
 
+  void getEstimatied(){
+    DateFormat formatter = DateFormat('dd-MMM-yyyy');
+    estimated = DateTime.now().add(Duration(days: 3));
+    estimatedDate = formatter.format(estimated);
+  }
   void getTotals() {
     setState(() {
       tax = widget.total * 0.01;
@@ -62,6 +69,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   void initState() {
     super.initState();
     getTotals();
+    getEstimatied();
   }
 
   @override
@@ -130,6 +138,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           _orderServices.createOrder(
                               userName: userProvider.userModel.name,
                               phone: phone,
+                              estimatedDate: estimatedDate,
                               totalQtyProduct: widget.totalQty,
                               address: address,
                               userId: userProvider.userModel.id,
@@ -601,7 +610,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12)),
               TextSpan(
-                  text: "21 Jul 2019 ",
+                  text: estimatedDate,
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),

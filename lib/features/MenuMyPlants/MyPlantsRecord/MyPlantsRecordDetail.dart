@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
@@ -10,6 +11,8 @@ var productImage =
     'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/4/4/67339064/67339064_0e9a5822-c3db-49fb-be1a-ea1f3ad177e4_336_336.jpg';
 
 class MyPlantsRecordDetail extends StatefulWidget {
+  final MyPlantsRecordModel model;
+  MyPlantsRecordDetail({this.model});
   @override
   _MyPlantsRecordDetailState createState() => _MyPlantsRecordDetailState();
 }
@@ -26,16 +29,16 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
 
   void createListItem() {
     listSection.add(
-        createSection("Media Semai : -", Icons.ac_unit, darkGreenColor, null));
+        createSection("Media Semai : ${widget.model.media}", Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection(
-        "Waktu Semai : 15 - 20 Hari", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Jenis Pupuk : Urea, TSP, dan KCL",
+        "Waktu Semai : ${widget.model.seedingTime}", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Jenis Pupuk : ${widget.model.fertilizerType}",
         Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection(
-        "Dosis Pupuk : 1 Sendok Makan", Icons.ac_unit, darkGreenColor, null));
+        "Dosis Pupuk : ${widget.model.dosageFertilizer}", Icons.ac_unit, darkGreenColor, null));
     listSection.add(
-        createSection("Waktu Pupuk : -", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Waktu Panen : 2,5 - 3 Bulan (75 - 90 Hari)",
+        createSection("Waktu Pupuk : ${widget.model.timeOfFertilizer}", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Waktu Panen : ${widget.model.harvestTime}",
         Icons.ac_unit, darkGreenColor, null));
   }
 
