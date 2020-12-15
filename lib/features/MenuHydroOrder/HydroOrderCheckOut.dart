@@ -76,7 +76,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
     try{
       hydroOrderServices.createHydroOrder({
         "userId": widget.userModel.id,
-        "userName": widget.userModel.id,
+        "userName": widget.userModel.name,
         "userAddress": widget.address,
         "phone": widget.phone,
         "holeQuantity": widget.jmlLubang,
