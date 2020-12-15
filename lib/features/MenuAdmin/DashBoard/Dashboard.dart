@@ -16,9 +16,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   @override
   void initState() {
     super.initState();
-    Provider.of<OrderProvider>(context, listen: false).getRevenue();
-    Provider.of<OrderProvider>(context, listen: false).getSales();
-    Provider.of<OrderProvider>(context, listen: false).getCategory();
+
 
     _seriesPieData = List<charts.Series<Task, String>>();
     _getData();
@@ -49,8 +47,12 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   @override
   Widget build(BuildContext context) {
+
     final appState = Provider.of<AppProvider>(context);
     final order = Provider.of<OrderProvider>(context);
+    // order.getSales();
+    // order.getCategory();
+    // order.getRevenue();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

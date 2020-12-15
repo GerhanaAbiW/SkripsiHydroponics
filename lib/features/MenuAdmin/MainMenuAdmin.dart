@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/OrderProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageArticle/AddArticle.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageArticle/ArticleList.dart';
@@ -15,6 +16,7 @@ import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoList.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 
 import 'package:hydroponics/features/MenuAdmin/DashBoard/Dashboard.dart';
+import 'package:provider/provider.dart';
 
 class DrawerItem {
   String title;
@@ -27,6 +29,7 @@ class DrawerItem {
 }
 
 class MenuAdmin extends StatefulWidget {
+
   @override
   _MenuAdminState createState() => _MenuAdminState();
   final drawerItem = [
@@ -48,7 +51,7 @@ class MenuAdmin extends StatefulWidget {
 class _MenuAdminState extends State<MenuAdmin> {
   int _selectedDrawerIndex = 0;
 
-  _getDrawerItemWidget(int pos) {
+    _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
         return NewAdminDashboard();

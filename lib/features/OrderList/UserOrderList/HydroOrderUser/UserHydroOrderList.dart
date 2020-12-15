@@ -14,16 +14,11 @@ class UserHydroOrderList extends StatefulWidget {
 }
 
 class _UserHydroOrderListState extends State<UserHydroOrderList> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<UserProvider>(context, listen: false).getOrders();
-  }
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    //userProvider.getOrders();
+    userProvider.getHydroOrders();
     return ListView(
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
@@ -40,8 +35,7 @@ class _UserHydroOrderListState extends State<UserHydroOrderList> {
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child: userProvider.hydroOrders.length == 0 ||
-                    userProvider.hydroOrders.length == null
+            child: userProvider.hydroOrders == null
                 ? Container(
                     height: MediaQuery.of(context).size.height - 600,
                     child: Padding(
@@ -53,7 +47,7 @@ class _UserHydroOrderListState extends State<UserHydroOrderList> {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: userProvider
-                        .orders.length, //plantProvider.plants.length,
+                        .hydroOrders.length, //plantProvider.plants.length,
                     itemBuilder: (BuildContext context, int index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,

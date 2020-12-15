@@ -117,7 +117,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                     child: ButtonButtom(
-                      color: darkYellowColor,
+                      color: blueColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
                         changeScreen(context, HydroOrderUploadPayment());
@@ -145,15 +145,17 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Image.asset(widget.order.hydroImage),
               Column(
                 children: <Widget>[
                   Text(widget.order.hydroType),
-                  Text(widget.order.holeQTY),
-                  Text(widget.order.landType),
+                  Text("Pipe Quantity : " + widget.order.pipeQTY),
+                  Text("Hole Quantity : " + widget.order.holeQTY),
+                  Text("Land Type : " + widget.order.landType),
                 ],
-              )
+              ),
             ],
           )),
     );
@@ -710,7 +712,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
             width: 10,
           ),
         ),
-        child: Image.network(widget.order.imagePayment),
+        child: widget.order.imagePayment==null?Text("No data"):Image.network(widget.order.imagePayment),
       ),
     ]));
   }
