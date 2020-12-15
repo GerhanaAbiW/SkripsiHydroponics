@@ -201,7 +201,7 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    '6,5 - 7,0',
+                                    widget.model.ph,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -231,7 +231,7 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    '1750 - 2100',
+                                    widget.model.ppm,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,

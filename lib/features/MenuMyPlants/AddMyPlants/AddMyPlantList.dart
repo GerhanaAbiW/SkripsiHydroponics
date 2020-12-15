@@ -54,7 +54,7 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: ListView.builder(
+              child: plantProvider.plants.length==0||plantProvider.plants==[]?Text("No Data"):ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: plantProvider.plants.length,

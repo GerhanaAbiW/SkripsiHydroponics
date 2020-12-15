@@ -80,7 +80,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                            child: ButtonButtom(
+                            child: ButtonRejectAcc(
                               color: darkYellowColor,
                               buttonText: 'Reject',
                               onPressed: () {
@@ -93,7 +93,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                           ),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                            child: ButtonButtom(
+                            child: ButtonRejectAcc(
                               color: darkYellowColor,
                               buttonText: 'Accept',
                               onPressed: () {
@@ -451,6 +451,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Image.asset(widget.order.hydroImage),
               Column(

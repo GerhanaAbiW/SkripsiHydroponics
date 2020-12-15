@@ -103,7 +103,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                   child: Container(
                     height: MediaQuery.of(context).size.height - 250.0,
                     child: AnimationLimiter(
-                      child: ListView.builder(
+                      child: userProvider.userModel.myPlant.length==0||userProvider.userModel.myPlant==[]?Text("Nodata"):ListView.builder(
                           itemCount: userProvider.userModel.myPlant.length,
                           itemBuilder: (BuildContext context, int index) {
                             return AnimationConfiguration.staggeredList(

@@ -213,7 +213,7 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                           horizontal: 30.0,
                           vertical: 20.0,
                         ),
-                        child: Form(
+                        child: model.userModel.role!="admin"?Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,7 +276,7 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                               ),
                             ],
                           ),
-                        ),
+                        ):SizedBox(height: 1),
                       ),
                     ],
                   ),

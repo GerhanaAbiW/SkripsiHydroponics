@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Models/Product.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
@@ -50,6 +52,7 @@ class NewProductCard extends StatefulWidget {
 }
 
 class _NewProductCardState extends State<NewProductCard> {
+
   getRatingStar(rating, index) {
     if (index <= rating) {
       return Icon(
@@ -69,7 +72,8 @@ class _NewProductCardState extends State<NewProductCard> {
   bool favorite = false;
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: () {
         changeScreen(
@@ -157,16 +161,48 @@ class _NewProductCardState extends State<NewProductCard> {
                 //         size: 18,
                 //       ))
                 // ),
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: GestureDetector(
-                      onTap: () {
-                        user.addToCart(product: widget.product, qty: 1);
-                      },
-                      child: Icon(
-                        Icons.add_shopping_cart,
-                        size: 18,
-                      )),
+                Offstage(
+                  offstage: userProvider.userModel.role=="admin"?true:false,
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: GestureDetector(
+                        onTap: () async{
+                          appProvider.changeIsLoading();
+                          bool success = await userProvider.addToCart(
+                              product: widget.product, qty: 1);
+                          if (success) {
+                            Fluttertoast.showToast(
+                                msg: "Success Added",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                            userProvider.reloadUserModel();
+                            appProvider.changeIsLoading();
+                            return;
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "Error Added",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                            appProvider.changeIsLoading();
+                            return;
+                          }
+
+                        },
+                        child: Icon(
+                          Icons.add_shopping_cart,
+                          size: 18,
+                        )),
+                  ),
                 )
                 //   ],
                 // ),

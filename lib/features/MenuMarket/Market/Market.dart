@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Providers/ProductProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MainMenu/MainMenu.dart';
@@ -38,6 +39,7 @@ class _MenuMarketState extends State<MenuMarket> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     Widget image_carousel = new Container(
       height: 200.0,
       child: new Carousel(
@@ -75,15 +77,18 @@ class _MenuMarketState extends State<MenuMarket> {
               .copyWith(color: Colors.white, fontSize: 21),
         ),
         actions: <Widget>[
-          new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (context) => new CartPage()));
-              }),
+          Offstage(
+            offstage: userProvider.userModel.role=="admin"?true:false,
+            child: new IconButton(
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (context) => new CartPage()));
+                }),
+          ),
         ],
       ),
       // appBar: new AppBar(

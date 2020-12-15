@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/MyPlantsRecordDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class WidgetLIstRecordDetailPlant extends StatefulWidget {
@@ -20,8 +22,10 @@ class WidgetLIstRecordDetailPlant extends StatefulWidget {
 
 class _WidgetLIstRecordDetailPlantState
     extends State<WidgetLIstRecordDetailPlant> {
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Container(
         child: InkWell(
             onTap: () {
@@ -139,7 +143,7 @@ class _WidgetLIstRecordDetailPlantState
                         ),
                       ),
                       onTap: () {
-                        //PlantService.deleteProduct(MyPlantsModel.id);
+                        userProvider.deleteMyPlantRecord(plantItem: widget.model);
                       },
                     )
                   ],

@@ -226,7 +226,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   createCartList(List<CartItemModel> cart) {
-    return ListView.builder(
+    return cart.length==0||cart==[]?Text("Nodata"):ListView.builder(
       shrinkWrap: true,
       primary: false,
       itemBuilder: (context, index) {

@@ -518,3 +518,37 @@ class ButtonButtom extends StatelessWidget {
     );
   }
 }
+
+class ButtonRejectAcc extends StatelessWidget {
+  ButtonRejectAcc(
+      {@required this.buttonText,
+        @required this.onPressed,
+        this.isDisabled = false,
+        this.color});
+  final String buttonText;
+  final Function onPressed;
+  final bool isDisabled;
+  final color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width/3.5,
+      // height: ScreenUtil().setHeight(38),
+      height: 50,
+      margin: EdgeInsets.only(bottom: 24),
+      child: FlatButton(
+        color: color, //isDisabled ? Color(0xFF2b961f) : Color(0xFF2b961f),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          buttonText,
+          style: CustomTextStyle.textFormFieldSemiBold
+              .copyWith(color: Colors.white),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
