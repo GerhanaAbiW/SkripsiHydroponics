@@ -16,7 +16,10 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   @override
   void initState() {
     super.initState();
-    Provider.of<OrderProvider>(context, listen: false); //.getRevenue();
+    Provider.of<OrderProvider>(context, listen: false).getRevenue();
+    Provider.of<OrderProvider>(context, listen: false).getSales();
+    Provider.of<OrderProvider>(context, listen: false).getCategory();
+
     _seriesPieData = List<charts.Series<Task, String>>();
     _getData();
   }

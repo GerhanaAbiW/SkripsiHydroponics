@@ -15,6 +15,7 @@ class MyPlantsRecordModel{
   static const SeedingTime = "SeedingTime";
   static const PestsType = "PestType";
   static const RecordMedia = "RecordMedia";
+  static const RecordSeedingTime = "RecordSeedingTime";
   static const RecordPPM = "RecordPPM";
   static const RecordPH = "RecordPH";
   static const RecordFertilizerType = "RecordFertilizerType";
@@ -25,6 +26,7 @@ class MyPlantsRecordModel{
   static const DATE = "Date";
 
   String _id;
+
   String _plantId;
   String _plant;
   String _media;
@@ -41,6 +43,7 @@ class MyPlantsRecordModel{
 
 
   bool _recordMedia;
+  bool _recordSeedingTime;
   bool _recordPPM;
   bool _recordPH;
   bool _recordFertilizerType;
@@ -55,6 +58,7 @@ class MyPlantsRecordModel{
 //  getters
   String get id => _id;
   String get seedingTime => _seedingTime;
+  bool get recordSeedingTime => _recordSeedingTime;
 
   String get plantId => _plantId;
 
@@ -114,6 +118,7 @@ class MyPlantsRecordModel{
     _fertilizerType = data[FertilizerType];
     _timeOfFertilizer = data[TimeOfFertilizer];
     _recordMedia = data[RecordMedia];
+    _recordSeedingTime = data[RecordSeedingTime];
     _recordPPM=data[RecordPPM];
     _recordPH=data[RecordPH];
     _recordFertilizerType=data[RecordFertilizerType];
@@ -154,6 +159,8 @@ class MyPlantsRecordModel{
     RecordPestsType : _recordPestsType,
 
     RecordMedia :  _recordMedia,
+    RecordSeedingTime :  _recordSeedingTime,
+
     SeedingTime : _seedingTime,
     DATE:_date
 

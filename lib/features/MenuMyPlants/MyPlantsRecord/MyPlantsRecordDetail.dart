@@ -29,16 +29,16 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
 
   void createListItem() {
     listSection.add(
-        createSection("Media Semai : ${widget.model.media}", Icons.ac_unit, darkGreenColor, null));
+        createSection("Media Semai : ${widget.model.recordMedia==true?widget.model.media:"-"}", Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection(
-        "Waktu Semai : ${widget.model.seedingTime}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Jenis Pupuk : ${widget.model.fertilizerType}",
+        "Waktu Semai : ${widget.model.recordSeedingTime==true?widget.model.seedingTime:"-"}", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Jenis Pupuk : ${widget.model.recordFertilizerType==true?widget.model.recordFertilizerType:"-"}",
         Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection(
-        "Dosis Pupuk : ${widget.model.dosageFertilizer}", Icons.ac_unit, darkGreenColor, null));
+        "Dosis Pupuk : ${widget.model.recordDosageFertilizer==true?widget.model.dosageFertilizer:"-"}", Icons.ac_unit, darkGreenColor, null));
     listSection.add(
-        createSection("Waktu Pupuk : ${widget.model.timeOfFertilizer}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Waktu Panen : ${widget.model.harvestTime}",
+        createSection("Waktu Pupuk : ${widget.model.recordTimeOfFertilizer==true?widget.model.timeOfFertilizer:"-"}", Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Waktu Panen : ${widget.model.recordHarvestTime==true?widget.model.harvestTime:"-"}",
         Icons.ac_unit, darkGreenColor, null));
   }
 
@@ -201,7 +201,7 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    widget.model.ph,
+                                    widget.model.recordPH==true?widget.model.ph:"-",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -231,7 +231,7 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    widget.model.ppm,
+                                    widget.model.recordPPM==true?widget.model.ppm:"-",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
