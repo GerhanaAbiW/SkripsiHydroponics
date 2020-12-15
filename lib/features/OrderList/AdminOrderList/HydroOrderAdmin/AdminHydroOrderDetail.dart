@@ -11,6 +11,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 
 class AdminHydroOrderDetail extends StatefulWidget {
@@ -46,7 +47,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: Color(0xFF2b961f),
+          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -74,36 +75,50 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                 flex: 90,
               ),
               Expanded(
-                child: widget.order.status=="Pending"?Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                      child: ButtonButtom(
-                        buttonText: 'Reject',
-                        onPressed: ()  {
-                          _orderServices.updateOrder(status:"Rejected", id:widget.order.id,img: widget.order.imagePayment);
-                        },
+                child: widget.order.status == "Pending"
+                    ? Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                            child: ButtonButtom(
+                              color: darkYellowColor,
+                              buttonText: 'Reject',
+                              onPressed: () {
+                                _orderServices.updateOrder(
+                                    status: "Rejected",
+                                    id: widget.order.id,
+                                    img: widget.order.imagePayment);
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                            child: ButtonButtom(
+                              color: darkYellowColor,
+                              buttonText: 'Accept',
+                              onPressed: () {
+                                _orderServices.updateOrder(
+                                    status: "Accepted",
+                                    id: widget.order.id,
+                                    img: widget.order.imagePayment);
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                        child: ButtonButtom(
+                          color: darkYellowColor,
+                          buttonText: 'Proccess Order',
+                          onPressed: () {
+                            _orderServices.updateOrder(
+                                status: "Paid",
+                                id: widget.order.id,
+                                img: widget.order.imagePayment);
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                      child: ButtonButtom(
-                        buttonText: 'Accept',
-                        onPressed: () {
-                          _orderServices.updateOrder(status:"Accepted", id:widget.order.id,img:widget.order.imagePayment);
-                        },
-                      ),
-                    ),
-                  ],
-                ):      Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                  child: ButtonButtom(
-                    buttonText: 'Proccess Order',
-                    onPressed: () {
-                      _orderServices.updateOrder(status:"Paid", id:widget.order.id, img: widget.order.imagePayment);
-                    },
-                  ),
-                ),
                 flex: 10,
               )
             ],
@@ -146,7 +161,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -162,7 +177,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                         style: CustomTextStyle.textFormFieldMedium
                             .copyWith(color: Colors.white),
                       ),
-                      color: Colors.pink,
+                      color: darkYellowColor, //Colors.pink,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(24))),
                     )
@@ -213,7 +228,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
@@ -385,9 +400,8 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
-          border:
-          Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
-          color: Colors.tealAccent.withOpacity(0.2)),
+          border: Border.all(color: Colors.lime.withOpacity(0.4), width: 1),
+          color: Colors.lime.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -396,7 +410,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
             value: 1,
             groupValue: 1,
             onChanged: (isChecked) {},
-            activeColor: Colors.tealAccent.shade400,
+            activeColor: Colors.lime.shade400,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,7 +440,6 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
     );
   }
 
-
   checkoutHydroItem() {
     return Container(
       margin: EdgeInsets.all(4),
@@ -437,23 +450,21 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
           elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
-          child: Row(children: <Widget>[
-            Image.asset(widget.order.hydroImage),
-            Column(
-              children: <Widget>[
-                Text(widget.order.hydroType),
-                Text("Pipe Quantity : " + widget.order.pipeQTY),
-                Text("Hole Quantity : " + widget.order.holeQTY),
-                Text("Land Type : " + widget.order.landType),
-              ],
-            ),
-
-          ],)
-      ),
+          child: Row(
+            children: <Widget>[
+              Image.asset(widget.order.hydroImage),
+              Column(
+                children: <Widget>[
+                  Text(widget.order.hydroType),
+                  Text("Pipe Quantity : " + widget.order.pipeQTY),
+                  Text("Hole Quantity : " + widget.order.holeQTY),
+                  Text("Land Type : " + widget.order.landType),
+                ],
+              ),
+            ],
+          )),
     );
   }
-
-
 
   priceSection() {
     return Container(
@@ -500,20 +511,24 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. " +widget.order.totalPrice.toStringAsFixed(3),
+              createPriceItem(
+                  "Order Total",
+                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toStringAsFixed(3),
+              createPriceItem(
+                  "Tax (10%)",
+                  "Rp. " + widget.order.tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
                     ? createPriceItem(
-                    "Instalation Delivery",
-                    "Rp. " + widget.order.delivery.toString(),
-                    Colors.teal.shade300)
+                        "Instalation Delivery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300)
                     : createPriceItem(
-                    "Delievery",
-                    "Rp. " + widget.order.delivery.toString(),
-                    Colors.teal.shade300),
+                        "Delievery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300),
               ),
 
               SizedBox(
@@ -591,23 +606,27 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
       ),
     );
   }
+
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-          Text('Transaction Provement'),
-          Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.brown,
-                width: 10,
-              ),
-            ),
-            child: widget.order.imagePayment==null?Text("Unpaid",style: CustomTextStyle.textFormFieldMedium
-                .copyWith(color: Colors.red, fontSize: 12)) : Image.network(widget.order.imagePayment),
+      Text('Transaction Provement'),
+      Container(
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: Colors.brown,
+            width: 10,
           ),
-        ]));
+        ),
+        child: widget.order.imagePayment == null
+            ? Text("Unpaid",
+                style: CustomTextStyle.textFormFieldMedium
+                    .copyWith(color: darkYellowColor, fontSize: 12))
+            : Image.network(widget.order.imagePayment),
+      ),
+    ]));
   }
 }
