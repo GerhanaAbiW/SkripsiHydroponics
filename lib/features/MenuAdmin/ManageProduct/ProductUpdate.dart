@@ -9,7 +9,7 @@ import 'package:hydroponics/core/Services/BrandServices.dart';
 import 'package:hydroponics/core/Services/CategoryServices.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';

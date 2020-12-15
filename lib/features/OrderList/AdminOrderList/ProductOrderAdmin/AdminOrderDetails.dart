@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/HydroOrderModel.dart';
 import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
@@ -15,26 +16,23 @@ import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class UserOrderDetail extends StatefulWidget {
+class AdminOrderDetail extends StatefulWidget {
   final OrderModel order;
-  const UserOrderDetail(
-      {Key key, this.order})
-      : super(key: key);
+
+  const AdminOrderDetail({Key key, this.order}) : super(key: key);
 
   @override
-  _UserOrderDetailState createState() => _UserOrderDetailState();
+  _AdminOrderDetailState createState() => _AdminOrderDetailState();
 }
 
-class _UserOrderDetailState extends State<UserOrderDetail> {
+class _AdminOrderDetailState extends State<AdminOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
-
-
+  OrderServices _orderServices = OrderServices();
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -71,19 +69,41 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                       selectedAddressSection(),
                       standardDelivery(),
                       checkoutItem(widget.order.cart),
-                      priceSection()
+                      priceSection(),
+                      transactionProvement(),
                     ],
                   ),
                 ),
                 flex: 90,
               ),
               Expanded(
-                child: Padding(
+                child: widget.order.status=="Pending"?Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                      child: ButtonButtom(
+                        buttonText: 'Reject',
+                        onPressed: ()  {
+                          _orderServices.updateOrder(status:"Rejected", id:widget.order.id,img: widget.order.imagePayment);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                      child: ButtonButtom(
+                        buttonText: 'Accept',
+                        onPressed: () {
+                          _orderServices.updateOrder(status:"Accepted", id:widget.order.id,img:widget.order.imagePayment);
+                        },
+                      ),
+                    ),
+                  ],
+                ):      Padding(
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                   child: ButtonButtom(
-                    buttonText: 'Order Now',
+                    buttonText: 'Proccess Order',
                     onPressed: () {
-
+                      _orderServices.updateOrder(status:"Paid", id:widget.order.id, img: widget.order.imagePayment);
                     },
                   ),
                 ),
@@ -129,7 +149,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -196,21 +216,20 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     child: Text(
-                      "HOME",
+                      "Customer Info",
                       style: CustomTextStyle.textFormFieldBlack.copyWith(
                           color: Colors.indigoAccent.shade200, fontSize: 8),
                     ),
                   )
                 ],
               ),
-              createAddressText("Address : "+ widget.order.userAddress, 16),
-
+              createAddressText("Address : " + widget.order.userAddress, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -370,7 +389,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-          Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
+              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
           color: Colors.tealAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -451,9 +470,9 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               children: <Widget>[
                 Positioned.fill(
                     child: Align(
-                      alignment: Alignment.center,
-                      child: Loading(),
-                    )),
+                  alignment: Alignment.center,
+                  child: Loading(),
+                )),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
@@ -468,7 +487,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               ],
             ),
             decoration:
-            BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
+                BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
           ),
           SizedBox(
             width: 8,
@@ -535,16 +554,20 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}" ,
+              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}",
                   Colors.grey.shade700),
-              createPriceItem(
-                  "Tax (10%)", "Rp. " + widget.order.tax.toString(), Colors.grey.shade700),
+              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toString(),
+                  Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
-                    ? createPriceItem("Instalation Delivery",
-                    "Rp. "+widget.order.delivery.toString(), Colors.teal.shade300)
-                    : createPriceItem("Delievery", "Rp. " + widget.order.delivery.toString(),
-                    Colors.teal.shade300),
+                    ? createPriceItem(
+                        "Instalation Delivery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300)
+                    : createPriceItem(
+                        "Delievery",
+                        "Rp. " + widget.order.delivery.toString(),
+                        Colors.teal.shade300),
               ),
 
               SizedBox(
@@ -621,5 +644,24 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
         ],
       ),
     );
+  }
+  transactionProvement() {
+    return Center(
+        child: Column(children: <Widget>[
+          Text('Transaction Provement'),
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color: Colors.brown,
+                width: 10,
+              ),
+            ),
+            child: widget.order.imagePayment==null?Text("Unpaid",style: CustomTextStyle.textFormFieldMedium
+                .copyWith(color: Colors.red, fontSize: 12)) : Image.network(widget.order.imagePayment),
+          ),
+        ]));
   }
 }

@@ -17,6 +17,7 @@ class ListRecordPlant extends StatefulWidget {
 
 class _ListRecordPlantState extends State<ListRecordPlant> {
   List<MyPlantsRecordModel> list;
+
   @override
   void initState() {
     super.initState();
@@ -70,26 +71,13 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
                     shrinkWrap: true,
                     itemCount: list.length,
                     itemBuilder: (BuildContext context, int index) {
-                      if (list.length > 1) {
-                        return AnimationConfiguration.staggeredList(
-                            position: index,
-                            child: list[index].date == list[index - 1].date
-                                ? WidgetLIstRecordDetailPlant(
-                                    model: list[index],
-                                    header: true,
-                                  )
-                                : WidgetLIstRecordDetailPlant(
-                                    model: list[index],
-                                    header: false,
-                                  ));
-                      } else
-                        return AnimationConfiguration.staggeredList(
-                          position: index,
-                          child: WidgetLIstRecordDetailPlant(
-                            model: list[index],
-                            header: false,
-                          ),
-                        );
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        child: WidgetLIstRecordDetailPlant(
+                          model: list[index],
+                          header: false,
+                        ),
+                      );
 
                       // return Card(
                       //     elevation: 10.0,

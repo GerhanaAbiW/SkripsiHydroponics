@@ -1,20 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 
-class OrderModel {
+class HydroOrderModel {
   static const ID = "id";
   static const USER_NAME = "userName";
   static const PHONE = "phone";
   static const USER_ADDRESS = "userAddress";
   static const DESCRIPTION = "description";
-  static const HYDRO_TYPE = "hydro_type";
-  static const HYDRO_IMAGE = "hydro_image";
-  static const CART = "cart";
+  static const HYDRO_TYPE = "hydroType";
+  static const HYDRO_IMAGE = "hydroImage";
+  static const HOLE_QTY= "holeQuantity";
+  static const LAND_TYPE=  "landType";
+  static const PIPE_QTY=  "pipeQuantity";
   static const IMAGE_PAYMENT = "imagePayment";
   static const InstalationPayment = "paymentInstalation";
   static const DeliveryPayment = "paymentDelivery";
   static const TAX_PAYMENT = "paymentTax";
   static const USER_ID = "userId";
+  static const PRICE = "price";
   static const TOTAL_PRICE = "totalPrice";
   static const TOTAL_QUANTITY_PRODUCT = "totalQuantityProduct";
   static const STATUS = "status";
@@ -22,14 +25,19 @@ class OrderModel {
 
 
   String _id;
+  String _price;
   String _imagePayment;
   String _userName;
   String _phone;
+  String _hydroType;
 
-
+  String get holeQTY => _holeQTY;
+  String _holeQTY;
+  String _pipeQTY;
+  String _landType;
 
   double _tax;
-
+  String _hydroImage;
   int _delivery;
   int _instalation;
   String _userAddress;
@@ -42,6 +50,9 @@ class OrderModel {
 
 //  getters
   String get id => _id;
+  String get price => _price;
+  String get hydroType => _hydroType;
+  String get hydroImage => _hydroImage;
   String get imagePayment => _imagePayment;
   String get userName => _userName;
   String get phone => _phone;
@@ -65,8 +76,11 @@ class OrderModel {
   List cart;
 
 
-  OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
+  HydroOrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
+    _price = snapshot.data[PRICE];
+    _hydroType = snapshot.data[HYDRO_TYPE];
+    _hydroImage = snapshot.data[HYDRO_IMAGE];
     _imagePayment = snapshot.data[IMAGE_PAYMENT];
     _userName = snapshot.data[USER_NAME];
     _instalation = snapshot.data[InstalationPayment];
@@ -80,17 +94,14 @@ class OrderModel {
     _userAddress = snapshot.data[USER_ADDRESS];
     _dateTime = snapshot.data[DATE_TIME];
     _totalQuantityProduct = snapshot.data[TOTAL_QUANTITY_PRODUCT];
-    cart = _convertCartItems(snapshot.data[CART]?? []);
+    _pipeQTY = snapshot.data[PIPE_QTY];
+    _holeQTY = snapshot.data[HOLE_QTY];
+    _landType = snapshot.data[LAND_TYPE];
 
 
   }
-  List<CartItemModel> _convertCartItems(List cart){
-    List<CartItemModel> convertedCart = [];
-    for(Map cartItem in cart){
-      convertedCart.add(CartItemModel.fromMap(cartItem));
-    }
-    return convertedCart;
-  }
 
+  String get pipeQTY => _pipeQTY;
 
+  String get landType => _landType;
 }

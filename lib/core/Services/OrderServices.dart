@@ -6,9 +6,10 @@ import 'package:uuid/uuid.dart';
 
 class OrderServices{
   String collection = "orders";
+
   Firestore _firestore = Firestore.instance;
 
-  void createOrder({String userId ,String description,String status ,List<CartItemModel> cart,
+  void createOrder({String userId, String userName,String description,List<CartItemModel> cart,
     double totalPrice, int totalQtyProduct, String address, String phone, double tax, int instalation, int delivery}) {
     var uuid = Uuid();
     String id = uuid.v4();
@@ -26,33 +27,22 @@ class OrderServices{
       "paymentDelivery" : delivery,
       "paymentTax": tax,
       "id": id,
+      "imagePayment":null,
       "cart": convertedCart,
       "totalPrice": totalPrice,
       "totalQuantityProduct" : totalQtyProduct,
       "createdAt": FieldValue.serverTimestamp(),
       "description": description,
-      "status": status,
+      "status": "Pending",
       "date" : DateTime.now().toString()
     });
   }
 
-  void updateOrder(String id,Map<String, dynamic> data) {
-    data["updatedAt"] =  FieldValue.serverTimestamp();
-    _firestore.collection(collection).document(id).updateData(data);
+  void updateOrder({String status,String id, String img}) {
+    _firestore.collection(collection).document(id).updateData({"status":status, "updatedAt":FieldValue.serverTimestamp(),"imagePayment":img});
   } 
   
-  void createHydroOrder(Map<String, dynamic> data) {
-    var uuid = Uuid();
-    String id = uuid.v4();
-    data["id"] = id;
-    data["createdAt"] =  FieldValue.serverTimestamp();
-    _firestore.collection(collection).document(id).setData(data);
-  }
 
-  void updateHydroOrder(String id,Map<String, dynamic> data) {
-    data["updatedAt"] =  FieldValue.serverTimestamp();
-    _firestore.collection(collection).document(id).updateData(data);
-  }
 
   Future<List<OrderModel>> getUserOrders({String userId}) async =>
       _firestore
@@ -70,7 +60,7 @@ class OrderServices{
   Future<List<OrderModel>> getBuyers() async =>
       _firestore
           .collection(collection)
-          .where("status", isEqualTo: "Accepted")
+          .where("status", isEqualTo: "Paid")
           .getDocuments()
           .then((result) {
         List<OrderModel> orders = [];

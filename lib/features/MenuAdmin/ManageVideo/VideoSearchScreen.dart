@@ -9,7 +9,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/AddVideo.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/VideoCard.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/SearchPlant.dart';
 import 'package:hydroponics/features/Widget/SearchVideo.dart';
 import 'package:provider/provider.dart';

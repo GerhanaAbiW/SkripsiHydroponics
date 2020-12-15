@@ -3,8 +3,10 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MainMenu/MainMenu.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderList.dart';
-import 'package:hydroponics/features/OrderList/UserOrderList/UserOrderList.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/DashboardAdminOrder.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderList.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/UserOrderList.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 import 'package:hydroponics/features/Widget/WhatsApps.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +47,7 @@ class _DashBoardState extends State<DashBoard> {
                     MainMenu(),
                     NewProfilePage(),
                     WhatsApps(),
-                    OrdersScreen()
+                   DashboardUserOrder()
                   ],
                 )
               : PageView(
@@ -57,7 +59,7 @@ class _DashBoardState extends State<DashBoard> {
                     MainMenu(),
                     NewProfilePage(),
                     WhatsApps(),
-                    ListOrder(),
+                    DashboardAdminOrder(),
                   ],
                 ),
         ),

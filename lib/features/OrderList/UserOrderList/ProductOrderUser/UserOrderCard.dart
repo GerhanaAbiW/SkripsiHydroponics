@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Order.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
-import 'package:hydroponics/features/OrderList/UserOrderList/UserOrderDetail.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/UserOrderDetail.dart';
 
 
 class CardMyListOrder extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
-import 'package:hydroponics/features/OrderList/AdminOrderList/AdminOrderDetails.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:intl/intl.dart';
 

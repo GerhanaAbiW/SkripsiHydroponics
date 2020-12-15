@@ -56,6 +56,7 @@ class ProductModel{
 
   ProductModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
+    _quantity = snapshot.data[QUANTITY];
     _brand = snapshot.data[BRAND];
     _description = snapshot.data[DESCRIPTION];
     _price = snapshot.data[PRICE].floor();

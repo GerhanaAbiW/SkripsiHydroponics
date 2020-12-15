@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/HydroOrderModel.dart';
+import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -9,60 +11,60 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/HydroOrderUser/HydroOrderUploadPayment.dart';
+import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class CheckOutPage extends StatefulWidget {
-  final List<CartItemModel> cart;
-  final String address;
-  final String phone;
-  final int delivery;
-  final int total;
-  final int totalQty;
+class UserHydroOrderDetail extends StatefulWidget {
+  final HydroOrderModel order;
 
-  const CheckOutPage(
-      {Key key, this.cart, this.delivery,this.total, this.address, this.phone, this.totalQty})
-      : super(key: key);
+  const UserHydroOrderDetail({Key key, this.order}) : super(key: key);
 
   @override
-  _CheckOutPageState createState() => _CheckOutPageState();
+  _UserHydroOrderDetailState createState() => _UserHydroOrderDetailState();
 }
 
-class _CheckOutPageState extends State<CheckOutPage> {
+class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   OrderServices _orderServices = OrderServices();
-  bool del = false;
-  bool ins = false;
-  double totals;
-  double tax;
-  String address;
-  String phone;
+  bool btn = true;
+  bool img = true;
 
-  void getTotals() {
-    setState(() {
-      tax = widget.total * 0.01;
-      totals = widget.total + tax + widget.delivery;
-    });
+  void visibleBtn() {
+    if (widget.order.status == "Accepted") {
+      setState(() {
+        btn = false;
+      });
+    } else {
+      setState(() {
+        btn = true;
+      });
+    }
   }
-
-
-
+  void visibleImg() {
+    if (widget.order.imagePayment != null) {
+      setState(() {
+        img = false;
+      });
+    } else {
+      setState(() {
+        img = true;
+      });
+    }
+  }
   @override
   void initState() {
     super.initState();
-    getTotals();
+    visibleBtn();
+    visibleImg();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    // final appProvider = Provider.of<AppProvider>(context);
-
     return MaterialApp(
       home: Scaffold(
         key: _scaffoldKey,
@@ -92,57 +94,32 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                      selectedAddressSection(userProvider.userModel),
+                      selectedAddressSectionAdmin(),
+                      selectedAddressSection(),
                       standardDelivery(),
-                      checkoutItem(widget.cart),
-                      priceSection()
+                      checkoutHydroItem(),
+                      priceSection(),
+                      Offstage(
+                        offstage: img,
+                        child: transactionProvement(),
+                      )
                     ],
                   ),
                 ),
                 flex: 90,
               ),
               Expanded(
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                      child: ButtonButtom(
-                        buttonText: 'Order Now',
-                        onPressed: () async{
-                          if(address!=null || phone !=null){
-                            _orderServices.createOrder(
-                              userName: userProvider.userModel.name,
-                                phone: phone,
-                                totalQtyProduct: widget.totalQty,
-                                address: address,
-                                userId: userProvider.userModel.id,
-                                description: "Some random description",
-                                tax: tax,
-                                instalation: 0,
-                                totalPrice: totals,
-                                cart: widget.cart);
-                            for (CartItemModel cartItem in userProvider.userModel.cart) {
-                              bool value = await userProvider.removeFromCart(
-                                  cartItem: cartItem);
-                              if (value) {
-                                userProvider.reloadUserModel();
-                                print("Item added to cart");
-                                _scaffoldKey.currentState.showSnackBar(
-                                    SnackBar(content: Text("Removed from Cart!")));
-                              } else {
-                                print("ITEM WAS NOT REMOVED");
-                              }
-                            }
-                            _scaffoldKey.currentState.showSnackBar(
-                                SnackBar(content: Text("Order created!")));
-                            changeScreen(context, MenuMarket());
-                          }else{
-                            showSnackBar("Please Add Your Phone Number and Your Address ", _scaffoldKey);
-                          }
-                        },
-                      ),
+                child: Offstage(
+                  offstage: btn,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                    child: ButtonButtom(
+                      buttonText: 'Upload Your Transaction',
+                      onPressed: () {
+                        changeScreen(context, HydroOrderUploadPayment());
+                      },
                     ),
-                  ],
+                  ),
                 ),
                 flex: 10,
               )
@@ -152,7 +129,29 @@ class _CheckOutPageState extends State<CheckOutPage> {
       ),
     );
   }
-
+  checkoutHydroItem() {
+    return Container(
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4))),
+          child: Row(children: <Widget>[
+            Image.asset(widget.order.hydroImage),
+            Column(
+              children: <Widget>[
+                Text(widget.order.hydroType),
+                Text(widget.order.holeQTY),
+                Text(widget.order.landType),
+              ],
+            )
+          ],)
+      ),
+    );
+  }
   showThankYouBottomSheet(BuildContext context) {
     return _scaffoldKey.currentState.showBottomSheet((context) {
       return Container(
@@ -186,7 +185,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -222,7 +221,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
         elevation: 2);
   }
 
-  selectedAddressSection(UserModel user) {
+  selectedAddressSectionAdmin() {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -247,29 +246,109 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    user.name,
+                    "Please Pay Your Order Here",
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
                   Container(
                     padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     child: Text(
-                      "HOME",
+                      "Seller Info",
                       style: CustomTextStyle.textFormFieldBlack.copyWith(
                           color: Colors.indigoAccent.shade200, fontSize: 8),
                     ),
                   )
                 ],
               ),
-              Container(
-                  child: address == null
-                      ? createAddressText("Address : No data", 16)
-                      : createAddressText(address, 16)),
+              createAddressText("Company Name : Hydroponic Market", 16),
+              createAddressText(
+                  "Company Adress : Hjwdjbwjdneifjiefrrmdmmkrorr", 16),
+              createAddressText("Bank Name : BCA", 16),
+              createAddressText("Bank Account Name : Gerhana Abi W", 16),
+
+              // createAddressText("Mumbai - 400023", 6),
+              // createAddressText("Maharashtra", 6),
+              SizedBox(
+                height: 6,
+              ),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Bank Account Number : ",
+                      style: CustomTextStyle.textFormFieldMedium
+                          .copyWith(fontSize: 12, color: Colors.grey.shade800)),
+                  TextSpan(
+                      text: "01934749373",
+                      style: CustomTextStyle.textFormFieldBold
+                          .copyWith(color: Colors.black, fontSize: 12)),
+                ]),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              // Container(
+              //   color: Colors.grey.shade300,
+              //   height: 1,
+              //   width: double.infinity,
+              // ),
+              //addressAction()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  selectedAddressSection() {
+    return Container(
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
+          padding: EdgeInsets.only(left: 12, top: 8, right: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 6,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "widget.order.name",
+                    style: CustomTextStyle.textFormFieldSemiBold
+                        .copyWith(fontSize: 14),
+                  ),
+                  Container(
+                    padding:
+                    EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                    child: Text(
+                      "Customer Info",
+                      style: CustomTextStyle.textFormFieldBlack.copyWith(
+                          color: Colors.indigoAccent.shade200, fontSize: 8),
+                    ),
+                  )
+                ],
+              ),
+              createAddressText("Address : " + widget.order.userAddress, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -283,7 +362,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
-                      text: phone == null ? "No data" : phone,
+                      text: widget.order.phone,
                       style: CustomTextStyle.textFormFieldBold
                           .copyWith(color: Colors.black, fontSize: 12)),
                 ]),
@@ -291,12 +370,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
               SizedBox(
                 height: 16,
               ),
-              Container(
-                color: Colors.grey.shade300,
-                height: 1,
-                width: double.infinity,
-              ),
-              addressAction()
+              // Container(
+              //   color: Colors.grey.shade300,
+              //   height: 1,
+              //   width: double.infinity,
+              // ),
+              //addressAction()
             ],
           ),
         ),
@@ -315,121 +394,121 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  addressAction() {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Spacer(
-            flex: 2,
-          ),
-          FlatButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      content: Stack(
-                        overflow: Overflow.visible,
-                        children: <Widget>[
-                          Positioned(
-                            right: -40.0,
-                            top: -40.0,
-                            child: GestureDetector(
-                              onTap: () {
-                               backScreen(context);
-                              },
-                              child: CircleAvatar(
-                                child: Icon(Icons.close),
-                                backgroundColor: Colors.red,
-                              ),
-                            ),
-                          ),
-                          Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: MultilineFormTextField(
-                                    controller: addressController,
-                                    textHint: "Add Your Adrress",
-                                    textLabel: "Input Address"
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: FormTextField(
-                                    controller: phoneController,
-                                    textHint: "Add Your Phone Number",
-                                    textLabel: "Input Phone Number"
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RaisedButton(
-                                    child: Text("Save"),
-                                    onPressed: () {
-                                      if (_formKey.currentState.validate()) {
-                                        setState(() {
-                                          address = addressController.text;
-                                          phone = phoneController.text;
-                                        });
-                                        _formKey.currentState.save();
-                                        backScreen(context);
-                                      }
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
-            },
-            child: Text(
-              "Edit Address",
-              style: CustomTextStyle.textFormFieldSemiBold
-                  .copyWith(fontSize: 12, color: Colors.indigo.shade700),
-            ),
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-          ),
-          // Spacer(
-          //   flex: 3,
-          // ),
-          // Container(
-          //   height: 20,
-          //   width: 1,
-          //   color: Colors.grey,
-          // ),
-          // Spacer(
-          //   flex: 3,
-          // ),
-          // FlatButton(
-          //   onPressed: () {},
-          //   child: Text("Add New Address",
-          //       style: CustomTextStyle.textFormFieldSemiBold
-          //           .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
-          //   splashColor: Colors.transparent,
-          //   highlightColor: Colors.transparent,
-          // ),
-          Spacer(
-            flex: 2,
-          ),
-        ],
-      ),
-    );
-  }
+  // addressAction() {
+  //   return Container(
+  //     child: Row(
+  //       children: <Widget>[
+  //         Spacer(
+  //           flex: 2,
+  //         ),
+  //         FlatButton(
+  //           onPressed: () {
+  //             showDialog(
+  //                 context: context,
+  //                 builder: (BuildContext context) {
+  //                   return AlertDialog(
+  //                     content: Stack(
+  //                       overflow: Overflow.visible,
+  //                       children: <Widget>[
+  //                         Positioned(
+  //                           right: -40.0,
+  //                           top: -40.0,
+  //                           child: GestureDetector(
+  //                             onTap: () {
+  //                               backScreen(context);
+  //                             },
+  //                             child: CircleAvatar(
+  //                               child: Icon(Icons.close),
+  //                               backgroundColor: Colors.red,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         Form(
+  //                           key: _formKey,
+  //                           child: Column(
+  //                             mainAxisSize: MainAxisSize.min,
+  //                             children: <Widget>[
+  //                               Padding(
+  //                                 padding: EdgeInsets.all(8.0),
+  //                                 child: MultilineFormTextField(
+  //                                     controller: addressController,
+  //                                     textHint: "Add Your Adrress",
+  //                                     textLabel: "Input Address"
+  //                                 ),
+  //                               ),
+  //                               Padding(
+  //                                 padding: EdgeInsets.all(8.0),
+  //                                 child: FormTextField(
+  //                                     controller: phoneController,
+  //                                     textHint: "Add Your Phone Number",
+  //                                     textLabel: "Input Phone Number"
+  //                                 ),
+  //                               ),
+  //                               Padding(
+  //                                 padding: const EdgeInsets.all(8.0),
+  //                                 child: RaisedButton(
+  //                                   child: Text("Save"),
+  //                                   onPressed: () {
+  //                                     if (_formKey.currentState.validate()) {
+  //                                       setState(() {
+  //                                         address = addressController.text;
+  //                                         phone = phoneController.text;
+  //                                       });
+  //                                       _formKey.currentState.save();
+  //                                       backScreen(context);
+  //                                     }
+  //                                   },
+  //                                 ),
+  //                               )
+  //                             ],
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   );
+  //                 });
+  //           },
+  //           child: Text(
+  //             "Edit Address",
+  //             style: CustomTextStyle.textFormFieldSemiBold
+  //                 .copyWith(fontSize: 12, color: Colors.indigo.shade700),
+  //           ),
+  //           splashColor: Colors.transparent,
+  //           highlightColor: Colors.transparent,
+  //         ),
+  //         // Spacer(
+  //         //   flex: 3,
+  //         // ),
+  //         // Container(
+  //         //   height: 20,
+  //         //   width: 1,
+  //         //   color: Colors.grey,
+  //         // ),
+  //         // Spacer(
+  //         //   flex: 3,
+  //         // ),
+  //         // FlatButton(
+  //         //   onPressed: () {},
+  //         //   child: Text("Add New Address",
+  //         //       style: CustomTextStyle.textFormFieldSemiBold
+  //         //           .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
+  //         //   splashColor: Colors.transparent,
+  //         //   highlightColor: Colors.transparent,
+  //         // ),
+  //         Spacer(
+  //           flex: 2,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   standardDelivery() {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
+          Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
           color: Colors.tealAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -469,85 +548,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  checkoutItem(List<CartItemModel> cart) {
-    return Container(
-      margin: EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-      ),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4))),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              border: Border.all(color: Colors.grey.shade200)),
-          padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
-          child: ListView.builder(
-            itemBuilder: (context, position) {
-              return checkoutListItem(cart[position]);
-            },
-            itemCount: cart.length,
-            shrinkWrap: true,
-            primary: false,
-            scrollDirection: Axis.vertical,
-          ),
-        ),
-      ),
-    );
-  }
 
-  checkoutListItem(CartItemModel cart) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: 35,
-            height: 45,
-            child: Stack(
-              children: <Widget>[
-                Positioned.fill(
-                    child: Align(
-                  alignment: Alignment.center,
-                  child: Loading(),
-                )),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1)),
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: cart.image,
-                    height: MediaQuery.of(context).size.height,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            ),
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
-          ),
-          SizedBox(
-            width: 8,
-          ),
-          RichText(
-            text: TextSpan(children: [
-              TextSpan(
-                  text: "Estimated Delivery : ",
-                  style: CustomTextStyle.textFormFieldMedium
-                      .copyWith(fontSize: 12)),
-              TextSpan(
-                  text: "21 Jul 2019 ",
-                  style: CustomTextStyle.textFormFieldMedium
-                      .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
-            ]),
-          )
-        ],
-      ),
-    );
-  }
+
+
 
   priceSection() {
     return Container(
@@ -594,13 +597,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. " + widget.total.toString(),
+              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}",
                   Colors.grey.shade700),
-              createPriceItem(
-                  "Tax (10%)", "Rp. " + tax.toString(), Colors.grey.shade700),
+              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toString(),
+                  Colors.grey.shade700),
               Container(
-                child: createPriceItem("Delievery", "Rp. " + widget.delivery.toString(),
-                        Colors.teal.shade300),
+                child: widget.order.delivery != 0
+                    ? createPriceItem(
+                    "Instalation Delivery",
+                    "Rp. " + widget.order.delivery.toString(),
+                    Colors.teal.shade300)
+                    : createPriceItem(
+                    "Delievery",
+                    "Rp. " + widget.order.delivery.toString(),
+                    Colors.teal.shade300),
               ),
 
               SizedBox(
@@ -625,7 +635,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + totals.toString(),
+                    "Rp. " + widget.order.totalPrice.toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
@@ -677,5 +687,24 @@ class _CheckOutPageState extends State<CheckOutPage> {
         ],
       ),
     );
+  }
+
+  transactionProvement() {
+    return Center(
+        child: Column(children: <Widget>[
+          Text('Transaction Provement'),
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color: Colors.brown,
+                width: 10,
+              ),
+            ),
+            child: Image.network(widget.order.imagePayment),
+          ),
+        ]));
   }
 }

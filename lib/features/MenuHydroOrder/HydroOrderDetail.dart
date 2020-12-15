@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
-import 'package:hydroponics/core/Services/OrderServices.dart';
+import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/Services/HydroOrderService.dart';
+import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCheckOut.dart';
 import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +19,7 @@ class HydroOrderDetail extends StatefulWidget {
 
 class _HydroOrderDetailState extends State<HydroOrderDetail> {
   String _currentTipeLahan;
-
+  bool isLoading = false;
   changeSelectedCategory(String selectedTipeLahan) {
     setState(() => _currentTipeLahan = selectedTipeLahan);
   }
@@ -28,32 +30,6 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
   TextEditingController alamatController = new TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
-  OrderServices orderServices = OrderServices();
-
-  void validateAndUpload(String userId) async {
-    if (_formKey.currentState.validate()) {
-      setState(() => isLoading = true);
-      orderServices.createHydroOrder({
-        "userId": userId,
-        "address" : alamatController.text,
-        "phone" : nomorHpController.text,
-        "holeQuantity" : jumlahLubangController.text,
-        "pipeQuantity" : jumlahPipa.text,
-        "hydroType" : widget.hydroType.type,
-        "image" : widget.hydroType.image,
-        "price" : widget.hydroType.intPrice,
-        "landType" : _currentTipeLahan
-
-      });
-      _formKey.currentState.reset();
-      setState(() => isLoading = false);
-      Navigator.pop(context);
-    } else {
-      setState(() => isLoading = false);
-
-    }
-  }
 
   final List<Map<String, dynamic>> areaItems = [
     {
@@ -70,10 +46,10 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(
         builder: (context, model, child) => Scaffold(
-                body:  AnnotatedRegion<SystemUiOverlayStyle>(
-                    value: SystemUiOverlayStyle.light,
-                  child: ListView(
-              children: <Widget>[
+                body: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle.light,
+              child: ListView(
+                children: <Widget>[
                   Stack(children: [
                     Container(
                       height: 500.0,
@@ -91,8 +67,8 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                     Container(
                       height: 350.0,
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(50.0)),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(50.0)),
                         color: Color(0xFF03A9F4).withOpacity(0.5),
                       ),
                     ),
@@ -174,7 +150,8 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                             Text('Luas Maximum : ${widget.hydroType.area}',
                                 style: TextStyle(
                                     fontSize: 12.0, color: Colors.grey)),
-                            Text('Tipe Lahan Tanam : ${widget.hydroType.landType}',
+                            Text(
+                                'Tipe Lahan Tanam : ${widget.hydroType.landType}',
                                 style: TextStyle(
                                     fontSize: 12.0, color: Colors.grey)),
                             Text(
@@ -183,8 +160,8 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                     fontSize: 12.0, color: Colors.grey)),
                             Text(
                                 'Jumlah Lubang tanam Minimum - Maximum : ${widget.hydroType.holeQty}',
-                                style:
-                                    TextStyle(fontSize: 12.0, color: Colors.grey))
+                                style: TextStyle(
+                                    fontSize: 12.0, color: Colors.grey))
                           ],
                         ),
                       ),
@@ -229,11 +206,10 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
 
                                 SizedBox(height: 20),
                                 FormTextField(
-                                  textLabel: "jumlah Lubang",
-                                  textHint: "Masukkan Jumlah Lubang Tanaman",
-                                  controller: jumlahLubangController,
-                                  textType: TextInputType.number
-                                ),
+                                    textLabel: "jumlah Lubang",
+                                    textHint: "Masukkan Jumlah Lubang Tanaman",
+                                    controller: jumlahLubangController,
+                                    textType: TextInputType.number),
                                 //),
                                 //Container(
                                 SizedBox(height: 16),
@@ -252,7 +228,8 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                     textHint: "Masukkan Type Lahan",
                                     selectedItem: _currentTipeLahan,
                                     dropDownItems: areaItems,
-                                    changedDropDownItems: changeSelectedCategory),
+                                    changedDropDownItems:
+                                        changeSelectedCategory),
                                 // FormDropDown(
                                 //     labelText: "Tipe Lahan",
                                 //     hintText: "Masukkan Type Lahan",
@@ -278,7 +255,13 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                           Center(
                             child: GestureDetector(
                               onTap: () {
-                                validateAndUpload(model.userModel.id);
+                                if (_formKey.currentState.validate()) {
+
+                                  changeScreen(context, HydroOrderCheckOut(hydroType: widget.hydroType,jmlLubang: jumlahLubangController.text,jmlPipa: jumlahPipa.text,address: alamatController.text,landType: _currentTipeLahan,phone: nomorHpController.text,userModel: model.userModel,));
+                                  _formKey.currentState.reset();
+                                } else {
+
+                                }
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -299,8 +282,8 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                       ),
                     ),
                   ),
-              ],
-            ),
-                )));
+                ],
+              ),
+            )));
   }
 }

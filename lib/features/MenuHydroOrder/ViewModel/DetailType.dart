@@ -8,14 +8,18 @@ class HydroType {
   String landType;
   String description;
   int intPrice;
+  int instalationPrice;
+  int deliveryPrice;
 
   HydroType({
-    this.type, this.image, this.area, this.price, this.holeQty,this.pipeQty, this.landType, this.description, this.intPrice
+    this.type, this.image, this.area, this.price, this.holeQty,this.pipeQty, this.landType, this.description, this.intPrice, this.deliveryPrice,this.instalationPrice
   });
 }
 
 final List<HydroType> types = [
   HydroType(
+    instalationPrice: 20000,
+    deliveryPrice: 10000,
     type: "Small",
     image: "images/hydro1.jpeg",
     area: 'Outdoor',
@@ -28,6 +32,8 @@ final List<HydroType> types = [
 
   ),
   HydroType(
+    instalationPrice: 25000,
+    deliveryPrice: 10000,
     type: "Medium",
     image: "images/hydro2.jpeg",
     area: 'Outdoor',
@@ -40,6 +46,8 @@ final List<HydroType> types = [
 
   ),
   HydroType(
+    instalationPrice: 30000,
+    deliveryPrice: 15000,
     type: "Large",
     image: "images/ficus.png",
     area: 'Outdoor',
@@ -52,6 +60,8 @@ final List<HydroType> types = [
 
   ),
   HydroType(
+    instalationPrice: 0,
+    deliveryPrice: 0,
     type: "Custom",
     image: "images/bayam.jpeg",
     area: 'Outdoor',
