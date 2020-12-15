@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/Order.dart';
 import 'package:uuid/uuid.dart';
@@ -14,6 +15,9 @@ class OrderServices{
     var uuid = Uuid();
     String id = uuid.v4();
     List<Map> convertedCart = [];
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('dd-MMM-yyyy');
+    String date = formatter.format(now);
 
     for(CartItemModel item in cart){
       convertedCart.add(item.toMap());
@@ -23,6 +27,7 @@ class OrderServices{
       "userId": userId,
       "phone" : phone,
       "userAddress" : address,
+      "userName": userName,
       "paymentInstalation": instalation,
       "paymentDelivery" : delivery,
       "paymentTax": tax,
@@ -34,7 +39,7 @@ class OrderServices{
       "createdAt": FieldValue.serverTimestamp(),
       "description": description,
       "status": "Pending",
-      "date" : DateTime.now().toString()
+      "date" : date
     });
   }
 

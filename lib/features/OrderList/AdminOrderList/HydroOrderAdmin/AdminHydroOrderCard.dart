@@ -47,7 +47,7 @@ class AdminHydroOrderCard extends StatelessWidget {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Text("${orderModel.totalPrice}",
+                                Text(orderModel.hydroType,
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 17.0,

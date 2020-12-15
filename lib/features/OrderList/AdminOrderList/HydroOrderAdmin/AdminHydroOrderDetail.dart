@@ -54,7 +54,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            'Check Out',
+            'Customer Hydro Order',
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21),
           ),
@@ -495,9 +495,9 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. ${widget.order.totalPrice}",
+              createPriceItem("Order Total", "Rp. " +widget.order.totalPrice.toStringAsFixed(3),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toString(),
+              createPriceItem("Tax (10%)", "Rp. " + widget.order.tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
@@ -533,7 +533,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + widget.order.totalPrice.toString(),
+                    "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

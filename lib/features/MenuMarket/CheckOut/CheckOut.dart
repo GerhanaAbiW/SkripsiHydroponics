@@ -45,6 +45,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   bool del = false;
   bool ins = false;
   double totals;
+
   double tax;
   String address;
   String phone;
@@ -53,6 +54,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
     setState(() {
       tax = widget.total * 0.01;
       totals = widget.total + tax + widget.delivery;
+
     });
   }
 
@@ -657,7 +659,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               createPriceItem("Order Total", "Rp. " + widget.total.toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (10%)", "Rp. " + tax.toString(), Colors.grey.shade700),
+                  "Tax (10%)", "Rp. " + tax.toStringAsFixed(3), Colors.grey.shade700),
               Container(
                 child: createPriceItem("Delievery",
                     "Rp. " + widget.delivery.toString(), Colors.teal.shade300),
@@ -685,7 +687,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + totals.toString(),
+                    "Rp. " + totals.toStringAsFixed(3),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

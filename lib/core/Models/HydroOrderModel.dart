@@ -25,7 +25,7 @@ class HydroOrderModel {
 
 
   String _id;
-  String _price;
+  int _price;
   String _imagePayment;
   String _userName;
   String _phone;
@@ -50,7 +50,7 @@ class HydroOrderModel {
 
 //  getters
   String get id => _id;
-  String get price => _price;
+  int get price => _price;
   String get hydroType => _hydroType;
   String get hydroImage => _hydroImage;
   String get imagePayment => _imagePayment;
