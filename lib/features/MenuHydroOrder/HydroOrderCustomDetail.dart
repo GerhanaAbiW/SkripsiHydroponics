@@ -41,7 +41,7 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                   ),
                   height: 400.0,
                   width: MediaQuery.of(context).size.width,
-                  color: Color(0xFF32A060),
+                  color: Color(0xFF03A9F4), //Color(0xFF32A060),
                   child: Column(
                     //crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -213,70 +213,78 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                           horizontal: 30.0,
                           vertical: 20.0,
                         ),
-                        child: model.userModel.role!="admin"?Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Custom Order Form',
-                                style: TextStyle(
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 10.0),
-                              FormTextField(
-                                textType: TextInputType.number,
-                                textLabel: "Nomor HP",
-                                textHint: "Masukkan Nomor HP Anda",
-                                controller: nomorHpController,
-                              ),
-                              SizedBox(height: 10),
-                              MultilineFormTextField(
-                                  textType: TextInputType.multiline,
-                                  textLabel: "Alamat",
-                                  textHint: "Masukkan Alamat Anda",
-                                  controller: alamatController,
-                                  height: 20.0),
-                              SizedBox(height: 30),
-                              Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    if (_formKey.currentState.validate()) {
-                                      changeScreen(
-                                          context,
-                                          HydroOrderCheckOut(
-                                            hydroType: widget.hydroType,
-                                            jmlLubang: "-",
-                                            jmlPipa: "-",
-                                            address: alamatController.text,
-                                            landType: "-",
-                                            phone: nomorHpController.text,
-                                            userModel: model.userModel,
-                                          ));
-                                      _formKey.currentState.reset();
-                                    } else {}
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(10),
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.8,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Color(0xFF03A9F4)),
-                                    child: Text(
-                                      'ORDER',
+                        child: model.userModel.role != "admin"
+                            ? Form(
+                                key: _formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Custom Order Form',
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: 22),
+                                        fontSize: 24.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
+                                    SizedBox(height: 10.0),
+                                    FormTextField(
+                                      textType: TextInputType.number,
+                                      textLabel: "Nomor HP",
+                                      textHint: "Masukkan Nomor HP Anda",
+                                      controller: nomorHpController,
+                                    ),
+                                    SizedBox(height: 10),
+                                    MultilineFormTextField(
+                                        textType: TextInputType.multiline,
+                                        textLabel: "Alamat",
+                                        textHint: "Masukkan Alamat Anda",
+                                        controller: alamatController,
+                                        height: 20.0),
+                                    SizedBox(height: 30),
+                                    Center(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          if (_formKey.currentState
+                                              .validate()) {
+                                            changeScreen(
+                                                context,
+                                                HydroOrderCheckOut(
+                                                  hydroType: widget.hydroType,
+                                                  jmlLubang: "-",
+                                                  jmlPipa: "-",
+                                                  address:
+                                                      alamatController.text,
+                                                  landType: "-",
+                                                  phone: nomorHpController.text,
+                                                  userModel: model.userModel,
+                                                ));
+                                            _formKey.currentState.reset();
+                                          } else {}
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.8,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: Color(0xFF03A9F4)),
+                                          child: Text(
+                                            'ORDER',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 22),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ):SizedBox(height: 1),
+                              )
+                            : SizedBox(height: 1),
                       ),
                     ],
                   ),

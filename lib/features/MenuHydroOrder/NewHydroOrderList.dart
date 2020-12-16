@@ -4,6 +4,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCustomDetail.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
 import 'package:hydroponics/features/MenuHydroOrder/ViewModel/DetailType.dart';
+import 'package:hydroponics/features/MenuLearning/LearningVideo/LearningVideoDetail.dart';
 
 class NewHydroOrderList extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFF32A060),
+                color: Color(0xFF03A9F4), //Color(0xFF32A060),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 30.0),
