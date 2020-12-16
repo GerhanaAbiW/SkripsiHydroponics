@@ -250,10 +250,11 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                                                 context,
                                                 HydroOrderCheckOut(
                                                   hydroType: widget.hydroType,
-                                                  jmlLubang: "-",
-                                                  jmlPipa: "-",
-                                                  address: alamatController.text,
-                                                  landType: "-",
+                                                  jmlLubang: "Custom",
+                                                  jmlPipa: "Custom",
+                                                  address:
+                                                      alamatController.text,
+                                                  landType: "Custom",
                                                   phone: nomorHpController.text,
                                                   userModel: model.userModel,
                                                 ));

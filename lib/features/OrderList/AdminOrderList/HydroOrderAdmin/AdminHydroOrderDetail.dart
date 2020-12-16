@@ -93,7 +93,6 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
                                 changeScreen(context, DashBoard());
-
                               },
                             ),
                           ),
@@ -108,7 +107,6 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
                                 changeScreen(context, DashBoard());
-
                               },
                             ),
                           ),
@@ -451,29 +449,33 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
 
   checkoutHydroItem() {
     return Container(
-      margin: EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-      ),
-      child: Card(
+        margin: EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        child: Card(
           elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Image.asset(widget.order.hydroImage),
+              Container(
+                  height: 120,
+                  width: 150,
+                  child: Image.asset(widget.order.hydroImage)),
               Column(
                 children: <Widget>[
                   Text(widget.order.hydroType),
+                  //Text(widget.landType),
                   Text("Pipe Quantity : " + widget.order.pipeQTY),
                   Text("Hole Quantity : " + widget.order.holeQTY),
                   Text("Land Type : " + widget.order.landType),
                 ],
               ),
             ],
-          )),
-    );
+          ),
+        ));
   }
 
   priceSection() {

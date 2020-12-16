@@ -483,19 +483,26 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
           elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
-          child: Row(
-            children: <Widget>[
-              Image.asset(widget.hydroType.image),
-              Column(
-                children: <Widget>[
-                  Text(widget.hydroType.type),
-                  //Text(widget.landType),
-                  Text("Pipe Quantity : " + widget.hydroType.pipeQty),
-                  Text("Hole Quantity : " + widget.jmlLubang),
-                  Text("Land Type : " + widget.landType),
-                ],
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                    height: 120,
+                    width: 150,
+                    child: Image.asset(widget.hydroType.image)),
+                Column(
+                  children: <Widget>[
+                    Text(widget.hydroType.type),
+                    //Text(widget.landType),
+                    Text("Pipe Quantity : " + widget.hydroType.pipeQty),
+                    Text("Hole Quantity : " + widget.jmlLubang),
+                    Text("Land Type : " + widget.landType),
+                  ],
+                ),
+              ],
+            ),
           )),
     );
   }

@@ -72,7 +72,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
                     child: Hero(
                       tag: types[index].image,
                       child: Image(
-                        height: 280.0,
+                        height: 250.0,
                         width: 280.0,
                         image: AssetImage(
                           types[index].image,
