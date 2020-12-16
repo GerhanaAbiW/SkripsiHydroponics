@@ -4,6 +4,7 @@ import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 var greenColor = Color(0xFF8BC34A);
 var darkGreenColor = Color(0xFF689F38);
@@ -28,18 +29,36 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
   }
 
   void createListItem() {
-    listSection.add(
-        createSection("Media Semai : ${widget.model.recordMedia==true?widget.model.media:"-"}", Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection(
-        "Waktu Semai : ${widget.model.recordSeedingTime==true?widget.model.seedingTime:"-"}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Jenis Pupuk : ${widget.model.recordFertilizerType==true?widget.model.recordFertilizerType:"-"}",
-        Icons.ac_unit, darkGreenColor, null));
+        "Media Semai : ${widget.model.recordMedia == true ? widget.model.media : "-"}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
     listSection.add(createSection(
-        "Dosis Pupuk : ${widget.model.recordDosageFertilizer==true?widget.model.dosageFertilizer:"-"}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(
-        createSection("Waktu Pupuk : ${widget.model.recordTimeOfFertilizer==true?widget.model.timeOfFertilizer:"-"}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Waktu Panen : ${widget.model.recordHarvestTime==true?widget.model.harvestTime:"-"}",
-        Icons.ac_unit, darkGreenColor, null));
+        "Waktu Semai : ${widget.model.recordSeedingTime == true ? widget.model.seedingTime : "-"}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
+    listSection.add(createSection(
+        "Jenis Pupuk : ${widget.model.recordFertilizerType == true ? widget.model.recordFertilizerType : "-"}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
+    listSection.add(createSection(
+        "Dosis Pupuk : ${widget.model.recordDosageFertilizer == true ? widget.model.dosageFertilizer : "-"}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
+    listSection.add(createSection(
+        "Waktu Pupuk : ${widget.model.recordTimeOfFertilizer == true ? widget.model.timeOfFertilizer : "-"}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
+    listSection.add(createSection(
+        "Waktu Panen : ${widget.model.recordHarvestTime == true ? widget.model.harvestTime : "-"}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
   }
 
   createSection(String title, IconData icon, Color color, Widget widget) {
@@ -83,7 +102,7 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.fromLTRB(40, 0, 60, 10),
-                                child: Text('Bayam',
+                                child: Text('${widget.model.plant}',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: greenColor,
@@ -93,17 +112,21 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                             ],
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 16,
                           ),
                           Center(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 4.5,
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: Image.network(
-                                productImage,
-                                height: 30,
-                                width: 30,
-                                fit: BoxFit.contain,
+                              width: MediaQuery.of(context).size.width / 1.6,
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(14)),
+                                child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: widget.model.image,
+                                  //height: MediaQuery.of(context).size.height,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -201,7 +224,9 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    widget.model.recordPH==true?widget.model.ph:"-",
+                                    widget.model.recordPH == true
+                                        ? widget.model.ph
+                                        : "-",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -231,7 +256,9 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    widget.model.recordPPM==true?widget.model.ppm:"-",
+                                    widget.model.recordPPM == true
+                                        ? widget.model.ppm
+                                        : "-",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,

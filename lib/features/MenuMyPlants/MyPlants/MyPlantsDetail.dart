@@ -5,6 +5,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 var greenColor = Color(0xFF8BC34A);
 var darkGreenColor = Color(0xFF689F38);
@@ -39,17 +40,24 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
       btn = !btn;
     });
   }
-  void visibleBtnRecord(){
-    if(DateTime.now().isAfter(DateTime.parse(widget.myPlantsModel.harvestDay))==true || DateTime.now().isAtSameMomentAs(DateTime.parse(widget.myPlantsModel.harvestDay))==true){
+
+  void visibleBtnRecord() {
+    if (DateTime.now()
+                .isAfter(DateTime.parse(widget.myPlantsModel.harvestDay)) ==
+            true ||
+        DateTime.now().isAtSameMomentAs(
+                DateTime.parse(widget.myPlantsModel.harvestDay)) ==
+            true) {
       setState(() {
         btnRecord = false;
       });
-    }else{
+    } else {
       setState(() {
         btnRecord = true;
       });
     }
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -111,12 +119,16 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                         Center(
                           child: Container(
                             height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Image.network(
-                              widget.myPlantsModel.image,
-                              height: 30,
-                              width: 30,
-                              fit: BoxFit.contain,
+                            width: MediaQuery.of(context).size.width / 1.6,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(14)),
+                              child: FadeInImage.memoryNetwork(
+                                placeholder: kTransparentImage,
+                                image: widget.myPlantsModel.image,
+                                //height: MediaQuery.of(context).size.height,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -159,7 +171,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                             ),
                             Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
                                       "Waktu Semai: ${widget.myPlantsModel.seedingTime}"),
@@ -202,7 +214,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                   Text(
                                       "Dosis Pupuk: ${widget.myPlantsModel.dosageFertilizer}"),
                                   Checkbox(
-                                    activeColor: Colors.greenAccent,
+                                      activeColor: Colors.greenAccent,
                                       value: dosisPupuk,
                                       onChanged: (bool value) {
                                         print(value);
@@ -309,15 +321,18 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                         ppmIdeal: ppmIdeal,
                                         jenisPupuk: jenisPupuk);
                                 if (success) {
-                                  _key.currentState.showSnackBar(
-                                      SnackBar(content: Text("Added to My Record Plants!")));
+                                  _key.currentState.showSnackBar(SnackBar(
+                                      content:
+                                          Text("Added to My Record Plants!")));
                                   userProvider.reloadUserModel();
                                   appProvider.changeIsLoading();
-                                  userProvider.deleteMyPlant(plantItem: widget.myPlantsModel);
+                                  userProvider.deleteMyPlant(
+                                      plantItem: widget.myPlantsModel);
                                   return changeScreen(context, MyPlantsList());
                                 } else {
                                   _key.currentState.showSnackBar(SnackBar(
-                                      content: Text("Not added to My Record Plants!")));
+                                      content: Text(
+                                          "Not added to My Record Plants!")));
                                   appProvider.changeIsLoading();
                                   return;
                                 }
@@ -352,5 +367,4 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
           ],
         ));
   }
-
 }

@@ -98,7 +98,7 @@ class _WidgetLIstRecordDetailPlantState
                                 width: MediaQuery.of(context).size.width,
                                 child: ClipRRect(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(14)),
+                                      BorderRadius.all(Radius.circular(80)),
                                   child: FadeInImage.memoryNetwork(
                                     placeholder: kTransparentImage,
                                     image: widget.model.image,
@@ -129,7 +129,7 @@ class _WidgetLIstRecordDetailPlantState
                               SizedBox(
                                 height: 5,
                               ),
-                              Text(widget.model.media,
+                              Text(widget.model.harvestTime,
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 15.0,

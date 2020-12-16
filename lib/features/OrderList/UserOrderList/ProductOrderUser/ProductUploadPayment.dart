@@ -123,7 +123,7 @@ class _UploadPaymentState extends State<UploadPayment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: GreenTosca,
+        backgroundColor: darkYellowColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -141,14 +141,24 @@ class _UploadPaymentState extends State<UploadPayment> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                SizedBox(
+                  height: 30,
+                ),
                 Text("Upload Your Transaction Payment Here"),
+                SizedBox(
+                  height: 16,
+                ),
                 Icon(
                   Icons.arrow_downward,
-                  color: Colors.blue,
+                  color: Colors.black, //Colors.blue,
                   size: 24.0,
                 ),
+                SizedBox(
+                  height: 16,
+                ),
                 Container(
-                  width: 120,
+                  width: MediaQuery.of(context).size.height / 2,
+                  height: MediaQuery.of(context).size.height / 1.8,
                   child: OutlineButton(
                       borderSide:
                           BorderSide(color: grey.withOpacity(0.5), width: 2.5),
@@ -159,12 +169,15 @@ class _UploadPaymentState extends State<UploadPayment> {
                 ),
               ],
             ),
-            ButtonButtom(
-              color: darkYellowColor,
-              buttonText: 'Upload Now',
-              onPressed: () {
-                validateAndUpload();
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ButtonButtom(
+                color: darkYellowColor,
+                buttonText: 'Upload Now',
+                onPressed: () {
+                  validateAndUpload();
+                },
+              ),
             ),
           ],
         ),

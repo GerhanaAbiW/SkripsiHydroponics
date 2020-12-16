@@ -79,7 +79,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: Color(0xFF2b961f),
+          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -488,9 +488,8 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
-          border:
-              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
-          color: Colors.tealAccent.withOpacity(0.2)),
+          border: Border.all(color: Colors.lime.withOpacity(0.4), width: 1),
+          color: Colors.lime.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -499,7 +498,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
             value: 1,
             groupValue: 1,
             onChanged: (isChecked) {},
-            activeColor: Colors.tealAccent.shade400,
+            activeColor: Colors.lime.shade400,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -764,7 +763,9 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
             width: 10,
           ),
         ),
-        child: widget.order.imagePayment==null?Text("nodata"):Image.network(widget.order.imagePayment),
+        child: widget.order.imagePayment == null
+            ? Text("nodata")
+            : Image.network(widget.order.imagePayment),
       ),
     ]));
   }

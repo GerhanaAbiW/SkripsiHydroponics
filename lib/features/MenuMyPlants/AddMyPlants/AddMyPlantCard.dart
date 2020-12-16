@@ -21,7 +21,11 @@ class AddMyPlantCard extends StatelessWidget {
           elevation: 10.0,
           child: InkWell(
               onTap: () {
-                changeScreen(context, MyPlantsDetail(plant: plant,));
+                changeScreen(
+                    context,
+                    MyPlantsDetail(
+                      plant: plant,
+                    ));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,21 +54,34 @@ class AddMyPlantCard extends StatelessWidget {
                             //       )
                             //     :
 
-                        Stack(
+                            Stack(
                           children: <Widget>[
                             Positioned.fill(
                                 child: Align(
-                                  alignment: Alignment.center,
-                                  child: Loading(),
-                                )),
+                              alignment: Alignment.center,
+                              child: Loading(),
+                            )),
                             Container(
                               width: MediaQuery.of(context).size.width,
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: plant.image,
-                                height: MediaQuery.of(context).size.height,
-                                fit: BoxFit.cover,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(80)),
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: '${plant.image}',
+                                    height: MediaQuery.of(context).size.height,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
+                              // FadeInImage.memoryNetwork(
+                              //   placeholder: kTransparentImage,
+                              //   image: plant.image,
+                              //   height: MediaQuery.of(context).size.height,
+                              //   fit: BoxFit.cover,
+                              // ),
                             )
                           ],
                         ),
@@ -106,7 +123,6 @@ class AddMyPlantCard extends StatelessWidget {
                           ]),
                     )
                   ])),
-
                 ],
               ))),
     );

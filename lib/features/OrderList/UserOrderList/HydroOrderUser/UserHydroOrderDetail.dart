@@ -80,7 +80,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: Color(0xFF2b961f),
+          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -117,7 +117,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                     child: ButtonButtom(
-                      color: blueColor,
+                      color: darkYellowColor, //blueColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
                         changeScreen(context, HydroOrderUploadPayment());
@@ -517,8 +517,8 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
-          color: Colors.tealAccent.withOpacity(0.2)),
+              Border.all(color: Colors.limeAccent.withOpacity(0.4), width: 1),
+          color: Colors.limeAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -527,7 +527,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
             value: 1,
             groupValue: 1,
             onChanged: (isChecked) {},
-            activeColor: Colors.tealAccent.shade400,
+            activeColor: Colors.limeAccent.shade400,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -712,7 +712,9 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
             width: 10,
           ),
         ),
-        child: widget.order.imagePayment==null?Text("No data"):Image.network(widget.order.imagePayment),
+        child: widget.order.imagePayment == null
+            ? Text("No data")
+            : Image.network(widget.order.imagePayment),
       ),
     ]));
   }

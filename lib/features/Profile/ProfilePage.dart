@@ -222,9 +222,12 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                           alignment: Alignment.center,
                                           child: Loading(),
                                         )),
-                                        Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                                        // Container(
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(80)),
+                                          // width:
+                                          //     MediaQuery.of(context).size.width,
                                           child: FadeInImage.memoryNetwork(
                                             placeholder: kTransparentImage,
                                             image: user.userModel.userPicture,

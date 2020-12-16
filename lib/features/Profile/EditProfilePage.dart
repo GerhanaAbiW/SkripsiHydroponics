@@ -163,8 +163,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       alignment: Alignment.center,
                                       child: Loading(),
                                     )),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
+                                    ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(80)),
+                                      //width: MediaQuery.of(context).size.width,
                                       child: FadeInImage.memoryNetwork(
                                         placeholder: kTransparentImage,
                                         image: model.userModel.userPicture,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/Router/Router_Constants.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
@@ -66,11 +67,15 @@ class MyPlantListCard extends StatelessWidget {
                             )),
                             Container(
                               width: MediaQuery.of(context).size.width,
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: myPlantsModel.image,
-                                height: MediaQuery.of(context).size.height,
-                                fit: BoxFit.cover,
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(80)),
+                                child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: myPlantsModel.image,
+                                  height: MediaQuery.of(context).size.height,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             )
                           ],

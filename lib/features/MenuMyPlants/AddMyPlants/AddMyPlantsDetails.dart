@@ -8,6 +8,7 @@ import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 var greenColor = Color(0xFF8BC34A);
 var darkGreenColor = Color(0xFF689F38);
@@ -33,18 +34,27 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
   }
 
   void createListItem() {
-    listSection.add(createSection(
-        "Media Semai : ${widget.plant.media}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection(
-        "Media Semai : ${widget.plant.seedingTime}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection(
-        "Jenis Hama : ${widget.plant.pestsType}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Jenis Pupuk : ${widget.plant.fertilizerType}",
+    listSection.add(createSection("Media Semai : ${widget.plant.media}",
+        Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Media Semai : ${widget.plant.seedingTime}",
+        Icons.ac_unit, darkGreenColor, null));
+    listSection.add(createSection("Jenis Hama : ${widget.plant.pestsType}",
         Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection(
-        "Dosis Pupuk : ${widget.plant.dosageFertilizer}", Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Waktu Pupuk : ${widget.plant.timeOfFertilizer}",
-        Icons.ac_unit, darkGreenColor, null));
+        "Jenis Pupuk : ${widget.plant.fertilizerType}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
+    listSection.add(createSection(
+        "Dosis Pupuk : ${widget.plant.dosageFertilizer}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
+    listSection.add(createSection(
+        "Waktu Pupuk : ${widget.plant.timeOfFertilizer}",
+        Icons.ac_unit,
+        darkGreenColor,
+        null));
     listSection.add(createSection("Waktu Panen : ${widget.plant.harvestTime}",
         Icons.ac_unit, darkGreenColor, null));
   }
@@ -108,12 +118,16 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
                           Center(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 4.5,
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: Image.network(
-                                widget.plant.image,
-                                height: 30,
-                                width: 30,
-                                fit: BoxFit.cover,
+                              width: MediaQuery.of(context).size.width / 1.6,
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(14)),
+                                child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: widget.plant.image,
+                                  //height: MediaQuery.of(context).size.height,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -145,7 +159,10 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
                             children: <Widget>[
                               FloatingActionButton(
                                 onPressed: () async {
-                                  String date = DateTime.now().add(Duration(days: widget.plant.harvestDay)).toString();
+                                  String date = DateTime.now()
+                                      .add(Duration(
+                                          days: widget.plant.harvestDay))
+                                      .toString();
                                   appProvider.changeIsLoading();
                                   bool success = await userProvider.addMyPlant(
                                       plant: widget.plant, harvestDay: date);
