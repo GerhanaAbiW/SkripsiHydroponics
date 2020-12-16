@@ -338,7 +338,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "widget.order.name",
+                    widget.order.userName,
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),

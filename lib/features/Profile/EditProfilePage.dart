@@ -469,7 +469,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             phone: nomorHPController.text,
                             gender: jenisKelaminController.text,
                             address: alamatController.text,
-                            email: emailController.text);
+                            email: emailController.text,
+
+                        );
                         _formKey.currentState.reset();
                         setState(() => isLoading = false);
                         Navigator.pop(context);
