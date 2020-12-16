@@ -252,8 +252,7 @@ class _HydroOrderCustomDetailState extends State<HydroOrderCustomDetail> {
                                                   hydroType: widget.hydroType,
                                                   jmlLubang: "-",
                                                   jmlPipa: "-",
-                                                  address:
-                                                      alamatController.text,
+                                                  address: alamatController.text,
                                                   landType: "-",
                                                   phone: nomorHpController.text,
                                                   userModel: model.userModel,

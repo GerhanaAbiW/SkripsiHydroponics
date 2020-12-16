@@ -436,6 +436,7 @@ class UserProvider with ChangeNotifier {
     _firestore.collection('users').document(_user.uid).updateData({
       "name": name,
       "email": email,
+      "address" : address,
       "userPicture": img,
       "role": role,
       "phone": phone,
