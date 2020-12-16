@@ -544,7 +544,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 5,
               ),
               Text(
-                "Get it by 20 jul - 27 jul | Free Delivery",
+                "Exceeded the delivery limit time | Free Delivery",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,

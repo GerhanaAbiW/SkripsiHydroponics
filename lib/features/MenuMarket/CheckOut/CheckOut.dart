@@ -52,16 +52,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
   String address;
   String phone;
 
-  void getEstimatied(){
+  void getEstimatied() {
     DateFormat formatter = DateFormat('dd-MMM-yyyy');
     estimated = DateTime.now().add(Duration(days: 3));
     estimatedDate = formatter.format(estimated);
   }
+
   void getTotals() {
     setState(() {
       tax = widget.total * 0.01;
       totals = widget.total + tax + widget.delivery;
-
     });
   }
 
@@ -667,8 +667,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
               createPriceItem("Order Total", "Rp. " + widget.total.toString(),
                   Colors.grey.shade700),
-              createPriceItem(
-                  "Tax (10%)", "Rp. " + tax.toStringAsFixed(3), Colors.grey.shade700),
+              createPriceItem("Tax (10%)", "Rp. " + tax.toStringAsFixed(3),
+                  Colors.grey.shade700),
               Container(
                 child: createPriceItem("Delievery",
                     "Rp. " + widget.delivery.toString(), Colors.teal.shade300),

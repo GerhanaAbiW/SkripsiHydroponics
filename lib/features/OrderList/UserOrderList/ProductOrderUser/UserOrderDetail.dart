@@ -515,7 +515,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 height: 5,
               ),
               Text(
-                "Get it by 20 jul - 27 jul | Free Delivery",
+                "Exceeded the delivery limit time | Free Delivery",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -579,6 +579,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                   child: FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
                     image: cart.image,
+                    width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     fit: BoxFit.cover,
                   ),
