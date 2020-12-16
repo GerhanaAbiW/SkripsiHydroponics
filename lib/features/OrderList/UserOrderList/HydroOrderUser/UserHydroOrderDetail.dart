@@ -120,7 +120,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                       color: darkYellowColor, //blueColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
-                        changeScreen(context, HydroOrderUploadPayment());
+                        changeScreen(context, HydroOrderUploadPayment(id: widget.order.id,));
                       },
                     ),
                   ),

@@ -119,7 +119,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                       color: darkYellowColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
-                        changeScreen(context, UploadPayment());
+                        changeScreen(context, UploadPayment(id: widget.order.id,));
                       },
                     ),
                   ),

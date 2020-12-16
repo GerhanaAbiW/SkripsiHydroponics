@@ -13,9 +13,8 @@ class HydroOrderServices{
     _firestore.collection(collection).document(id).setData(data);
   }
 
-  void updateHydroOrder(Map<String, dynamic> data,String id) {
-    data["updatedAt"] =  FieldValue.serverTimestamp();
-    _firestore.collection(collection).document(id).updateData(data);
+  void updateHydroOrder({String status,String id, String img}) {
+    _firestore.collection(collection).document(id).updateData({"status":status, "updatedAt":FieldValue.serverTimestamp(),"imagePayment":img});
   }
 
   Future<List<HydroOrderModel>> getUserOrders({String userId}) async =>

@@ -11,6 +11,7 @@ import 'package:hydroponics/core/Services/OrderServices.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderList.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
@@ -106,6 +107,8 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                       status: "Rejected",
                                       id: widget.order.id,
                                       img: widget.order.imagePayment);
+                                  changeScreen(context, AdminOrderList());
+
                                 },
                               ),
                             ),
@@ -133,6 +136,8 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                       status: "Accepted",
                                       id: widget.order.id,
                                       img: widget.order.imagePayment);
+                                  changeScreen(context, AdminOrderList());
+
                                 },
                               ),
                             ),
@@ -161,6 +166,8 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                   status: "Paid",
                                   id: widget.order.id,
                                   img: widget.order.imagePayment);
+                              changeScreen(context, AdminOrderList());
+
                             },
                           ),
                         ),
