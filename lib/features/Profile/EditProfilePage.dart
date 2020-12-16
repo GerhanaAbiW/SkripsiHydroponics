@@ -461,6 +461,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           Navigator.pop(context);
                         });
                       } else {
+                        model.updateUser(
+                            img: widget.user.userPicture,
+                            name: nameController.text,
+                            role: model.userModel.role,
+                            dob: dateController.text,
+                            phone: nomorHPController.text,
+                            gender: jenisKelaminController.text,
+                            address: alamatController.text,
+                            email: emailController.text);
+                        _formKey.currentState.reset();
+                        setState(() => isLoading = false);
+                        Navigator.pop(context);
                         setState(() => isLoading = false);
                       }
                     }

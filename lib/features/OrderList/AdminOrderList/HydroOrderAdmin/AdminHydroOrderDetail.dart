@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/HydroOrderModel.dart';
 import 'package:hydroponics/core/Models/Order.dart';
@@ -91,7 +92,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                     status: "Rejected",
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
-                                changeScreen(context, AdminHydroOrderList());
+                                changeScreen(context, DashBoard());
 
                               },
                             ),
@@ -106,7 +107,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                     status: "Accepted",
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
-                                changeScreen(context, AdminHydroOrderList());
+                                changeScreen(context, DashBoard());
 
                               },
                             ),
@@ -123,7 +124,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                 status: "Paid",
                                 id: widget.order.id,
                                 img: widget.order.imagePayment);
-                            changeScreen(context, AdminHydroOrderList());
+                            changeScreen(context, DashBoard());
                           },
                         ),
                       ),

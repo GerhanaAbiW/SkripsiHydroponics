@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
@@ -45,7 +46,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
           _hydroOrderServices.updateHydroOrder(status: "Proccess",id:widget.id,img: imageUrl1);
           _formKey.currentState.reset();
           setState(() => isLoading = false);
-          changeScreen(context, UserHydroOrderList());
+          changeScreen(context, DashBoard());
         });
       } else {
         setState(() => isLoading = false);
