@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/Services/HydroOrderService.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/HydroOrderUser/UserHydroOrderList.dart';
@@ -24,6 +25,8 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
   File _image;
   bool isLoading = false;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  HydroOrderServices _hydroOrderServices = HydroOrderServices();
+
   void validateAndUpload() async {
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
@@ -39,8 +42,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
-          _orderServices.updateOrder(
-              status: "Proccess", id: widget.id, img: imageUrl1);
+          _hydroOrderServices.updateHydroOrder(status: "Proccess",id:widget.id,img: imageUrl1);
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, UserHydroOrderList());
@@ -59,7 +61,6 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
     });
   }
 
-  OrderServices _orderServices = OrderServices();
   void myAlert() {
     showDialog(
         context: context,

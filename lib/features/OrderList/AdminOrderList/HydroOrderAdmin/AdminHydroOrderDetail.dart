@@ -6,11 +6,13 @@ import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:hydroponics/core/Services/HydroOrderService.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
+import 'package:hydroponics/features/OrderList/AdminOrderList/HydroOrderAdmin/AdminHydroOrderList.dart';
 import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 
@@ -26,7 +28,7 @@ class AdminHydroOrderDetail extends StatefulWidget {
 class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
-  OrderServices _orderServices = OrderServices();
+  HydroOrderServices _hydroOrderServices = HydroOrderServices();
 
   @override
   void initState() {
@@ -85,10 +87,12 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                               color: darkYellowColor,
                               buttonText: 'Reject',
                               onPressed: () {
-                                _orderServices.updateOrder(
+                                _hydroOrderServices.updateHydroOrder(
                                     status: "Rejected",
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
+                                changeScreen(context, AdminHydroOrderList());
+
                               },
                             ),
                           ),
@@ -98,10 +102,12 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                               color: darkYellowColor,
                               buttonText: 'Accept',
                               onPressed: () {
-                                _orderServices.updateOrder(
+                                _hydroOrderServices.updateHydroOrder(
                                     status: "Accepted",
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
+                                changeScreen(context, AdminHydroOrderList());
+
                               },
                             ),
                           ),
@@ -113,10 +119,11 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                           color: darkYellowColor,
                           buttonText: 'Proccess Order',
                           onPressed: () {
-                            _orderServices.updateOrder(
+                            _hydroOrderServices.updateHydroOrder(
                                 status: "Paid",
                                 id: widget.order.id,
                                 img: widget.order.imagePayment);
+                            changeScreen(context, AdminHydroOrderList());
                           },
                         ),
                       ),
