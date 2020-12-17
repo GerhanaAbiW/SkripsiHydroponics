@@ -81,7 +81,7 @@ class OrderServices{
 
   Future<List<OrderModel>> getAdminOrders() async =>
       _firestore
-          .collection(collection)
+          .collection(collection).orderBy('createdAt', descending: true)
           .getDocuments()
           .then((result) {
         List<OrderModel> orders = [];

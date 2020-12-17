@@ -31,8 +31,9 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   getSales() {
     for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
-      //if(i>0)
-      _sales = Provider.of<OrderProvider>(context,listen: false).buyers[i].totalQuantityProduct + Provider.of<OrderProvider>(context,listen: false).buyers[i + 1].totalQuantityProduct;
+
+        _sales = Provider.of<OrderProvider>(context,listen: false).buyers[i].totalQuantityProduct + Provider.of<OrderProvider>(context,listen: false).buyers[i + 1].totalQuantityProduct;
+
     }
     //notifyListeners();
     //return _sales;
