@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
@@ -93,7 +94,8 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
         "paymentDelivery": widget.hydroType.deliveryPrice,
         "paymentInstalation": widget.hydroType.instalationPrice,
         "status": "Pending",
-        "date": date
+        "date": date,
+        "createdAt" : FieldValue.serverTimestamp(),
       });
       changeScreen(context, NewHydroOrderList());
     } catch (e) {
