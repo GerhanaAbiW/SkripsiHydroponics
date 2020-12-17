@@ -27,7 +27,6 @@ class HydroOrderServices {
       _firestore
           .collection(collection)
           .where("userId", isEqualTo: userId)
-          .orderBy('createdAt', descending: true)
           .getDocuments()
           .then((result) {
         List<HydroOrderModel> orders = [];
