@@ -52,30 +52,32 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
       body: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Container(
-            height: MediaQuery.of(context).size.height - 300.0,
+            height: MediaQuery.of(context).size.height,
             //height: 20,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-            ),
+
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             child: list.length == 0 || list.length == null
                 ? Padding(
                     padding: const EdgeInsets.all(125.0),
-                    child: Image.asset('images/not_found.png'),
+                    child: Image.asset('images/not_found.png', width: 20, height: 20,),
                   )
                 : ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: list.length,
                     itemBuilder: (BuildContext context, int index) {
+                      bool isHeader = false;
+                      if(index>0){
+                        isHeader = list[index].date == list[index-1].date;
+                      }
+
                       return AnimationConfiguration.staggeredList(
                         position: index,
                         child: WidgetLIstRecordDetailPlant(
                           model: list[index],
-                          header: false,
+                          header: isHeader,
                         ),
                       );
 

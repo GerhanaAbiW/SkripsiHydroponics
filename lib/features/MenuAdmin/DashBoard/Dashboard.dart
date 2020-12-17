@@ -7,6 +7,7 @@ import 'package:hydroponics/core/Providers/HydroOrderProvider.dart';
 import 'package:hydroponics/core/Providers/OrderProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/MenuAdmin/DashBoard/SmallCard.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class NewAdminDashboard extends StatefulWidget {
@@ -15,6 +16,7 @@ class NewAdminDashboard extends StatefulWidget {
 }
 
 class _NewAdminDashboardState extends State<NewAdminDashboard> {
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   List<charts.Series<Task, String>> _seriesPieData;
 
   int user = 0;
@@ -22,10 +24,10 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   int transaction = 0;
   int hydroMarket=0;
   int hydroOrder=0;
-  double bibit =0;
-  double obat =0;
-  double pupuk =0;
-  double alat =0;
+  // double bibit =0;
+  // double obat =0;
+  // double pupuk =0;
+  // double alat =0;
 
 
 
@@ -35,10 +37,14 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
    transaction = Provider.of<OrderProvider>(context,listen: false).buyers.length + Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
    hydroOrder = Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
    hydroMarket = Provider.of<OrderProvider>(context,listen: false).sales;
-   bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
-   obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
-   pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
-   alat = Provider.of<OrderProvider>(context,listen: false).alat.toDouble();
+   // bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
+   // obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
+   // pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
+   // alat = Provider.of<OrderProvider>(context,listen: false).alat.toDouble();
+   // print("ini"+bibit.toString());
+   // print("ini"+obat.toString());
+   // print("ini"+pupuk.toString());
+   // print("ini"+alat.toString());
  }
 
 
@@ -52,10 +58,10 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   _getData() {
     var piedata = [
-      new Task('Bibit', bibit, Color(0xff3366cc)),
-      new Task('Obat', obat, Color(0xff990099)),
-      new Task('Pupuk', pupuk, Color(0xff109618)),
-      new Task('Alat', alat, Color(0xfffdbe19)),
+      new Task('User', user.toDouble(), Color(0xff3366cc)),
+      new Task('Transaction', transaction.toDouble(), Color(0xff990099)),
+      new Task('Hydro Order', hydroOrder.toDouble(), Color(0xff109618)),
+      new Task('Hydro Market', hydroMarket.toDouble(), Color(0xfffdbe19)),
       //new Task('HydroOrder', 19.2, Color(0xffff9900)),
       //new Task('Other', 10.3, Color(0xffdc3912)),
     ];
@@ -92,9 +98,12 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                   text: 'Revenue\n',
                   style: TextStyle(fontSize: 35, color: Colors.grey)),
               TextSpan(
-                  text: '\Rp. $revenue',
+                  text:  "Rp. " +
+                      currencyFormatter
+                          .format(revenue)
+                          .toString(), //'\Rp. $revenue',
                   style: TextStyle(
-                      fontSize: 55,
+                      fontSize: 30,
                       color: Colors.black,
                       fontWeight: FontWeight.w300)),
             ]),
@@ -109,7 +118,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 color1: Colors.blue,
                 icon: Icons.person_outline,
                 value: user.listUserModel.length,
-                title: 'User',
+                title: 'User                   ',
               ),
               SizedBox(
                 width: 1,
@@ -178,7 +187,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                         new charts.DatumLegend(
                           outsideJustification:
                               charts.OutsideJustification.endDrawArea,
-                          // horizontalFirst: false,
+                           horizontalFirst: false,
                           desiredMaxRows: 2,
                           cellPadding:
                               new EdgeInsets.only(right: 4.0, bottom: 4.0),
