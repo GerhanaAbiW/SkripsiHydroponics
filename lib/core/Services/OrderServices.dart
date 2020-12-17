@@ -10,7 +10,7 @@ class OrderServices{
 
   Firestore _firestore = Firestore.instance;
 
-  void createOrder({String userId, String userName,String description,List<CartItemModel> cart,
+  void createOrder({String userId, String userName,String description,List<CartItemModel> cart, int price,
     double totalPrice, int totalQtyProduct,String estimatedDate, String address, String phone, double tax, int instalation, int delivery}) {
     var uuid = Uuid();
     String id = uuid.v4();
@@ -32,6 +32,7 @@ class OrderServices{
       "paymentDelivery" : delivery,
       "paymentTax": tax,
       "id": id,
+      "price": price,
       "resi": "-",
       "estimatedDate" : estimatedDate,
       "imagePayment":null,

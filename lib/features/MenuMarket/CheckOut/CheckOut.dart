@@ -145,6 +145,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                               userId: userProvider.userModel.id,
                               description: "Some random description",
                               tax: tax,
+                              price : widget.total,
                               instalation: 0,
                               totalPrice: totals,
                               cart: widget.cart);

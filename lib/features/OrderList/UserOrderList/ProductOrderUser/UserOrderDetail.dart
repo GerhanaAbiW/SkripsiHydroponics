@@ -723,9 +723,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               createPriceItem(
                   "Order Total",
                   "Rp. " +
-                      currencyFormatter
-                          .format(widget.order.totalPrice)
-                          .toString(),
+                      currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",
