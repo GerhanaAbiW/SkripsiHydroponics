@@ -731,19 +731,19 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                       currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
               Container(
-                child: widget.order.delivery != 0
+                child: widget.order.delivery == 0
                     ? createPriceItem(
                         "Instalation Delivery",
                         "Rp. " +
                             currencyFormatter
-                                .format(widget.order.delivery)
+                                .format(widget.order.instalation.toDouble())
                                 .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
                         "Delievery",
                         "Rp. " +
                             currencyFormatter
-                                .format(widget.order.delivery)
+                                .format(widget.order.delivery.toDouble())
                                 .toString(),
                         Colors.teal.shade300),
               ),

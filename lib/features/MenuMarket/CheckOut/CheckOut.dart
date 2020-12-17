@@ -19,14 +19,12 @@ class CheckOutPage extends StatefulWidget {
   final List<CartItemModel> cart;
   final String address;
   final String phone;
-  final int delivery;
   final int total;
   final int totalQty;
 
   const CheckOutPage(
       {Key key,
       this.cart,
-      this.delivery,
       this.total,
       this.address,
       this.phone,
@@ -44,6 +42,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   OrderServices _orderServices = OrderServices();
+  final int delivery = 15000;
   bool del = false;
   bool ins = false;
   double totals;
@@ -62,7 +61,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   void getTotals() {
     setState(() {
       tax = widget.total * 0.01;
-      totals = widget.total + tax + widget.delivery;
+      totals = widget.total + tax + delivery;
     });
   }
 
@@ -139,6 +138,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           _orderServices.createOrder(
                               userName: userProvider.userModel.name,
                               phone: phone,
+                              delivery: delivery,
                               estimatedDate: estimatedDate,
                               totalQtyProduct: widget.totalQty,
                               address: address,
@@ -680,7 +680,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 child: createPriceItem(
                     "Delievery",
                     "Rp. " +
-                        currencyFormatter.format(widget.delivery).toString(),
+                        currencyFormatter.format(delivery).toString(),
                     Colors.teal.shade300),
               ),
 

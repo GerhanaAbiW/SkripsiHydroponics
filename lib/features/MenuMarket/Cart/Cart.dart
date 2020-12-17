@@ -142,7 +142,6 @@ class _CartPageState extends State<CartPage> {
                                         cart: userProvider.userModel.cart,
                                         totalQty:
                                             userProvider.userModel.cart.length,
-                                        delivery: 15000,
                                         address: userProvider.userModel.address,
                                         phone: userProvider.userModel.phone,
                                         total: userProvider
