@@ -51,8 +51,7 @@ final List<HydroType> types = [
     landType: "Horizontal/Vertical",
     pipeQty: "6",
     intPrice: 500000,
-    description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),
   HydroType(
     instalationPrice: 30000,

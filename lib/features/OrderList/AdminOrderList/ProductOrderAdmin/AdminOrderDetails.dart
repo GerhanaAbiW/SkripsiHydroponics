@@ -15,6 +15,7 @@ import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderList.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -34,6 +35,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
   final _formKey = GlobalKey<FormState>();
   OrderServices _orderServices = OrderServices();
 
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   @override
   void initState() {
     super.initState();
@@ -662,7 +664,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                    "Rp. " + currencyFormatter.format(widget.order.totalPrice).toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
