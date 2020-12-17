@@ -39,7 +39,7 @@ class _UploadPaymentState extends State<UploadPayment> {
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
           _orderServices.updateOrder(
-              status: "Proccess", id: widget.id, img: imageUrl1);
+              status: "Proccess", id: widget.id, img: imageUrl1,resi: "-");
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, DashBoard());
