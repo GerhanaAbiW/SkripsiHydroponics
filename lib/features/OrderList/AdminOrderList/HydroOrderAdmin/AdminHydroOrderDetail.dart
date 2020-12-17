@@ -174,19 +174,16 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                                         MainAxisSize.min,
                                                     children: <Widget>[
                                                       Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Container(
-                                                            color: Colors.blue,
-                                                            child: Text(
-                                                              "Input Note for Customer",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          )),
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Text(
+                                                          "Input Note For Customer",
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ),
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.all(8.0),

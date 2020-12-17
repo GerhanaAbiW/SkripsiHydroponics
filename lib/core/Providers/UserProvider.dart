@@ -38,9 +38,11 @@ class UserProvider with ChangeNotifier {
   ProductServices _productServices = ProductServices();
   Firestore _firestore = Firestore.instance;
   UserModel _userModel;
+  List<UserModel> _listUserModel;
 
 //  getter
   UserModel get userModel => _userModel;
+  List<UserModel> get listUserModel => _listUserModel;
 
   Status get status => _status;
 
@@ -53,6 +55,12 @@ class UserProvider with ChangeNotifier {
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
+    _getListUsers();
+  }
+
+  void _getListUsers() async {
+    _listUserModel = await _userServices.getListUsers();
+    notifyListeners();
   }
 
   //init() async {}
