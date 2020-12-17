@@ -88,6 +88,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
         "landType": widget.landType,
         "totalPrice": totalPrice,
         "imagePayment": null,
+        "resi":"-",
         "paymentTax": tax,
         "paymentDelivery": widget.hydroType.deliveryPrice,
         "paymentInstalation": widget.hydroType.instalationPrice,

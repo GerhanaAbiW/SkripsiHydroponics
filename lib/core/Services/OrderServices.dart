@@ -32,6 +32,7 @@ class OrderServices{
       "paymentDelivery" : delivery,
       "paymentTax": tax,
       "id": id,
+      "resi": "-",
       "estimatedDate" : estimatedDate,
       "imagePayment":null,
       "cart": convertedCart,
@@ -44,8 +45,8 @@ class OrderServices{
     });
   }
 
-  void updateOrder({String status,String id, String img}) {
-    _firestore.collection(collection).document(id).updateData({"status":status, "updatedAt":FieldValue.serverTimestamp(),"imagePayment":img});
+  void updateOrder({String status,String id, String img, String resi}) {
+    _firestore.collection(collection).document(id).updateData({"status":status, "updatedAt":FieldValue.serverTimestamp(),"imagePayment":img, "resi":resi});
   } 
   
 

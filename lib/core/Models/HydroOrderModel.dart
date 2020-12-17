@@ -21,10 +21,12 @@ class HydroOrderModel {
   static const TOTAL_PRICE = "totalPrice";
   static const TOTAL_QUANTITY_PRODUCT = "totalQuantityProduct";
   static const STATUS = "status";
+  static const RESI = "resi";
   static const DATE_TIME = "date";
 
 
   String _id;
+  String _resi;
   int _price;
   String _imagePayment;
   String _userName;
@@ -50,6 +52,7 @@ class HydroOrderModel {
 
 //  getters
   String get id => _id;
+  String get resi => _resi;
   int get price => _price;
   String get hydroType => _hydroType;
   String get hydroImage => _hydroImage;

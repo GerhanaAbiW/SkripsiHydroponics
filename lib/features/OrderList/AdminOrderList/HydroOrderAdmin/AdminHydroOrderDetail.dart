@@ -30,6 +30,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
   HydroOrderServices _hydroOrderServices = HydroOrderServices();
+  TextEditingController resiController = TextEditingController();
 
   @override
   void initState() {
@@ -50,7 +51,8 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
+          backgroundColor: darkYellowColor,
+          //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -71,6 +73,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                       standardDelivery(),
                       checkoutHydroItem(),
                       priceSection(),
+                      resiNumber(),
                       transactionProvement(),
                     ],
                   ),
@@ -90,6 +93,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                               onPressed: () {
                                 _hydroOrderServices.updateHydroOrder(
                                     status: "Rejected",
+                                    resi: widget.order.resi,
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
                                 changeScreen(context, DashBoard());
@@ -104,6 +108,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                               onPressed: () {
                                 _hydroOrderServices.updateHydroOrder(
                                     status: "Accepted",
+                                    resi: widget.order.resi,
                                     id: widget.order.id,
                                     img: widget.order.imagePayment);
                                 changeScreen(context, DashBoard());
@@ -112,20 +117,128 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                           ),
                         ],
                       )
-                    : Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                        child: ButtonButtom(
-                          color: darkYellowColor,
-                          buttonText: 'Proccess Order',
-                          onPressed: () {
-                            _hydroOrderServices.updateHydroOrder(
-                                status: "Paid",
-                                id: widget.order.id,
-                                img: widget.order.imagePayment);
-                            changeScreen(context, DashBoard());
-                          },
-                        ),
-                      ),
+                    : widget.order.status == "Proccess"
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                                child: ButtonRejectAcc(
+                                  color: darkYellowColor,
+                                  buttonText: 'Reject',
+                                  onPressed: () {
+                                    _hydroOrderServices.updateHydroOrder(
+                                        status: "Rejected",
+                                        id: widget.order.id,
+                                        resi: widget.order.resi,
+                                        img: widget.order.imagePayment);
+                                    changeScreen(context, DashBoard());
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                                child: ButtonRejectAcc(
+                                  color: darkYellowColor,
+                                  buttonText: 'Proccess',
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: Stack(
+                                              overflow: Overflow.visible,
+                                              children: <Widget>[
+                                                Positioned(
+                                                  right: -40.0,
+                                                  top: -40.0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      backScreen(context);
+                                                    },
+                                                    child: CircleAvatar(
+                                                      child: Icon(Icons.close),
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Form(
+                                                  key: _formKey,
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Container(
+                                                            color: Colors.blue,
+                                                            child: Text(
+                                                              "Input Your Resi Number",
+                                                              style: TextStyle(
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          )),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: FormTextField(
+                                                            controller:
+                                                                resiController,
+                                                            textHint:
+                                                                "Add Your Resi Number",
+                                                            textLabel:
+                                                                "Input Resi Number"),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: RaisedButton(
+                                                          child: Text("Save"),
+                                                          onPressed: () {
+                                                            if (_formKey
+                                                                .currentState
+                                                                .validate()) {
+                                                              _hydroOrderServices
+                                                                  .updateHydroOrder(
+                                                                      status:
+                                                                          "Paid",
+                                                                      resi: resiController.text,
+                                                                      id: widget
+                                                                          .order
+                                                                          .id,
+                                                                      img: widget
+                                                                          .order
+                                                                          .imagePayment);
+                                                              changeScreen(
+                                                                  context,
+                                                                  DashBoard());
+                                                            }
+                                                          },
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                ),
+                              ),
+                            ],
+                          )
+                        : SizedBox(
+                            height: 1,
+                          ),
                 flex: 10,
               )
             ],
@@ -134,7 +247,63 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
       ),
     );
   }
+  resiNumber() {
+    return Container(
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
+          padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                "Your Resi Number",
+                style: CustomTextStyle.textFormFieldMedium.copyWith(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Container(
+                width: double.infinity,
+                height: 0.5,
+                margin: EdgeInsets.symmetric(vertical: 4),
+                color: Colors.grey.shade400,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              // createPriceItem("Total MRP", "getFormattedCurrency(5197)",
+              //     Colors.grey.shade700),
+              // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
+              //     Colors.teal.shade300),
 
+              createPriceItem(
+                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+
+              SizedBox(
+                height: 8,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
   showThankYouBottomSheet(BuildContext context) {
     return _scaffoldKey.currentState.showBottomSheet((context) {
       return Container(
@@ -184,7 +353,8 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                         style: CustomTextStyle.textFormFieldMedium
                             .copyWith(color: Colors.white),
                       ),
-                      color: darkYellowColor, //Colors.pink,
+                      color: darkYellowColor,
+                      //Colors.pink,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(24))),
                     )
