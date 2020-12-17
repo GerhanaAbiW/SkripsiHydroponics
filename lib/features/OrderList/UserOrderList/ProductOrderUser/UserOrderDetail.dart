@@ -112,7 +112,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: Offstage(
@@ -314,7 +314,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               ),
               createAddressText("Company Name : Hydroponic Market", 16),
               createAddressText(
-                  "Company Adress : Hjwdjbwjdneifjiefrrmdmmkrorr", 16),
+                  "Company Adress : Jalan Raden Fatah RT 03/06 No.26", 16),
               createAddressText("Bank Name : BCA", 16),
               createAddressText("Bank Account Name : Gerhana Abi W", 16),
 
@@ -376,7 +376,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "widget.order.name",
+                    widget.order.userName,
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),

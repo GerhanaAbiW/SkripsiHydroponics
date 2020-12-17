@@ -113,7 +113,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: Offstage(
@@ -288,7 +288,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               ),
               createAddressText("Company Name : Hydroponic Market", 16),
               createAddressText(
-                  "Company Adress : Hjwdjbwjdneifjiefrrmdmmkrorr", 16),
+                  "Company Adress : Jalan Raden Fatah RT 03/06 No.26", 16),
               createAddressText("Bank Name : BCA", 16),
               createAddressText("Bank Account Name : Gerhana Abi W", 16),
 
@@ -617,9 +617,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               createPriceItem(
                   "Order Total",
                   "Rp. " +
-                      currencyFormatter
-                          .format(widget.order.price)
-                          .toString(),
+                      currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",
@@ -704,7 +702,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 4,
               ),
               Text(
-                "Your Resi Number",
+                "Notes",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -728,7 +726,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+                  "Notes : ", widget.order.resi, Colors.teal.shade300),
 
               SizedBox(
                 height: 8,

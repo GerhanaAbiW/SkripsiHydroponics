@@ -80,7 +80,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: widget.order.status == "Pending"
@@ -174,17 +174,16 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                                         MainAxisSize.min,
                                                     children: <Widget>[
                                                       Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                          child:Text(
-                                                              "Input Your Resi Number",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: Colors
-                                                                      .black),
-                                                            ),
-                                                          ),
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Text(
+                                                          "Input Note For Customer",
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ),
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.all(8.0),
@@ -192,9 +191,9 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                                             controller:
                                                                 resiController,
                                                             textHint:
-                                                                "Add Your Resi Number",
+                                                                "Add Your Note",
                                                             textLabel:
-                                                                "Input Resi Number"),
+                                                                "Input Note"),
                                                       ),
                                                       Padding(
                                                         padding:
@@ -271,7 +270,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                 height: 4,
               ),
               Text(
-                "Your Resi Number",
+                "Note",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -295,7 +294,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+                  "Note : ", widget.order.resi, Colors.teal.shade300),
 
               SizedBox(
                 height: 8,
@@ -699,9 +698,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               createPriceItem(
                   "Order Total",
                   "Rp. " +
-                      currencyFormatter
-                          .format(widget.order.price)
-                          .toString(),
+                      currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",

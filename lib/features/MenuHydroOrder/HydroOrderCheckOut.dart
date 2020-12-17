@@ -96,7 +96,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
         "paymentInstalation": widget.hydroType.instalationPrice,
         "status": "Pending",
         "date": date,
-        "createdAt" : FieldValue.serverTimestamp(),
+        "createdAt": FieldValue.serverTimestamp(),
       });
       changeScreen(context, NewHydroOrderList());
     } catch (e) {
@@ -142,7 +142,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: Padding(

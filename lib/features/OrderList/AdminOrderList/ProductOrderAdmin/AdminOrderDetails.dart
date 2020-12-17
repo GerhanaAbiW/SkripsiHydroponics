@@ -84,7 +84,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: widget.order.status == "Pending"
