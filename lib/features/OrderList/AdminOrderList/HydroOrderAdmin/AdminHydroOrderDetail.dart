@@ -702,7 +702,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                   "Order Total",
                   "Rp. " +
                       currencyFormatter
-                          .format(widget.order.totalPrice)
+                          .format(widget.order.price)
                           .toString(),
                   Colors.grey.shade700),
               createPriceItem(

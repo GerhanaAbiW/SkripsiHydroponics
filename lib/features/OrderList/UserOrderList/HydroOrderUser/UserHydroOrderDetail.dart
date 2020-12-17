@@ -618,7 +618,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   "Order Total",
                   "Rp. " +
                       currencyFormatter
-                          .format(widget.order.totalPrice)
+                          .format(widget.order.price)
                           .toString(),
                   Colors.grey.shade700),
               createPriceItem(

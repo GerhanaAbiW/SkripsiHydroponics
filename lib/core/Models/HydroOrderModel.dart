@@ -81,6 +81,7 @@ class HydroOrderModel {
 
   HydroOrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];
+    _resi = snapshot.data[RESI];
     _price = snapshot.data[PRICE];
     _hydroType = snapshot.data[HYDRO_TYPE];
     _hydroImage = snapshot.data[HYDRO_IMAGE];
