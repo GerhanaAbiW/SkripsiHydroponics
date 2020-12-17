@@ -112,7 +112,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: Offstage(

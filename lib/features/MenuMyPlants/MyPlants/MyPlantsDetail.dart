@@ -339,10 +339,10 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                padding: EdgeInsets.all(10),
-                                width: MediaQuery.of(context).size.width * 0.8,
+                                padding: EdgeInsets.all(8),
+                                width: MediaQuery.of(context).size.width * 0.9,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(10),
                                     color: darkGreenColor),
                                 child: Text(
                                   'Record',

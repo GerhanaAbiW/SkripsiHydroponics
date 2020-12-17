@@ -522,9 +522,9 @@ class ButtonButtom extends StatelessWidget {
 class ButtonRejectAcc extends StatelessWidget {
   ButtonRejectAcc(
       {@required this.buttonText,
-        @required this.onPressed,
-        this.isDisabled = false,
-        this.color});
+      @required this.onPressed,
+      this.isDisabled = false,
+      this.color});
   final String buttonText;
   final Function onPressed;
   final bool isDisabled;
@@ -533,7 +533,7 @@ class ButtonRejectAcc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width/3.5,
+      width: MediaQuery.of(context).size.width / 3.5,
       // height: ScreenUtil().setHeight(38),
       height: 50,
       margin: EdgeInsets.only(bottom: 24),

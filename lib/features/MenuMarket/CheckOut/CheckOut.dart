@@ -23,12 +23,7 @@ class CheckOutPage extends StatefulWidget {
   final int totalQty;
 
   const CheckOutPage(
-      {Key key,
-      this.cart,
-      this.total,
-      this.address,
-      this.phone,
-      this.totalQty})
+      {Key key, this.cart, this.total, this.address, this.phone, this.totalQty})
       : super(key: key);
 
   @override
@@ -113,7 +108,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     ],
                   ),
                 ),
-                flex: 90,
+                flex: 75,
               ),
               Expanded(
                 child: Padding(
@@ -145,7 +140,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                               userId: userProvider.userModel.id,
                               description: "Some random description",
                               tax: tax,
-                              price : widget.total,
+                              price: widget.total,
                               instalation: 0,
                               totalPrice: totals,
                               cart: widget.cart);
@@ -679,8 +674,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               Container(
                 child: createPriceItem(
                     "Delievery",
-                    "Rp. " +
-                        currencyFormatter.format(delivery).toString(),
+                    "Rp. " + currencyFormatter.format(delivery).toString(),
                     Colors.teal.shade300),
               ),
 

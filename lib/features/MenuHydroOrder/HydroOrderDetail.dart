@@ -169,127 +169,139 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                   ]),
                   SizedBox(height: 10.0),
                   Container(
-                    child: model.userModel.role!="admin"?Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: <Widget>[
-                            Form(
-                              key: _formKey,
+                    child: model.userModel.role != "admin"
+                        ? Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text('Mohon Untuk Lengkapi Data Order',
-                                              style: TextStyle(
-                                                fontFamily: 'AbrilFatFace',
-                                                fontSize: 20.0,
-                                                color: Colors.green,
-                                              )),
-                                          Text(
-                                              '*Di mohon untuk mengisi data yang sesuai',
-                                              style: TextStyle(
-                                                  fontFamily: 'AbrilFatFace',
-                                                  fontSize: 11.0,
-                                                  color: Colors.grey))
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                  Form(
+                                    key: _formKey,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                    'Mohon Untuk Lengkapi Data Order',
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          'AbrilFatFace',
+                                                      fontSize: 20.0,
+                                                      color: Colors.green,
+                                                    )),
+                                                Text(
+                                                    '*Di mohon untuk mengisi data yang sesuai',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'AbrilFatFace',
+                                                        fontSize: 11.0,
+                                                        color: Colors.grey))
+                                              ],
+                                            ),
+                                          ],
+                                        ),
 
-                                  SizedBox(height: 20),
-                                  FormTextField(
-                                      textLabel: "jumlah Lubang",
-                                      textHint: "Masukkan Jumlah Lubang Tanaman",
-                                      controller: jumlahLubangController,
-                                      textType: TextInputType.number),
-                                  //),
-                                  //Container(
-                                  SizedBox(height: 16),
-                                  FormTextField(
-                                    textType: TextInputType.number,
-                                    textLabel: "Nomor HP",
-                                    textHint: "Masukkan Nomor HP Anda",
-                                    controller: nomorHpController,
+                                        SizedBox(height: 20),
+                                        FormTextField(
+                                            textLabel: "jumlah Lubang",
+                                            textHint:
+                                                "Masukkan Jumlah Lubang Tanaman",
+                                            controller: jumlahLubangController,
+                                            textType: TextInputType.number),
+                                        //),
+                                        //Container(
+                                        SizedBox(height: 16),
+                                        FormTextField(
+                                          textType: TextInputType.number,
+                                          textLabel: "Nomor HP",
+                                          textHint: "Masukkan Nomor HP Anda",
+                                          controller: nomorHpController,
+                                        ),
+                                        //),
+                                        // Container(
+                                        //   child:
+                                        SizedBox(height: 16),
+                                        DropdownForm(
+                                            textLabel: "Tipe Lahan",
+                                            textHint: "Masukkan Type Lahan",
+                                            selectedItem: _currentTipeLahan,
+                                            dropDownItems: areaItems,
+                                            changedDropDownItems:
+                                                changeSelectedCategory),
+                                        // FormDropDown(
+                                        //     labelText: "Tipe Lahan",
+                                        //     hintText: "Masukkan Type Lahan",
+                                        //     selectedItem: _currentTipeLahan,
+                                        //     dropDownItems: typelahanDropdown,
+                                        //     changedDropDownItems: changeSelectedCategory),
+                                        SizedBox(height: 16),
+                                        MultilineFormTextField(
+                                            textType: TextInputType.multiline,
+                                            textLabel: "Alamat",
+                                            textHint: "Masukkan Alamat Anda",
+                                            controller: alamatController,
+                                            height: 20.0),
+                                        // Container(
+                                        //   child: Text(
+                                        //       'Whether it\'s an impromptu gathering with good friends or sustainbly canning wine to keep up with your daily adventures. Together we seek the uncommon.',
+                                        //       style: TextStyle(fontSize: 12.0, color: Colors.grey)),
+                                        // ),
+                                      ],
+                                    ),
                                   ),
-                                  //),
-                                  // Container(
-                                  //   child:
-                                  SizedBox(height: 16),
-                                  DropdownForm(
-                                      textLabel: "Tipe Lahan",
-                                      textHint: "Masukkan Type Lahan",
-                                      selectedItem: _currentTipeLahan,
-                                      dropDownItems: areaItems,
-                                      changedDropDownItems:
-                                          changeSelectedCategory),
-                                  // FormDropDown(
-                                  //     labelText: "Tipe Lahan",
-                                  //     hintText: "Masukkan Type Lahan",
-                                  //     selectedItem: _currentTipeLahan,
-                                  //     dropDownItems: typelahanDropdown,
-                                  //     changedDropDownItems: changeSelectedCategory),
-                                  SizedBox(height: 16),
-                                  MultilineFormTextField(
-                                      textType: TextInputType.multiline,
-                                      textLabel: "Alamat",
-                                      textHint: "Masukkan Alamat Anda",
-                                      controller: alamatController,
-                                      height: 20.0),
-                                  // Container(
-                                  //   child: Text(
-                                  //       'Whether it\'s an impromptu gathering with good friends or sustainbly canning wine to keep up with your daily adventures. Together we seek the uncommon.',
-                                  //       style: TextStyle(fontSize: 12.0, color: Colors.grey)),
-                                  // ),
+                                  SizedBox(height: 30),
+                                  Center(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (_formKey.currentState.validate()) {
+                                          changeScreen(
+                                              context,
+                                              HydroOrderCheckOut(
+                                                hydroType: widget.hydroType,
+                                                jmlLubang:
+                                                    jumlahLubangController.text,
+                                                jmlPipa: jumlahPipa.text,
+                                                address: alamatController.text,
+                                                landType: _currentTipeLahan,
+                                                phone: nomorHpController.text,
+                                                userModel: model.userModel,
+                                              ));
+                                          _formKey.currentState.reset();
+                                        } else {}
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        padding: EdgeInsets.all(10),
+                                        // width:
+                                        //     MediaQuery.of(context).size.width *
+                                        //         0.8,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Color(0xFF03A9F4)),
+                                        child: Text(
+                                          'ORDER',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            SizedBox(height: 30),
-                            Center(
-                              child: GestureDetector(
-                                onTap: () {
-                                  if (_formKey.currentState.validate()) {
-                                    changeScreen(
-                                        context,
-                                        HydroOrderCheckOut(
-                                          hydroType: widget.hydroType,
-                                          jmlLubang: jumlahLubangController.text,
-                                          jmlPipa: jumlahPipa.text,
-                                          address: alamatController.text,
-                                          landType: _currentTipeLahan,
-                                          phone: nomorHpController.text,
-                                          userModel: model.userModel,
-                                        ));
-                                    _formKey.currentState.reset();
-                                  } else {}
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.all(10),
-                                  width: MediaQuery.of(context).size.width * 0.8,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(0xFF03A9F4)),
-                                  child: Text(
-                                    'ORDER',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 22),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ): SizedBox(height: 1),
+                          )
+                        : SizedBox(height: 1),
                   ),
                 ],
               ),

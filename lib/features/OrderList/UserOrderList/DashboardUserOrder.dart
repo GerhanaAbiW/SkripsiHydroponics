@@ -21,10 +21,16 @@ class _DashboardUserOrderState extends State<DashboardUserOrder> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
-              "Orders",
-              style: TextStyle(
-                  color: white, fontWeight: FontWeight.bold, fontSize: 32.0),
+            title: Center(
+              child: Center(
+                child: Text(
+                  "Orders",
+                  style: TextStyle(
+                      color: white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32.0),
+                ),
+              ),
             ),
             backgroundColor: darkYellowColor,
             elevation: 0,

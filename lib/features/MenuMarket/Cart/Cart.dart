@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
+import 'package:hydroponics/core/constants/Screen_Resolution.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/MenuMarket/CheckOut/CheckOut.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
@@ -61,7 +63,7 @@ class _CartPageState extends State<CartPage> {
                 child: Container(
                     child: Column(children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height - 220,
+                  height: MediaQuery.of(context).size.height / 1.4,
                   child: ListView(
                     children: <Widget>[
                       createHeader(),
@@ -79,9 +81,12 @@ class _CartPageState extends State<CartPage> {
                   child: Container(
                       //Container(
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -129,26 +134,29 @@ class _CartPageState extends State<CartPage> {
                         //         .copyWith(color: Colors.white),
                         //   ),
                         // ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                            child: ButtonButtom(
-                                buttonText: 'Checkout',
-                                color: green,
-                                onPressed: () {
-                                  changeScreen(
-                                      context,
-                                      CheckOutPage(
-                                        cart: userProvider.userModel.cart,
-                                        totalQty:
-                                            userProvider.userModel.cart.length,
-                                        address: userProvider.userModel.address,
-                                        phone: userProvider.userModel.phone,
-                                        total: userProvider
-                                            .userModel.totalCartPrice,
-                                      ));
-                                }),
-                          ),
+
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(24, 2, 24, 24),
+
+                          // padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                          //child: Container(
+                          child: ButtonButtom(
+                              buttonText: 'Checkout',
+                              color: green,
+                              onPressed: () {
+                                changeScreen(
+                                    context,
+                                    CheckOutPage(
+                                      cart: userProvider.userModel.cart,
+                                      totalQty:
+                                          userProvider.userModel.cart.length,
+                                      address: userProvider.userModel.address,
+                                      phone: userProvider.userModel.phone,
+                                      total:
+                                          userProvider.userModel.totalCartPrice,
+                                    ));
+                              }),
+                          // ),
                         ),
                       ])),
                 ),
