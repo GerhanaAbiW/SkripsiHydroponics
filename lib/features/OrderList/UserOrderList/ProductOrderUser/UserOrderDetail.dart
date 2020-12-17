@@ -714,7 +714,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
 
               createPriceItem(
                   "Order Total",
-                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                  "Rp. " + widget.order.price.toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",
