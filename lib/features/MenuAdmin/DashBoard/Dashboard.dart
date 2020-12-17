@@ -22,11 +22,12 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   int transaction = 0;
   int hydroMarket=0;
   int hydroOrder=0;
+  double bibit =0;
+  double obat =0;
+  double pupuk =0;
+  double alat =0;
 
-  int _bibit = 0;
-  int _obat = 0;
-  int _pupuk = 0;
-  int _alat = 0;
+
 
  void getAllCards(){
    user = Provider.of<UserProvider>(context,listen: false).listUserModel.length;
@@ -34,44 +35,27 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
    transaction = Provider.of<OrderProvider>(context,listen: false).buyers.length + Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
    hydroOrder = Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
    hydroMarket = Provider.of<OrderProvider>(context,listen: false).sales;
+   bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
+   obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
+   pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
+   alat = Provider.of<OrderProvider>(context,listen: false).alat.toDouble();
  }
 
-  getCategory() {
-    List<CartItemModel> cart;
-    for (int i = 1; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
-      if (Provider.of<OrderProvider>(context,listen: false).buyers[i].cart != null || Provider.of<OrderProvider>(context,listen: false).buyers[i].cart != []) {
-        Provider.of<OrderProvider>(context,listen: false).buyers[i].cart = cart;
-        if (cart[i].productCategory == "Bibit") {
-          _bibit = _bibit + 1;
-        } else if (cart[i].productCategory == "Pupuk") {
-          _pupuk = _pupuk + 1;
-        } else if (cart[i].productCategory == "Obat") {
-          _obat = _obat + 1;
-        } else if (cart[i].productCategory == "Alat") {
-          _alat = _alat + 1;
-        }
-      }else{
-        print("haha");
-      }
-    }
 
-    //notifyListeners();
-  }
   @override
   void initState() {
     super.initState();
-
-
+    getAllCards();
     _seriesPieData = List<charts.Series<Task, String>>();
     _getData();
   }
 
   _getData() {
     var piedata = [
-      new Task('Bibit', 35.8, Color(0xff3366cc)),
-      new Task('Obat', 8.3, Color(0xff990099)),
-      new Task('Pupuk', 10.8, Color(0xff109618)),
-      new Task('Alat', 15.6, Color(0xfffdbe19)),
+      new Task('Bibit', bibit, Color(0xff3366cc)),
+      new Task('Obat', obat, Color(0xff990099)),
+      new Task('Pupuk', pupuk, Color(0xff109618)),
+      new Task('Alat', alat, Color(0xfffdbe19)),
       //new Task('HydroOrder', 19.2, Color(0xffff9900)),
       //new Task('Other', 10.3, Color(0xffdc3912)),
     ];
