@@ -80,7 +80,8 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
+          backgroundColor: darkYellowColor,
+          //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -102,6 +103,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                       standardDelivery(),
                       checkoutHydroItem(),
                       priceSection(),
+                      resiNumber(),
                       Offstage(
                         offstage: img,
                         child: transactionProvement(),
@@ -120,7 +122,11 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                       color: darkYellowColor, //blueColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
-                        changeScreen(context, HydroOrderUploadPayment(id: widget.order.id,));
+                        changeScreen(
+                            context,
+                            HydroOrderUploadPayment(
+                              id: widget.order.id,
+                            ));
                       },
                     ),
                   ),
@@ -650,6 +656,64 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   )
                 ],
               )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  resiNumber() {
+    return Container(
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
+          padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                "Your Resi Number",
+                style: CustomTextStyle.textFormFieldMedium.copyWith(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Container(
+                width: double.infinity,
+                height: 0.5,
+                margin: EdgeInsets.symmetric(vertical: 4),
+                color: Colors.grey.shade400,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              // createPriceItem("Total MRP", "getFormattedCurrency(5197)",
+              //     Colors.grey.shade700),
+              // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
+              //     Colors.teal.shade300),
+
+              createPriceItem(
+                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+
+              SizedBox(
+                height: 8,
+              ),
             ],
           ),
         ),

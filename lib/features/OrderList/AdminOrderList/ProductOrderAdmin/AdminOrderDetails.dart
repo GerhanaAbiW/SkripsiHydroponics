@@ -34,8 +34,10 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
   OrderServices _orderServices = OrderServices();
+  TextEditingController resiController = TextEditingController();
 
   final currencyFormatter = NumberFormat('#,##0.00', 'ID');
+
   @override
   void initState() {
     super.initState();
@@ -55,7 +57,8 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               backScreen(context);
             },
           ),
-          backgroundColor: darkYellowColor, //Color(0xFF2b961f),
+          backgroundColor: darkYellowColor,
+          //Color(0xFF2b961f),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -76,6 +79,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                       standardDelivery(),
                       checkoutItem(widget.order.cart),
                       priceSection(),
+                      resiNumber(),
                       transactionProvement(),
                     ],
                   ),
@@ -109,9 +113,9 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                   _orderServices.updateOrder(
                                       status: "Rejected",
                                       id: widget.order.id,
+                                      resi: widget.order.resi,
                                       img: widget.order.imagePayment);
                                   changeScreen(context, DashBoard());
-
                                 },
                               ),
                             ),
@@ -138,43 +142,171 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                   _orderServices.updateOrder(
                                       status: "Accepted",
                                       id: widget.order.id,
+                                      resi: widget.order.resi,
                                       img: widget.order.imagePayment);
                                   changeScreen(context, DashBoard());
-
                                 },
                               ),
                             ),
                           ),
                         ],
                       )
-                    : Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                        child: Container(
-                          width: double.infinity,
-                          // height: ScreenUtil().setHeight(38),
-                          height: 40,
-                          margin: EdgeInsets.only(bottom: 24),
-                          child: FlatButton(
-                            color: darkYellowColor, //Color(0xFF2b961f),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              "Proccess Order",
-                              style: CustomTextStyle.textFormFieldSemiBold
-                                  .copyWith(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              _orderServices.updateOrder(
-                                  status: "Paid",
-                                  id: widget.order.id,
-                                  img: widget.order.imagePayment);
-                              changeScreen(context, DashBoard());
-
-                            },
+                    : widget.order.status == "Process"
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width /
+                                      3.5, // double.infinity,
+                                  // height: ScreenUtil().setHeight(38),
+                                  height: 40,
+                                  margin: EdgeInsets.only(bottom: 24),
+                                  child: FlatButton(
+                                    color: darkYellowColor, //Color(0xFF2b961f),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      "Reject",
+                                      style: CustomTextStyle
+                                          .textFormFieldSemiBold
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                    onPressed: () {
+                                      _orderServices.updateOrder(
+                                          status: "Rejected",
+                                          id: widget.order.id,
+                                          resi: widget.order.resi,
+                                          img: widget.order.imagePayment);
+                                      changeScreen(context, DashBoard());
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width /
+                                      3.5, // double.infinity,
+                                  // height: ScreenUtil().setHeight(38),
+                                  height: 40,
+                                  margin: EdgeInsets.only(bottom: 24),
+                                  child: FlatButton(
+                                    color: darkYellowColor, //Color(0xFF2b961f),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      "Proccess",
+                                      style: CustomTextStyle
+                                          .textFormFieldSemiBold
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              content: Stack(
+                                                overflow: Overflow.visible,
+                                                children: <Widget>[
+                                                  Positioned(
+                                                    right: -40.0,
+                                                    top: -40.0,
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        backScreen(context);
+                                                      },
+                                                      child: CircleAvatar(
+                                                        child:
+                                                            Icon(Icons.close),
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Form(
+                                                    key: _formKey,
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: <Widget>[
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    8.0),
+                                                            child: Container(
+                                                              color:
+                                                                  Colors.blue,
+                                                              child: Text(
+                                                                "Input Your Resi Number",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        16,
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                            )),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: FormTextField(
+                                                              controller:
+                                                                  resiController,
+                                                              textHint:
+                                                                  "Add Your Resi Number",
+                                                              textLabel:
+                                                                  "Input Resi Number"),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: RaisedButton(
+                                                            child: Text("Save"),
+                                                            onPressed: () {
+                                                              if (_formKey
+                                                                  .currentState
+                                                                  .validate()) {
+                                                                _orderServices
+                                                                    .updateOrder(
+                                                                  status:
+                                                                      "Paid",
+                                                                  resi: resiController.text,
+                                                                  id: widget
+                                                                      .order.id,
+                                                                  img: widget
+                                                                      .order
+                                                                      .imagePayment,
+                                                                );
+                                                                changeScreen(
+                                                                    context,
+                                                                    DashBoard());
+                                                              }
+                                                            },
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : SizedBox(
+                            height: 1,
                           ),
-                        ),
-                      ),
                 flex: 10,
               )
             ],
@@ -331,7 +463,63 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
       ),
     );
   }
+  resiNumber() {
+    return Container(
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
+          padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                "Your Resi Number",
+                style: CustomTextStyle.textFormFieldMedium.copyWith(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Container(
+                width: double.infinity,
+                height: 0.5,
+                margin: EdgeInsets.symmetric(vertical: 4),
+                color: Colors.grey.shade400,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              // createPriceItem("Total MRP", "getFormattedCurrency(5197)",
+              //     Colors.grey.shade700),
+              // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
+              //     Colors.teal.shade300),
 
+              createPriceItem(
+                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+
+              SizedBox(
+                height: 8,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
   createAddressText(String strAddress, double topMargin) {
     return Container(
       margin: EdgeInsets.only(top: topMargin),
@@ -664,7 +852,10 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + currencyFormatter.format(widget.order.totalPrice).toString(),
+                    "Rp. " +
+                        currencyFormatter
+                            .format(widget.order.totalPrice)
+                            .toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
