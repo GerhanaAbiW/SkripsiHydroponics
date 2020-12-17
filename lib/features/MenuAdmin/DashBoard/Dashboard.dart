@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/Order.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:hydroponics/core/Providers/HydroOrderProvider.dart';
 import 'package:hydroponics/core/Providers/OrderProvider.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/MenuAdmin/DashBoard/SmallCard.dart';
 import 'package:provider/provider.dart';
 
@@ -13,36 +16,29 @@ class NewAdminDashboard extends StatefulWidget {
 
 class _NewAdminDashboardState extends State<NewAdminDashboard> {
   List<charts.Series<Task, String>> _seriesPieData;
-  double _revenue = 0;
-  int _sales = 0;
+
+  int user = 0;
+  double revenue = 0;
+  int transaction = 0;
+  int hydroMarket=0;
+  int hydroOrder=0;
+
   int _bibit = 0;
   int _obat = 0;
   int _pupuk = 0;
   int _alat = 0;
-  getRevenue() {
-    for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
-      _revenue =  Provider.of<OrderProvider>(context,listen: false).buyers[i].totalPrice + Provider.of<OrderProvider>(context,listen: false).buyers[i + 1].totalPrice;
-    }
-    //notifyListeners();
-    //return _revenue;
 
-  }
-
-
-  getSales() {
-    for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
-
-        _sales = Provider.of<OrderProvider>(context,listen: false).buyers[i].totalQuantityProduct +
-            Provider.of<OrderProvider>(context,listen: false).buyers[i + 1].totalQuantityProduct;
-
-    }
-    //notifyListeners();
-    //return _sales;
-  }
+ void getAllCards(){
+   user = Provider.of<UserProvider>(context,listen: false).listUserModel.length;
+   revenue = Provider.of<OrderProvider>(context,listen: false).revenue + Provider.of<HydroOrderProvider>(context,listen: false).revenue;
+   transaction = Provider.of<OrderProvider>(context,listen: false).buyers.length + Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
+   hydroOrder = Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
+   hydroMarket = Provider.of<OrderProvider>(context,listen: false).sales;
+ }
 
   getCategory() {
     List<CartItemModel> cart;
-    for (int i = 0; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
+    for (int i = 1; i < Provider.of<OrderProvider>(context,listen: false).buyers.length; i++) {
       if (Provider.of<OrderProvider>(context,listen: false).buyers[i].cart != null || Provider.of<OrderProvider>(context,listen: false).buyers[i].cart != []) {
         Provider.of<OrderProvider>(context,listen: false).buyers[i].cart = cart;
         if (cart[i].productCategory == "Bibit") {
@@ -64,9 +60,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   @override
   void initState() {
     super.initState();
-    getRevenue();
-    getCategory();
-    getSales();
+
 
     _seriesPieData = List<charts.Series<Task, String>>();
     _getData();
@@ -98,7 +92,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   @override
   Widget build(BuildContext context) {
 
-    final appState = Provider.of<AppProvider>(context);
+    final user = Provider.of<UserProvider>(context);
     final order = Provider.of<OrderProvider>(context);
     // order.getSales();
     // order.getCategory();
@@ -114,7 +108,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                   text: 'Revenue\n',
                   style: TextStyle(fontSize: 35, color: Colors.grey)),
               TextSpan(
-                  text: '\Rp. $_revenue',
+                  text: '\Rp. $revenue',
                   style: TextStyle(
                       fontSize: 55,
                       color: Colors.black,
@@ -130,18 +124,18 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 color2: Colors.indigo,
                 color1: Colors.blue,
                 icon: Icons.person_outline,
-                value: order.buyers.length,
-                title: 'Customer',
+                value: user.listUserModel.length,
+                title: 'User',
               ),
               SizedBox(
                 width: 1,
               ),
               SmallCard(
-                color2: Colors.indigo,
-                color1: Colors.blue,
-                icon: Icons.shopping_cart,
-                value: 30,
-                title: 'Orders',
+                color2: Colors.green,
+                color1: Colors.greenAccent,
+                icon: Icons.monetization_on,
+                value: transaction,
+                title: 'Transaction',
               ),
             ],
           ),
@@ -150,18 +144,18 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SmallCard(
-              color2: Colors.black87,
-              color1: Colors.black87,
-              icon: Icons.attach_money,
-              value: 65,
-              title: 'Sales',
+              color2: Colors.deepOrange,
+              color1: Colors.deepOrangeAccent,
+              icon: Icons.shopping_basket,
+              value: hydroMarket,
+              title: 'Hydro Market',
             ),
             SmallCard(
               color2: Colors.black,
               color1: Colors.black87,
               icon: Icons.shopping_basket,
-              value: 230,
-              title: 'Stock',
+              value: hydroOrder,
+              title: 'Hydro Order',
             ),
           ],
         ),

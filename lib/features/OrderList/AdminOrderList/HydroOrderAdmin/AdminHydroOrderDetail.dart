@@ -177,16 +177,14 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                                           padding:
                                                               EdgeInsets.all(
                                                                   8.0),
-                                                          child: Container(
-                                                            color: Colors.blue,
-                                                            child: Text(
+                                                          child:Text(
                                                               "Input Your Resi Number",
                                                               style: TextStyle(
                                                                   fontSize: 16,
                                                                   color: Colors
-                                                                      .white),
+                                                                      .black),
                                                             ),
-                                                          )),
+                                                          ),
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.all(8.0),

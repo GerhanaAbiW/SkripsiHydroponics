@@ -151,7 +151,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                           ),
                         ],
                       )
-                    : widget.order.status == "Process"
+                    : widget.order.status == "Proccess"
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -239,18 +239,15 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     8.0),
-                                                            child: Container(
-                                                              color:
-                                                                  Colors.blue,
-                                                              child: Text(
+                                                            child: Text(
                                                                 "Input Your Resi Number",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         16,
                                                                     color: Colors
-                                                                        .white),
+                                                                        .black),
                                                               ),
-                                                            )),
+                                                            ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsets.all(
