@@ -376,7 +376,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "widget.order.name",
+                    widget.order.userName,
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
