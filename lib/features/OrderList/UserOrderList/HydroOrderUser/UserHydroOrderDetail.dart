@@ -16,6 +16,7 @@ import 'package:hydroponics/features/OrderList/UserOrderList/HydroOrderUser/Hydr
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -31,6 +32,7 @@ class UserHydroOrderDetail extends StatefulWidget {
 class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   OrderServices _orderServices = OrderServices();
   bool btn = true;
   bool img = true;
@@ -614,21 +616,31 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
 
               createPriceItem(
                   "Order Total",
-                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.totalPrice)
+                          .toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",
-                  "Rp. " + widget.order.tax.toStringAsFixed(3),
+                  "Rp. " +
+                      currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
                     ? createPriceItem(
                         "Instalation Delivery",
-                        "Rp. " + widget.order.delivery.toString(),
+                        "Rp. " +
+                            currencyFormatter
+                                .format(widget.order.delivery)
+                                .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
                         "Delievery",
-                        "Rp. " + widget.order.delivery.toString(),
+                        "Rp. " +
+                            currencyFormatter
+                                .format(widget.order.delivery)
+                                .toString(),
                         Colors.teal.shade300),
               ),
 
@@ -654,7 +666,10 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                    "Rp. " +
+                        currencyFormatter
+                            .format(widget.order.totalPrice)
+                            .toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductUpdate.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat('#,##0.00', 'ID');
     ProductServices productService = ProductServices();
     return Container(
       // width: MediaQuery.of(context).size.width,
@@ -106,7 +108,11 @@ class ProductCard extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text("Rp. {productModel.price}",
+                            Text(
+                                "Rp. " +
+                                    currencyFormatter
+                                        .format(productModel.price)
+                                        .toString(),
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 15.0,

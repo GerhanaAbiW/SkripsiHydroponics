@@ -51,6 +51,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
   OrderServices _orderServices = OrderServices();
   double tax = 0;
   double totalPrice = 0;
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
 
   void getTax() {
     if (widget.hydroType.intPrice != 0) {
@@ -88,7 +89,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
         "landType": widget.landType,
         "totalPrice": totalPrice,
         "imagePayment": null,
-        "resi":"-",
+        "resi": "-",
         "paymentTax": tax,
         "paymentDelivery": widget.hydroType.deliveryPrice,
         "paymentInstalation": widget.hydroType.instalationPrice,
@@ -553,17 +554,33 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Hydro Order", "Rp. ${widget.hydroType.intPrice}",
+              createPriceItem(
+                  "Hydro Order",
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.hydroType.intPrice)
+                          .toString(), //"Rp. ${widget.hydroType.intPrice}",
                   Colors.grey.shade700),
-              createPriceItem("Tax (15%)", "Rp. " + tax.toStringAsFixed(3),
+              createPriceItem(
+                  "Tax (15%)",
+                  "Rp. " +
+                      currencyFormatter
+                          .format(tax)
+                          .toString(), //"Rp. " + tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               createPriceItem(
                   "Instalation",
-                  "Rp. " + widget.hydroType.instalationPrice.toString(),
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.hydroType.instalationPrice)
+                          .toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Delievery",
-                  "Rp. " + widget.hydroType.deliveryPrice.toString(),
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.hydroType.deliveryPrice)
+                          .toString(),
                   Colors.grey.shade700),
 
               SizedBox(
@@ -588,7 +605,10 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + totalPrice.toStringAsFixed(3),
+                    "Rp. " +
+                        currencyFormatter
+                            .format(totalPrice)
+                            .toString(), //  "Rp. " + totalPrice.toStringAsFixed(3),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

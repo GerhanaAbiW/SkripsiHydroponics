@@ -9,6 +9,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMarket/Product/ProductDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -21,6 +22,7 @@ class Products extends StatefulWidget {
 
 class _ProductsState extends State<Products> {
   @override
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: ClampingScrollPhysics(),
@@ -52,7 +54,6 @@ class NewProductCard extends StatefulWidget {
 }
 
 class _NewProductCardState extends State<NewProductCard> {
-
   getRatingStar(rating, index) {
     if (index <= rating) {
       return Icon(
@@ -72,6 +73,7 @@ class _NewProductCardState extends State<NewProductCard> {
   bool favorite = false;
   @override
   Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat('#,##0.00', 'ID');
     final appProvider = Provider.of<AppProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
     return GestureDetector(
@@ -162,11 +164,12 @@ class _NewProductCardState extends State<NewProductCard> {
                 //       ))
                 // ),
                 Offstage(
-                  offstage: userProvider.userModel.role=="admin"?true:false,
+                  offstage:
+                      userProvider.userModel.role == "admin" ? true : false,
                   child: Padding(
                     padding: EdgeInsets.all(8),
                     child: GestureDetector(
-                        onTap: () async{
+                        onTap: () async {
                           appProvider.changeIsLoading();
                           bool success = await userProvider.addToCart(
                               product: widget.product, qty: 1);
@@ -178,8 +181,7 @@ class _NewProductCardState extends State<NewProductCard> {
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: Colors.red,
                                 textColor: Colors.white,
-                                fontSize: 16.0
-                            );
+                                fontSize: 16.0);
                             userProvider.reloadUserModel();
                             appProvider.changeIsLoading();
                             return;
@@ -191,12 +193,10 @@ class _NewProductCardState extends State<NewProductCard> {
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: Colors.red,
                                 textColor: Colors.white,
-                                fontSize: 16.0
-                            );
+                                fontSize: 16.0);
                             appProvider.changeIsLoading();
                             return;
                           }
-
                         },
                         child: Icon(
                           Icons.add_shopping_cart,
@@ -222,10 +222,10 @@ class _NewProductCardState extends State<NewProductCard> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: CustomText(
-                text: "Rp. " + widget.product.price.toString(),
-                weight: FontWeight.bold,
-              ),
+              child: Text(
+                  "Rp. " +
+                      currencyFormatter.format(widget.product.price).toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),

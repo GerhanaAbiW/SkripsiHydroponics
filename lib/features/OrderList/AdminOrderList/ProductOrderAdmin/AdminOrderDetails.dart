@@ -277,7 +277,9 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                                                     .updateOrder(
                                                                   status:
                                                                       "Paid",
-                                                                  resi: resiController.text,
+                                                                  resi:
+                                                                      resiController
+                                                                          .text,
                                                                   id: widget
                                                                       .order.id,
                                                                   img: widget
@@ -463,6 +465,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
       ),
     );
   }
+
   resiNumber() {
     return Container(
       margin: EdgeInsets.all(4),
@@ -520,6 +523,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
       ),
     );
   }
+
   createAddressText(String strAddress, double topMargin) {
     return Container(
       margin: EdgeInsets.only(top: topMargin),
@@ -812,17 +816,24 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
 
               createPriceItem(
                   "Order Total",
-                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.totalPrice)
+                          .toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",
-                  "Rp. " + widget.order.tax.toStringAsFixed(3),
+                  "Rp. " +
+                      currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != null
                     ? createPriceItem(
                         "Instalation Delivery",
-                        "Rp. " + widget.order.delivery.toString(),
+                        "Rp. " +
+                            currencyFormatter
+                                .format(widget.order.delivery)
+                                .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
                         "Delievery",

@@ -8,6 +8,7 @@ import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Cart/Cart.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -20,6 +21,7 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   final _key = GlobalKey<ScaffoldState>();
   String qty;
   List<String> listQty = [];
@@ -141,7 +143,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "\Rp.${widget.product.price}",
+                      "Rp. " +
+                          currencyFormatter
+                              .format(widget.product.price)
+                              .toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.red),
                     ),

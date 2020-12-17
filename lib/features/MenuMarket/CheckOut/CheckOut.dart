@@ -38,6 +38,7 @@ class CheckOutPage extends StatefulWidget {
 }
 
 class _CheckOutPageState extends State<CheckOutPage> {
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -432,6 +433,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: FormTextField(
+                                      textType: TextInputType.number,
                                       controller: phoneController,
                                       textHint: "Add Your Phone Number",
                                       textLabel: "Input Phone Number"),
@@ -665,13 +667,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
               // createPriceItem("Bag discount", "getFormattedCurrency(3280)",
               //     Colors.teal.shade300),
 
-              createPriceItem("Order Total", "Rp. " + widget.total.toString(),
+              createPriceItem(
+                  "Order Total",
+                  "Rp. " + currencyFormatter.format(widget.total).toString(),
                   Colors.grey.shade700),
-              createPriceItem("Tax (10%)", "Rp. " + tax.toStringAsFixed(3),
+              createPriceItem(
+                  "Tax (10%)",
+                  "Rp. " + currencyFormatter.format(tax).toString(),
                   Colors.grey.shade700),
               Container(
-                child: createPriceItem("Delievery",
-                    "Rp. " + widget.delivery.toString(), Colors.teal.shade300),
+                child: createPriceItem(
+                    "Delievery",
+                    "Rp. " +
+                        currencyFormatter.format(widget.delivery).toString(),
+                    Colors.teal.shade300),
               ),
 
               SizedBox(
@@ -696,7 +705,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + totals.toStringAsFixed(3),
+                    "Rp. " + currencyFormatter.format(totals).toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )

@@ -13,6 +13,7 @@ import 'package:hydroponics/core/Utils/CustomUtils.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -24,6 +25,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final _key = GlobalKey<ScaffoldState>();
   int qty = 0;
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   //List<int> totals;
 
   @override
@@ -73,77 +75,84 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ),
 //footer(BuildContext context, String total, List<CartItemModel> cart) {
-                Container(
-                    //Container(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(left: 30),
-                            child: Text(
-                              "Total",
-                              style: CustomTextStyle.textFormFieldMedium
-                                  .copyWith(color: Colors.black, fontSize: 12),
+                Expanded(
+                  child: Container(
+                      //Container(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(left: 30),
+                              child: Text(
+                                "Total",
+                                style: CustomTextStyle.textFormFieldMedium
+                                    .copyWith(
+                                        color: Colors.black, fontSize: 12),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 30),
-                            child: Text(
-                              "Rp. " +
-                                  userProvider.userModel.totalCartPrice
-                                      .toString(),
-                              style: CustomTextStyle.textFormFieldBlack
-                                  .copyWith(
-                                      color: Colors.greenAccent.shade700,
-                                      fontSize: 14),
+                            Container(
+                              margin: EdgeInsets.only(right: 30),
+                              child: Text(
+                                "Rp. " +
+                                    currencyFormatter
+                                        .format(userProvider
+                                            .userModel.totalCartPrice)
+                                        .toString(),
+                                style: CustomTextStyle.textFormFieldBlack
+                                    .copyWith(
+                                        color: Colors.greenAccent.shade700,
+                                        fontSize: 14),
+                              ),
                             ),
+                          ],
+                        ),
+                        // Utils.getSizedBox(height: 8),
+                        // RaisedButton(
+                        //   onPressed: () {
+                        //     changeScreen(
+                        //         context,
+                        //         CheckOutPage(
+                        //           cart: cart,
+                        //         ));
+                        //   },
+                        //   color: Colors.green,
+                        //   padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
+                        //   shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.all(Radius.circular(24))),
+                        //   child: Text(
+                        //     "Checkout",
+                        //     style: CustomTextStyle.textFormFieldSemiBold
+                        //         .copyWith(color: Colors.white),
+                        //   ),
+                        // ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+                            child: ButtonButtom(
+                                buttonText: 'Checkout',
+                                color: green,
+                                onPressed: () {
+                                  changeScreen(
+                                      context,
+                                      CheckOutPage(
+                                        cart: userProvider.userModel.cart,
+                                        totalQty:
+                                            userProvider.userModel.cart.length,
+                                        delivery: 15000,
+                                        address: userProvider.userModel.address,
+                                        phone: userProvider.userModel.phone,
+                                        total: userProvider
+                                            .userModel.totalCartPrice,
+                                      ));
+                                }),
                           ),
-                        ],
-                      ),
-                      // Utils.getSizedBox(height: 8),
-                      // RaisedButton(
-                      //   onPressed: () {
-                      //     changeScreen(
-                      //         context,
-                      //         CheckOutPage(
-                      //           cart: cart,
-                      //         ));
-                      //   },
-                      //   color: Colors.green,
-                      //   padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
-                      //   shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.all(Radius.circular(24))),
-                      //   child: Text(
-                      //     "Checkout",
-                      //     style: CustomTextStyle.textFormFieldSemiBold
-                      //         .copyWith(color: Colors.white),
-                      //   ),
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                        child: ButtonButtom(
-                            buttonText: 'Checkout',
-                            color: green,
-                            onPressed: () {
-                              changeScreen(
-                                  context,
-                                  CheckOutPage(
-                                    cart: userProvider.userModel.cart,
-                                    totalQty:
-                                        userProvider.userModel.cart.length,
-                                    delivery: 15000,
-                                    address: userProvider.userModel.address,
-                                    phone: userProvider.userModel.phone,
-                                    total:
-                                        userProvider.userModel.totalCartPrice,
-                                  ));
-                            }),
-                      ),
-                    ])),
+                        ),
+                      ])),
+                ),
                 // },
               ]))));
   }
@@ -228,7 +237,7 @@ class _CartPageState extends State<CartPage> {
   createCartList(List<CartItemModel> cart) {
     return cart.length == 0 || cart == []
         ? Padding(
-            padding: const EdgeInsets.all(125.0),
+            padding: const EdgeInsets.fromLTRB(125, 180, 125, 0),
             child: Image.asset('images/not_found.png'),
           )
         : ListView.builder(
@@ -318,7 +327,10 @@ class _CartPageState extends State<CartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              "Rp${cart.price} ",
+                              "Rp. " +
+                                  currencyFormatter
+                                      .format(cart.price)
+                                      .toString(),
                               style: CustomTextStyle.textFormFieldBlack
                                   .copyWith(color: Colors.green),
                             ),

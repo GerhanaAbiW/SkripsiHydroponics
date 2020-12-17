@@ -15,6 +15,7 @@ import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -28,6 +29,8 @@ class UserOrderDetail extends StatefulWidget {
 }
 
 class _UserOrderDetailState extends State<UserOrderDetail> {
+  final currencyFormatter = NumberFormat('#,##0.00', 'ID');
+
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _formKey = GlobalKey<FormState>();
   OrderServices _orderServices = OrderServices();
@@ -120,7 +123,11 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                       color: darkYellowColor,
                       buttonText: 'Upload Your Transaction',
                       onPressed: () {
-                        changeScreen(context, UploadPayment(id: widget.order.id,));
+                        changeScreen(
+                            context,
+                            UploadPayment(
+                              id: widget.order.id,
+                            ));
                       },
                     ),
                   ),
@@ -202,6 +209,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
         backgroundColor: Colors.white,
         elevation: 2);
   }
+
   resiNumber() {
     return Container(
       margin: EdgeInsets.all(4),
@@ -714,21 +722,31 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
 
               createPriceItem(
                   "Order Total",
-                  "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.totalPrice)
+                          .toString(),
                   Colors.grey.shade700),
               createPriceItem(
                   "Tax (10%)",
-                  "Rp. " + widget.order.tax.toStringAsFixed(3),
+                  "Rp. " +
+                      currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != 0
                     ? createPriceItem(
                         "Instalation Delivery",
-                        "Rp. " + widget.order.delivery.toString(),
+                        "Rp. " +
+                            currencyFormatter
+                                .format(widget.order.delivery)
+                                .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
                         "Delievery",
-                        "Rp. " + widget.order.delivery.toString(),
+                        "Rp. " +
+                            currencyFormatter
+                                .format(widget.order.delivery)
+                                .toString(),
                         Colors.teal.shade300),
               ),
 
@@ -754,7 +772,10 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                         .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
-                    "Rp. " + widget.order.totalPrice.toStringAsFixed(3),
+                    "Rp. " +
+                        currencyFormatter
+                            .format(widget.order.totalPrice)
+                            .toString(),
                     style: CustomTextStyle.textFormFieldMedium
                         .copyWith(color: Colors.black, fontSize: 12),
                   )
