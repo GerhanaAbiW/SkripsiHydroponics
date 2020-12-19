@@ -14,7 +14,11 @@ class UserHydroOrderList extends StatefulWidget {
 }
 
 class _UserHydroOrderListState extends State<UserHydroOrderList> {
-
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context,listen: false).getHydroOrders();
+  }
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);

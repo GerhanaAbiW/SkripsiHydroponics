@@ -29,7 +29,12 @@ class _CartPageState extends State<CartPage> {
   int qty = 0;
   final currencyFormatter = NumberFormat('#,##0.00', 'ID');
   //List<int> totals;
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context,listen: false).reloadUserModel();
 
+  }
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);

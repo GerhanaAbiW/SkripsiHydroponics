@@ -13,7 +13,11 @@ class AdminOrderList extends StatefulWidget {
 }
 
 class _AdminOrderListState extends State<AdminOrderList> {
-
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<OrderProvider>(context,listen: false).getListOrders();
+  }
   @override
   Widget build(BuildContext context) {
     final order = Provider.of<OrderProvider>(context);

@@ -23,7 +23,10 @@ class HydroOrderProvider with ChangeNotifier {
     _adminOrders = await _hydroOrderServices.getAdminOrders();
     notifyListeners();
   }
-
+  getAdminListOrders() async {
+    _adminOrders = await _hydroOrderServices.getAdminOrders();
+    notifyListeners();
+  }
   void _getListBuyers() async {
     _buyers = await _hydroOrderServices.getBuyers();
 

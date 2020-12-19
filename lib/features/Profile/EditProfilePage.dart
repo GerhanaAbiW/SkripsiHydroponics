@@ -27,12 +27,46 @@ class _EditProfilePageState extends State<EditProfilePage> {
   File _image;
   bool isLoading = false;
   TextEditingController nameController = TextEditingController();
-  TextEditingController jenisKelaminController = TextEditingController();
+  String _currentGender;
   TextEditingController dateController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController nomorHPController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
+  List<String> genders = ['Male', 'Female', 'Other'];
+  List<DropdownMenuItem<String>> gendersDropDown = <DropdownMenuItem<String>>[];
 
+  final List<Map<String, dynamic>> genderItems = [
+    {
+      'value': 'Male',
+      'label': 'Male',
+    },
+    {
+      'value': 'Female',
+      'label': 'Female',
+    },
+    {
+      'value': 'Other',
+      'label': 'Other',
+    },
+
+  ];
+  _getGenders() async {
+    //print(brands.length);
+    setState(() {
+      gendersDropDown = getGendersDropDown();
+    });
+  }
+
+  List<DropdownMenuItem<String>> getGendersDropDown() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (int i = 0; i < genders.length; i++) {
+      setState(() {
+        items.insert(
+            0, DropdownMenuItem(child: Text(genders[i]), value: genders[i]));
+      });
+    }
+    return items;
+  }
   Future getImage(ImageSource media) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: media);
@@ -40,12 +74,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
       _image = File(pickedFile.path);
     });
   }
-
+  changeSelectedGender(String selectedGender) {
+    setState(() => _currentGender = selectedGender);
+  }
   @override
   void initState() {
+    _getGenders();
     nameController.text = widget.user.name;
     emailController.text = widget.user.email;
-    jenisKelaminController.text = widget.user.gender;
+    _currentGender= widget.user.gender;
     dateController.text = widget.user.dob;
     nomorHPController.text = widget.user.phone;
     alamatController.text = widget.user.address;
@@ -322,13 +359,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         controller: dateController),
 
                     SizedBox(height: 16),
-                    FormTextField(
+
+                    DropdownForm(
                         textLabel: "Jenis Kelamin",
                         textHint: model.userModel.gender == null
                             ? "Masukkan Jenis Kelamin Anda"
                             : model.userModel.gender,
-                        controller: jenisKelaminController),
-
+                        selectedItem: _currentGender,
+                        dropDownItems: genderItems,
+                        changedDropDownItems: changeSelectedGender
+                    ),
                     // Container(
                     //   child: TextFormField(
                     //     controller: _email,
@@ -453,7 +493,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               role: model.userModel.role,
                               dob: dateController.text,
                               phone: nomorHPController.text,
-                              gender: jenisKelaminController.text,
+                              gender: _currentGender,
                               address: alamatController.text,
                               email: emailController.text);
                           _formKey.currentState.reset();
@@ -467,7 +507,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             role: model.userModel.role,
                             dob: dateController.text,
                             phone: nomorHPController.text,
-                            gender: jenisKelaminController.text,
+                            gender: _currentGender,
                             address: alamatController.text,
                             email: emailController.text,
 

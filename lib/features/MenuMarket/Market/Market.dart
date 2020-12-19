@@ -27,6 +27,7 @@ class _MenuMarketState extends State<MenuMarket> {
   @override
   void initState() {
     super.initState();
+    Provider.of<ProductProvider>(context,listen: false).loadProducts();
     _pageController = PageController();
   }
 

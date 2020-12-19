@@ -22,6 +22,11 @@ class PlantProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future getListPlants() async {
+    _plants = await _plantService.getListPlants();
+    notifyListeners();
+  }
+
   Future search({String plant})async{
     _plantsSearched = await _plantService.searchPlants(plant: plant);
     print("THE NUMBER OF PRODUCTS DETECTED IS: ${_plantsSearched.length}");

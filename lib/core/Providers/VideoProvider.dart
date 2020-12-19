@@ -21,6 +21,10 @@ class VideoProvider with ChangeNotifier {
     _videos = await _videoService.getListVideos();
     notifyListeners();
   }
+  Future getListVideos() async {
+    _videos = await _videoService.getListVideos();
+    notifyListeners();
+  }
   Future search({String videoTitle})async{
     _videosSearched = await _videoService.searchVideos(videoTitle: videoTitle);
     print("THE NUMBER OF PRODUCTS DETECTED IS: ${_videosSearched.length}");

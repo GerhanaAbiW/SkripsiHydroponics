@@ -21,9 +21,8 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
   @override
   void initState() {
     super.initState();
-    list = Provider.of<UserProvider>(context, listen: false)
-        .userModel
-        .myPlantsRecord;
+    Provider.of<UserProvider>(context, listen: false).reloadUserModel();
+    list = Provider.of<UserProvider>(context, listen: false).userModel.myPlantsRecord;
     list.sort((a, b) => a.date.compareTo(b.date));
   }
 

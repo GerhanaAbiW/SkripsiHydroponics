@@ -20,6 +20,11 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<ProductProvider>(context,listen: false).loadProducts();
+  }
+  @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
     return ListView(

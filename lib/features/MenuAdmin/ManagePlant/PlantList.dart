@@ -19,6 +19,11 @@ class PlantList extends StatefulWidget {
 
 class _PlantListState extends State<PlantList> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<PlantProvider>(context,listen: false).getListPlants();
+  }
+  @override
   Widget build(BuildContext context) {
     final plantProvider = Provider.of<PlantProvider>(context);
     return ListView(
@@ -79,4 +84,6 @@ class _PlantListState extends State<PlantList> {
       ],
     );
   }
+
+
 }

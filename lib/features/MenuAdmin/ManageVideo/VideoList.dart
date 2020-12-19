@@ -18,6 +18,11 @@ class VideoList extends StatefulWidget {
 }
 
 class _VideoListState extends State<VideoList> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<VideoProvider>(context,listen: false).getListVideos();
+  }
   String idUrl;
   @override
   Widget build(BuildContext context) {

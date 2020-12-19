@@ -18,6 +18,11 @@ class ArticleList extends StatefulWidget {
 class _ArticleListState extends State<ArticleList> {
 
   @override
+  void initState() {
+    super.initState();
+    Provider.of<ArticleProvider>(context, listen: false).getListArticles();
+  }
+  @override
   Widget build(BuildContext context) {
     final articleProvider = Provider.of<ArticleProvider>(context);
     return ListView(
@@ -76,4 +81,5 @@ class _ArticleListState extends State<ArticleList> {
       ],
     );
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -74,7 +75,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                     children: <Widget>[
                       Positioned(
                         child: Container(
-                          width: 200,
+                          width: 200, //ScreenUtil().setWidth(200),
                           height: 200,
                           decoration: BoxDecoration(
                               color: darkGreenColor, shape: BoxShape.circle),

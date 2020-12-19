@@ -83,8 +83,7 @@ class _UpdateProductState extends State<UpdateProduct> {
 
   @override
   void initState() {
-    _currentCategory = widget.product.category;
-    _currentBrand = widget.product.brand;
+
     _getCategories();
     _getBrands();
     productNameController.text = widget.product.name;
@@ -92,6 +91,7 @@ class _UpdateProductState extends State<UpdateProduct> {
     prodcutDescriptionController.text = widget.product.description;
     productPriceController.text = widget.product.price.toString();
     _currentCategory = widget.product.category;
+    _currentBrand = widget.product.brand;
   }
 
   List<DropdownMenuItem<String>> getCategoriesDropdown() {

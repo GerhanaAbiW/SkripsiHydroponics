@@ -20,6 +20,11 @@ class MyPlantsList extends StatefulWidget {
 
 class _MyPlantsListState extends State<MyPlantsList> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context,listen: false).reloadUserModel();
+  }
+  @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(

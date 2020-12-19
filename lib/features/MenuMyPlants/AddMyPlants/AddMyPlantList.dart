@@ -15,7 +15,11 @@ class AddMyPlantList extends StatefulWidget {
 
 class _AddMyPlantListState extends State<AddMyPlantList> {
 
-
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<PlantProvider>(context,listen: false).getListPlants();
+  }
   @override
   Widget build(BuildContext context) {
     final plantProvider = Provider.of<PlantProvider>(context);

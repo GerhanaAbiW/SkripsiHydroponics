@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/ArticleProvider.dart';
+import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuLearning/LearningArticle/LearningArticleList.dart';
 import 'package:hydroponics/features/MenuLearning/LearningVideo/LearningVideoList.dart';
@@ -15,7 +16,13 @@ class MenuLearning extends StatefulWidget {
 }
 
 class _MenuLearningState extends State<MenuLearning> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<VideoProvider>(context,listen: false).getListVideos();
+    Provider.of<ArticleProvider>(context, listen: false).getListArticles();
 
+  }
 
   @override
   Widget build(BuildContext context) {

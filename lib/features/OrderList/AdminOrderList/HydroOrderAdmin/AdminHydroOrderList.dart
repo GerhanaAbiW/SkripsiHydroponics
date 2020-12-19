@@ -16,6 +16,11 @@ class AdminHydroOrderList extends StatefulWidget {
 
 class _AdminHydroOrderListState extends State<AdminHydroOrderList> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<HydroOrderProvider>(context,listen: false).getAdminListOrders();
+  }
+  @override
   Widget build(BuildContext context) {
     final order = Provider.of<HydroOrderProvider>(context);
     return  ListView(
@@ -51,4 +56,6 @@ class _AdminHydroOrderListState extends State<AdminHydroOrderList> {
         ],
     );
   }
+
+
 }

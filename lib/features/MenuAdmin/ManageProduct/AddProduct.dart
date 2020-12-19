@@ -67,8 +67,7 @@ class _AddProductsState extends State<AddProducts> {
     },
   ];
   List<String> categories = ['Bibit', 'Obat', 'Pupuk', 'Alat'];
-  List<DropdownMenuItem<String>> categoriesDropDown =
-      <DropdownMenuItem<String>>[];
+  List<DropdownMenuItem<String>> categoriesDropDown = <DropdownMenuItem<String>>[];
   List<DropdownMenuItem<String>> brandsDropDown = <DropdownMenuItem<String>>[];
   String _currentCategory;
   String _currentBrand;

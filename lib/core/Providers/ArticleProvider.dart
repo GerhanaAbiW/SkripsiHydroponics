@@ -17,6 +17,10 @@ class ArticleProvider with ChangeNotifier {
   List<Article> get articlesSearched => _articlesSearched;
 
 //  methods
+  Future getListArticles() async {
+    _articles = await _articleService.getListArticles();
+    notifyListeners();
+  }
   void _getListArticles() async {
     _articles = await _articleService.getListArticles();
     notifyListeners();
