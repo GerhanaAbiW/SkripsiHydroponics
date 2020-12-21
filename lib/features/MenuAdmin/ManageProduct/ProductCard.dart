@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Models/Product.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductUpdate.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductCard extends StatelessWidget {
@@ -16,6 +19,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context,listen: false);
+    final appProvider = Provider.of<AppProvider>(context,listen: false);
+
     final currencyFormatter = NumberFormat('#,##0.00', 'ID');
     ProductServices productService = ProductServices();
     return Container(
@@ -129,7 +135,10 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
+                      appProvider.changeIsLoading();
                       productService.deleteProduct(productModel.id);
+                      appProvider.changeIsLoading();
+                      productProvider.loadProducts();
                     },
                   )
                 ],

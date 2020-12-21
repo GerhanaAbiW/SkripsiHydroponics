@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Models/Video.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageVideo/UpdateVideo.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
+import 'package:provider/provider.dart';
 
 class VideoCard extends StatelessWidget {
   final Video video;
@@ -15,6 +18,9 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final videoProvider = Provider.of<VideoProvider>(context, listen: false);
+    final appProvider = Provider.of<AppProvider>(context,listen: false);
+
     String idUrl = video.video.substring(video.video.length - 11);
     VideoService _videoService = VideoService();
     return Container(

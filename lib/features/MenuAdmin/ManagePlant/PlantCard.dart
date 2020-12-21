@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/PlantProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
 import 'package:hydroponics/features/MenuAdmin/ManagePlant/PlantUpdate.dart';
+import 'package:provider/provider.dart';
 
 class PlantCard extends StatelessWidget {
   final Plants plant;
@@ -10,6 +13,10 @@ class PlantCard extends StatelessWidget {
   const PlantCard({Key key, this.plant}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context,listen: false);
+    final plantProvider=Provider.of<PlantProvider>(context,listen: false);
+
+
     PlantService _plantService = PlantService();
     return Container(
       height: 100, //MediaQuery.of(context).size.height,
@@ -84,7 +91,10 @@ class PlantCard extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
+                      appProvider.changeIsLoading();
                       _plantService.deletePlant(plant.id);
+                      appProvider.changeIsLoading();
+                      plantProvider.getListPlants();
                     },
                   )
                 ],

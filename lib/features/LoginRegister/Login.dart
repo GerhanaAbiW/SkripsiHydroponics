@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: 10,
                           ),
                           Text(
-                            'Plant App',
+                            'Hydroponic',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,

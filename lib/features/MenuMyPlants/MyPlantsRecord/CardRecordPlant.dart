@@ -145,9 +145,12 @@ class _WidgetLIstRecordDetailPlantState
                           color: Colors.red,
                         ),
                       ),
-                      onTap: () {
-                        userProvider.deleteMyPlantRecord(
-                            plantItem: widget.model);
+                      onTap: () async{
+                        if(await userProvider.deleteMyPlantRecord(
+                            plantItem: widget.model)==true){
+                          userProvider.reloadUserModel();
+                        }
+
                       },
                     )
                   ],

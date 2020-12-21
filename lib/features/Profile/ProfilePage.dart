@@ -382,6 +382,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
                   onPressed: () {
                     Provider.of<UserProvider>(context, listen: false)
                         .signOut(context);
+                    Navigator.pop(context, true);
                   },
                   child: Text(
                     'Ya',

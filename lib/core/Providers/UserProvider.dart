@@ -68,7 +68,8 @@ class UserProvider with ChangeNotifier {
   Future<bool> signIn(String email, String password) async {
     try {
       _status = Status.Authenticating;
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) => reloadUserModel());
+
       notifyListeners();
       return true;
     } catch (e) {
@@ -108,10 +109,11 @@ class UserProvider with ChangeNotifier {
   }
 
   Future signOut(context) async {
-    _auth.signOut();
     _status = Status.Unauthenticated;
+    await _auth.signOut().then((value) => changeScreenReplacement(context, LoginPage()));
+    _user =  await _auth.currentUser();
     notifyListeners();
-    changeScreenReplacement(context, LoginPage());
+    //
     return Future.delayed(Duration.zero);
   }
 

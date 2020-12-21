@@ -24,6 +24,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     super.initState();
+    Provider.of<UserProvider>(context,listen: false).reloadUserModel();
     _pageController = PageController();
   }
 

@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Article.dart';
+import 'package:hydroponics/core/Providers/AppProvider.dart';
+import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/ArticleServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageArticle/ArticleUpdate.dart';
+import 'package:provider/provider.dart';
 
-class ArticleCard extends StatelessWidget {
+class ArticleCard extends StatefulWidget {
   final Article article;
 
   const ArticleCard({Key key, this.article}) : super(key: key);
+
+  @override
+  _ArticleCardState createState() => _ArticleCardState();
+}
+
+class _ArticleCardState extends State<ArticleCard> {
   @override
   Widget build(BuildContext context) {
+
+    final articleProvider = Provider.of<ArticleProvider>(context,listen: false);
+    final appProvider = Provider.of<AppProvider>(context,listen: false);
     ArticleService _articleService = ArticleService();
     return Container(
       height: 100, //MediaQuery.of(context).size.height,
@@ -20,7 +32,7 @@ class ArticleCard extends StatelessWidget {
                 changeScreen(
                     context,
                     ArticleUpdate(
-                      article: article,
+                      article: widget.article,
                     ));
               },
               child: Row(
@@ -39,9 +51,9 @@ class ArticleCard extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             border: Border.all(),
                           ),
-                          child: article.image != null
+                          child: widget.article.image != null
                               ? Image.network(
-                                  '${article.image}',
+                                  '${widget.article.image}',
                                   fit: BoxFit.fill,
                                 )
                               : Image.asset("images/bayam.jpeg")),
@@ -55,7 +67,7 @@ class ArticleCard extends StatelessWidget {
                           children: [
                             new Container(
                               width: MediaQuery.of(context).size.width / 2,
-                              child: Text(article.title,
+                              child: Text(widget.article.title,
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 15.0,
@@ -66,7 +78,7 @@ class ArticleCard extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(article.date,
+                              child: Text(widget.article.date,
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 15.0,
@@ -84,7 +96,10 @@ class ArticleCard extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      _articleService.deleteArticle(article.id);
+                      appProvider.changeIsLoading();
+                      _articleService.deleteArticle(widget.article.id);
+                      appProvider.changeIsLoading();
+                      articleProvider.getListArticles();
                     },
                   )
                 ],

@@ -13,6 +13,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Providers/VideoProvider.dart';
 
 import 'package:hydroponics/Dashboard.dart';
+import 'package:hydroponics/features/Widget/Loading.dart';
 
 import 'package:hydroponics/features/Widget/SplashScreen.dart';
 import 'package:provider/provider.dart';
@@ -51,11 +52,11 @@ class ScreensController extends StatelessWidget {
     final user = Provider.of<UserProvider>(context);
     switch (user.status) {
       case Status.Uninitialized:
-        return Splash();
+        return Loading();
       case Status.Unauthenticated:
-        return LoginPage();
+        return SplashScreen();
       case Status.Authenticating:
-        return LoginPage();
+        return DashBoard();
       case Status.Authenticated:
         return DashBoard();
       default:
