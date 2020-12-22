@@ -2,12 +2,14 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
+import 'package:hydroponics/core/Providers/PlantProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class AddPlant extends StatefulWidget {
   @override
@@ -118,6 +120,7 @@ class _AddPlantState extends State<AddPlant> {
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);
+          Provider.of<PlantProvider>(context,listen: false).getListPlants();
           Navigator.pop(context);
         });
       } else {
@@ -126,10 +129,7 @@ class _AddPlantState extends State<AddPlant> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {

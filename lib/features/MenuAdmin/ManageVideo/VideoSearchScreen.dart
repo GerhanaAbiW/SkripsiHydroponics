@@ -39,64 +39,66 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
-      body: ListView(
-        physics: NeverScrollableScrollPhysics(),
+      body: Column(
+        //physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(child: SearchVideo()),
-          Container(
-              height: MediaQuery.of(context).size.height - 300.0,
-              //height: 20,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-              ),
-              width: MediaQuery.of(context).size.width,
-              //height: MediaQuery.of(context).size.height / 2,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: videoProvider.videosSearched.length < 1
-                  ? Padding(
-                      padding: const EdgeInsets.all(125.0),
-                      child: Image.asset('images/not_found.png'),
-                    )
-                  : ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: videoProvider.videosSearched.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (videoProvider.videosSearched[index].video != null &&
-                            videoProvider.videosSearched[index].video != "") {
-                          idUrl = videoProvider.videosSearched[index].video
-                              .substring(videoProvider
-                                      .videosSearched[index].video.length -
-                                  11);
-                        }
-                        return AnimationConfiguration.staggeredList(
-                          position: index,
-                          child: VideoCard(
-                            video: videoProvider.videosSearched[index],
-                          ),
-                        );
-                        // return Card(
-                        //     elevation: 10.0,
-                        //     child: InkWell(
-                        //       onTap: () {
-                        //         Navigator.of(context).push(MaterialPageRoute(
-                        //             builder: (context) => MyPlantsDetail()));
-                        //       },
-                        //       child: ListTile(
-                        //         leading: CircleAvatar(
-                        //           radius: 30,
-                        //           backgroundImage:
-                        //               ExactAssetImage("images/plant.png"),
-                        //         ),
-                        //         title: Text(title[index],
-                        //             style: TextStyle(fontSize: 14)),
-                        //         subtitle:
-                        //             Text(desc[index], style: TextStyle(fontSize: 10)),
-                        //       ),
-                        //     ));
-                      },
+          Expanded(
+            child: Container(
+
+                child: videoProvider.videosSearched.length < 1
+                    ? Padding(
+                        padding: const EdgeInsets.all(125.0),
+                        child: Image.asset('images/not_found.png'),
+                      )
+                    : Container(
+                  height: MediaQuery.of(context).size.height,
+                  //height: 20,
+
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height / 2,
+                  //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: videoProvider.videosSearched.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (videoProvider.videosSearched[index].video != null &&
+                                videoProvider.videosSearched[index].video != "") {
+                              idUrl = videoProvider.videosSearched[index].video
+                                  .substring(videoProvider
+                                          .videosSearched[index].video.length -
+                                      11);
+                            }
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              child: VideoCard(
+                                video: videoProvider.videosSearched[index],
+                              ),
+                            );
+                            // return Card(
+                            //     elevation: 10.0,
+                            //     child: InkWell(
+                            //       onTap: () {
+                            //         Navigator.of(context).push(MaterialPageRoute(
+                            //             builder: (context) => MyPlantsDetail()));
+                            //       },
+                            //       child: ListTile(
+                            //         leading: CircleAvatar(
+                            //           radius: 30,
+                            //           backgroundImage:
+                            //               ExactAssetImage("images/plant.png"),
+                            //         ),
+                            //         title: Text(title[index],
+                            //             style: TextStyle(fontSize: 14)),
+                            //         subtitle:
+                            //             Text(desc[index], style: TextStyle(fontSize: 10)),
+                            //       ),
+                            //     ));
+                          },
+                        ),
                     )),
+          ),
         ],
       ),
     );
