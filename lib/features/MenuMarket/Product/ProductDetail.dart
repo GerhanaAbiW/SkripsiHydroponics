@@ -113,7 +113,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: Column(children: <Widget>[
             Expanded(
               child: Carousel(
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.contain,
                 images: productAssets(imgList),
                 autoplay: true,
                 animationCurve: Curves.fastOutSlowIn,

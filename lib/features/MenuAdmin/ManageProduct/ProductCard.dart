@@ -8,6 +8,7 @@ import 'package:hydroponics/core/Services/ProductServices.dart';
 import 'package:hydroponics/features/MenuAdmin/ManageProduct/ProductUpdate.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -19,8 +20,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context,listen: false);
-    final appProvider = Provider.of<AppProvider>(context,listen: false);
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
 
     final currencyFormatter = NumberFormat('#,##0.00', 'ID');
     ProductServices productService = ProductServices();
@@ -50,7 +52,7 @@ class ProductCard extends StatelessWidget {
                         width: 60, //ScreenUtil().setWidth(60),
                         height: 60, //ScreenUtil().setWidth(60),
                         decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
+                          //shape: BoxShape.circle,
                           border: Border.all(),
                         ),
                         child:
@@ -71,7 +73,7 @@ class ProductCard extends StatelessWidget {
                             Positioned.fill(
                                 child: Align(
                               alignment: Alignment.center,
-                              child: Loading(),
+                              child: Loading2(),
                             )),
                             Container(
                               width: MediaQuery.of(context).size.width,

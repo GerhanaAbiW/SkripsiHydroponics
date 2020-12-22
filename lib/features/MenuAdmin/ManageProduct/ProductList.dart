@@ -22,8 +22,9 @@ class _ProductListState extends State<ProductList> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProductProvider>(context,listen: false).loadProducts();
+    Provider.of<ProductProvider>(context, listen: false).loadProducts();
   }
+
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -36,7 +37,7 @@ class _ProductListState extends State<ProductList> {
           search: "Search Product..",
         )),
         Container(
-            height: MediaQuery.of(context).size.height - 300.0,
+            height: MediaQuery.of(context).size.height - 150,
             //height: 20,
             decoration: BoxDecoration(
               color: Colors.white,
