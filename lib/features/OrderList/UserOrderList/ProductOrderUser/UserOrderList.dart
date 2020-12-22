@@ -39,7 +39,7 @@ class _UserOrderListState extends State<UserOrderList> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child:userProvider.hydroOrders == null
+              child:userProvider.hydroOrders == null || userProvider.hydroOrders.length==0
                   ? Padding(
                       padding: const EdgeInsets.all(125.0),
                       child: Image.asset('images/not_found.png'),

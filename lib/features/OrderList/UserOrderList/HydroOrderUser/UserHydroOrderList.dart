@@ -39,7 +39,7 @@ class _UserHydroOrderListState extends State<UserHydroOrderList> {
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child: userProvider.hydroOrders == null
+            child: userProvider.hydroOrders == null || userProvider.hydroOrders.length==0
                 ? Container(
                     height: MediaQuery.of(context).size.height - 600,
                     child: Padding(
