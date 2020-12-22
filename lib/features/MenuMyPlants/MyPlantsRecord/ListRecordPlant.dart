@@ -56,7 +56,7 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
 
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+            //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             child: list.length == 0 || list.length == null
                 ? Padding(
                     padding: const EdgeInsets.all(125.0),
