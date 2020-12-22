@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -12,6 +13,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController _email = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _key = GlobalKey<ScaffoldState>();
   InputDecoration decor = InputDecoration(
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(50),
@@ -68,15 +70,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       TextFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
-                              Pattern pattern =
-                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                              RegExp regex = new RegExp(pattern);
-                              if (!regex.hasMatch(value))
-                                return 'Please make sure your email address is valid';
-                              else
-                                return null;
+                            if(value.isEmpty)
+                            {
+                              return showSnackBar("The password field cannot be empty", _key);
                             }
+                            if(!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)){
+                              return showSnackBar("Please make sure your email address is valid", _key);
+                            }
+                            return null;
                           },
                           controller: _email,
                           decoration: decor.copyWith(
@@ -91,6 +92,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       GestureDetector(
                         onTap: () async {
                           if (_formKey.currentState.validate()) {
+                            //if( _email.text!=0)
                             if (await user.sendPasswordResetEmail(
                                 _email.text) ==
                                 true)
