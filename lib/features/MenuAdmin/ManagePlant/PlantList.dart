@@ -21,8 +21,9 @@ class _PlantListState extends State<PlantList> {
   @override
   void initState() {
     super.initState();
-    Provider.of<PlantProvider>(context,listen: false).getListPlants();
+    Provider.of<PlantProvider>(context, listen: false).getListPlants();
   }
+
   @override
   Widget build(BuildContext context) {
     final plantProvider = Provider.of<PlantProvider>(context);
@@ -34,7 +35,7 @@ class _PlantListState extends State<PlantList> {
           widget: PlantSearchScreen(),
         )),
         Container(
-            height: MediaQuery.of(context).size.height - 300.0,
+            height: MediaQuery.of(context).size.height - 150,
             //height: 20,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -84,6 +85,4 @@ class _PlantListState extends State<PlantList> {
       ],
     );
   }
-
-
 }

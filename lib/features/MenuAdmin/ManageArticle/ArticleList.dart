@@ -16,12 +16,12 @@ class ArticleList extends StatefulWidget {
 }
 
 class _ArticleListState extends State<ArticleList> {
-
   @override
   void initState() {
     super.initState();
     Provider.of<ArticleProvider>(context, listen: false).getListArticles();
   }
+
   @override
   Widget build(BuildContext context) {
     final articleProvider = Provider.of<ArticleProvider>(context);
@@ -32,7 +32,7 @@ class _ArticleListState extends State<ArticleList> {
           child: SearchArticle(),
         ),
         Container(
-            height: MediaQuery.of(context).size.height - 300.0,
+            height: MediaQuery.of(context).size.height - 150,
             //height: 20,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -81,5 +81,4 @@ class _ArticleListState extends State<ArticleList> {
       ],
     );
   }
-
 }

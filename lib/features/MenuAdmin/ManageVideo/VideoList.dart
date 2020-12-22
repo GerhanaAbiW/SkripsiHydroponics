@@ -21,8 +21,9 @@ class _VideoListState extends State<VideoList> {
   @override
   void initState() {
     super.initState();
-    Provider.of<VideoProvider>(context,listen: false).getListVideos();
+    Provider.of<VideoProvider>(context, listen: false).getListVideos();
   }
+
   String idUrl;
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _VideoListState extends State<VideoList> {
       children: <Widget>[
         Container(child: SearchVideo()),
         Container(
-            height: MediaQuery.of(context).size.height - 300.0,
+            height: MediaQuery.of(context).size.height - 150,
             //height: 20,
             decoration: BoxDecoration(
               color: Colors.white,
