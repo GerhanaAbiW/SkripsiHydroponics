@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/LoginRegister/ForgotPassword.dart';
 import 'package:hydroponics/features/LoginRegister/Register.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 
@@ -88,15 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             TextFormField(
                                 validator: (value) {
-                                  if (value.isEmpty) {
-                                    Pattern pattern =
-                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                    RegExp regex = new RegExp(pattern);
-                                    if (!regex.hasMatch(value))
-                                      return 'Please make sure your email address is valid';
-                                    else
-                                      return null;
+                                  if(value.isEmpty)
+                                  {
+                                    return "The password field cannot be empty";//showSnackBar("The password field cannot be empty", _key);
                                   }
+                                  if(!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)){
+                                    return "Please make sure your email address is valid";//showSnackBar("Please make sure your email address is valid", _key);
+                                  }
+                                  return null;
                                 },
                                 controller: _email,
                                 decoration: decor.copyWith(
@@ -111,9 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                             TextFormField(
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "The password field cannot be empty";
+                                    return "The password field cannot be empty";//showSnackBar("The password field cannot be empty", _key);
                                   } else if (value.length < 6) {
-                                    return "the password has to be at least 6 characters long";
+                                    return "The password has to be at least 6 characters long";//showSnackBar("The password has to be at least 6 characters long", _key);
                                   }
                                   return null;
                                 },
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () async {
                                 if (_formKey.currentState.validate()) {
                                   if (await user.signIn(
-                                          _email.text, _password.text) ==
+                                          _email.text, _password.text, _key) ==
                                       true)
                                     changeScreenReplacement(
                                         context, DashBoard());
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                                 GestureDetector(
                                     onTap: () =>
                                         changeScreen(context, ForgotPassword()),
-                                    child: Text("Forgot Passsword? ",
+                                    child: Text("Forgot Password? ",
                                         style: TextStyle(color: green)))
                               ],
                             )

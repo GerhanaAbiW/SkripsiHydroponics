@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Router/Router_Constants.dart';
 import 'package:hydroponics/features/LoginRegister/Login.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _passwordVisible = false;
     _confirmPasswordVisible = false;
   }
+
 
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
@@ -111,15 +113,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: EdgeInsets.only(left: 10),
                             child: TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
-                                  Pattern pattern =
-                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                  RegExp regex = new RegExp(pattern);
-                                  if (!regex.hasMatch(value))
-                                    return 'Please make sure your email address is valid';
-                                  else
-                                    return null;
+                                if(value.isEmpty)
+                                {
+                                  return "The password field cannot be empty";//showSnackBar("The password field cannot be empty", _key);
                                 }
+                                if(!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)){
+                                  return "Please make sure your email address is valid";//showSnackBar("Please make sure your email address is valid", _key);
+                                }
+                                return null;
+
                               },
                               controller: _email,
                               decoration: InputDecoration(
@@ -141,9 +143,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: TextFormField(
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "The password field cannot be empty";
+                                    return "The password field cannot be empty";//showSnackBar("The password field cannot be empty", _key);
                                   } else if (value.length < 6) {
-                                    return "the password has to be at least 6 characters long";
+                                    return "The password has to be at least 6 characters long";//showSnackBar("The password has to be at least 6 characters long", _key);
                                   }
                                   return null;
                                 },
@@ -183,9 +185,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: TextFormField(
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "The password field cannot be empty";
-                                  } else if (value.length < 6) {
-                                    return "the password has to be at least 6 characters long";
+                                    return showSnackBar("The confirm password field cannot be empty", _key);
+                                  } if (value.length < 6) {
+                                    return showSnackBar("The confirm password has to be at least 6 characters long", _key);
+                                  } if(value!=_password.text){
+                                    return showSnackBar("Confirm Password doesn't match", _key);
                                   }
                                   return null;
                                 },

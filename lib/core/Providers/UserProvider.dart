@@ -10,6 +10,7 @@ import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Services/HydroOrderService.dart';
 import 'package:hydroponics/core/Services/PaymentService.dart';
 import 'package:hydroponics/core/Services/ProductServices.dart';
+import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -65,7 +66,7 @@ class UserProvider with ChangeNotifier {
 
   //init() async {}
 
-  Future<bool> signIn(String email, String password) async {
+  Future<bool> signIn(String email, String password, GlobalKey<ScaffoldState> _key) async {
     try {
       _status = Status.Authenticating;
       await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) => reloadUserModel());
@@ -74,6 +75,7 @@ class UserProvider with ChangeNotifier {
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;
+      showSnackBar(e.toString(), _key);
       notifyListeners();
       print(e.toString());
       return false;
