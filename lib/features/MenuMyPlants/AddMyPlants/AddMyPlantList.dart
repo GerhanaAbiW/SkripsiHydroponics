@@ -14,12 +14,12 @@ class AddMyPlantList extends StatefulWidget {
 }
 
 class _AddMyPlantListState extends State<AddMyPlantList> {
-
   @override
   void initState() {
     super.initState();
-    Provider.of<PlantProvider>(context,listen: false).getListPlants();
+    Provider.of<PlantProvider>(context, listen: false).getListPlants();
   }
+
   @override
   Widget build(BuildContext context) {
     final plantProvider = Provider.of<PlantProvider>(context);
@@ -46,7 +46,9 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
-            child: SearchPlant(widget: AddMyPlantSearchScreen(),),
+            child: SearchPlant(
+              widget: AddMyPlantSearchScreen(),
+            ),
           ),
           Container(
               height: MediaQuery.of(context).size.height - 200.0,
@@ -58,19 +60,25 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height / 2,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: plantProvider.plants.length==0||plantProvider.plants==[]?Text("No Data"):ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: plantProvider.plants.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: AddMyPlantCard(
-                      plant: plantProvider.plants[index],
-                    ),
-                  );
-                },
-              )),
+              child:
+                  plantProvider.plants.length == 0 || plantProvider.plants == []
+                      ? Padding(
+                          padding: const EdgeInsets.all(125.0),
+                          child: Image.asset('images/no_data_grey.png'),
+                        )
+                      : ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: plantProvider.plants.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              child: AddMyPlantCard(
+                                plant: plantProvider.plants[index],
+                              ),
+                            );
+                          },
+                        )),
         ],
       ),
     );
