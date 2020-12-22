@@ -156,7 +156,7 @@ class _AddProductsState extends State<AddProducts> {
               MultiImagePickerList(
                   imageList: imageList,
                   removeNewImage: (index) {
-                    removeImage(index);
+                    return removeImage(index);
                   }),
               SizedBox(
                 height: 16,
