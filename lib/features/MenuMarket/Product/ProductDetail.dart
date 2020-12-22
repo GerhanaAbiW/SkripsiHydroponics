@@ -109,6 +109,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       backgroundColor: Colors.green[100],
       body: ListView(children: <Widget>[
         new Container(
+          color: Colors.white,
           height: 300.0,
           child: Column(children: <Widget>[
             Expanded(
@@ -237,98 +238,106 @@ class _ProductDetailsState extends State<ProductDetails> {
         //     ),
         //   ],
         // ),
-        Row(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Quantity : ",
-              style: TextStyle(color: Colors.green, fontSize: 16.0),
-            ),
-          ),
-          Expanded(
-            child: Padding(
+        Container(
+          color: Colors.green[200],
+          child: Row(children: <Widget>[
+            Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.grey[200],
-                    border: Border.all()),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    hint: Text("Please select the quantity",
-                        style: TextStyle(color: Colors.black, fontSize: 14.0)),
-                    dropdownColor: Colors.white,
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black87,
+              child: Text(
+                "Quantity : ",
+                style: TextStyle(color: Colors.black, fontSize: 16.0),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.grey[200],
+                      border: Border.all()),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      hint: Text("Please select the quantity",
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 14.0)),
+                      dropdownColor: Colors.white,
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black87,
+                      ),
+                      iconSize: 36.0,
+                      isExpanded: true,
+                      style: TextStyle(color: Colors.black, fontSize: 22),
+                      value: qty,
+                      items: listQty.map((valueItem) {
+                        return DropdownMenuItem(
+                          child: Text(valueItem),
+                          value: valueItem,
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          qty = value;
+                        });
+                      },
                     ),
-                    iconSize: 36.0,
-                    isExpanded: true,
-                    style: TextStyle(color: Colors.black, fontSize: 22),
-                    value: qty,
-                    items: listQty.map((valueItem) {
-                      return DropdownMenuItem(
-                        child: Text(valueItem),
-                        value: valueItem,
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        qty = value;
-                      });
-                    },
                   ),
                 ),
               ),
+              // MaterialButton(
+              //   onPressed: () {
+              //     showDialog(
+              //         context: context,
+              //         builder: (context) {
+              //           return AlertDialog(
+              //             title: new Text("Quantity"),
+              //             content: new Text("Choose the quantity"),
+              //             actions: <Widget>[
+              //               new MaterialButton(
+              //                   onPressed: () {
+              //                     Navigator.of(context).pop(context);
+              //                   },
+              //                   child: new Text("close"))
+              //             ],
+              //           );
+              //         });
+              //   },
+              //   color: Colors.white,
+              //   textColor: Colors.grey,
+              //   elevation: 0.2,
+              //   child: Row(children: <Widget>[
+              //     Expanded(
+              //       child: new Text("Quantity"),
+              //     ),
+              //     new Icon(Icons.arrow_drop_down),
+              //   ]),
+              // ),
             ),
-            // MaterialButton(
-            //   onPressed: () {
-            //     showDialog(
-            //         context: context,
-            //         builder: (context) {
-            //           return AlertDialog(
-            //             title: new Text("Quantity"),
-            //             content: new Text("Choose the quantity"),
-            //             actions: <Widget>[
-            //               new MaterialButton(
-            //                   onPressed: () {
-            //                     Navigator.of(context).pop(context);
-            //                   },
-            //                   child: new Text("close"))
-            //             ],
-            //           );
-            //         });
-            //   },
-            //   color: Colors.white,
-            //   textColor: Colors.grey,
-            //   elevation: 0.2,
-            //   child: Row(children: <Widget>[
-            //     Expanded(
-            //       child: new Text("Quantity"),
+            new IconButton(
+                icon: Icon(
+                  Icons.add_shopping_cart,
+                  color: Colors.black,
+                ),
+                onPressed: () {}),
+            // new IconButton(
+            //     icon: Icon(
+            //       Icons.favorite_border,
+            //       color: Colors.red,
             //     ),
-            //     new Icon(Icons.arrow_drop_down),
-            //   ]),
-            // ),
-          ),
-          new IconButton(
-              icon: Icon(
-                Icons.add_shopping_cart,
-                color: Colors.green,
-              ),
-              onPressed: () {}),
-          // new IconButton(
-          //     icon: Icon(
-          //       Icons.favorite_border,
-          //       color: Colors.red,
-          //     ),
-          //     onPressed: () {})
-        ]),
+            //     onPressed: () {})
+          ]),
+        ),
+        // SizedBox(
+        //   height: 20,
+        // ),
         Divider(),
         new ListTile(
           title: new Text("Product description"),
           subtitle: new Text(widget.product.description),
         ),
+
         Divider(),
         new Row(children: <Widget>[
           Padding(

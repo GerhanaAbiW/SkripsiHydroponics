@@ -3,6 +3,7 @@ import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class AddMyPlantCard extends StatelessWidget {
@@ -59,7 +60,7 @@ class AddMyPlantCard extends StatelessWidget {
                             Positioned.fill(
                                 child: Align(
                               alignment: Alignment.center,
-                              child: Loading(),
+                              child: Loading2(),
                             )),
                             Container(
                               width: MediaQuery.of(context).size.width,

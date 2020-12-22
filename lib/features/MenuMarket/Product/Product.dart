@@ -9,6 +9,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMarket/Product/ProductDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -110,15 +111,16 @@ class _NewProductCardState extends State<NewProductCard> {
                     Positioned.fill(
                         child: Align(
                       alignment: Alignment.center,
-                      child: Loading(),
+                      child: Loading2(),
                     )),
                     Container(
+                      //color: Colors.green[200],
                       width: MediaQuery.of(context).size.width,
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
                         image: widget.product.picture[0],
                         height: MediaQuery.of(context).size.height,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     )
                   ],

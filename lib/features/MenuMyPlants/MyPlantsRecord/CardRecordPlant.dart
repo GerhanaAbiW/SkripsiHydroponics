@@ -6,6 +6,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/PlantService.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/MyPlantsRecordDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -92,7 +93,7 @@ class _WidgetLIstRecordDetailPlantState
                               Positioned.fill(
                                   child: Align(
                                 alignment: Alignment.center,
-                                child: Loading(),
+                                child: Loading2(),
                               )),
                               Container(
                                 width: MediaQuery.of(context).size.width,
@@ -145,12 +146,12 @@ class _WidgetLIstRecordDetailPlantState
                           color: Colors.red,
                         ),
                       ),
-                      onTap: () async{
-                        if(await userProvider.deleteMyPlantRecord(
-                            plantItem: widget.model)==true){
+                      onTap: () async {
+                        if (await userProvider.deleteMyPlantRecord(
+                                plantItem: widget.model) ==
+                            true) {
                           userProvider.reloadUserModel();
                         }
-
                       },
                     )
                   ],

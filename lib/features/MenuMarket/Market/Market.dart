@@ -27,7 +27,7 @@ class _MenuMarketState extends State<MenuMarket> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProductProvider>(context,listen: false).loadProducts();
+    Provider.of<ProductProvider>(context, listen: false).loadProducts();
     _pageController = PageController();
   }
 
@@ -42,11 +42,12 @@ class _MenuMarketState extends State<MenuMarket> {
     final productProvider = Provider.of<ProductProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
     Widget image_carousel = new Container(
+      color: Colors.white,
       height: 200.0,
       child: new Carousel(
-        boxFit: BoxFit.cover,
+        boxFit: BoxFit.contain,
         images: [
-          AssetImage('images/bayam.jpeg'),
+          AssetImage('images/hydro4.png'),
           AssetImage('images/hydro1.jpeg'),
           AssetImage('images/obat.jpeg'),
           AssetImage('images/hydro2.jpeg'),
@@ -79,7 +80,7 @@ class _MenuMarketState extends State<MenuMarket> {
         ),
         actions: <Widget>[
           Offstage(
-            offstage: userProvider.userModel.role=="admin"?true:false,
+            offstage: userProvider.userModel.role == "admin" ? true : false,
             child: new IconButton(
                 icon: Icon(
                   Icons.shopping_cart,
@@ -110,6 +111,7 @@ class _MenuMarketState extends State<MenuMarket> {
       // ),
       //backgroundColor: Colors.white,
       body: Container(
+        color: Colors.green[100],
         child: SingleChildScrollView(
           child: new Column(
             children: <Widget>[
@@ -117,7 +119,10 @@ class _MenuMarketState extends State<MenuMarket> {
               //   child: SearchWidget(),
               //   height: 70.0,
               // ),
-              SearchProduct(widget: SearchScreenMarket(),search: "What would your like to buy?",),
+              SearchProduct(
+                widget: SearchScreenMarket(),
+                search: "What would your like to buy?",
+              ),
               // Container(
               //   decoration: BoxDecoration(
               //       color: Colors.white,
@@ -155,10 +160,12 @@ class _MenuMarketState extends State<MenuMarket> {
 
               image_carousel,
               new Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
                 child: Container(
+                    color: Colors.white,
                     alignment: Alignment.topCenter,
-                    child: new Text("Categories")),
+                    child: new Text("Categories",
+                        style: TextStyle(fontWeight: FontWeight.bold))),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -168,8 +175,11 @@ class _MenuMarketState extends State<MenuMarket> {
               new Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                 child: Container(
+                    height: 20,
+                    color: Colors.white,
                     alignment: Alignment.topCenter,
-                    child: new Text("Recent Product")),
+                    child: new Text("Recent Product",
+                        style: TextStyle(fontWeight: FontWeight.bold))),
               ),
               Products(productProvider.products)
             ],
