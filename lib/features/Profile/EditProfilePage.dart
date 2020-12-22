@@ -10,6 +10,7 @@ import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/Profile/ProfilePage.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -48,7 +49,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       'value': 'Other',
       'label': 'Other',
     },
-
   ];
   _getGenders() async {
     //print(brands.length);
@@ -67,6 +67,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
     return items;
   }
+
   Future getImage(ImageSource media) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: media);
@@ -74,15 +75,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
       _image = File(pickedFile.path);
     });
   }
+
   changeSelectedGender(String selectedGender) {
     setState(() => _currentGender = selectedGender);
   }
+
   @override
   void initState() {
     _getGenders();
     nameController.text = widget.user.name;
     emailController.text = widget.user.email;
-    _currentGender= widget.user.gender;
+    _currentGender = widget.user.gender;
     dateController.text = widget.user.dob;
     nomorHPController.text = widget.user.phone;
     alamatController.text = widget.user.address;
@@ -198,7 +201,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     Positioned.fill(
                                         child: Align(
                                       alignment: Alignment.center,
-                                      child: Loading(),
+                                      child: Loading2(),
                                     )),
                                     ClipRRect(
                                       borderRadius:
@@ -209,6 +212,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         image: model.userModel.userPicture,
                                         height:
                                             MediaQuery.of(context).size.height,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         fit: BoxFit.cover,
                                       ),
                                     )
@@ -367,8 +372,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             : model.userModel.gender,
                         selectedItem: _currentGender,
                         dropDownItems: genderItems,
-                        changedDropDownItems: changeSelectedGender
-                    ),
+                        changedDropDownItems: changeSelectedGender),
                     // Container(
                     //   child: TextFormField(
                     //     controller: _email,
@@ -502,15 +506,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         });
                       } else {
                         model.updateUser(
-                            img: widget.user.userPicture,
-                            name: nameController.text,
-                            role: model.userModel.role,
-                            dob: dateController.text,
-                            phone: nomorHPController.text,
-                            gender: _currentGender,
-                            address: alamatController.text,
-                            email: emailController.text,
-
+                          img: widget.user.userPicture,
+                          name: nameController.text,
+                          role: model.userModel.role,
+                          dob: dateController.text,
+                          phone: nomorHPController.text,
+                          gender: _currentGender,
+                          address: alamatController.text,
+                          email: emailController.text,
                         );
                         _formKey.currentState.reset();
                         setState(() => isLoading = false);
@@ -521,10 +524,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    padding: EdgeInsets.all(16),
+                    width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(15),
                         color: darkGreenColor),
                     child: Text(
                       'Save',

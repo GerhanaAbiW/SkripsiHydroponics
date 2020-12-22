@@ -17,8 +17,9 @@ class _UserHydroOrderListState extends State<UserHydroOrderList> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context,listen: false).getHydroOrders();
+    Provider.of<UserProvider>(context, listen: false).getHydroOrders();
   }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -30,16 +31,17 @@ class _UserHydroOrderListState extends State<UserHydroOrderList> {
         //   child: SearchListAddPlantWidget(),
         // ),
         Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height / 1.5,
             //height: 20,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-            ),
+            // decoration: BoxDecoration(
+            //   color: Colors.white,
+            //   borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+            // ),
             width: MediaQuery.of(context).size.width,
             //height: MediaQuery.of(context).size.height / 2,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child: userProvider.hydroOrders == null || userProvider.hydroOrders.length==0
+            child: userProvider.hydroOrders == null ||
+                    userProvider.hydroOrders.length == 0
                 ? Container(
                     height: MediaQuery.of(context).size.height - 600,
                     child: Padding(

@@ -18,13 +18,17 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController _password = TextEditingController();
   TextEditingController _cPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context,listen: false);
+    final user = Provider.of<UserProvider>(context, listen: false);
     return Consumer<UserProvider>(
       builder: (context, model, child) => Scaffold(
+        // key: _formKey,
+        // resizeToAvoidBottomPadding: true,
+        // resizeToAvoidBottomInset: true,
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
@@ -45,15 +49,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ),
         body: Form(
           key: _formKey,
-          child: ListView(
+          child: Stack(
             // child: Column(
             children: <Widget>[
               SizedBox(
-                height: 24,
+                height: 35,
               ),
               //Container(
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 30.0, left: 16, right: 16),
                 child: Column(
                   children: <Widget>[
                     FormTextField(
@@ -78,32 +82,39 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               SizedBox(
                 height: 40,
               ),
-              Center(
-                child: GestureDetector(
-                  onTap: () async{
-                    if(_formKey.currentState.validate()){
-                      if(await user.resetPassword(_password.text)==true){
-                        user.signOut(context);
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 90,
+                  child: GestureDetector(
+                    onTap: () async {
+                      if (_formKey.currentState.validate()) {
+                        if (await user.resetPassword(_password.text) == true) {
+                          user.signOut(context);
+                        }
                       }
-                    }
-                  //   if (_formKey.currentState.validate()) {
-                  //     if (await user.sendPasswordResetEmail(
-                  //     _email.text) ==
-                  //   true)
-                  //   changeScreenReplacement(
-                  //   context, LoginPage());
-                  // }
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: darkGreenColor),
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+                      //   if (_formKey.currentState.validate()) {
+                      //     if (await user.sendPasswordResetEmail(
+                      //     _email.text) ==
+                      //   true)
+                      //   changeScreenReplacement(
+                      //   context, LoginPage());
+                      // }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(16),
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: darkGreenColor),
+                        child: Text(
+                          'Save',
+                          style: TextStyle(color: Colors.white, fontSize: 22),
+                        ),
+                      ),
                     ),
                   ),
                 ),

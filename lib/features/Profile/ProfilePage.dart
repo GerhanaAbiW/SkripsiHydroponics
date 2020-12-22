@@ -8,6 +8,7 @@ import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/Profile/ChangePassword.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -202,17 +203,13 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                         image: DecorationImage(
                                             image: AssetImage(
                                                 'images/asset_profile/placeholderprofile.png'),
-                                            fit: BoxFit.contain)))
+                                            fit: BoxFit.fill)))
                                 : Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                           color: Colors.grey.shade400,
                                           width: 2),
                                       shape: BoxShape.circle,
-                                      // image: DecorationImage(
-                                      //     image: AssetImage(
-                                      //         "images/asset_profile/deku.jpeg"),
-                                      //     fit: BoxFit.contain)
                                     ),
                                     width: 100,
                                     height: 100,
@@ -221,21 +218,27 @@ class _NewProfilePageState extends State<NewProfilePage> {
                                         Positioned.fill(
                                             child: Align(
                                           alignment: Alignment.center,
-                                          child: Loading(),
+                                          child: Loading2(),
                                         )),
                                         // Container(
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(80)),
-                                          // width:
-                                          //     MediaQuery.of(context).size.width,
-                                          child: FadeInImage.memoryNetwork(
-                                            placeholder: kTransparentImage,
-                                            image: user.userModel.userPicture,
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height,
-                                            fit: BoxFit.cover,
+                                        Center(
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(80)),
+                                            // width:
+                                            //     MediaQuery.of(context).size.width,
+                                            child: FadeInImage.memoryNetwork(
+                                              alignment: Alignment.center,
+                                              placeholder: kTransparentImage,
+                                              image: user.userModel.userPicture,
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         )
                                       ],
