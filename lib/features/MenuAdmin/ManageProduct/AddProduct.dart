@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/BrandServices.dart';
 import 'package:hydroponics/core/Services/CategoryServices.dart';
@@ -11,6 +12,7 @@ import 'package:hydroponics/features/MenuAdmin/MainMenuAdmin.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class AddProducts extends StatefulWidget {
@@ -288,7 +290,8 @@ class _AddProductsState extends State<AddProducts> {
 
           _formKey.currentState.reset();
           setState(() => isLoading = false);
-          changeScreen(context, MenuAdmin());
+          Provider.of<ProductProvider>(context, listen: false).loadProducts();
+          backScreen(context);
         } else {
           setState(() => isLoading = false);
         }

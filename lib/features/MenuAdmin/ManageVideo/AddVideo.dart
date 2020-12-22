@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/VideoProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/VideoServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddVideo extends StatefulWidget {
   @override
@@ -52,6 +54,7 @@ class _AddVideoState extends State<AddVideo> {
       });
       _formKey.currentState.reset();
       setState(() => isLoading = false);
+      Provider.of<VideoProvider>(context,listen: false).getListVideos();
       Navigator.pop(context);
     } else {
       setState(() => isLoading = false);

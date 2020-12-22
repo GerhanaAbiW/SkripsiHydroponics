@@ -3,12 +3,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/ArticleServices.dart';
 
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderDetails.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class AddArticle extends StatefulWidget {
   @override
@@ -108,6 +110,7 @@ class _AddArticleState extends State<AddArticle> {
           });
           _formKey.currentState.reset();
           setState(() => isLoading = false);
+          Provider.of<ArticleProvider>(context, listen: false).getListArticles();
           Navigator.pop(context);
         });
       } else {

@@ -21,33 +21,37 @@ class _VideoListState extends State<VideoList> {
   @override
   void initState() {
     super.initState();
-    Provider.of<VideoProvider>(context,listen: false).getListVideos();
+    Provider.of<VideoProvider>(context, listen: false).getListVideos();
   }
+
   String idUrl;
+
   @override
   Widget build(BuildContext context) {
     final videoProvider = Provider.of<VideoProvider>(context);
-    return ListView(
-      physics: NeverScrollableScrollPhysics(),
+    return Column(
+      //physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Container(child: SearchVideo()),
-        Container(
-            height: MediaQuery.of(context).size.height - 300.0,
-            //height: 20,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-            ),
-            width: MediaQuery.of(context).size.width,
-            //height: MediaQuery.of(context).size.height / 2,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            child:
-                videoProvider.videos.length == 0 || videoProvider.videos == null
-                    ? Padding(
-                        padding: const EdgeInsets.all(125.0),
-                        child: Image.asset('images/not_found.png'),
-                      )
-                    : ListView.builder(
+        Expanded(
+          child: Container(
+              // height: MediaQuery.of(context).size.height,
+              // //height: 20,
+              //
+              // width: MediaQuery.of(context).size.width,
+              // //height: MediaQuery.of(context).size.height / 2,
+              // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+              child: videoProvider.videos.length == 0 ||
+                      videoProvider.videos == null
+                  ? Padding(
+                      padding: const EdgeInsets.all(125.0),
+                      child: Image.asset('images/not_found.png'),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height,
+                      //height: 20,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: videoProvider.videos.length,
@@ -83,7 +87,9 @@ class _VideoListState extends State<VideoList> {
                           //       ),
                           //     ));
                         },
-                      )),
+                      ),
+                    )),
+        ),
       ],
     );
   }

@@ -38,24 +38,23 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
-      body: ListView(
-        physics: NeverScrollableScrollPhysics(),
+      body: Column(
+        //physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Container(
               child: SearchProduct(
             widget: ProductSearchScreen(),
             search: "Search",
           )),
-          Container(
-              height: MediaQuery.of(context).size.height - 300.0,
+          Expanded(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
               //height: 20,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-              ),
+              // decoration: BoxDecoration(
+              //   color: Colors.white,
+              //   borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+              // ),
               width: MediaQuery.of(context).size.width,
-              //height: MediaQuery.of(context).size.height / 2,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -69,8 +68,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                       : AnimationConfiguration.staggeredList(
                           position: index,
                           child: ProductCard(
-                            productModel:
-                                productProvider.productsSearched[index],
+                            productModel: productProvider.productsSearched[index],
                           ),
                         );
                   // return Card(
@@ -93,7 +91,9 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                   //       ),
                   //     ));
                 },
-              )),
+              ),
+            ),
+          )
         ],
       ),
     );
