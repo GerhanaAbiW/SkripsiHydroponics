@@ -121,8 +121,9 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 color1: Colors.blue,
                 icon: Icons.person_outline,
                 value: user.listUserModel.length,
-                title: 'User                   ',
+                title: 'User',
               ),
+              SizedBox(width: 0,),
               SmallCard(
                 color2: Colors.green,
                 color1: Colors.greenAccent,
