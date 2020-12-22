@@ -16,43 +16,43 @@ class _AdminOrderListState extends State<AdminOrderList> {
   @override
   void initState() {
     super.initState();
-    Provider.of<OrderProvider>(context,listen: false).getListOrders();
+    Provider.of<OrderProvider>(context, listen: false).getListOrders();
   }
+
   @override
   Widget build(BuildContext context) {
     final order = Provider.of<OrderProvider>(context);
-    return ListView(
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+    return Container(
+        //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+        child: order.orders.length == 0 || order.orders.length == null
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: Image.asset('images/not_found.png'),
+                    width: 200,
+                    height: 200,
+                  ),
+                ],
+              )
+            : Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: order.orders.length, //plantProvider.plants.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      child: AdminOrderCard(
+                        orderModel: order.orders[index],
+                      ),
+                    );
+                  },
+                ),
               ),
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-              child: order.orders.length == 0 || order.orders.length == null
-                  ? Padding(
-                      padding: const EdgeInsets.all(125.0),
-                      child: Image.asset('images/not_found.png'),
-                    )
-                  : ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount:
-                          order.orders.length, //plantProvider.plants.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return AnimationConfiguration.staggeredList(
-                          position: index,
-                          child: AdminOrderCard(
-                            orderModel: order.orders[index],
-                          ),
-                        );
-                      },
-                    )),
-        ],
-
     );
   }
 }

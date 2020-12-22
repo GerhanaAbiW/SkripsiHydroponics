@@ -63,10 +63,10 @@ class _SmallCardState extends State<SmallCard> {
                     )
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
+                // Column(
+                //   // mainAxisAlignment: MainAxisAlignment.center,
+                //   // crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: <Widget>[
                     Text(
                       widget.value.toString(),
                       style: TextStyle(
@@ -74,8 +74,8 @@ class _SmallCardState extends State<SmallCard> {
                           color: Colors.white,
                           fontWeight: FontWeight.w400),
                     ),
-                  ],
-                )
+              //    ],
+             //   )
               ],
             ),
           )
