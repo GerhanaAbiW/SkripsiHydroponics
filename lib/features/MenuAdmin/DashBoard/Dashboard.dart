@@ -22,31 +22,35 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   int user = 0;
   double revenue = 0;
   int transaction = 0;
-  int hydroMarket=0;
-  int hydroOrder=0;
+  int hydroMarket = 0;
+  int hydroOrder = 0;
+
   // double bibit =0;
   // double obat =0;
   // double pupuk =0;
   // double alat =0;
 
-
-
- void getAllCards(){
-   user = Provider.of<UserProvider>(context,listen: false).listUserModel.length;
-   revenue = Provider.of<OrderProvider>(context,listen: false).revenue + Provider.of<HydroOrderProvider>(context,listen: false).revenue;
-   transaction = Provider.of<OrderProvider>(context,listen: false).buyers.length + Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
-   hydroOrder = Provider.of<HydroOrderProvider>(context,listen: false).buyers.length;
-   hydroMarket = Provider.of<OrderProvider>(context,listen: false).sales;
-   // bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
-   // obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
-   // pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
-   // alat = Provider.of<OrderProvider>(context,listen: false).alat.toDouble();
-   // print("ini"+bibit.toString());
-   // print("ini"+obat.toString());
-   // print("ini"+pupuk.toString());
-   // print("ini"+alat.toString());
- }
-
+  void getAllCards() {
+    user =
+        Provider.of<UserProvider>(context, listen: false).listUserModel.length;
+    revenue = Provider.of<OrderProvider>(context, listen: false).revenue +
+        Provider.of<HydroOrderProvider>(context, listen: false).revenue;
+    transaction = Provider.of<OrderProvider>(context, listen: false)
+            .buyers
+            .length +
+        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroOrder =
+        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroMarket = Provider.of<OrderProvider>(context, listen: false).sales;
+    // bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
+    // obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
+    // pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
+    // alat = Provider.of<OrderProvider>(context,listen: false).alat.toDouble();
+    // print("ini"+bibit.toString());
+    // print("ini"+obat.toString());
+    // print("ini"+pupuk.toString());
+    // print("ini"+alat.toString());
+  }
 
   @override
   void initState() {
@@ -81,7 +85,6 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   @override
   Widget build(BuildContext context) {
-
     final user = Provider.of<UserProvider>(context);
     final order = Provider.of<OrderProvider>(context);
     // order.getSales();
@@ -98,7 +101,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                   text: 'Revenue\n',
                   style: TextStyle(fontSize: 35, color: Colors.grey)),
               TextSpan(
-                  text:  "Rp. " +
+                  text: "Rp. " +
                       currencyFormatter
                           .format(revenue)
                           .toString(), //'\Rp. $revenue',
@@ -119,9 +122,6 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 icon: Icons.person_outline,
                 value: user.listUserModel.length,
                 title: 'User                   ',
-              ),
-              SizedBox(
-                width: 1,
               ),
               SmallCard(
                 color2: Colors.green,
@@ -187,7 +187,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                         new charts.DatumLegend(
                           outsideJustification:
                               charts.OutsideJustification.endDrawArea,
-                           horizontalFirst: false,
+                          horizontalFirst: false,
                           desiredMaxRows: 2,
                           cellPadding:
                               new EdgeInsets.only(right: 4.0, bottom: 4.0),
