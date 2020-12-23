@@ -12,6 +12,7 @@ import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -580,7 +581,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 Positioned.fill(
                     child: Align(
                   alignment: Alignment.center,
-                  child: Loading(),
+                  child: Container(height: 40, width: 30, child: Loading2()),
                 )),
                 Container(
                   width: MediaQuery.of(context).size.width,

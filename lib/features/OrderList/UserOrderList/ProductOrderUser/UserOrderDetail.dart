@@ -15,6 +15,7 @@ import 'package:hydroponics/features/OrderList/UserOrderList/DashboardUserOrder.
 import 'package:hydroponics/features/OrderList/UserOrderList/ProductOrderUser/ProductUploadPayment.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -636,7 +637,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 Positioned.fill(
                     child: Align(
                   alignment: Alignment.center,
-                  child: Loading(),
+                  child: Container(width: 30, height: 40, child: Loading2()),
                 )),
                 Container(
                   width: MediaQuery.of(context).size.width,
