@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Providers/ArticleProvider.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/HydroOrderAdmin/AdminHydroOrderList.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderList.dart';
-import 'package:provider/provider.dart';
 
 var blueColor = Color(0xFF3232FF);
 var darkYellowColor = Color(0xFFAB9208);

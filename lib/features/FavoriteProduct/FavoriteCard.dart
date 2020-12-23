@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Models/FavoriteProduct.dart';
-import 'package:hydroponics/core/Models/Product.dart';
 
 class FavoriteCard extends StatefulWidget {
   final FavoriteProductModel product;

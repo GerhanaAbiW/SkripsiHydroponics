@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Article.dart';
-import 'package:hydroponics/core/Providers/ArticleProvider.dart';
-import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/core/constants/App_Text_Style.dart';
-import 'package:provider/provider.dart';
 
 var blueColor = Color(0xFF3232FF);
 var darkBlueColor = Color(0xFF3F51B5);

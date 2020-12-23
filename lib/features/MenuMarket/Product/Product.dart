@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Constants/App_Text_Style.dart';
-import 'package:hydroponics/core/Models/FavoriteProduct.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
-import 'package:hydroponics/core/Providers/ProductProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMarket/Product/ProductDetail.dart';
-import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
