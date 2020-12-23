@@ -747,7 +747,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12)),
               TextSpan(
-                  text: "21 Jul 2019 ",
+                  text: widget.order.estimatedTime,
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),
