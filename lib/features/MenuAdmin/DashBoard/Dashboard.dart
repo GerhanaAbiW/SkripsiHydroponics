@@ -62,8 +62,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   _getData() {
     var piedata = [
-      new Task('User', user.toDouble(), Color(0xff3366cc)),
-      new Task('Transaction', transaction.toDouble(), Color(0xff990099)),
+      // new Task('User', user.toDouble(), Color(0xff3366cc)),
+      // new Task('Transaction', transaction.toDouble(), Color(0xff990099)),
       new Task('Hydro Order', hydroOrder.toDouble(), Color(0xff109618)),
       new Task('Hydro Market', hydroMarket.toDouble(), Color(0xfffdbe19)),
       //new Task('HydroOrder', 19.2, Color(0xffff9900)),
@@ -90,8 +90,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
     // order.getSales();
     // order.getCategory();
     // order.getRevenue();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      //  crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(10),
@@ -123,10 +123,12 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 value: user.listUserModel.length,
                 title: 'User',
               ),
-              SizedBox(width: 0,),
+              SizedBox(
+                width: 0,
+              ),
               SmallCard(
-                color2: Colors.green,
-                color1: Colors.greenAccent,
+                color2: Colors.black,
+                color1: Colors.black87,
                 icon: Icons.monetization_on,
                 value: transaction,
                 title: 'Transaction',
@@ -138,15 +140,15 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SmallCard(
-              color2: Colors.deepOrange,
-              color1: Colors.deepOrangeAccent,
+              color2: Colors.yellow[900],
+              color1: Colors.yellow[500],
               icon: Icons.shopping_basket,
               value: hydroMarket,
               title: 'Hydro Market',
             ),
             SmallCard(
-              color2: Colors.black,
-              color1: Colors.black87,
+              color2: Colors.green,
+              color1: Colors.greenAccent,
               icon: Icons.shopping_basket,
               value: hydroOrder,
               title: 'Hydro Order',
@@ -154,58 +156,73 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
           ],
         ),
         Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width / 1.9,
+            child: SmallCard(
+              color2: Colors.deepOrange,
+              color1: Colors.deepOrangeAccent,
+              icon: Icons.assessment,
+              value: hydroOrder,
+              title: 'Average',
+            ),
+          ),
+        ),
+        Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-              'Sales per category',
+              'Percentage of Sales',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             ),
           ),
         ),
-        Expanded(
-          child: Center(
-            // child: Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey[400],
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 4)
-                  ]),
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: MediaQuery.of(context).size.height - 550,
-              child: Center(
-                child: ListTile(
-                  title: charts.PieChart(_seriesPieData,
-                      animate: true,
-                      animationDuration: Duration(seconds: 3),
-                      behaviors: [
-                        new charts.DatumLegend(
-                          outsideJustification:
-                              charts.OutsideJustification.endDrawArea,
-                          horizontalFirst: false,
-                          desiredMaxRows: 2,
-                          cellPadding:
-                              new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                        )
-                      ],
-                      defaultRenderer: new charts.ArcRendererConfig(
-                          //arcWidth: 30,
-                          arcRendererDecorators: [
-                            new charts.ArcLabelDecorator(
-                                labelPosition: charts.ArcLabelPosition.inside)
-                          ])),
-                ),
+        SizedBox(
+          height: 16,
+        ),
+        //Expanded(
+        Center(
+          // child: Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey[400],
+                      offset: Offset(1.0, 1.0),
+                      blurRadius: 4)
+                ]),
+            width: MediaQuery.of(context).size.width / 1.2,
+            height: MediaQuery.of(context).size.height - 550,
+            child: Center(
+              child: ListTile(
+                title: charts.PieChart(_seriesPieData,
+                    animate: true,
+                    animationDuration: Duration(seconds: 3),
+                    behaviors: [
+                      new charts.DatumLegend(
+                        outsideJustification:
+                            charts.OutsideJustification.endDrawArea,
+                        //horizontalFirst: false,
+                        desiredMaxRows: 2,
+                        cellPadding:
+                            new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                      )
+                    ],
+                    defaultRenderer: new charts.ArcRendererConfig(
+                        //arcWidth: 30,
+                        arcRendererDecorators: [
+                          new charts.ArcLabelDecorator(
+                              labelPosition: charts.ArcLabelPosition.inside)
+                        ])),
               ),
             ),
-            // ),
           ),
-        )
+          // ),
+        ),
+        //  )
       ],
     );
   }

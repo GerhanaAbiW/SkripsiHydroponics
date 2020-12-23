@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/HydroOrderModel.dart';
 import 'package:hydroponics/core/Models/Order.dart';
+import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -313,11 +314,9 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                   )
                 ],
               ),
-              createAddressText("Company Name : Hydroponic Market", 16),
-              createAddressText(
-                  "Company Adress : Jalan Raden Fatah RT 03/06 No.26", 16),
+
               createAddressText("Bank Name : BCA", 16),
-              createAddressText("Bank Account Name : Gerhana Abi W", 16),
+              createAddressText("Bank Account Name : Gerhana Abi W", 6),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -572,7 +571,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Standard Delivery",
+                "Estimated Delivery",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
@@ -582,7 +581,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 height: 5,
               ),
               Text(
-                "Exceeded the delivery limit time | Free Delivery",
+                widget.order.estimatedTime,
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -661,12 +660,12 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
           ),
           RichText(
             text: TextSpan(children: [
+              // TextSpan(
+              //     text: "Product Name : ",
+              //     style: CustomTextStyle.textFormFieldMedium
+              //         .copyWith(fontSize: 12)),
               TextSpan(
-                  text: "Estimated Delivery : ",
-                  style: CustomTextStyle.textFormFieldMedium
-                      .copyWith(fontSize: 12)),
-              TextSpan(
-                  text: widget.order.estimatedTime,
+                  text: ProductModel.NAME + "(" + ProductModel.QUANTITY + ")",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),
@@ -722,7 +721,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Order Total",
+                  "Price",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
@@ -734,14 +733,14 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               Container(
                 child: widget.order.delivery == 0
                     ? createPriceItem(
-                        "Instalation Delivery",
+                        "Delivery",
                         "Rp. " +
                             currencyFormatter
                                 .format(widget.order.instalation.toDouble())
                                 .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
-                        "Delievery",
+                        "Delivery",
                         "Rp. " +
                             currencyFormatter
                                 .format(widget.order.delivery.toDouble())
@@ -831,7 +830,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Transaction Provement'),
+      Text('Payment Slip'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

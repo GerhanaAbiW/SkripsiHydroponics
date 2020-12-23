@@ -603,13 +603,6 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               SizedBox(
                 height: 5,
               ),
-              // Text(
-              //   "Get it by 20 jul - 27 jul | Free Delivery",
-              //   style: CustomTextStyle.textFormFieldMedium.copyWith(
-              //     color: Colors.black,
-              //     fontSize: 12,
-              //   ),
-              // )
             ],
           ),
         ],
@@ -694,7 +687,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Order Total",
+                  "Price",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
@@ -703,23 +696,32 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                   "Rp. " +
                       currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
-              Container(
-                child: widget.order.delivery != 0
-                    ? createPriceItem(
-                        "Instalation Delivery",
-                        "Rp. " +
-                            currencyFormatter
-                                .format(widget.order.delivery)
-                                .toString(),
-                        Colors.teal.shade300)
-                    : createPriceItem(
-                        "Delievery",
-                        "Rp. " +
-                            currencyFormatter
-                                .format(widget.order.delivery)
-                                .toString(),
-                        Colors.teal.shade300),
-              ),
+              // Container(
+              //   child: widget.order.delivery != 0
+              //       ?
+              // (
+              createPriceItem(
+                  "Instalation",
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.instalation)
+                          .toString(),
+                  Colors.teal.shade300),
+              createPriceItem(
+                  "Delivery",
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.delivery)
+                          .toString(),
+                  Colors.teal.shade300),
+              // : createPriceItem(
+              //     "Delivery",
+              //     "Rp. " +
+              //         currencyFormatter
+              //             .format(widget.order.delivery)
+              //             .toString(),
+              //     Colors.teal.shade300),
+              // ),
 
               SizedBox(
                 height: 8,
@@ -803,7 +805,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Transaction Provement'),
+      Text('Payment Slip'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

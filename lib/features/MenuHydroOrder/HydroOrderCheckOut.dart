@@ -460,16 +460,6 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-              // SizedBox(
-              //   height: 5,
-              // ),
-              // Text(
-              //   "Get it by 20 jul - 27 jul | Free Delivery",
-              //   style: CustomTextStyle.textFormFieldMedium.copyWith(
-              //     color: Colors.black,
-              //     fontSize: 12,
-              //   ),
-              // )
             ],
           ),
         ],
@@ -578,7 +568,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                           .toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Delievery",
+                  "Delivery",
                   "Rp. " +
                       currencyFormatter
                           .format(widget.hydroType.deliveryPrice)

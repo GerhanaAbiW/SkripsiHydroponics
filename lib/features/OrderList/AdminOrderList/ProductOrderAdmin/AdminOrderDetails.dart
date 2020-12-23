@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/Order.dart';
+import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/OrderServices.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
@@ -664,7 +665,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 height: 5,
               ),
               Text(
-                "Exceeded the delivery limit time | Free Delivery",
+                "3 Days After Successful Order",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -743,11 +744,11 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                  text: "Estimated Delivery : ",
+                  text: "Product Name : ",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12)),
               TextSpan(
-                  text: widget.order.estimatedTime,
+                  text: ProductModel.NAME + "(" + ProductModel.QUANTITY + ")",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),
@@ -803,7 +804,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Order Total",
+                  "Price",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
@@ -815,14 +816,14 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               Container(
                 child: widget.order.delivery != null
                     ? createPriceItem(
-                        "Instalation Delivery",
+                        "Delivery",
                         "Rp. " +
                             currencyFormatter
                                 .format(widget.order.delivery)
                                 .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
-                        "Delievery",
+                        "Delivery",
                         "Rp. -", // widget.order.delivery.toString(),
                         Colors.teal.shade300),
               ),
@@ -909,7 +910,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Transaction Provement'),
+      Text('Payment Slip'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

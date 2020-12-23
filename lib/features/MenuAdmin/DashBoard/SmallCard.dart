@@ -6,13 +6,16 @@ class SmallCard extends StatefulWidget {
   final int value;
   final Color color1;
   final Color color2;
+  // final Container widtht;
 
-  SmallCard(
-      {@required this.icon,
-      @required this.title,
-      @required this.value,
-      @required this.color1,
-      @required this.color2});
+  SmallCard({
+    @required this.icon,
+    @required this.title,
+    @required this.value,
+    @required this.color1,
+    @required this.color2,
+    // @required this.widtht,
+  });
 
   @override
   _SmallCardState createState() => _SmallCardState();
@@ -41,42 +44,46 @@ class _SmallCardState extends State<SmallCard> {
                       blurRadius: 4)
                 ]),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        widget.icon,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300),
+                      )
+                    ],
+                  ),
 
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      widget.icon,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      widget.title,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300),
-                    )
-                  ],
-                ),
-                // Column(
-                //   // mainAxisAlignment: MainAxisAlignment.center,
-                //   // crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: <Widget>[
-                    Text(
+                  // Column(
+                  //   // mainAxisAlignment: MainAxisAlignment.center,
+                  //   // crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: <Widget>[
+                  Center(
+                    child: Text(
                       widget.value.toString(),
                       style: TextStyle(
                           fontSize: 50,
                           color: Colors.white,
                           fontWeight: FontWeight.w400),
                     ),
-              //    ],
-             //   )
-              ],
+                  ),
+                  //    ],
+                  //   )
+                ],
+              ),
             ),
           )
         ],

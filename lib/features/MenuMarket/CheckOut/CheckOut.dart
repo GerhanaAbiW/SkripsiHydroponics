@@ -1,6 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
+import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Models/User.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -125,7 +126,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        "ORDER NOW",
+                        "Order Now",
                         style: CustomTextStyle.textFormFieldSemiBold
                             .copyWith(color: Colors.white),
                       ),
@@ -516,7 +517,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Standard Delivery",
+                "Estimated Delivery",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
@@ -526,7 +527,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 height: 5,
               ),
               Text(
-                "Get it by 20 jul - 27 jul | Free Delivery",
+                estimatedDate,
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -605,11 +606,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                  text: "Estimated Delivery : ",
+                  text: "Product Name : ",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12)),
               TextSpan(
-                  text: estimatedDate,
+                  text: ProductModel.NAME,
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),
@@ -665,7 +666,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Order Total",
+                  "Price",
                   "Rp. " + currencyFormatter.format(widget.total).toString(),
                   Colors.grey.shade700),
               createPriceItem(
@@ -674,7 +675,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   Colors.grey.shade700),
               Container(
                 child: createPriceItem(
-                    "Delievery",
+                    "Delivery",
                     "Rp. " + currencyFormatter.format(delivery).toString(),
                     Colors.teal.shade300),
               ),

@@ -286,11 +286,9 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   )
                 ],
               ),
-              createAddressText("Company Name : Hydroponic Market", 16),
-              createAddressText(
-                  "Company Adress : Jalan Raden Fatah RT 03/06 No.26", 16),
+
               createAddressText("Bank Name : BCA", 16),
-              createAddressText("Bank Account Name : Gerhana Abi W", 16),
+              createAddressText("Bank Account Name : Gerhana Abi W", 6),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -556,7 +554,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 5,
               ),
               Text(
-                "Exceeded the delivery limit time | Free Delivery",
+                "3 Days After Successful Order",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -615,32 +613,40 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Order Total",
+                  "Price",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (10%)",
+                  "Tax (15%)",
                   "Rp. " +
                       currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
-              Container(
-                child: widget.order.delivery != 0
-                    ? createPriceItem(
-                        "Instalation Delivery",
-                        "Rp. " +
-                            currencyFormatter
-                                .format(widget.order.delivery)
-                                .toString(),
-                        Colors.teal.shade300)
-                    : createPriceItem(
-                        "Delievery",
-                        "Rp. " +
-                            currencyFormatter
-                                .format(widget.order.delivery)
-                                .toString(),
-                        Colors.teal.shade300),
-              ),
+              // Container(
+              // child: widget.order.delivery != 0
+              //?
+              createPriceItem(
+                  "Instalation",
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.instalation)
+                          .toString(),
+                  Colors.teal.shade300),
+              createPriceItem(
+                  "Delivery",
+                  "Rp. " +
+                      currencyFormatter
+                          .format(widget.order.delivery)
+                          .toString(),
+                  Colors.teal.shade300),
+              // : createPriceItem(
+              //     "Delivery",
+              //     "Rp. " +
+              //         currencyFormatter
+              //             .format(widget.order.delivery)
+              //             .toString(),
+              //     Colors.teal.shade300),
+              //  ),
 
               SizedBox(
                 height: 8,
@@ -702,7 +708,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 4,
               ),
               Text(
-                "Notes",
+                "Note From Admin",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -726,7 +732,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Notes : ", widget.order.resi, Colors.teal.shade300),
+                  "Note : ", widget.order.resi, Colors.teal.shade300),
 
               SizedBox(
                 height: 8,
@@ -782,7 +788,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Transaction Provement'),
+      Text('Payment Slip'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

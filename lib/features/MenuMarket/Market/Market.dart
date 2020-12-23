@@ -121,7 +121,7 @@ class _MenuMarketState extends State<MenuMarket> {
               // ),
               SearchProduct(
                 widget: SearchScreenMarket(),
-                search: "What would your like to buy?",
+                search: "What would you like to buy?",
               ),
               // Container(
               //   decoration: BoxDecoration(

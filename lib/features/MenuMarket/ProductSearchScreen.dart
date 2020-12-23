@@ -50,7 +50,10 @@ class _SearchScreenMarketState extends State<SearchScreenMarket> {
               //   child: SearchWidget(),
               //   height: 70.0,
               // // ),
-              SearchProduct(widget: SearchScreenMarket(), search: "What would your like to buy?",),
+              SearchProduct(
+                widget: SearchScreenMarket(),
+                search: "What would you like to buy?",
+              ),
               // Container(
               //   decoration: BoxDecoration(
               //       color: Colors.white,

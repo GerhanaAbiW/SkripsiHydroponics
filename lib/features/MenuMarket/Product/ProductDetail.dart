@@ -314,12 +314,12 @@ class _ProductDetailsState extends State<ProductDetails> {
               //   ]),
               // ),
             ),
-            new IconButton(
-                icon: Icon(
-                  Icons.add_shopping_cart,
-                  color: Colors.black,
-                ),
-                onPressed: () {}),
+            // new IconButton(
+            //     icon: Icon(
+            //       Icons.add_shopping_cart,
+            //       color: Colors.black,
+            //     ),
+            //     onPressed: () {}),
             // new IconButton(
             //     icon: Icon(
             //       Icons.favorite_border,
@@ -373,47 +373,97 @@ class _ProductDetailsState extends State<ProductDetails> {
         ]),
         //Divider(),
         SizedBox(
-          height: 30,
+          height: 50,
         ),
-        Container(
-          child: userProvider.userModel.role != "admin"
-              ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50.0,
-                    width: MediaQuery.of(context).size.width,
-                    child: new MaterialButton(
-                      onPressed: () async {
-                        if (qty != null) {
-                          appProvider.changeIsLoading();
-                          bool success = await userProvider.addToCart(
-                              product: widget.product, qty: int.parse(qty));
-                          if (success) {
-                            _key.currentState.showSnackBar(
-                                SnackBar(content: Text("Added to Cart!")));
-                            userProvider.reloadUserModel();
-                            appProvider.changeIsLoading();
-                            return changeScreen(context, CartPage());
-                          } else {
-                            _key.currentState.showSnackBar(
-                                SnackBar(content: Text("Not added to Cart!")));
-                            appProvider.changeIsLoading();
-                            return;
-                          }
-                        } else {
-                          _key.currentState.showSnackBar(SnackBar(
-                              content: Text("Please Add Quantity Product")));
-                        }
-                      },
-                      color: Colors.green[700],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      textColor: Colors.white,
-                      child: new Text("Buy Now"),
-                    ),
-                  ),
-                )
-              : SizedBox(height: 1),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              child: userProvider.userModel.role != "admin"
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 50.0,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                        child: new MaterialButton(
+                          onPressed: () async {
+                            // if (qty != null) {
+                            //   appProvider.changeIsLoading();
+                            //   bool success = await userProvider.addToCart(
+                            //       product: widget.product, qty: int.parse(qty));
+                            //   if (success) {
+                            //     _key.currentState.showSnackBar(
+                            //         SnackBar(content: Text("Added to Cart!")));
+                            //     userProvider.reloadUserModel();
+                            //     appProvider.changeIsLoading();
+                            //     return changeScreen(context, CartPage());
+                            //   } else {
+                            //     _key.currentState.showSnackBar(SnackBar(
+                            //         content: Text("Not added to Cart!")));
+                            //     appProvider.changeIsLoading();
+                            //     return;
+                            //   }
+                            // } else {
+                            //   _key.currentState.showSnackBar(SnackBar(
+                            //       content:
+                            //           Text("Please Add Quantity Product")));
+                            // }
+                          },
+                          color: Colors.green[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          textColor: Colors.white,
+                          child: new Text("Add Cart"),
+                        ),
+                      ),
+                    )
+                  : SizedBox(height: 1),
+            ),
+            // SizedBox(
+            //   width: 2,
+            // ),
+            Container(
+              child: userProvider.userModel.role != "admin"
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 50.0,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                        child: new MaterialButton(
+                          onPressed: () async {
+                            if (qty != null) {
+                              appProvider.changeIsLoading();
+                              bool success = await userProvider.addToCart(
+                                  product: widget.product, qty: int.parse(qty));
+                              if (success) {
+                                _key.currentState.showSnackBar(
+                                    SnackBar(content: Text("Added to Cart!")));
+                                userProvider.reloadUserModel();
+                                appProvider.changeIsLoading();
+                                return changeScreen(context, CartPage());
+                              } else {
+                                _key.currentState.showSnackBar(SnackBar(
+                                    content: Text("Not added to Cart!")));
+                                appProvider.changeIsLoading();
+                                return;
+                              }
+                            } else {
+                              _key.currentState.showSnackBar(SnackBar(
+                                  content:
+                                      Text("Please Add Quantity Product!")));
+                            }
+                          },
+                          color: Colors.green[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          textColor: Colors.white,
+                          child: new Text("Buy Now"),
+                        ),
+                      ),
+                    )
+                  : SizedBox(height: 1),
+            ),
+          ],
         ),
         //Similar Product
 //        Container(
