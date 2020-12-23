@@ -34,15 +34,15 @@ class _UserHydroOrderListState extends State<UserHydroOrderList> {
       child: userProvider.hydroOrders == null ||
               userProvider.hydroOrders.length == 0
           ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
                   child: Image.asset('images/not_found.png'),
                   width: 200,
                   height: 200,
                 ),
-            ],
-          )
+              ],
+            )
           : Container(
               height: MediaQuery.of(context).size.height,
               //height: 20,
