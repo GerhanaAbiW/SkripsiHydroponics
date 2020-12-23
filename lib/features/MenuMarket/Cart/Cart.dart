@@ -15,6 +15,7 @@ import 'package:hydroponics/core/Utils/CustomUtils.dart';
 import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -32,9 +33,9 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context,listen: false).reloadUserModel();
-
+    Provider.of<UserProvider>(context, listen: false).reloadUserModel();
   }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -63,7 +64,7 @@ class _CartPageState extends State<CartPage> {
           ),
         ),
         body: appProvider.isLoading
-            ? Loading()
+            ? Loading2()
             : SafeArea(
                 child: Container(
                     child: Column(children: <Widget>[
@@ -294,7 +295,7 @@ class _CartPageState extends State<CartPage> {
                     Positioned.fill(
                         child: Align(
                       alignment: Alignment.center,
-                      child: Loading(),
+                      child: Loading2(),
                     )),
                     Container(
                       width: MediaQuery.of(context).size.width,
