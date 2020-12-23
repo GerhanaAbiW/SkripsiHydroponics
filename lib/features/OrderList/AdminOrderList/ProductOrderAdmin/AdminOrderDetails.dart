@@ -15,6 +15,7 @@ import 'package:hydroponics/features/MenuMarket/Market/Market.dart';
 import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/AdminOrderList.dart';
 import 'package:hydroponics/features/Widget/AppTools.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
+import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -236,18 +237,17 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                                           MainAxisSize.min,
                                                       children: <Widget>[
                                                         Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8.0),
-                                                            child: Text(
-                                                                "Input Your Resi Number",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
-                                                            ),
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Text(
+                                                            "Input Your Resi Number",
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsets.all(
@@ -728,7 +728,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 Positioned.fill(
                     child: Align(
                   alignment: Alignment.center,
-                  child: Loading(),
+                  child: Container(width: 30, height: 40, child: Loading2()),
                 )),
                 Container(
                   width: MediaQuery.of(context).size.width,
