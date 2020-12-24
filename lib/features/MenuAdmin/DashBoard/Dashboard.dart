@@ -98,7 +98,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
           child: RichText(
             text: TextSpan(children: [
               TextSpan(
-                  text: 'Revenue\n',
+                  text: 'Pendapatan\n',
                   style: TextStyle(fontSize: 35, color: Colors.grey)),
               TextSpan(
                   text: "Rp. " +
@@ -121,7 +121,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 color1: Colors.blue,
                 icon: Icons.person_outline,
                 value: user.listUserModel.length,
-                title: 'User',
+                title: 'Pengguna',
               ),
               SizedBox(
                 width: 0,
@@ -131,7 +131,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                 color1: Colors.black87,
                 icon: Icons.monetization_on,
                 value: transaction,
-                title: 'Transaction',
+                title: 'Transaksi',
               ),
             ],
           ),
@@ -157,13 +157,13 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
         ),
         Center(
           child: Container(
-            width: MediaQuery.of(context).size.width / 1.9,
+            width: MediaQuery.of(context).size.width / 2,
             child: SmallCard(
               color2: Colors.deepOrange,
               color1: Colors.deepOrangeAccent,
               icon: Icons.assessment,
               value: hydroOrder,
-              title: 'Average',
+              title: 'Rata-rata',
             ),
           ),
         ),
@@ -171,7 +171,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-              'Percentage of Sales',
+              'Persentase Penjualan Produk',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             ),

@@ -159,14 +159,17 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                   height: 120,
                   width: 150,
                   child: Image.asset(widget.order.hydroImage)),
-              Column(
-                children: <Widget>[
-                  Text(widget.order.hydroType),
-                  //Text(widget.landType),
-                  Text("Pipe Quantity : " + widget.order.pipeQTY),
-                  Text("Hole Quantity : " + widget.order.holeQTY),
-                  Text("Land Type : " + widget.order.landType),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Column(
+                  children: <Widget>[
+                    Text(widget.order.hydroType),
+                    //Text(widget.landType),
+                    Text("Jumlah Pipa : " + widget.order.pipeQTY),
+                    Text("Jumlah Lubang Tanam : " + widget.order.holeQTY),
+                    Text("Tipe Lahan : " + widget.order.landType),
+                  ],
+                ),
               ),
             ],
           ),
@@ -267,28 +270,28 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Please Pay Your Order Here",
+                    "Harap Melakukan Pembayaran",
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Text(
-                      "Seller Info",
-                      style: CustomTextStyle.textFormFieldBlack.copyWith(
-                          color: Colors.indigoAccent.shade200, fontSize: 8),
-                    ),
-                  )
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       color: Colors.grey.shade300,
+                  //       borderRadius: BorderRadius.all(Radius.circular(16))),
+                  //   child: Text(
+                  //     "Seller Info",
+                  //     style: CustomTextStyle.textFormFieldBlack.copyWith(
+                  //         color: Colors.indigoAccent.shade200, fontSize: 8),
+                  //   ),
+                  // )
                 ],
               ),
 
-              createAddressText("Bank Name : BCA", 16),
-              createAddressText("Bank Account Name : Gerhana Abi W", 6),
+              createAddressText("Nama Bank : BCA", 16),
+              createAddressText("Atas Nama : Gerhana Abi W", 6),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -298,7 +301,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Bank Account Number : ",
+                      text: "Nomor Rekening : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -352,22 +355,22 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Text(
-                      "Customer Info",
-                      style: CustomTextStyle.textFormFieldBlack.copyWith(
-                          color: Colors.indigoAccent.shade200, fontSize: 8),
-                    ),
-                  )
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       color: Colors.grey.shade300,
+                  //       borderRadius: BorderRadius.all(Radius.circular(16))),
+                  //   child: Text(
+                  //     "Customer Info",
+                  //     style: CustomTextStyle.textFormFieldBlack.copyWith(
+                  //         color: Colors.indigoAccent.shade200, fontSize: 8),
+                  //   ),
+                  // )
                 ],
               ),
-              createAddressText("Address : " + widget.order.userAddress, 16),
+              createAddressText("Alamat : " + widget.order.userAddress, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -377,7 +380,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Mobile : ",
+                      text: "Nomor Telepon : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -544,7 +547,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Standard Delivery",
+                "Estimasi Pengiriman",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
@@ -554,7 +557,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 5,
               ),
               Text(
-                "3 Days After Successful Order",
+                "3 Hari Setelah Proses Order Berhasil",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                   color: Colors.black,
                   fontSize: 12,
@@ -589,7 +592,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 4,
               ),
               Text(
-                "PRICE DETAILS",
+                "Detail Harga",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -613,12 +616,12 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Price",
+                  "Harga",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (15%)",
+                  "PPN (15%)",
                   "Rp. " +
                       currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
@@ -626,14 +629,14 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               // child: widget.order.delivery != 0
               //?
               createPriceItem(
-                  "Instalation",
+                  "Instalasi",
                   "Rp. " +
                       currencyFormatter
                           .format(widget.order.instalation)
                           .toString(),
                   Colors.teal.shade300),
               createPriceItem(
-                  "Delivery",
+                  "Ongkos Kirim",
                   "Rp. " +
                       currencyFormatter
                           .format(widget.order.delivery)
@@ -708,7 +711,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 height: 4,
               ),
               Text(
-                "Note From Admin",
+                "Catatan Dari Admin",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -732,7 +735,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Note : ", widget.order.resi, Colors.teal.shade300),
+                  "Catatan : ", widget.order.resi, Colors.teal.shade300),
 
               SizedBox(
                 height: 8,
@@ -788,7 +791,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Payment Slip'),
+      Text('Bukti Transfer'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

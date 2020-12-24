@@ -243,7 +243,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Quantity : ",
+                "Jumlah : ",
                 style: TextStyle(color: Colors.black, fontSize: 16.0),
               ),
             ),
@@ -258,7 +258,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       border: Border.all()),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
-                      hint: Text("Please select the quantity",
+                      hint: Text(" ",
                           style:
                               TextStyle(color: Colors.black, fontSize: 14.0)),
                       dropdownColor: Colors.white,
@@ -333,7 +333,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         // ),
         Divider(),
         new ListTile(
-          title: new Text("Product description"),
+          title: new Text("Deskripsi Produk"),
           subtitle: new Text(widget.product.description),
         ),
 
@@ -342,7 +342,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
             child:
-                new Text("product name", style: TextStyle(color: Colors.grey)),
+                new Text("Nama Produk", style: TextStyle(color: Colors.grey)),
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
@@ -353,7 +353,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
             child:
-                new Text("product brand", style: TextStyle(color: Colors.grey)),
+                new Text("Merek Produk", style: TextStyle(color: Colors.grey)),
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
@@ -363,8 +363,8 @@ class _ProductDetailsState extends State<ProductDetails> {
         new Row(children: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
-            child: new Text("stock available",
-                style: TextStyle(color: Colors.grey)),
+            child:
+                new Text("Stok Tersedia", style: TextStyle(color: Colors.grey)),
           ),
           Padding(
             padding: EdgeInsets.all(5.0),
@@ -436,21 +436,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                               bool success = await userProvider.addToCart(
                                   product: widget.product, qty: int.parse(qty));
                               if (success) {
-                                _key.currentState.showSnackBar(
-                                    SnackBar(content: Text("Added to Cart!")));
+                                _key.currentState.showSnackBar(SnackBar(
+                                    content: Text(
+                                        "Produk Telah ditambahkan Ke keranjang!")));
                                 userProvider.reloadUserModel();
                                 appProvider.changeIsLoading();
                                 return changeScreen(context, CartPage());
                               } else {
                                 _key.currentState.showSnackBar(SnackBar(
-                                    content: Text("Not added to Cart!")));
+                                    content: Text(
+                                        "Produk Tidak ditambahkan Ke keranjang!")));
                                 appProvider.changeIsLoading();
                                 return;
                               }
                             } else {
                               _key.currentState.showSnackBar(SnackBar(
-                                  content:
-                                      Text("Please Add Quantity Product!")));
+                                  content: Text(
+                                      "Mohon Untuk Melengkapi Jumlah Produk!")));
                             }
                           },
                           color: Colors.green[700],

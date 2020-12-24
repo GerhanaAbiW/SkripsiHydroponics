@@ -234,7 +234,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 height: 4,
               ),
               Text(
-                "Your Resi Number",
+                "Nomor Resi Anda",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -258,7 +258,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+                  "Nomor Resi : ", widget.order.resi, Colors.teal.shade300),
 
               SizedBox(
                 height: 8,
@@ -295,28 +295,28 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Please Pay Your Order Here",
+                    "Harap Melakukan Pembayaran",
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Text(
-                      "Seller Info",
-                      style: CustomTextStyle.textFormFieldBlack.copyWith(
-                          color: Colors.indigoAccent.shade200, fontSize: 8),
-                    ),
-                  )
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       color: Colors.grey.shade300,
+                  //       borderRadius: BorderRadius.all(Radius.circular(16))),
+                  //   child: Text(
+                  //     "Seller Info",
+                  //     style: CustomTextStyle.textFormFieldBlack.copyWith(
+                  //         color: Colors.indigoAccent.shade200, fontSize: 8),
+                  //   ),
+                  // )
                 ],
               ),
 
-              createAddressText("Bank Name : BCA", 16),
-              createAddressText("Bank Account Name : Gerhana Abi W", 6),
+              createAddressText("Nama Bank : BCA", 16),
+              createAddressText("Atas Nama : Gerhana Abi W", 6),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -326,7 +326,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Bank Account Number : ",
+                      text: "Nomor Rekening : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -380,22 +380,22 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Text(
-                      "Customer Info",
-                      style: CustomTextStyle.textFormFieldBlack.copyWith(
-                          color: Colors.indigoAccent.shade200, fontSize: 8),
-                    ),
-                  )
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       color: Colors.grey.shade300,
+                  //       borderRadius: BorderRadius.all(Radius.circular(16))),
+                  //   child: Text(
+                  //     "Customer Info",
+                  //     style: CustomTextStyle.textFormFieldBlack.copyWith(
+                  //         color: Colors.indigoAccent.shade200, fontSize: 8),
+                  //   ),
+                  // )
                 ],
               ),
-              createAddressText("Address : " + widget.order.userAddress, 16),
+              createAddressText("Alamat : " + widget.order.userAddress, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -405,7 +405,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Mobile : ",
+                      text: "Nomor Telepon : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -571,7 +571,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Estimated Delivery",
+                "Estimasi Pengiriman",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
@@ -697,7 +697,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 height: 4,
               ),
               Text(
-                "PRICE DETAILS",
+                "Detail Harga",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -721,26 +721,26 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Price",
+                  "Harga",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (10%)",
+                  "PPN (10%)",
                   "Rp. " +
                       currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery == 0
                     ? createPriceItem(
-                        "Delivery",
+                        "Ongkos Kirim",
                         "Rp. " +
                             currencyFormatter
                                 .format(widget.order.instalation.toDouble())
                                 .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
-                        "Delivery",
+                        "Ongkos Kirim",
                         "Rp. " +
                             currencyFormatter
                                 .format(widget.order.delivery.toDouble())
@@ -830,7 +830,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Payment Slip'),
+      Text('Bukti Transfer'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

@@ -33,7 +33,7 @@ class SearchLPlantRecordDateWidget extends StatelessWidget {
                 ),
                 //fillColor: Colors.greenAccent[600],
                 hintStyle: new TextStyle(color: Colors.green[600]),
-                hintText: "Search Record Month...",
+                hintText: "Cari Catatan...",
               ),
               autofocus: false,
             ),

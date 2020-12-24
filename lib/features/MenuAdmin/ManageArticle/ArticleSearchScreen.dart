@@ -32,7 +32,7 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Search",
+        title: Text("Cari Artikel...",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
@@ -53,11 +53,11 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
                         child: Image.asset('images/not_found.png'),
                       )
                     : Container(
-                  height: MediaQuery.of(context).size.height ,
-                  //height: 20,
+                        height: MediaQuery.of(context).size.height,
+                        //height: 20,
 
-                  width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: articleProvider.articlesSearched.length,
@@ -65,7 +65,8 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
                             return AnimationConfiguration.staggeredList(
                                 position: index,
                                 child: ArticleCard(
-                                  article: articleProvider.articlesSearched[index],
+                                  article:
+                                      articleProvider.articlesSearched[index],
                                 ));
                             // return Card(
                             //     elevation: 10.0,
@@ -88,7 +89,7 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
                             //     ));
                           },
                         ),
-                    )),
+                      )),
           ),
         ],
       ),

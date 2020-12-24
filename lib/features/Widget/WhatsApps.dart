@@ -170,20 +170,19 @@ class _WhatsAppsState extends State<WhatsApps> {
                                   SizedBox(
                                     height: 4,
                                   ),
-                                  Text("Reach Us",
+                                  Text("Hubungi Kami",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 20)),
                                   SizedBox(
                                     height: 8,
                                   ),
                                   Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.3,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "We would love to respon to your queries and help you success. Fell free to get i touch with us",
-                                    ),
-                                  ),
+                                      width: MediaQuery.of(context).size.width /
+                                          1.3,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                          "Kami akan dengan senang hati menjawab pertanyaan Anda dan membantu Anda dalam kesulitan. bebas untuk menghubungi kami kapan pun dan dimana pun",
+                                          textAlign: TextAlign.center)),
                                   SizedBox(
                                     height: 16,
                                   ),

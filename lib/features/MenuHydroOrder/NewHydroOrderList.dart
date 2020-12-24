@@ -199,7 +199,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
             Padding(
               padding: EdgeInsets.only(left: 30.0),
               child: Text(
-                'Choose type of hydroland that you want ',
+                'Pilih jenis HydroMachine yang diinginkan',
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w400,

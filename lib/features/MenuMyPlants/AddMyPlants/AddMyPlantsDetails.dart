@@ -36,7 +36,7 @@ class _MyPlantsDetailState extends State<MyPlantsDetail> {
   void createListItem() {
     listSection.add(createSection("Media Semai : ${widget.plant.media}",
         Icons.ac_unit, darkGreenColor, null));
-    listSection.add(createSection("Media Semai : ${widget.plant.seedingTime}",
+    listSection.add(createSection("Waktu Semai : ${widget.plant.seedingTime}",
         Icons.ac_unit, darkGreenColor, null));
     listSection.add(createSection("Jenis Hama : ${widget.plant.pestsType}",
         Icons.ac_unit, darkGreenColor, null));

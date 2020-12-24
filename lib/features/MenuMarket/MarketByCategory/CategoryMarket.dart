@@ -97,7 +97,7 @@ class CategoryScreen extends StatelessWidget {
                           // changeScreen(context, ProductSearchScreen());
                         },
                         decoration: InputDecoration(
-                          hintText: "Search...",
+                          hintText: "Cari Produk ...",
                           border: InputBorder.none,
                         ),
                       ),
@@ -110,7 +110,7 @@ class CategoryScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
                     alignment: Alignment.topCenter,
-                    child: new Text("Categories")),
+                    child: new Text("Kategori")),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

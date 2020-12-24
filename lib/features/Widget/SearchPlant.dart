@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 class SearchPlant extends StatelessWidget {
   final Widget widget;
 
-
   const SearchPlant({Key key, this.widget}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class SearchPlant extends StatelessWidget {
                 ),
                 //fillColor: Colors.greenAccent[600],
                 hintStyle: new TextStyle(color: Colors.green[600]),
-                hintText: "Search Plant...",
+                hintText: "Cari Tumbuhan...",
               ),
               autofocus: false,
             ),

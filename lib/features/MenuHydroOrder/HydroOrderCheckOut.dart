@@ -277,7 +277,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                   )
                 ],
               ),
-              createAddressText("Address : " + widget.address, 16),
+              createAddressText("Alamat : " + widget.address, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -287,7 +287,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Mobile : ",
+                      text: "Nomor Telepon : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -486,14 +486,17 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                     height: 120,
                     width: 150,
                     child: Image.asset(widget.hydroType.image)),
-                Column(
-                  children: <Widget>[
-                    Text(widget.hydroType.type),
-                    //Text(widget.landType),
-                    Text("Pipe Quantity : " + widget.hydroType.pipeQty),
-                    Text("Hole Quantity : " + widget.jmlLubang),
-                    Text("Land Type : " + widget.landType),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(widget.hydroType.type),
+                      //Text(widget.landType),
+                      Text("Jumlah Pipa : " + widget.hydroType.pipeQty),
+                      Text("Jumlah Lubang Tanam : " + widget.jmlLubang),
+                      Text("Tipe Lahan : " + widget.landType),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -523,7 +526,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
                 height: 4,
               ),
               Text(
-                "PRICE DETAILS",
+                "Detail Harga",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -547,28 +550,28 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Hydro Order",
+                  "HydroMachine",
                   "Rp. " +
                       currencyFormatter
                           .format(widget.hydroType.intPrice)
                           .toString(), //"Rp. ${widget.hydroType.intPrice}",
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (15%)",
+                  "PPN (15%)",
                   "Rp. " +
                       currencyFormatter
                           .format(tax)
                           .toString(), //"Rp. " + tax.toStringAsFixed(3),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Instalation",
+                  "Instalasi",
                   "Rp. " +
                       currencyFormatter
                           .format(widget.hydroType.instalationPrice)
                           .toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Delivery",
+                  "Ongkos Kirim",
                   "Rp. " +
                       currencyFormatter
                           .format(widget.hydroType.deliveryPrice)

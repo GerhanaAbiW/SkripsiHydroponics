@@ -14,10 +14,10 @@ class SearchArticle extends StatelessWidget {
           child: Center(
             child: TextField(
               textInputAction: TextInputAction.search,
-             onSubmitted: (pattern)async{
-               await articleProvider.search(articleTitle: pattern);
-               changeScreen(context, ArticleSearchScreen());
-             },
+              onSubmitted: (pattern) async {
+                await articleProvider.search(articleTitle: pattern);
+                changeScreen(context, ArticleSearchScreen());
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -33,7 +33,7 @@ class SearchArticle extends StatelessWidget {
                 ),
                 //fillColor: Colors.greenAccent[600],
                 hintStyle: new TextStyle(color: Colors.green[600]),
-                hintText: "Search Article...",
+                hintText: "Cari Artikel...",
               ),
               autofocus: false,
             ),

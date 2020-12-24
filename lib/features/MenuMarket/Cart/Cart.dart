@@ -227,7 +227,7 @@ class _CartPageState extends State<CartPage> {
     return Container(
       alignment: Alignment.topLeft,
       child: Text(
-        "Your Cart",
+        "Keranjang Anda",
         style: CustomTextStyle.textFormFieldBold
             .copyWith(fontSize: 16, color: Color(0xFF2b961f)),
       ),
@@ -239,7 +239,7 @@ class _CartPageState extends State<CartPage> {
     return Container(
       alignment: Alignment.topLeft,
       child: Text(
-        "Total($totalItems) Items",
+        "Total($totalItems) Produk",
         style: CustomTextStyle.textFormFieldBold
             .copyWith(fontSize: 12, color: Colors.black),
       ),
@@ -431,9 +431,9 @@ class _CartPageState extends State<CartPage> {
                     await userProvider.removeFromCart(cartItem: cart);
                 if (success) {
                   userProvider.reloadUserModel();
-                  print("Item remove from cart");
+                  print("Produk telah dihapus dari keranjang!");
                   _key.currentState.showSnackBar(
-                      SnackBar(content: Text("Removed from Cart!")));
+                      SnackBar(content: Text("Dihapus dari keranjang!")));
                   appProvider.changeIsLoading();
                   return;
                 } else {

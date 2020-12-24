@@ -34,7 +34,7 @@ class _ProductListState extends State<ProductList> {
         Container(
             child: SearchProduct(
           widget: ProductSearchScreen(),
-          search: "Search Product..",
+          search: "Cari Produk...",
         )),
         Expanded(
           child: Container(
@@ -48,11 +48,11 @@ class _ProductListState extends State<ProductList> {
                       child: Image.asset('images/not_found.png'),
                     )
                   : Container(
-                height: MediaQuery.of(context).size.height,
-                //height: 20,
+                      height: MediaQuery.of(context).size.height,
+                      //height: 20,
 
-                width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: productProvider.products.length,
@@ -84,7 +84,7 @@ class _ProductListState extends State<ProductList> {
                           //     ));
                         },
                       ),
-                  )),
+                    )),
         ),
       ],
     );

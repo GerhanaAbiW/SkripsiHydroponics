@@ -35,7 +35,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Search",
+        title: Text("Cari Video...",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
@@ -45,26 +45,27 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
           Container(child: SearchVideo()),
           Expanded(
             child: Container(
-
                 child: videoProvider.videosSearched.length < 1
                     ? Padding(
                         padding: const EdgeInsets.all(125.0),
                         child: Image.asset('images/not_found.png'),
                       )
                     : Container(
-                  height: MediaQuery.of(context).size.height,
-                  //height: 20,
+                        height: MediaQuery.of(context).size.height,
+                        //height: 20,
 
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height / 2,
-                  //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                      child: ListView.builder(
+                        width: MediaQuery.of(context).size.width,
+                        //height: MediaQuery.of(context).size.height / 2,
+                        //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                        child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: videoProvider.videosSearched.length,
                           itemBuilder: (BuildContext context, int index) {
-                            if (videoProvider.videosSearched[index].video != null &&
-                                videoProvider.videosSearched[index].video != "") {
+                            if (videoProvider.videosSearched[index].video !=
+                                    null &&
+                                videoProvider.videosSearched[index].video !=
+                                    "") {
                               idUrl = videoProvider.videosSearched[index].video
                                   .substring(videoProvider
                                           .videosSearched[index].video.length -
@@ -97,7 +98,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
                             //     ));
                           },
                         ),
-                    )),
+                      )),
           ),
         ],
       ),

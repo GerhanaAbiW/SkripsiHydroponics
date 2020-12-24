@@ -164,7 +164,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           changeScreen(context, MenuMarket());
                         } else {
                           showSnackBar(
-                              "Please Add Your Phone Number and Your Address ",
+                              "Mohon Untuk Melengkapi Alamat dan Nomor Telepon! ",
                               _scaffoldKey);
                         }
                       },
@@ -323,25 +323,38 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Text(
-                      "HOME",
-                      style: CustomTextStyle.textFormFieldBlack.copyWith(
-                          color: Colors.indigoAccent.shade200, fontSize: 8),
-                    ),
-                  )
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       color: Colors.grey.shade300,
+                  //       borderRadius: BorderRadius.all(Radius.circular(16))),
+                  //   child: Text(
+                  //     "HOME",
+                  //     style: CustomTextStyle.textFormFieldBlack.copyWith(
+                  //         color: Colors.indigoAccent.shade200, fontSize: 8),
+                  //   ),
+                  // )
                 ],
               ),
-              Container(
-                  child: address == null
-                      ? createAddressText("Address : No data", 16)
-                      : createAddressText(address, 16)),
+              // Container(
+              //     child: address == null
+              //         ? createAddressText("Alamat : No data", 16)
+              //         : createAddressText(address, 16)),
+              SizedBox(height: 16),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Alamat : ",
+                      style: CustomTextStyle.textFormFieldMedium
+                          .copyWith(fontSize: 12, color: Colors.grey.shade800)),
+                  TextSpan(
+                      text: address == null ? "No data" : address,
+                      style: CustomTextStyle.textFormFieldBold
+                          .copyWith(color: Colors.black, fontSize: 12)),
+                ]),
+              ),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -351,7 +364,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Mobile : ",
+                      text: "Nomor Telepon : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -425,16 +438,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   padding: EdgeInsets.all(8.0),
                                   child: MultilineFormTextField(
                                       controller: addressController,
-                                      textHint: "Add Your Adrress",
-                                      textLabel: "Input Address"),
+                                      textHint: "Masukkan Alamat",
+                                      textLabel: "Masukkan Alamat"),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: FormTextField(
                                       textType: TextInputType.number,
                                       controller: phoneController,
-                                      textHint: "Add Your Phone Number",
-                                      textLabel: "Input Phone Number"),
+                                      textHint: "Masukkan Nomor Telepon",
+                                      textLabel: "Masukkan Nomor Telepon"),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -461,7 +474,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   });
             },
             child: Text(
-              "Edit Address",
+              "Tambah Alamat",
               style: CustomTextStyle.textFormFieldSemiBold
                   .copyWith(fontSize: 12, color: Colors.indigo.shade700),
             ),
@@ -517,7 +530,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Estimated Delivery",
+                "Estimasi Pengiriman",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
@@ -606,11 +619,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                  text: "Product Name : ",
+                  text: "Nama Produk : ",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12)),
               TextSpan(
-                  text: ProductModel.NAME,
+                  text: ProductModel.NAME + "(" + ProductModel.QUANTITY + ")",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),
@@ -642,7 +655,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 height: 4,
               ),
               Text(
-                "PRICE DETAILS",
+                "Detail Harga",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -666,16 +679,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Price",
+                  "Harga",
                   "Rp. " + currencyFormatter.format(widget.total).toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (10%)",
+                  "PPN (10%)",
                   "Rp. " + currencyFormatter.format(tax).toString(),
                   Colors.grey.shade700),
               Container(
                 child: createPriceItem(
-                    "Delivery",
+                    "Ongkos Kirim",
                     "Rp. " + currencyFormatter.format(delivery).toString(),
                     Colors.teal.shade300),
               ),

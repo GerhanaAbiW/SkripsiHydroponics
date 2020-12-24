@@ -33,7 +33,7 @@ class _PlantSearchScreenState extends State<PlantSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Search",
+        title: Text("Cari Tumbuhan...",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
@@ -55,14 +55,14 @@ class _PlantSearchScreenState extends State<PlantSearchScreen> {
                         child: Image.asset('images/not_found.png'),
                       )
                     : Container(
-                  height: MediaQuery.of(context).size.height,
-                  // //height: 20,
-                  // decoration: BoxDecoration(
-                  //   color: Colors.white,
-                  //   borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
-                  // ),
-                  width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
+                        height: MediaQuery.of(context).size.height,
+                        // //height: 20,
+                        // decoration: BoxDecoration(
+                        //   color: Colors.white,
+                        //   borderRadius: BorderRadius.only(topLeft: Radius.circular(70.0)),
+                        // ),
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: plantProvider.plantsSearched.length,
@@ -94,7 +94,7 @@ class _PlantSearchScreenState extends State<PlantSearchScreen> {
                             //     ));
                           },
                         ),
-                    )),
+                      )),
           ),
         ],
       ),

@@ -34,7 +34,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Search",
+        title: Text("Cari Produk...",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
@@ -44,7 +44,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
           Container(
               child: SearchProduct(
             widget: ProductSearchScreen(),
-            search: "Search",
+            search: "Cari Produk...",
           )),
           Expanded(
             child: Container(
@@ -68,7 +68,8 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                       : AnimationConfiguration.staggeredList(
                           position: index,
                           child: ProductCard(
-                            productModel: productProvider.productsSearched[index],
+                            productModel:
+                                productProvider.productsSearched[index],
                           ),
                         );
                   // return Card(

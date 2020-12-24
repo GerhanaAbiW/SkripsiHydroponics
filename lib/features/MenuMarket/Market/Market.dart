@@ -120,9 +120,7 @@ class _MenuMarketState extends State<MenuMarket> {
               //   height: 70.0,
               // ),
               SearchProduct(
-                widget: SearchScreenMarket(),
-                search: "What would you like to buy?",
-              ),
+                  widget: SearchScreenMarket(), search: "Search Product ..."),
               // Container(
               //   decoration: BoxDecoration(
               //       color: Colors.white,

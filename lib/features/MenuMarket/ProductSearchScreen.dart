@@ -52,7 +52,7 @@ class _SearchScreenMarketState extends State<SearchScreenMarket> {
               // // ),
               SearchProduct(
                 widget: SearchScreenMarket(),
-                search: "What would you like to buy?",
+                search: "Cari Produk...",
               ),
               // Container(
               //   decoration: BoxDecoration(

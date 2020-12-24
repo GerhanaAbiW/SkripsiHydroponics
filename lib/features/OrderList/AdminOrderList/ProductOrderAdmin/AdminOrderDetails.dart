@@ -233,7 +233,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                                               EdgeInsets.all(
                                                                   8.0),
                                                           child: Text(
-                                                            "Input Your Resi Number",
+                                                            "Masukkan Nomor Resi",
                                                             style: TextStyle(
                                                                 fontSize: 16,
                                                                 color: Colors
@@ -248,9 +248,9 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                                               controller:
                                                                   resiController,
                                                               textHint:
-                                                                  "Add Your Resi Number",
+                                                                  "Masukkan Nomor Resi",
                                                               textLabel:
-                                                                  "Input Resi Number"),
+                                                                  "Masukkan Nomor Resi"),
                                                         ),
                                                         Padding(
                                                           padding:
@@ -405,22 +405,22 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                     style: CustomTextStyle.textFormFieldSemiBold
                         .copyWith(fontSize: 14),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Text(
-                      "Customer Info",
-                      style: CustomTextStyle.textFormFieldBlack.copyWith(
-                          color: Colors.indigoAccent.shade200, fontSize: 8),
-                    ),
-                  )
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       color: Colors.grey.shade300,
+                  //       borderRadius: BorderRadius.all(Radius.circular(16))),
+                  //   child: Text(
+                  //     "Customer Info",
+                  //     style: CustomTextStyle.textFormFieldBlack.copyWith(
+                  //         color: Colors.indigoAccent.shade200, fontSize: 8),
+                  //   ),
+                  // )
                 ],
               ),
-              createAddressText("Address : " + widget.order.userAddress, 16),
+              createAddressText("Alamat : " + widget.order.userAddress, 16),
 
               // createAddressText("Mumbai - 400023", 6),
               // createAddressText("Maharashtra", 6),
@@ -430,7 +430,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: "Mobile : ",
+                      text: "Nomor Telepon : ",
                       style: CustomTextStyle.textFormFieldMedium
                           .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
@@ -477,7 +477,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 height: 4,
               ),
               Text(
-                "Your Resi Number",
+                "Nomor Resi",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -501,7 +501,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Resi Number : ", widget.order.resi, Colors.teal.shade300),
+                  "Nomor Resi : ", widget.order.resi, Colors.teal.shade300),
 
               SizedBox(
                 height: 8,
@@ -655,22 +655,22 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Standard Delivery",
+                "Hydro Market",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "3 Days After Successful Order",
-                style: CustomTextStyle.textFormFieldMedium.copyWith(
-                  color: Colors.black,
-                  fontSize: 12,
-                ),
-              )
+              // SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   "3 Hari Setelah Proses Order Berhasil",
+              //   style: CustomTextStyle.textFormFieldMedium.copyWith(
+              //     color: Colors.black,
+              //     fontSize: 12,
+              //   ),
+              // )
             ],
           ),
         ],
@@ -743,10 +743,10 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
           ),
           RichText(
             text: TextSpan(children: [
-              TextSpan(
-                  text: "Product Name : ",
-                  style: CustomTextStyle.textFormFieldMedium
-                      .copyWith(fontSize: 12)),
+              // TextSpan(
+              //     text: "Product Name : ",
+              //     style: CustomTextStyle.textFormFieldMedium
+              //         .copyWith(fontSize: 12)),
               TextSpan(
                   text: ProductModel.NAME + "(" + ProductModel.QUANTITY + ")",
                   style: CustomTextStyle.textFormFieldMedium
@@ -780,7 +780,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 height: 4,
               ),
               Text(
-                "PRICE DETAILS",
+                "Detail Harga",
                 style: CustomTextStyle.textFormFieldMedium.copyWith(
                     fontSize: 12,
                     color: Colors.black,
@@ -804,26 +804,26 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
               //     Colors.teal.shade300),
 
               createPriceItem(
-                  "Price",
+                  "Harga",
                   "Rp. " +
                       currencyFormatter.format(widget.order.price).toString(),
                   Colors.grey.shade700),
               createPriceItem(
-                  "Tax (10%)",
+                  "PPN (10%)",
                   "Rp. " +
                       currencyFormatter.format(widget.order.tax).toString(),
                   Colors.grey.shade700),
               Container(
                 child: widget.order.delivery != null
                     ? createPriceItem(
-                        "Delivery",
+                        "Ongkos Kirim",
                         "Rp. " +
                             currencyFormatter
                                 .format(widget.order.delivery)
                                 .toString(),
                         Colors.teal.shade300)
                     : createPriceItem(
-                        "Delivery",
+                        "Ongkos Kirim",
                         "Rp. -", // widget.order.delivery.toString(),
                         Colors.teal.shade300),
               ),
@@ -910,7 +910,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Payment Slip'),
+      Text('Bukti Transfer'),
       Container(
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),

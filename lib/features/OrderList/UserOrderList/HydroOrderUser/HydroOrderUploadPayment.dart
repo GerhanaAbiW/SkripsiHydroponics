@@ -40,7 +40,8 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
 
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
-          _hydroOrderServices.updateHydroOrder(status: "Proccess",id:widget.id,img: imageUrl1,resi: "-");
+          _hydroOrderServices.updateHydroOrder(
+              status: "Proccess", id: widget.id, img: imageUrl1, resi: "-");
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, DashBoard());
@@ -145,7 +146,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
                 SizedBox(
                   height: 30,
                 ),
-                Text("Upload Your Transaction Payment Here"),
+                Text("Unggah Bukti Transfer Disini"),
                 SizedBox(
                   height: 16,
                 ),
