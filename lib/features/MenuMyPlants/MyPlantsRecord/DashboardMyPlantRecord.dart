@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
+import 'package:hydroponics/core/constants/Colors.dart';
 import 'package:hydroponics/features/MenuLearning/LearningArticle/LearningArticleDetail.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListFailPlantRecord.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListHarvestPlantRecord.dart';
@@ -15,8 +16,9 @@ class _DashboardMyplantRecordState extends State<DashboardMyplantRecord> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context,listen: false).reloadUserModel();
+    Provider.of<UserProvider>(context, listen: false).reloadUserModel();
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -25,29 +27,32 @@ class _DashboardMyplantRecordState extends State<DashboardMyplantRecord> {
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              color: white,
+              color: Colors.white,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             title: Text(
-              "My Plant Record",
+              "Plant Record",
               style: TextStyle(
-                  color: white, fontWeight: FontWeight.bold, fontSize: 32.0),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32.0),
             ),
-            backgroundColor: darkBlueColor,
+            backgroundColor: Color(0xFF8BC34A),
             elevation: 0,
             bottom: TabBar(
-                unselectedLabelColor: Colors.blue[900],
+                unselectedLabelColor: Colors.greenAccent,
                 indicatorPadding: EdgeInsets.only(left: 30, right: 30),
                 indicator: ShapeDecoration(
-                  // color: Colors.lightBlue[900],
-                    gradient: LinearGradient(
-                        colors: [Colors.lightBlue[900], Colors.blue[200]]),
+                    gradient: LinearGradient(colors: [
+                      Colors.lightGreen[600],
+                      Colors.lightGreenAccent[200]
+                    ]),
                     shape: BeveledRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                         side: BorderSide(
-                          color: Colors.lightBlue[900],
+                          color: Colors.green[900],
                         ))),
                 tabs: [
                   Tab(
@@ -55,7 +60,7 @@ class _DashboardMyplantRecordState extends State<DashboardMyplantRecord> {
                       alignment: Alignment.center,
                       child: Text(
                         "Harvest",
-                        style: TextStyle(color: white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -64,7 +69,7 @@ class _DashboardMyplantRecordState extends State<DashboardMyplantRecord> {
                       alignment: Alignment.center,
                       child: Text(
                         "Crop Failure",
-                        style: TextStyle(color: white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),

@@ -219,8 +219,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                            "Isi sesuai dengan perlakuan yang anda selama menanam",
+                        Text("Lengkapi Sesuai Perlakuan Anda Selama Menanam",
                             style: TextStyle(
                                 color: darkGreenColor,
                                 fontSize: 20.0,

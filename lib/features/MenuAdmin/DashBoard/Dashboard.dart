@@ -173,14 +173,14 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
           ),
         ),
         Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(
-              'Persentase Penjualan Produk',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey),
-            ),
+          // child: Padding(
+          //   padding: const EdgeInsets.only(left: 10),
+          child: Text(
+            'Persentase Penjualan Produk',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.grey),
           ),
+          // ),
         ),
         SizedBox(
           height: 16,
@@ -212,8 +212,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                             charts.OutsideJustification.endDrawArea,
                         // horizontalFirst: false,
                         // desiredMaxRows: 1,
-                        cellPadding:
-                            new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                        // cellPadding:
+                        //     new EdgeInsets.only(right: 4.0, bottom: 4.0),
                       )
                     ],
                     defaultRenderer: new charts.ArcRendererConfig(

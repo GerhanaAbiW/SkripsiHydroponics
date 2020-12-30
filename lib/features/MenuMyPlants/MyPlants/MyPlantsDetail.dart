@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'MyPlantAddRecordDetail.dart';
 
@@ -15,8 +16,11 @@ class MyPlantDetail extends StatefulWidget {
 
 class _MyPlantDetailState extends State<MyPlantDetail> {
   void visibleBtnRecord() {
-    if (DateTime.now().isAfter(DateTime.parse(widget.plant.harvestDay)) == true ||
-        DateTime.now().isAtSameMomentAs(DateTime.parse(widget.plant.harvestDay)) == true) {
+    if (DateTime.now().isAfter(DateTime.parse(widget.plant.harvestDay)) ==
+            true ||
+        DateTime.now()
+                .isAtSameMomentAs(DateTime.parse(widget.plant.harvestDay)) ==
+            true) {
       setState(() {
         btnRecord = true;
       });
@@ -26,6 +30,7 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
       });
     }
   }
+
   external bool isAfter(DateTime other);
   external bool isAtSameMomentAs(DateTime other);
   bool btnRecord = false;
@@ -36,6 +41,7 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
     //record = DateTime.parse(widget.myPlantsModel.harvestDay);
     visibleBtnRecord();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +59,8 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                       right: 30.0,
                       top: 60.0,
                     ),
-                    height: 520.0,
-                    color: Color(0xFF32A060),
+                    height: 600.0,
+                    color: Color(0xFF8BC34A), //Color(0xFF32A060),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -69,22 +75,27 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                                 color: Colors.white,
                               ),
                             ),
-                            Icon(
-                              Icons.shopping_cart,
-                              size: 30.0,
-                              color: Colors.white,
-                            ),
                           ],
                         ),
-                        SizedBox(height: 20.0),
-                        // Text(
-                        //   widget.plant.category.toUpperCase(),
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 15.0,
-                        //   ),
-                        // ),
-                        SizedBox(height: 5.0),
+                        SizedBox(height: 40.0),
+
+                        Center(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height / 4.5,
+                            width: MediaQuery.of(context).size.width / 1.6,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(14)),
+                              child: FadeInImage.memoryNetwork(
+                                placeholder: kTransparentImage,
+                                image: widget.plant.image,
+                                //height: MediaQuery.of(context).size.height,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 60.0),
                         Text(
                           widget.plant.plant,
                           style: TextStyle(
@@ -93,7 +104,7 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 40.0),
+                        SizedBox(height: 16.0),
                         Text(
                           'PH',
                           style: TextStyle(
@@ -110,7 +121,7 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 40.0),
+                        SizedBox(height: 16.0),
                         Text(
                           'PPM',
                           style: TextStyle(
@@ -127,7 +138,8 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 40.0),
+
+                        //SizedBox(height: 40.0),
                         // RawMaterialButton(
                         //   padding: EdgeInsets.all(20.0),
                         //   shape: CircleBorder(),
@@ -143,23 +155,24 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                       ],
                     ),
                   ),
-                  Positioned(
-                    right: 20.0,
-                    bottom: 30.0,
-                    child: Hero(
-                      tag: widget.plant.image,
-                      child: Image(
-                        height: 280.0,
-                        width: 280.0,
-                        image: AssetImage(widget.plant.image),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+
+                  // Positioned(
+                  //   right: 20.0,
+                  //   bottom: 30.0,
+                  //   child: Hero(
+                  //     tag: widget.plant.image,
+                  //     child: Image(
+                  //       height: 280.0,
+                  //       width: 280.0,
+                  //       image: AssetImage(widget.plant.image),
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               Container(
-                height: 400.0,
+                height: 320, //MediaQuery.of(context).size.height * 1,
                 transform: Matrix4.translationValues(0.0, -20.0, 0.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -178,68 +191,82 @@ class _MyPlantDetailState extends State<MyPlantDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'All to know...',
+                            'Karakteristik:',
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(height: 10.0),
+                          SizedBox(height: 24.0),
                           Text("Media Semai: ${widget.plant.media}"),
                           Text("Waktu Semai: ${widget.plant.seedingTime}"),
                           Text("Jenis Pupuk: ${widget.plant.fertilizerType}"),
                           Text("Dosis Pupuk: ${widget.plant.dosageFertilizer}"),
-                          Text("Waktu Pemupukan: ${widget.plant.timeOfFertilizer}"),
+                          Text(
+                              "Waktu Pemupukan: ${widget.plant.timeOfFertilizer}"),
                           Text("Waktu Panen: ${widget.plant.harvestTime}"),
                         ],
                       ),
                     ),
+                    SizedBox(height: 64),
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 30.0,
-                        vertical: 40.0,
+                        // vertical: 40.0,
                       ),
-                      child: btnRecord == true? Center(
-                          child: GestureDetector(
-                            onTap: (){
-                              changeScreen(context, PlantStartRecord(myPlantsModel: widget.plant,status: "Harvest",));
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(8),
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: darkGreenColor),
-                              child: Text(
-                                'Harvest',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 22),
+                      child: btnRecord == true
+                          ? Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  changeScreen(
+                                      context,
+                                      PlantStartRecord(
+                                        myPlantsModel: widget.plant,
+                                        status: "Harvest",
+                                      ));
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(8),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: darkGreenColor),
+                                  child: Text(
+                                    'Harvest',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 22),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  changeScreen(
+                                      context,
+                                      PlantStartRecord(
+                                        myPlantsModel: widget.plant,
+                                        status: "Crop Failure",
+                                      ));
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(8),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: darkGreenColor),
+                                  child: Text(
+                                    'Crop Failure',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 22),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ):Center(
-                        child: GestureDetector(
-                          onTap: (){
-                            changeScreen(context, PlantStartRecord(myPlantsModel: widget.plant,status: "Crop Failure",));
-
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.all(8),
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: darkGreenColor),
-                            child: Text(
-                              'Crop Failure',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 22),
-                            ),
-                          ),
-                        ),
-                      ),
-
                     ),
                   ],
                 ),
