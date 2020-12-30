@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hydroponics/Dashboard.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderCustomDetail.dart';
 import 'package:hydroponics/features/MenuHydroOrder/HydroOrderDetail.dart';
@@ -174,7 +175,7 @@ class _NewHydroOrderListState extends State<NewHydroOrderList>
                       size: 30.0,
                       color: Colors.grey,
                     ),
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => changeScreenReplacement(context, DashBoard()),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 20.0),

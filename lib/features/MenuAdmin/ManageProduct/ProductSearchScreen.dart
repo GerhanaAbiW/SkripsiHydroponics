@@ -34,7 +34,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Cari Produk...",
+        title: Text("Cari Produk",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),

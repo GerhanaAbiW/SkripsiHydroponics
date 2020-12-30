@@ -51,7 +51,7 @@ class _AddMyPlantListState extends State<AddMyPlantList> {
             ),
           ),
           Container(
-              height: MediaQuery.of(context).size.height - 200.0,
+              height: MediaQuery.of(context).size.height,
               //height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,
