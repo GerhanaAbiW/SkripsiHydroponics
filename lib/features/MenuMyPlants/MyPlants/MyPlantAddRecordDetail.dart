@@ -444,7 +444,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                   appProvider.changeIsLoading();
                                   bool success =
                                       await userProvider.addMyPlantRecord(
-                                          status: "Harvest",
+                                          status: widget.status,
                                           img: imageUrl1,
                                           description: descController.text,
                                           myPlants: widget.myPlantsModel,
