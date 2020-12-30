@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Cart.dart';
 import 'package:hydroponics/core/Models/Order.dart';
@@ -69,8 +71,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
     var piedata = [
       // new Task('User', user.toDouble(), Color(0xff3366cc)),
       // new Task('Transaction', transaction.toDouble(), Color(0xff990099)),
-      new Task('Hydro Market', hydroMarket.toDouble(), Color(0xfffdbe19)),
-      new Task('Hydro Order', hydroOrder.toDouble(), Color(0xff109618)),
+      new Task('Hydro Market', persenHydroMarket, Color(0xfffdbe19)),
+      new Task('Hydro Order', persenHydroOrder, Color(0xff109618)),
       //new Task('HydroOrder', 19.2, Color(0xffff9900)),
       //new Task('Other', 10.3, Color(0xffdc3912)),
     ];
@@ -83,7 +85,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
             charts.ColorUtil.fromDartColor(task.colorval),
         id: 'Air Pollution',
         data: piedata,
-        labelAccessorFn: (Task row, _) => '${row.taskvalue}',
+        labelAccessorFn: (Task row, _) => '${row.taskvalue}%',
       ),
     );
   }
@@ -208,12 +210,13 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                     animationDuration: Duration(seconds: 3),
                     behaviors: [
                       new charts.DatumLegend(
-                        outsideJustification:
-                            charts.OutsideJustification.endDrawArea,
+                        // outsideJustification:
+                        //     charts.OutsideJustification.endDrawArea,
                         // horizontalFirst: false,
                         // desiredMaxRows: 1,
-                        // cellPadding:
-                        //     new EdgeInsets.only(right: 4.0, bottom: 4.0),
+
+                        cellPadding:
+                            new EdgeInsets.only(right: 4.0, bottom: 4.0),
                       )
                     ],
                     defaultRenderer: new charts.ArcRendererConfig(
