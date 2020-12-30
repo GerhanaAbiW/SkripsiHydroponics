@@ -34,7 +34,7 @@ class ArticleService {
   Future<List<Article>> searchArticles({String articleTitle}) {
     // code to convert the first character to uppercase
     //String searchKey = productName[0].toUpperCase() + productName.substring(1);
-    String searchKey = articleTitle[0].toLowerCase() + articleTitle.substring(1);
+    String searchKey = articleTitle[0].toUpperCase() + articleTitle.substring(1);
     return _firestore
         .collection(collection)
         .orderBy("title")

@@ -743,12 +743,12 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
           ),
           RichText(
             text: TextSpan(children: [
-              // TextSpan(
-              //     text: "Product Name : ",
-              //     style: CustomTextStyle.textFormFieldMedium
-              //         .copyWith(fontSize: 12)),
               TextSpan(
-                  text: ProductModel.NAME + "(" + ProductModel.QUANTITY + ")",
+                  text: "Product Name : ${cart.name}",
+                  style: CustomTextStyle.textFormFieldMedium
+                      .copyWith(fontSize: 12, fontWeight: FontWeight.w600)),
+              TextSpan(
+                  text: "Quantity : ${cart.quantity}",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),

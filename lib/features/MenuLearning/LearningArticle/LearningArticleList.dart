@@ -26,6 +26,8 @@ class LearningArticleList extends StatelessWidget {
           height: MediaQuery.of(context).size.height ,
           child: AnimationLimiter(
             child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: articleProvider.articles.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
