@@ -24,6 +24,7 @@ class OrderModel {
   static const ESTIMATED_Date = "estimatedDate";
 
 
+
   String _id;
   int _price;
   String _resi;

@@ -80,7 +80,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                 flex: 75,
               ),
               Expanded(
-                child: widget.order.status == "Pending"
+                child: widget.order.status == "Check Availability"
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -133,7 +133,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                 ),
                                 onPressed: () {
                                   _orderServices.updateOrder(
-                                      status: "Accepted",
+                                      status: "Waiting for Payment",
                                       id: widget.order.id,
                                       resi: widget.order.resi,
                                       img: widget.order.imagePayment);
@@ -144,7 +144,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                           ),
                         ],
                       )
-                    : widget.order.status == "Proccess"
+                    : widget.order.status == "Process"
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -194,7 +194,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Text(
-                                      "Proccess",
+                                      "Accept",
                                       style: CustomTextStyle
                                           .textFormFieldSemiBold
                                           .copyWith(color: Colors.white),
@@ -265,7 +265,7 @@ class _AdminOrderDetailState extends State<AdminOrderDetail> {
                                                                 _orderServices
                                                                     .updateOrder(
                                                                   status:
-                                                                      "Paid",
+                                                                      "Accepted",
                                                                   resi:
                                                                       resiController
                                                                           .text,

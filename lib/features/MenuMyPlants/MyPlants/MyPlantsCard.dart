@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/Router_Constants.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsDetail.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantAddRecordDetail.dart';
 import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:provider/provider.dart';

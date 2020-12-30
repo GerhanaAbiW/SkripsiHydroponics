@@ -11,6 +11,7 @@ class HydroOrderServices {
     String id = uuid.v4();
     data["id"] = id;
     data["createdAt"] = FieldValue.serverTimestamp();
+    data["updatedAt"] = FieldValue.serverTimestamp();
     _firestore.collection(collection).document(id).setData(data);
   }
 
@@ -23,18 +24,31 @@ class HydroOrderServices {
     });
   }
 
-  Future<List<HydroOrderModel>> getUserOrders({String userId}) async =>
-      _firestore
-          .collection(collection)
-          .where("userId", isEqualTo: userId)
-          .getDocuments()
-          .then((result) {
-        List<HydroOrderModel> orders = [];
-        for (DocumentSnapshot order in result.documents) {
-          orders.add(HydroOrderModel.fromSnapshot(order));
-        }
-        return orders;
-      });
+  Future<List<HydroOrderModel>>getUserOrders({String userId}) async => _firestore
+      .collection(collection)
+      .orderBy('updatedAt', descending: true)
+      .getDocuments()
+      .then((result) {
+    List<HydroOrderModel> orders = [];
+    for (DocumentSnapshot order in result.documents) {
+      if(order.data["userId"]==userId){
+        orders.add(HydroOrderModel.fromSnapshot(order));
+      }
+    }
+    return orders;
+  });
+  // Future<List<HydroOrderModel>> getUserOrders({String userId}) async =>
+  //     _firestore
+  //         .collection(collection)
+  //         .where("userId", isEqualTo: userId)
+  //         .getDocuments()
+  //         .then((result) {
+  //       List<HydroOrderModel> orders = [];
+  //       for (DocumentSnapshot order in result.documents) {
+  //         orders.add(HydroOrderModel.fromSnapshot(order));
+  //       }
+  //       return orders;
+  //     });
 
   Future<List<HydroOrderModel>> getBuyers() async => _firestore
           .collection(collection)
@@ -50,7 +64,7 @@ class HydroOrderServices {
 
   Future<List<HydroOrderModel>> getAdminOrders() async => _firestore
           .collection(collection)
-          .orderBy('createdAt', descending: true)
+          .orderBy('updatedAt', descending: true)
           .getDocuments()
           .then((result) {
         List<HydroOrderModel> orders = [];

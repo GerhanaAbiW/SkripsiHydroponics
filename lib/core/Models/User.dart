@@ -61,6 +61,7 @@ class UserModel {
   List<FavoriteProductModel> favorite;
   List<MyPlantsModel> myPlant;
   List<MyPlantsRecordModel> myPlantsRecord;
+  List<MyPlantsRecordModel> myFailPlantsRecord;
 
 
   int totalCartPrice;
@@ -81,6 +82,7 @@ class UserModel {
     favorite = _convertFavoriteItems(snapshot.data[FAVORITE]?? []);
     myPlant = _convertMyPlants(snapshot.data[MyPlants]?? []);
     myPlantsRecord = _convertMyPlantsRecord(snapshot.data[MyPlantsRecord]?? []);
+    myFailPlantsRecord = _convertMyFailPlantsRecord(snapshot.data[MyPlantsRecord]?? []);
     totalCartPrice = snapshot.data[CART] == null ? 0 :getTotalPrice(cart: snapshot.data[CART]);
 
   }
@@ -113,7 +115,19 @@ class UserModel {
   List<MyPlantsRecordModel> _convertMyPlantsRecord(List plantRecord){
     List<MyPlantsRecordModel> convertedPlantRecord = [];
     for(Map plantRecordItem in plantRecord){
-      convertedPlantRecord.add(MyPlantsRecordModel.fromMap(plantRecordItem));
+      if(plantRecordItem["Status"]=="Harvest"){
+        convertedPlantRecord.add(MyPlantsRecordModel.fromMap(plantRecordItem));
+      }
+    }
+    return convertedPlantRecord;
+  }
+
+  List<MyPlantsRecordModel> _convertMyFailPlantsRecord(List plantRecord){
+    List<MyPlantsRecordModel> convertedPlantRecord = [];
+    for(Map plantRecordItem in plantRecord){
+      if(plantRecordItem["Status"]=="Fail"){
+        convertedPlantRecord.add(MyPlantsRecordModel.fromMap(plantRecordItem));
+      }
     }
     return convertedPlantRecord;
   }

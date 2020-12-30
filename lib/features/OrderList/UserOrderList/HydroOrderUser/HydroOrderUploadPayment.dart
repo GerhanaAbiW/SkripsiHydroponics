@@ -41,7 +41,7 @@ class _HydroOrderUploadPaymentState extends State<HydroOrderUploadPayment> {
         task1.onComplete.then((snapshot3) async {
           imageUrl1 = await snapshot1.ref.getDownloadURL();
           _hydroOrderServices.updateHydroOrder(
-              status: "Proccess", id: widget.id, img: imageUrl1, resi: "-");
+              status: "Process", id: widget.id, img: imageUrl1, resi: "-");
           _formKey.currentState.reset();
           setState(() => isLoading = false);
           changeScreen(context, DashBoard());

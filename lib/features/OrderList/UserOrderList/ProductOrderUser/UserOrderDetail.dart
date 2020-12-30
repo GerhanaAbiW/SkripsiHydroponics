@@ -40,7 +40,7 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
   bool img = true;
 
   void visibleBtn() {
-    if (widget.order.status == "Accepted") {
+    if (widget.order.status == "Waiting for Payment") {
       setState(() {
         btn = false;
       });
@@ -101,7 +101,10 @@ class _UserOrderDetailState extends State<UserOrderDetail> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                      selectedAddressSectionAdmin(),
+                      Offstage(
+                        offstage: btn,
+                        child: selectedAddressSectionAdmin(),
+                      ),
                       selectedAddressSection(),
                       standardDelivery(),
                       checkoutItem(widget.order.cart),

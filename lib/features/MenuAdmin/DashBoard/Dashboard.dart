@@ -24,6 +24,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   int transaction = 0;
   int hydroMarket = 0;
   int hydroOrder = 0;
+  double persenHydroOrder=0;
+  double persenHydroMarket =0;
 
   // double bibit =0;
   // double obat =0;
@@ -31,17 +33,13 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   // double alat =0;
 
   void getAllCards() {
-    user =
-        Provider.of<UserProvider>(context, listen: false).listUserModel.length;
-    revenue = Provider.of<OrderProvider>(context, listen: false).revenue +
-        Provider.of<HydroOrderProvider>(context, listen: false).revenue;
-    transaction = Provider.of<OrderProvider>(context, listen: false)
-            .buyers
-            .length +
-        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
-    hydroOrder =
-        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
-    hydroMarket = Provider.of<OrderProvider>(context, listen: false).sales;
+    user = Provider.of<UserProvider>(context, listen: false).listUserModel.length;
+    revenue = Provider.of<OrderProvider>(context, listen: false).revenue + Provider.of<HydroOrderProvider>(context, listen: false).revenue;
+    transaction = Provider.of<OrderProvider>(context, listen: false).buyers.length + Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroOrder = Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroMarket = Provider.of<OrderProvider>(context, listen: false).buyers.length;
+    persenHydroMarket = hydroMarket * 100 / transaction;
+    persenHydroOrder = hydroOrder * 100/transaction;
     // bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
     // obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
     // pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
@@ -74,8 +72,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
       charts.Series(
         domainFn: (Task task, _) => task.task,
         measureFn: (Task task, _) => task.taskvalue,
-        colorFn: (Task task, _) =>
-            charts.ColorUtil.fromDartColor(task.colorval),
+        colorFn: (Task task, _) => charts.ColorUtil.fromDartColor(task.colorval),
         id: 'Air Pollution',
         data: piedata,
         labelAccessorFn: (Task row, _) => '${row.taskvalue}',

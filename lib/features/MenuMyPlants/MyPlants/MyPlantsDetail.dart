@@ -1,370 +1,253 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
-import 'package:hydroponics/core/Providers/AppProvider.dart';
-import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
-import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
-var greenColor = Color(0xFF8BC34A);
-var darkGreenColor = Color(0xFF689F38);
+import 'MyPlantAddRecordDetail.dart';
 
-class PlantStartRecord extends StatefulWidget {
-  final MyPlantsModel myPlantsModel;
+class MyPlantDetail extends StatefulWidget {
+  final MyPlantsModel plant;
 
-  const PlantStartRecord({Key key, this.myPlantsModel}) : super(key: key);
-
+  const MyPlantDetail({Key key, this.plant}) : super(key: key);
   @override
-  _PlantStartRecordState createState() => _PlantStartRecordState();
+  _MyPlantDetailState createState() => _MyPlantDetailState();
 }
 
-class _PlantStartRecordState extends State<PlantStartRecord> {
-  bool mediaSemai = false;
-  bool waktuSemai = false;
-  bool jenisPupuk = false;
-  bool dosisPupuk = false;
-  bool waktuPupuk = false;
-  bool waktuPanen = false;
-  bool phIdeal = false;
-  bool ppmIdeal = false;
-
-  final _key = GlobalKey<ScaffoldState>();
-  DateTime record;
-  external bool isAfter(DateTime other);
-  external bool isAtSameMomentAs(DateTime other);
-  bool btnRecord = true;
-
-  void changeSelected(bool btn) {
-    setState(() {
-      btn = !btn;
-    });
-  }
-
+class _MyPlantDetailState extends State<MyPlantDetail> {
   void visibleBtnRecord() {
-    if (DateTime.now()
-                .isAfter(DateTime.parse(widget.myPlantsModel.harvestDay)) ==
-            true ||
-        DateTime.now().isAtSameMomentAs(
-                DateTime.parse(widget.myPlantsModel.harvestDay)) ==
-            true) {
-      setState(() {
-        btnRecord = false;
-      });
-    } else {
+    if (DateTime.now().isAfter(DateTime.parse(widget.plant.harvestDay)) == true ||
+        DateTime.now().isAtSameMomentAs(DateTime.parse(widget.plant.harvestDay)) == true) {
       setState(() {
         btnRecord = true;
       });
+    } else {
+      setState(() {
+        btnRecord = false;
+      });
     }
   }
-
+  external bool isAfter(DateTime other);
+  external bool isAtSameMomentAs(DateTime other);
+  bool btnRecord = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    record = DateTime.parse(widget.myPlantsModel.harvestDay);
+    //record = DateTime.parse(widget.myPlantsModel.harvestDay);
     visibleBtnRecord();
   }
-
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
-        key: _key,
-        backgroundColor: greenColor,
-        body: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.only(topRight: Radius.circular(300.0)),
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(top: 15.0, left: 10.0),
-                child: Stack(
-                  children: <Widget>[
-                    Column(
+      backgroundColor: Colors.white,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 30.0,
+                      right: 30.0,
+                      top: 60.0,
+                    ),
+                    height: 520.0,
+                    color: Color(0xFF32A060),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 8.0),
-                        IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          color: Colors.black,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        SizedBox(height: 12.0),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(40, 10, 60, 10),
-                              child: Text(widget.myPlantsModel.plant,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: darkGreenColor,
-                                      fontSize: 32.0,
-                                      fontWeight: FontWeight.bold)),
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 30.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Icon(
+                              Icons.shopping_cart,
+                              size: 30.0,
+                              color: Colors.white,
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Center(
-                          child: Container(
-                            height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 1.6,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(14)),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: widget.myPlantsModel.image,
-                                //height: MediaQuery.of(context).size.height,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                        SizedBox(height: 20.0),
+                        // Text(
+                        //   widget.plant.category.toUpperCase(),
+                        //   style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 15.0,
+                        //   ),
+                        // ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          widget.plant.plant,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text("Karakteristik",
-                            style: TextStyle(
-                                color: darkGreenColor,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold)),
-                        Text("*NOTE : isi mendekati waktu panen",
-                            style: TextStyle(
-                                color: darkGreenColor,
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.normal)),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "Media Semai: ${widget.myPlantsModel.media}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: mediaSemai,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          mediaSemai = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "Waktu Semai: ${widget.myPlantsModel.seedingTime}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: waktuSemai,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          waktuSemai = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "Jenis Pupuk: ${widget.myPlantsModel.fertilizerType}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: jenisPupuk,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          jenisPupuk = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "Dosis Pupuk: ${widget.myPlantsModel.dosageFertilizer}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: dosisPupuk,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          dosisPupuk = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "Waktu Pemupukan: ${widget.myPlantsModel.timeOfFertilizer}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: waktuPupuk,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          waktuPupuk = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "Waktu Panen: ${widget.myPlantsModel.harvestTime}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: waktuPanen,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          waktuPanen = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "PPM Ideal: ${widget.myPlantsModel.ppm}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: ppmIdeal,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          ppmIdeal = value;
-                                        });
-                                      }),
-                                ]),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text("PH Ideal: ${widget.myPlantsModel.ph}"),
-                                  Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      value: phIdeal,
-                                      onChanged: (bool value) {
-                                        print(value);
-                                        setState(() {
-                                          phIdeal = value;
-                                        });
-                                      }),
-                                ]),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Offstage(
-                          offstage: btnRecord,
-                          child: Center(
-                            child: GestureDetector(
-                              onTap: () async {
-                                appProvider.changeIsLoading();
-                                bool success =
-                                    await userProvider.addMyPlantRecord(
-                                        myPlants: widget.myPlantsModel,
-                                        waktuPanen: waktuPanen,
-                                        waktuPupuk: waktuPupuk,
-                                        waktuSemai: waktuSemai,
-                                        mediaSemai: mediaSemai,
-                                        phIdeal: phIdeal,
-                                        dosisPupuk: dosisPupuk,
-                                        ppmIdeal: ppmIdeal,
-                                        jenisPupuk: jenisPupuk);
-                                if (success) {
-                                  _key.currentState.showSnackBar(SnackBar(
-                                      content:
-                                          Text("Added to My Record Plants!")));
-                                  userProvider.reloadUserModel();
-                                  appProvider.changeIsLoading();
-                                  userProvider.deleteMyPlant(
-                                      plantItem: widget.myPlantsModel);
-                                  return changeScreen(context, MyPlantsList());
-                                } else {
-                                  _key.currentState.showSnackBar(SnackBar(
-                                      content: Text(
-                                          "Not added to My Record Plants!")));
-                                  appProvider.changeIsLoading();
-                                  return;
-                                }
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(8),
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: darkGreenColor),
-                                child: Text(
-                                  'Record',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                ),
-                              ),
-                            ),
+                        SizedBox(height: 40.0),
+                        Text(
+                          'PH',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.0,
                           ),
                         ),
-                        SizedBox(
-                          height: 30,
-                        )
+                        SizedBox(height: 5.0),
+                        Text(
+                          widget.plant.ph,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 40.0),
+                        Text(
+                          'PPM',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          widget.plant.ppm,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 40.0),
+                        // RawMaterialButton(
+                        //   padding: EdgeInsets.all(20.0),
+                        //   shape: CircleBorder(),
+                        //   elevation: 2.0,
+                        //   fillColor: Colors.black,
+                        //   child: Icon(
+                        //     Icons.add_shopping_cart,
+                        //     color: Colors.white,
+                        //     size: 35.0,
+                        //   ),
+                        //   onPressed: () => print('Add to cart'),
+                        // ),
                       ],
                     ),
+                  ),
+                  Positioned(
+                    right: 20.0,
+                    bottom: 30.0,
+                    child: Hero(
+                      tag: widget.plant.image,
+                      child: Image(
+                        height: 280.0,
+                        width: 280.0,
+                        image: AssetImage(widget.plant.image),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                height: 400.0,
+                transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 30.0,
+                        right: 30.0,
+                        top: 40.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'All to know...',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text("Media Semai: ${widget.plant.media}"),
+                          Text("Waktu Semai: ${widget.plant.seedingTime}"),
+                          Text("Jenis Pupuk: ${widget.plant.fertilizerType}"),
+                          Text("Dosis Pupuk: ${widget.plant.dosageFertilizer}"),
+                          Text("Waktu Pemupukan: ${widget.plant.timeOfFertilizer}"),
+                          Text("Waktu Panen: ${widget.plant.harvestTime}"),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                        vertical: 40.0,
+                      ),
+                      child: btnRecord == true? Center(
+                          child: GestureDetector(
+                            onTap: (){
+                              changeScreen(context, PlantStartRecord(myPlantsModel: widget.plant,status: "Harvest",));
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(8),
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: darkGreenColor),
+                              child: Text(
+                                'Harvest',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 22),
+                              ),
+                            ),
+                          ),
+                        ):Center(
+                        child: GestureDetector(
+                          onTap: (){
+                            changeScreen(context, PlantStartRecord(myPlantsModel: widget.plant,status: "Crop Failure",));
 
-                    //SizedBox(height: 16.0)
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(8),
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: darkGreenColor),
+                            child: Text(
+                              'Crop Failure',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 22),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                    ),
                   ],
                 ),
               ),
-            ),
-          ],
-        ));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -94,9 +94,9 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
         "paymentTax": tax,
         "paymentDelivery": widget.hydroType.deliveryPrice,
         "paymentInstalation": widget.hydroType.instalationPrice,
-        "status": "Pending",
+        "status": "Waiting for Payment",
         "date": date,
-        "createdAt": FieldValue.serverTimestamp(),
+        //"createdAt": FieldValue.serverTimestamp(),
       });
       changeScreen(context, NewHydroOrderList());
     } catch (e) {

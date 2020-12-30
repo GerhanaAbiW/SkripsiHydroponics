@@ -38,7 +38,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   bool img = true;
 
   void visibleBtn() {
-    if (widget.order.status == "Accepted") {
+    if (widget.order.status == "Waiting for Payment") {
       setState(() {
         btn = false;
       });
@@ -100,7 +100,11 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                      selectedAddressSectionAdmin(),
+                      Offstage(
+                        offstage: btn,
+                        child: selectedAddressSectionAdmin(),
+
+                      ),
                       selectedAddressSection(),
                       standardDelivery(),
                       checkoutHydroItem(),
@@ -209,7 +213,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                                "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
+                            "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
                             style: CustomTextStyle.textFormFieldMedium.copyWith(
                                 fontSize: 14, color: Colors.grey.shade800),
                           )
@@ -530,7 +534,7 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           border:
-              Border.all(color: Colors.limeAccent.withOpacity(0.4), width: 1),
+          Border.all(color: Colors.limeAccent.withOpacity(0.4), width: 1),
           color: Colors.limeAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -791,21 +795,21 @@ class _UserHydroOrderDetailState extends State<UserHydroOrderDetail> {
   transactionProvement() {
     return Center(
         child: Column(children: <Widget>[
-      Text('Bukti Transfer'),
-      Container(
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(
-            color: Colors.brown,
-            width: 10,
+          Text('Bukti Transfer'),
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color: Colors.brown,
+                width: 10,
+              ),
+            ),
+            child: widget.order.imagePayment == null
+                ? Text("No data")
+                : Image.network(widget.order.imagePayment),
           ),
-        ),
-        child: widget.order.imagePayment == null
-            ? Text("No data")
-            : Image.network(widget.order.imagePayment),
-      ),
-    ]));
+        ]));
   }
 }

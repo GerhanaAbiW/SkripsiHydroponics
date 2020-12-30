@@ -40,8 +40,9 @@ class OrderServices{
       "totalPrice": totalPrice,
       "totalQuantityProduct" : totalQtyProduct,
       "createdAt": FieldValue.serverTimestamp(),
+      "updatedAt": FieldValue.serverTimestamp(),
       "description": description,
-      "status": "Pending",
+      "status": "Check Availability",
       "date" : date
     });
   }
@@ -51,16 +52,30 @@ class OrderServices{
   } 
   
 
+  //
+  // Future<List<OrderModel>> getUserOrders({String userId}) async =>
+  //     _firestore
+  //         .collection(collection)
+  //         .where("userId", isEqualTo: userId)
+  //         .getDocuments()
+  //         .then((result) {
+  //       List<OrderModel> orders = [];
+  //       for (DocumentSnapshot order in result.documents) {
+  //         orders.add(OrderModel.fromSnapshot(order));
+  //       }
+  //       return orders;
+  //     });
 
   Future<List<OrderModel>> getUserOrders({String userId}) async =>
       _firestore
-          .collection(collection)
-          .where("userId", isEqualTo: userId)
+          .collection(collection).orderBy('updatedAt', descending: true)
           .getDocuments()
           .then((result) {
         List<OrderModel> orders = [];
         for (DocumentSnapshot order in result.documents) {
-          orders.add(OrderModel.fromSnapshot(order));
+          if(order.data["userId"]==userId){
+            orders.add(OrderModel.fromSnapshot(order));
+          }
         }
         return orders;
       });
@@ -82,7 +97,7 @@ class OrderServices{
 
   Future<List<OrderModel>> getAdminOrders() async =>
       _firestore
-          .collection(collection).orderBy('createdAt', descending: true)
+          .collection(collection).orderBy('updatedAt', descending: true)
           .getDocuments()
           .then((result) {
         List<OrderModel> orders = [];

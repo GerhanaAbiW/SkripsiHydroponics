@@ -10,7 +10,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantList.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsCard.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListRecordPlant.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListHarvestPlantRecord.dart';
 import 'package:provider/provider.dart';
 
 class MyPlantsList extends StatefulWidget {

@@ -364,6 +364,9 @@ class UserProvider with ChangeNotifier {
     bool waktuPanen,
     bool phIdeal,
     bool ppmIdeal,
+    String status,
+    String img,
+    String description,
   }) async {
     try {
       var uuid = Uuid();
@@ -377,7 +380,8 @@ class UserProvider with ChangeNotifier {
         "PlantId": myPlants.id,
         "Plant": myPlants.plant,
         "Media": myPlants.media,
-        "Image": myPlants.image,
+        "Image": img,
+        "Description" : description,
         "PPM": myPlants.ppm,
         "PH": myPlants.ph,
         "SeedingTime": myPlants.seedingTime,
@@ -395,6 +399,7 @@ class UserProvider with ChangeNotifier {
         "RecordHarvestTime": waktuPanen,
         "RecordPestsType": waktuSemai,
         "Date": date,
+        "Status" : status,
         "CreatedAt": FieldValue.serverTimestamp()
       };
 

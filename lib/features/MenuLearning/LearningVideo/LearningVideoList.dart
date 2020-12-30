@@ -14,7 +14,7 @@ class LearningVideoList extends StatelessWidget {
     final videoProvider = Provider.of<VideoProvider>(context);
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 2,
+        height: MediaQuery.of(context).size.height ,
         padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
         child: AnimationLimiter(
           child: ListView.builder(

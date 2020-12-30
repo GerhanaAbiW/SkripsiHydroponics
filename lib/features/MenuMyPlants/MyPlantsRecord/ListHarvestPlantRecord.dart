@@ -28,27 +28,8 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Color(0xFF8BC34A),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          'Plant Record',
-          style: CustomTextStyle.textFormFieldBold
-              .copyWith(color: Colors.white, fontSize: 21),
-        ),
-      ),
-      body: Padding(
+    //final userProvider = Provider.of<UserProvider>(context);
+    return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Container(
             height: MediaQuery.of(context).size.height,
@@ -101,7 +82,7 @@ class _ListRecordPlantState extends State<ListRecordPlant> {
                       //     ));
                     },
                   )),
-      ),
+
     );
   }
 }

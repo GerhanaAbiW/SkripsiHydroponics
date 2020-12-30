@@ -81,43 +81,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                 flex: 75,
               ),
               Expanded(
-                child: widget.order.status == "Pending"
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                            child: ButtonRejectAcc(
-                              color: darkYellowColor,
-                              buttonText: 'Reject',
-                              onPressed: () {
-                                _hydroOrderServices.updateHydroOrder(
-                                    status: "Rejected",
-                                    resi: widget.order.resi,
-                                    id: widget.order.id,
-                                    img: widget.order.imagePayment);
-                                changeScreen(context, DashBoard());
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                            child: ButtonRejectAcc(
-                              color: darkYellowColor,
-                              buttonText: 'Accept',
-                              onPressed: () {
-                                _hydroOrderServices.updateHydroOrder(
-                                    status: "Accepted",
-                                    resi: widget.order.resi,
-                                    id: widget.order.id,
-                                    img: widget.order.imagePayment);
-                                changeScreen(context, DashBoard());
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    : widget.order.status == "Proccess"
+                child:  widget.order.status == "Process"
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -206,7 +170,7 @@ class _AdminHydroOrderDetailState extends State<AdminHydroOrderDetail> {
                                                               _hydroOrderServices
                                                                   .updateHydroOrder(
                                                                       status:
-                                                                          "Paid",
+                                                                          "Accepted",
                                                                       resi: resiController
                                                                           .text,
                                                                       id: widget

@@ -8,6 +8,7 @@ class MyPlantsRecordModel{
   static const IMAGE = "Image";
   static const PPM = "PPM";
   static const PH = "PH";
+  static const DESCRIPTION = "Description";
   static const FertilizerType = "FertilizerType";
   static const TimeOfFertilizer = "TimeOfFertilizer";
   static const DosageOfFertilizer = "DosageOfFertilizer";
@@ -24,8 +25,10 @@ class MyPlantsRecordModel{
   static const RecordHarvestTime = "RecordHarvestTime";
   static const RecordPestsType = "RecordPestsType";
   static const DATE = "Date";
+  static const STATUS = "Status";
 
   String _id;
+  String _description;
 
   String _plantId;
   String _plant;
@@ -39,6 +42,7 @@ class MyPlantsRecordModel{
   String _harvestTime;
   String _pestsType;
   String _date;
+  String _status;
   String _seedingTime;
 
 
@@ -57,6 +61,7 @@ class MyPlantsRecordModel{
 
 //  getters
   String get id => _id;
+  String get description => _description;
   String get seedingTime => _seedingTime;
   bool get recordSeedingTime => _recordSeedingTime;
 
@@ -83,6 +88,7 @@ class MyPlantsRecordModel{
   String get pestsType => _pestsType;
 
   String get date => _date;
+  String get status => _status;
 
   bool get recordPPM => _recordPPM;
 
@@ -106,6 +112,7 @@ class MyPlantsRecordModel{
 
   MyPlantsRecordModel.fromMap(Map data){
     _id = data[ID];
+    _description = data[DESCRIPTION];
     _plantId = data[PlantID];
     _plant =  data[PLANT];
     _image =  data[IMAGE];
@@ -127,12 +134,15 @@ class MyPlantsRecordModel{
     _recordHarvestTime=data[RecordHarvestTime];
     _recordPestsType=data[RecordPestsType];
     _date = data[DATE];
+    _status = data[STATUS];
     _seedingTime=data[SeedingTime];
 
   }
 
   Map toMap() => {
     ID: _id,
+    DESCRIPTION: _description,
+    STATUS: _status,
     PlantID : _plantId,
     IMAGE: _image,
     DosageOfFertilizer: _dosageFertilizer,
