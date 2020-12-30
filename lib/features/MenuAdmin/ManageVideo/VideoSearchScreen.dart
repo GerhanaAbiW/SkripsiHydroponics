@@ -35,7 +35,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Cari Video...",
+        title: Text("Cari Video",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),

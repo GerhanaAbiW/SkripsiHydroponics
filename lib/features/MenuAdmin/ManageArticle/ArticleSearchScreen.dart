@@ -32,7 +32,7 @@ class _ArticleSearchScreenState extends State<ArticleSearchScreen> {
             backScreen(context);
           },
         ),
-        title: Text("Cari Artikel...",
+        title: Text("Cari Artikel",
             style: CustomTextStyle.textFormFieldBold
                 .copyWith(color: Colors.white, fontSize: 21)),
       ),
