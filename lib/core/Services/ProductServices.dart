@@ -50,7 +50,7 @@ class ProductServices {
   Future<List<ProductModel>> searchProducts({String productName}) {
     // code to convert the first character to uppercase
     //String searchKey = productName[0].toUpperCase() + productName.substring(1);
-    String searchKey = productName[0].toLowerCase() + productName.substring(1);
+    String searchKey = productName[0].toUpperCase() + productName.substring(1);
     return _firestore
         .collection(collection)
         .orderBy("name")

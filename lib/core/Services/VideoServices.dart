@@ -39,7 +39,7 @@ class VideoService {
   Future<List<Video>> searchVideos({String videoTitle}) {
     // code to convert the first character to uppercase
     //String searchKey = productName[0].toUpperCase() + productName.substring(1);
-    String searchKey = videoTitle[0].toLowerCase() + videoTitle.substring(1);
+    String searchKey = videoTitle[0].toUpperCase() + videoTitle.substring(1);
     return _firestore
         .collection(collection)
         .orderBy("title")

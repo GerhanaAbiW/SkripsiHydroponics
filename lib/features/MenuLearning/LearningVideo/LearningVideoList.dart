@@ -30,6 +30,8 @@ class LearningVideoList extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
             child: AnimationLimiter(
               child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
                 itemCount: videoProvider.videos.length,
                 itemBuilder: (BuildContext context, int index) {
                   if (videoProvider.videos[index].video != null &&

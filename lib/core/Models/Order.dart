@@ -72,7 +72,7 @@ class OrderModel {
 
   int get totalQuantityProduct => _totalQuantityProduct;
   // public variable
-  List cart;
+  List<CartItemModel> cart;
 
 
   OrderModel.fromSnapshot(DocumentSnapshot snapshot) {

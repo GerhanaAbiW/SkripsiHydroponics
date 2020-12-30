@@ -4,7 +4,6 @@ import 'package:hydroponics/features/OrderList/AdminOrderList/ProductOrderAdmin/
 
 class AdminOrderCard extends StatelessWidget {
   final OrderModel orderModel;
-
   AdminOrderCard({this.orderModel});
 
   @override
@@ -30,7 +29,7 @@ class AdminOrderCard extends StatelessWidget {
                         width: 60, //ScreenUtil().setWidth(60),
                         height: MediaQuery.of(context).size.height, //60,
 
-                        child: Image.asset('images/hydro1.jpeg',
+                        child: Image.network(orderModel.cart[0].image,
                             height: MediaQuery.of(context).size.height,
                             width: 100 //MediaQuery.of(context).size.width / 1,
                             ),
