@@ -5,6 +5,8 @@ class HydroType {
   String price;
   String pipeQty;
   String holeQty;
+  int maxHole;
+  int minHole;
   String landType;
   String description;
   int intPrice;
@@ -22,7 +24,7 @@ class HydroType {
       this.description,
       this.intPrice,
       this.deliveryPrice,
-      this.instalationPrice});
+      this.instalationPrice,this.maxHole,this.minHole});
 }
 
 final List<HydroType> types = [
@@ -34,6 +36,8 @@ final List<HydroType> types = [
     area: 'Outdoor',
     price: "Rp. 250.000",
     holeQty: "4 - 6 lubang",
+    maxHole: 6,
+    minHole: 4,
     landType: "Horizontal/Vertical",
     pipeQty: "3",
     intPrice: 250000,
@@ -47,7 +51,9 @@ final List<HydroType> types = [
     image: "images/hydro5.png",
     area: 'Outdoor',
     price: "Rp. 500.000",
-    holeQty: "4 - 6 lubang",
+    holeQty: "4 - 8 lubang",
+    minHole: 4,
+    maxHole: 8,
     landType: "Horizontal/Vertical",
     pipeQty: "6",
     intPrice: 500000,
@@ -60,7 +66,9 @@ final List<HydroType> types = [
     image: "images/hydro4.png",
     area: 'Outdoor',
     price: "Rp. 750.000",
-    holeQty: "4 - 6 lubang",
+    holeQty: "6 - 10 lubang",
+    minHole: 6,
+    maxHole: 10,
     landType: "Horizontal/Vertical",
     pipeQty: "9",
     intPrice: 750000,
