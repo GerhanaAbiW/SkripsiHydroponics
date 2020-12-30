@@ -125,7 +125,7 @@ class UserModel {
   List<MyPlantsRecordModel> _convertMyFailPlantsRecord(List plantRecord){
     List<MyPlantsRecordModel> convertedPlantRecord = [];
     for(Map plantRecordItem in plantRecord){
-      if(plantRecordItem["Status"]=="Fail"){
+      if(plantRecordItem["Status"]=="Crop Failure"){
         convertedPlantRecord.add(MyPlantsRecordModel.fromMap(plantRecordItem));
       }
     }
