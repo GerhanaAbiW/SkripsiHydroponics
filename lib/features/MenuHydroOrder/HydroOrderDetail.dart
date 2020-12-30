@@ -264,7 +264,7 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                     child: GestureDetector(
                                       onTap: () {
                                         if (_formKey.currentState.validate()) {
-                                          if(int.parse(jumlahLubangController.text)>=widget.hydroType.minHole||int.parse(jumlahLubangController.text)<=widget.hydroType.maxHole){
+                                          if(int.parse(jumlahLubangController.text)>=widget.hydroType.minHole && int.parse(jumlahLubangController.text)<=widget.hydroType.maxHole){
                                             changeScreen(context, HydroOrderCheckOut(
                                               hydroType: widget.hydroType,
                                               jmlLubang: jumlahLubangController.text,
