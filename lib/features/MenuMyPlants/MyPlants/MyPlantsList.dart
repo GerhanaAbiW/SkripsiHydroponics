@@ -10,6 +10,7 @@ import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantList.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsCard.dart';
+import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/DashboardMyPlantRecord.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListHarvestPlantRecord.dart';
 import 'package:provider/provider.dart';
 
@@ -47,11 +48,7 @@ class _MyPlantsListState extends State<MyPlantsList> {
                     width: 125.0,
                     child: InkWell(
                       onTap: () {
-                        changeScreen(
-                            context,
-                            ListRecordPlant(
-                                // list: userProvider.userModel.myPlantsRecord,
-                                ));
+                        changeScreen(context, DashboardMyplantRecord());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

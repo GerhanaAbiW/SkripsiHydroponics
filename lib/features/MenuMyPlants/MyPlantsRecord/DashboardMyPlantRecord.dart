@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Constants/Colors.dart';
+import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/features/MenuLearning/LearningArticle/LearningArticleDetail.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListFailPlantRecord.dart';
 import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/ListHarvestPlantRecord.dart';
+import 'package:provider/provider.dart';
 
 class DashboardMyplantRecord extends StatefulWidget {
   @override
@@ -10,6 +12,11 @@ class DashboardMyplantRecord extends StatefulWidget {
 }
 
 class _DashboardMyplantRecordState extends State<DashboardMyplantRecord> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context,listen: false).reloadUserModel();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
