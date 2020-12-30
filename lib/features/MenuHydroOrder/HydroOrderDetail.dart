@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/core/Services/HydroOrderService.dart';
@@ -213,10 +214,10 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                         SizedBox(height: 20),
                                         FormTextField(
                                             textLabel: "jumlah Lubang",
-                                            textHint:
-                                                "Masukkan Jumlah Lubang Tanaman",
+                                            textHint: "Masukkan Jumlah Lubang Tanaman",
                                             controller: jumlahLubangController,
                                             textType: TextInputType.number),
+
                                         //),
                                         //Container(
                                         SizedBox(height: 16),
@@ -263,20 +264,38 @@ class _HydroOrderDetailState extends State<HydroOrderDetail> {
                                     child: GestureDetector(
                                       onTap: () {
                                         if (_formKey.currentState.validate()) {
-                                          changeScreen(
-                                              context,
-                                              HydroOrderCheckOut(
-                                                hydroType: widget.hydroType,
-                                                jmlLubang:
-                                                    jumlahLubangController.text,
-                                                jmlPipa: jumlahPipa.text,
-                                                address: alamatController.text,
-                                                landType: _currentTipeLahan,
-                                                phone: nomorHpController.text,
-                                                userModel: model.userModel,
-                                              ));
-                                          _formKey.currentState.reset();
-                                        } else {}
+                                          if(int.parse(jumlahLubangController.text)>=widget.hydroType.minHole||int.parse(jumlahLubangController.text)<=widget.hydroType.maxHole){
+                                            changeScreen(context, HydroOrderCheckOut(
+                                              hydroType: widget.hydroType,
+                                              jmlLubang: jumlahLubangController.text,
+                                              jmlPipa: jumlahPipa.text,
+                                              address: alamatController.text,
+                                              landType: _currentTipeLahan,
+                                              phone: nomorHpController.text,
+                                              userModel: model.userModel,
+                                            ));
+                                            _formKey.currentState.reset();
+                                          }else{
+                                            Fluttertoast.showToast(
+                                                msg: "Tolong masukan jumlah lubang yang sesuai!",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.CENTER,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.red,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: "Harap isi form dengan benar!",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        }
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
