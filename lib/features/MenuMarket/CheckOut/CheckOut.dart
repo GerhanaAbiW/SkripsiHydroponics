@@ -618,12 +618,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
           ),
           RichText(
             text: TextSpan(children: [
+              // TextSpan(
+              //     text: "Nama Produk : ",
+              //     style: CustomTextStyle.textFormFieldMedium
+              //         .copyWith(fontSize: 12)),
               TextSpan(
-                  text: "Nama Produk : ",
-                  style: CustomTextStyle.textFormFieldMedium
-                      .copyWith(fontSize: 12)),
-              TextSpan(
-                  text: ProductModel.NAME + "(" + ProductModel.QUANTITY + ")",
+                  text: " ${cart.name}" + "(" + "${cart.quantity}" + ")",
                   style: CustomTextStyle.textFormFieldMedium
                       .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),

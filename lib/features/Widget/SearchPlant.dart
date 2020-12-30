@@ -36,7 +36,7 @@ class SearchPlant extends StatelessWidget {
                   color: Colors.grey[800],
                 ),
                 //fillColor: Colors.greenAccent[600],
-                hintStyle: new TextStyle(color: Colors.green[600]),
+                hintStyle: new TextStyle(color: Colors.grey[500]),
                 hintText: "Cari Tumbuhan...",
               ),
               autofocus: false,

@@ -9,7 +9,8 @@ class SearchLearning extends StatelessWidget {
   final String search;
   final String hint;
 
-  const SearchLearning({Key key, this.widget,this.search,this.hint}) : super(key: key);
+  const SearchLearning({Key key, this.widget, this.search, this.hint})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final articleProvider = Provider.of<ArticleProvider>(context);
@@ -21,15 +22,14 @@ class SearchLearning extends StatelessWidget {
             child: TextField(
               textInputAction: TextInputAction.search,
               onSubmitted: (pattern) async {
-                if(search=="article"){
+                if (search == "article") {
                   await articleProvider.search(articleTitle: pattern);
                   changeScreen(context, widget);
-
-                }else{
+                } else {
                   await videoProvider.search(videoTitle: pattern);
                   changeScreen(context, widget);
                 }
-                },
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -44,7 +44,7 @@ class SearchLearning extends StatelessWidget {
                   color: Colors.grey[800],
                 ),
                 //fillColor: Colors.greenAccent[600],
-                hintStyle: new TextStyle(color: Colors.green[600]),
+                hintStyle: new TextStyle(color: Colors.grey[500]),
                 hintText: hint,
               ),
               autofocus: false,
