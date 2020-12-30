@@ -24,8 +24,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   int transaction = 0;
   int hydroMarket = 0;
   int hydroOrder = 0;
-  double persenHydroOrder=0;
-  double persenHydroMarket =0;
+  double persenHydroOrder = 0;
+  double persenHydroMarket = 0;
 
   // double bibit =0;
   // double obat =0;
@@ -33,13 +33,20 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   // double alat =0;
 
   void getAllCards() {
-    user = Provider.of<UserProvider>(context, listen: false).listUserModel.length;
-    revenue = Provider.of<OrderProvider>(context, listen: false).revenue + Provider.of<HydroOrderProvider>(context, listen: false).revenue;
-    transaction = Provider.of<OrderProvider>(context, listen: false).buyers.length + Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
-    hydroOrder = Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
-    hydroMarket = Provider.of<OrderProvider>(context, listen: false).buyers.length;
+    user =
+        Provider.of<UserProvider>(context, listen: false).listUserModel.length;
+    revenue = Provider.of<OrderProvider>(context, listen: false).revenue +
+        Provider.of<HydroOrderProvider>(context, listen: false).revenue;
+    transaction = Provider.of<OrderProvider>(context, listen: false)
+            .buyers
+            .length +
+        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroOrder =
+        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroMarket =
+        Provider.of<OrderProvider>(context, listen: false).buyers.length;
     persenHydroMarket = hydroMarket * 100 / transaction;
-    persenHydroOrder = hydroOrder * 100/transaction;
+    persenHydroOrder = hydroOrder * 100 / transaction;
     // bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
     // obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
     // pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
@@ -62,8 +69,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
     var piedata = [
       // new Task('User', user.toDouble(), Color(0xff3366cc)),
       // new Task('Transaction', transaction.toDouble(), Color(0xff990099)),
-      new Task('Hydro Order', hydroOrder.toDouble(), Color(0xff109618)),
       new Task('Hydro Market', hydroMarket.toDouble(), Color(0xfffdbe19)),
+      new Task('Hydro Order', hydroOrder.toDouble(), Color(0xff109618)),
       //new Task('HydroOrder', 19.2, Color(0xffff9900)),
       //new Task('Other', 10.3, Color(0xffdc3912)),
     ];
@@ -72,7 +79,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
       charts.Series(
         domainFn: (Task task, _) => task.task,
         measureFn: (Task task, _) => task.taskvalue,
-        colorFn: (Task task, _) => charts.ColorUtil.fromDartColor(task.colorval),
+        colorFn: (Task task, _) =>
+            charts.ColorUtil.fromDartColor(task.colorval),
         id: 'Air Pollution',
         data: piedata,
         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
@@ -192,7 +200,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                       blurRadius: 4)
                 ]),
             width: MediaQuery.of(context).size.width / 1.2,
-            height: MediaQuery.of(context).size.height - 550,
+            height: 400, //MediaQuery.of(context).size.height - 550,
             child: Center(
               child: ListTile(
                 title: charts.PieChart(_seriesPieData,
@@ -202,8 +210,8 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                       new charts.DatumLegend(
                         outsideJustification:
                             charts.OutsideJustification.endDrawArea,
-                        //horizontalFirst: false,
-                        desiredMaxRows: 2,
+                        // horizontalFirst: false,
+                        // desiredMaxRows: 1,
                         cellPadding:
                             new EdgeInsets.only(right: 4.0, bottom: 4.0),
                       )

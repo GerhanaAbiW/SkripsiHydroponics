@@ -19,7 +19,8 @@ class PlantStartRecord extends StatefulWidget {
   final MyPlantsModel myPlantsModel;
   final String status;
 
-  const PlantStartRecord({Key key, this.myPlantsModel, this.status}) : super(key: key);
+  const PlantStartRecord({Key key, this.myPlantsModel, this.status})
+      : super(key: key);
 
   @override
   _PlantStartRecordState createState() => _PlantStartRecordState();
@@ -44,6 +45,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
       _image = File(pickedFile.path);
     });
   }
+
   final _key = GlobalKey<ScaffoldState>();
   //DateTime record;
   // external bool isAfter(DateTime other);
@@ -55,8 +57,8 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
       btn = !btn;
     });
   }
-  TextEditingController descController = TextEditingController();
 
+  TextEditingController descController = TextEditingController();
 
   void myAlert() {
     showDialog(
@@ -64,7 +66,7 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
         builder: (BuildContext context) {
           return AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             title: Text('Please choose media to select'),
             content: Container(
               height: MediaQuery.of(context).size.height / 6,
@@ -100,7 +102,6 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
           );
         });
   }
-
 
   // void visibleBtnRecord() {
   //   if (DateTime.now().isAfter(DateTime.parse(widget.myPlantsModel.harvestDay)) == true ||
@@ -156,68 +157,79 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                           },
                         ),
                         SizedBox(height: 12.0),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                              const EdgeInsets.only(left: 16, top: 16, right: 16),
-                              child: _image == null
-                                  ? ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  "images/no_image_icon.png",
-                                  fit: BoxFit.contain,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                  MediaQuery.of(context).size.height / 3,
-                                ),
-                              )
-                                  : ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.file(
-                                  _image,
-                                  fit: BoxFit.contain,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                  MediaQuery.of(context).size.height / 3,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
                         Center(
                           child: Container(
                             height: MediaQuery.of(context).size.height / 4.5,
                             width: MediaQuery.of(context).size.width / 1.6,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(14)),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: widget.myPlantsModel.image,
-                                //height: MediaQuery.of(context).size.height,
-                                fit: BoxFit.cover,
-                              ),
+                            // child: Row(
+                            //   crossAxisAlignment: CrossAxisAlignment.end,
+                            //children: <Widget>[
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 16, top: 16, right: 16),
+                              child: _image == null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.asset(
+                                        "images/no_image_icon.png",
+                                        fit: BoxFit.contain,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                3,
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.file(
+                                        _image,
+                                        fit: BoxFit.contain,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                3,
+                                      ),
+                                    ),
                             ),
+                            // ],
                           ),
+                          //),
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        // Center(
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height / 4.5,
+                        //     width: MediaQuery.of(context).size.width / 1.6,
+                        //     child: ClipRRect(
+                        //       borderRadius:
+                        //           BorderRadius.all(Radius.circular(14)),
+                        //       child: FadeInImage.memoryNetwork(
+                        //         placeholder: kTransparentImage,
+                        //         image: widget.myPlantsModel.image,
+                        //         //height: MediaQuery.of(context).size.height,
+                        //         fit: BoxFit.cover,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 10,
                         ),
-                        Text("Isi sesuai dengan perlakuan yang anda berikan selama menanam",
+                        Text(
+                            "Isi sesuai dengan perlakuan yang anda selama menanam",
                             style: TextStyle(
                                 color: darkGreenColor,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold)),
-                        Text("Karakteristik",
-                            style: TextStyle(
-                                color: darkGreenColor,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.normal)),
+                        // Text("Karakteristik",
+                        //     style: TextStyle(
+                        //         color: darkGreenColor,
+                        //         fontSize: 15.0,
+                        //         fontWeight: FontWeight.normal)),
                         SizedBox(
                           height: 20,
                         ),
@@ -356,14 +368,6 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                             SizedBox(
                               height: 3,
                             ),
-                            MultilineFormTextField(
-                                controller: descController,
-                                textHint: "Masukkan Isi Konten",
-                                textLabel: "Konten",
-                                height: 10),
-                            SizedBox(
-                              height: 3,
-                            ),
                             Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -379,81 +383,103 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                                         });
                                       }),
                                 ]),
+                            SizedBox(
+                              height: 6,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: MultilineFormTextField(
+                                  controller: descController,
+                                  textHint: "Masukkan Isi Catatan",
+                                  textLabel: "Catatan",
+                                  height: 10),
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
                           ],
                         ),
                         SizedBox(
                           height: 40,
                         ),
-                       Center(
-                            child: GestureDetector(
-                              onTap: () async {
-                                if (_image != null && descController.text != null) {
-                                  setState(() => isLoading = true);
-                                  String imageUrl1;
-                                  final FirebaseStorage storage = FirebaseStorage.instance;
-                                  final String picture1 =
-                                      "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-                                  StorageUploadTask task1 = storage.ref().child("RecordPlant").child(picture1).putFile(_image);
-                                  StorageTaskSnapshot snapshot1 =
-                                  await task1.onComplete.then((snapshot) => snapshot);
+                        Center(
+                          child: GestureDetector(
+                            onTap: () async {
+                              if (_image != null &&
+                                  descController.text != null) {
+                                setState(() => isLoading = true);
+                                String imageUrl1;
+                                final FirebaseStorage storage =
+                                    FirebaseStorage.instance;
+                                final String picture1 =
+                                    "1${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
+                                StorageUploadTask task1 = storage
+                                    .ref()
+                                    .child("RecordPlant")
+                                    .child(picture1)
+                                    .putFile(_image);
+                                StorageTaskSnapshot snapshot1 = await task1
+                                    .onComplete
+                                    .then((snapshot) => snapshot);
 
-                                  task1.onComplete.then((snapshot3) async {
-                                    imageUrl1 = await snapshot1.ref.getDownloadURL();
+                                task1.onComplete.then((snapshot3) async {
+                                  imageUrl1 =
+                                      await snapshot1.ref.getDownloadURL();
+                                  appProvider.changeIsLoading();
+                                  bool success =
+                                      await userProvider.addMyPlantRecord(
+                                          status: "Harvest",
+                                          img: imageUrl1,
+                                          description: descController.text,
+                                          myPlants: widget.myPlantsModel,
+                                          waktuPanen: waktuPanen,
+                                          waktuPupuk: waktuPupuk,
+                                          waktuSemai: waktuSemai,
+                                          mediaSemai: mediaSemai,
+                                          phIdeal: phIdeal,
+                                          dosisPupuk: dosisPupuk,
+                                          ppmIdeal: ppmIdeal,
+                                          jenisPupuk: jenisPupuk);
+                                  if (success) {
+                                    _key.currentState.showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Added to My Record Plants!")));
+                                    userProvider.reloadUserModel();
                                     appProvider.changeIsLoading();
-                                    bool success =
-                                    await userProvider.addMyPlantRecord(
-                                        status: "Harvest",
-                                        img: imageUrl1,
-                                        description: descController.text,
-                                        myPlants: widget.myPlantsModel,
-                                        waktuPanen: waktuPanen,
-                                        waktuPupuk: waktuPupuk,
-                                        waktuSemai: waktuSemai,
-                                        mediaSemai: mediaSemai,
-                                        phIdeal: phIdeal,
-                                        dosisPupuk: dosisPupuk,
-                                        ppmIdeal: ppmIdeal,
-                                        jenisPupuk: jenisPupuk);
-                                    if (success) {
-                                      _key.currentState.showSnackBar(SnackBar(
-                                          content:
-                                          Text("Added to My Record Plants!")));
-                                      userProvider.reloadUserModel();
-                                      appProvider.changeIsLoading();
-                                      userProvider.deleteMyPlant(
-                                          plantItem: widget.myPlantsModel);
-                                      return changeScreen(context, MyPlantsList());
-                                    } else {
-                                      _key.currentState.showSnackBar(SnackBar(
-                                          content: Text(
-                                              "Not added to My Record Plants!")));
-                                      appProvider.changeIsLoading();
-                                      return;
-                                    }
-
-                                  });
-                                } else {
-                                  _key.currentState.showSnackBar(SnackBar(
-                                      content:
-                                      Text("Please add some description and image")));
-                                  setState(() => isLoading = false);
-                                }
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(8),
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: darkGreenColor),
-                                child: Text(
-                                  'Record',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                ),
+                                    userProvider.deleteMyPlant(
+                                        plantItem: widget.myPlantsModel);
+                                    return changeScreen(
+                                        context, MyPlantsList());
+                                  } else {
+                                    _key.currentState.showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Not added to My Record Plants!")));
+                                    appProvider.changeIsLoading();
+                                    return;
+                                  }
+                                });
+                              } else {
+                                _key.currentState.showSnackBar(SnackBar(
+                                    content: Text(
+                                        "Please add some description and image")));
+                                setState(() => isLoading = false);
+                              }
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(8),
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: darkGreenColor),
+                              child: Text(
+                                'Record',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 22),
                               ),
                             ),
                           ),
+                        ),
                         SizedBox(
                           height: 30,
                         )
