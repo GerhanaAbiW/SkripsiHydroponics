@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/MyPlantsRecord.dart';
 import 'package:hydroponics/core/constants/App_Text_Style.dart';
 import 'package:hydroponics/core/constants/Colors.dart';
-import 'package:hydroponics/features/MenuMyPlants/MyPlants/MyPlantsList.dart';
 import 'package:hydroponics/features/Profile/ProfileViewModel.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -13,7 +12,9 @@ var productImage =
 
 class MyPlantsRecordDetail extends StatefulWidget {
   final MyPlantsRecordModel model;
+
   MyPlantsRecordDetail({this.model});
+
   @override
   _MyPlantsRecordDetailState createState() => _MyPlantsRecordDetailState();
 }
@@ -145,6 +146,11 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
                             height: MediaQuery.of(context).size.height / 4,
                             child: buildListView(),
                           ),
+                          Text("Catatan : ${widget.model.description}",
+                              style: TextStyle(
+                                  color: red,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold))
                         ],
                       ),
                       // Column(
@@ -303,13 +309,13 @@ class _MyPlantsRecordDetailState extends State<MyPlantsRecordDetail> {
       return InkWell(
         splashColor: Colors.teal.shade200,
         onTap: () {
-          if (listSection.widget != null) {
-            Navigator.of(context).push(new MaterialPageRoute(
-                builder: (context) => listSection.widget));
-          }
-          if (listSection.title == "Logout") {
-            // _showDialog();
-          }
+          // if (listSection.widget != null) {
+          //   Navigator.of(context).push(new MaterialPageRoute(
+          //       builder: (context) => listSection.widget));
+          // }
+          // if (listSection.title == "Logout") {
+          //   // _showDialog();
+          // }
         },
         child: Container(
           margin: EdgeInsets.only(left: 16, right: 12),

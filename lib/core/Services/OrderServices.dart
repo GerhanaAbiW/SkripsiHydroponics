@@ -83,7 +83,7 @@ class OrderServices{
   Future<List<OrderModel>> getBuyers() async =>
       _firestore
           .collection(collection)
-          .where("status", isEqualTo: "Paid")
+          .where("status", isEqualTo: "Accepted")
           .getDocuments()
           .then((result) {
         List<OrderModel> orders = [];

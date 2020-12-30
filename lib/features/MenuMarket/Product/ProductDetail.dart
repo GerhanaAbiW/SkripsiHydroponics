@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hydroponics/core/Models/Product.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -387,27 +388,33 @@ class _ProductDetailsState extends State<ProductDetails> {
                         width: MediaQuery.of(context).size.width / 2.5,
                         child: new MaterialButton(
                           onPressed: () async {
-                            // if (qty != null) {
-                            //   appProvider.changeIsLoading();
-                            //   bool success = await userProvider.addToCart(
-                            //       product: widget.product, qty: int.parse(qty));
-                            //   if (success) {
-                            //     _key.currentState.showSnackBar(
-                            //         SnackBar(content: Text("Added to Cart!")));
-                            //     userProvider.reloadUserModel();
-                            //     appProvider.changeIsLoading();
-                            //     return changeScreen(context, CartPage());
-                            //   } else {
-                            //     _key.currentState.showSnackBar(SnackBar(
-                            //         content: Text("Not added to Cart!")));
-                            //     appProvider.changeIsLoading();
-                            //     return;
-                            //   }
-                            // } else {
-                            //   _key.currentState.showSnackBar(SnackBar(
-                            //       content:
-                            //           Text("Please Add Quantity Product")));
-                            // }
+                            appProvider.changeIsLoading();
+                            bool success = await userProvider.addToCart(
+                                product: widget.product, qty: 1);
+                            if (success) {
+                              Fluttertoast.showToast(
+                                  msg: "Success Added",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                              userProvider.reloadUserModel();
+                              appProvider.changeIsLoading();
+                              return;
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "Error Added",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                              appProvider.changeIsLoading();
+                              return;
+                            }
                           },
                           color: Colors.green[700],
                           shape: RoundedRectangleBorder(

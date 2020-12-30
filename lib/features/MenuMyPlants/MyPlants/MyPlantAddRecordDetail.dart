@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:hydroponics/core/Constants/Colors.dart';
 import 'package:hydroponics/core/Models/MyPlants.dart';
 import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:hydroponics/core/Providers/UserProvider.dart';
@@ -196,6 +197,22 @@ class _PlantStartRecordState extends State<PlantStartRecord> {
                             // ],
                           ),
                           //),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 3,
+                            height: 50.0,
+                            child: FlatButton(
+                              shape: CircleBorder(
+                                  side: BorderSide(color: Colors.white)),
+                              color: GreenTosca,
+                              child: Icon(Icons.camera_alt, color: white),
+                              onPressed: () {
+                                myAlert();
+                              },
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 20,

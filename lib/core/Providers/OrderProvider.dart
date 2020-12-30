@@ -62,10 +62,7 @@ class OrderProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void _getListOrderBuyers() async {
-    _orders = await _orderServices.getAdminOrders();
-    notifyListeners();
-  }
+
 
   void _getListBuyers() async {
     _buyers = await _orderServices.getBuyers();
