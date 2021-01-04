@@ -56,7 +56,7 @@ class _HydroOrderCheckOutState extends State<HydroOrderCheckOut> {
 
   void getTax() {
     if (widget.hydroType.intPrice != 0) {
-      tax = widget.hydroType.intPrice * 1.5;
+      tax = widget.hydroType.intPrice * 0.15;
       totalPrice = tax +
           widget.hydroType.intPrice +
           widget.hydroType.instalationPrice +
