@@ -31,7 +31,7 @@ class AdminHydroOrderCard extends StatelessWidget {
                             width: 60, //ScreenUtil().setWidth(60),
                             height: MediaQuery.of(context).size.height, //60,
 
-                            child: Image.asset('images/hydro1.jpeg',
+                            child: Image.asset(orderModel.hydroImage,
                                 height: MediaQuery.of(context).size.height,
                                 width: 100 //MediaQuery.of(context).size.width / 1,
                             ),

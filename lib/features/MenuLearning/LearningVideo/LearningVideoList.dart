@@ -14,8 +14,8 @@ class LearningVideoList extends StatelessWidget {
   Widget build(BuildContext context) {
     String idUrl;
     final videoProvider = Provider.of<VideoProvider>(context);
-    return ListView(
-      physics: NeverScrollableScrollPhysics(),
+    return Column(
+
       children: <Widget>[
         Container(
           child: SearchLearning(
