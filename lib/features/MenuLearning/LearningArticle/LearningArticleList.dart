@@ -11,8 +11,8 @@ class LearningArticleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final articleProvider = Provider.of<ArticleProvider>(context);
-    return ListView(
-      physics: NeverScrollableScrollPhysics(),
+    return Column(
+
       children: <Widget>[
         Container(
           child: SearchLearning(
