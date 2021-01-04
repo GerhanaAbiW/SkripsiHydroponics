@@ -78,7 +78,7 @@ class _DashboardMyplantRecordState extends State<DashboardMyplantRecord> {
           body: TabBarView(children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ListRecordPlant(),
+              child: ListHarvestPlantRecord(),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
