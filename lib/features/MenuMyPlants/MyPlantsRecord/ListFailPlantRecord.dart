@@ -28,16 +28,13 @@ class _ListFailPlantRecordState extends State<ListFailPlantRecord> {
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
           height: MediaQuery.of(context).size.height,
-          //height: 20,
-
           width: MediaQuery.of(context).size.width,
           //height: MediaQuery.of(context).size.height / 2,
           //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
           child: list.length == 0 || list.length == null
               ? Padding(
             padding: const EdgeInsets.all(125.0),
-            child: Image.asset('images/not_found.png', width: 20, height: 20,),
-          )
+            child: Image.asset('images/not_found.png', width: 20, height: 20))
               : ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
@@ -47,7 +44,6 @@ class _ListFailPlantRecordState extends State<ListFailPlantRecord> {
               if(index>0){
                 isHeader = list[index].date == list[index-1].date;
               }
-
               return AnimationConfiguration.staggeredList(
                 position: index,
                 child: WidgetLIstRecordDetailPlant(
