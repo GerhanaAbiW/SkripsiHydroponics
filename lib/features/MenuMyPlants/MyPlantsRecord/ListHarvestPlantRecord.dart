@@ -8,14 +8,14 @@ import 'package:hydroponics/features/MenuMyPlants/MyPlantsRecord/CardRecordPlant
 import 'package:hydroponics/features/Widget/SearchPlant.dart';
 import 'package:provider/provider.dart';
 
-class ListRecordPlant extends StatefulWidget {
+class ListHarvestPlantRecord extends StatefulWidget {
   // final List<MyPlantsRecordModel> list;
   // ListRecordPlant({Key key, this.list}) : super(key: key);
   @override
-  _ListRecordPlantState createState() => _ListRecordPlantState();
+  _ListHarvestPlantRecordState createState() => _ListHarvestPlantRecordState();
 }
 
-class _ListRecordPlantState extends State<ListRecordPlant> {
+class _ListHarvestPlantRecordState extends State<ListHarvestPlantRecord> {
   List<MyPlantsRecordModel> list;
 
   @override
