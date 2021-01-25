@@ -29,7 +29,6 @@ void main() {
       ChangeNotifierProvider.value(value: ProductProvider.initialize()),
       ChangeNotifierProvider.value(value: PlantProvider.initialize()),
       ChangeNotifierProvider.value(value: AppProvider()),
-      //ChangeNotifierProvider.value(value: CartViewModel()),
       ChangeNotifierProvider.value(value: OrderProvider.initialize()),
       ChangeNotifierProvider.value(value: HydroOrderProvider.initialize()),
       ChangeNotifierProvider.value(value: PaymentProvider.initialize()),
