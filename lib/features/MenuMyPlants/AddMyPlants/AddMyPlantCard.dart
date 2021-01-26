@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hydroponics/core/Models/Plant.dart';
 import 'package:hydroponics/core/Router/ChangeRoute.dart';
 import 'package:hydroponics/features/MenuMyPlants/AddMyPlants/AddMyPlantsDetails.dart';
-import 'package:hydroponics/features/Widget/Loading.dart';
 import 'package:hydroponics/features/Widget/Loading2.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -14,7 +13,6 @@ class AddMyPlantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: MediaQuery.of(context).size.width,
       height: 90, //MediaQuery.of(context).size.height / 9,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: Card(

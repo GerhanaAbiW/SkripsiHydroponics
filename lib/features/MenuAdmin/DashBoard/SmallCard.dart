@@ -6,7 +6,6 @@ class SmallCard extends StatefulWidget {
   final int value;
   final Color color1;
   final Color color2;
-  // final Container widtht;
 
   SmallCard({
     @required this.icon,
@@ -67,10 +66,7 @@ class _SmallCardState extends State<SmallCard> {
                     ],
                   ),
 
-                  // Column(
-                  //   // mainAxisAlignment: MainAxisAlignment.center,
-                  //   // crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: <Widget>[
+
                   Center(
                     child: Text(
                       widget.value.toString(),

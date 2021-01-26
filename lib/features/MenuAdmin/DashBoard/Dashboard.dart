@@ -1,9 +1,6 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:hydroponics/core/Models/Cart.dart';
-import 'package:hydroponics/core/Models/Order.dart';
-import 'package:hydroponics/core/Providers/AppProvider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hydroponics/core/Providers/HydroOrderProvider.dart';
 import 'package:hydroponics/core/Providers/OrderProvider.dart';
@@ -28,6 +25,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   int hydroOrder = 0;
   double persenHydroOrder = 0;
   double persenHydroMarket = 0;
+  double average = 0;
 
   // double bibit =0;
   // double obat =0;
@@ -49,14 +47,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
         Provider.of<OrderProvider>(context, listen: false).buyers.length;
     persenHydroMarket = hydroMarket * 100 / transaction;
     persenHydroOrder = hydroOrder * 100 / transaction;
-    // bibit = Provider.of<OrderProvider>(context,listen: false).bibit.toDouble();
-    // obat = Provider.of<OrderProvider>(context,listen: false).obat.toDouble();
-    // pupuk = Provider.of<OrderProvider>(context,listen: false).pupuk.toDouble();
-    // alat = Provider.of<OrderProvider>(context,listen: false).alat.toDouble();
-    // print("ini"+bibit.toString());
-    // print("ini"+obat.toString());
-    // print("ini"+pupuk.toString());
-    // print("ini"+alat.toString());
+    average = (hydroOrder + hydroMarket) / 2;
   }
 
   @override
@@ -69,12 +60,12 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
 
   _getData() {
     var piedata = [
-      // new Task('User', user.toDouble(), Color(0xff3366cc)),
-      // new Task('Transaction', transaction.toDouble(), Color(0xff990099)),
-      new Task('Hydro Market', persenHydroMarket, Color(0xfffdbe19)),
-      new Task('Hydro Order', persenHydroOrder, Color(0xff109618)),
-      //new Task('HydroOrder', 19.2, Color(0xffff9900)),
-      //new Task('Other', 10.3, Color(0xffdc3912)),
+      new Task(
+          'Hydro Market',
+          double.parse(persenHydroMarket.toStringAsFixed(2)),
+          Color(0xfffdbe19)),
+      new Task('Hydro Order', double.parse(persenHydroOrder.toStringAsFixed(2)),
+          Color(0xff109618)),
     ];
 
     _seriesPieData.add(
@@ -94,9 +85,6 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
     final order = Provider.of<OrderProvider>(context);
-    // order.getSales();
-    // order.getCategory();
-    // order.getRevenue();
     return ListView(
       //  crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -169,7 +157,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
               color2: Colors.deepOrange,
               color1: Colors.deepOrangeAccent,
               icon: Icons.assessment,
-              value: hydroOrder,
+              value: average.toInt(),
               title: 'Rata-rata',
             ),
           ),
