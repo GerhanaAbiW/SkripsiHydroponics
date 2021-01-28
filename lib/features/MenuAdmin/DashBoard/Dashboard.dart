@@ -91,7 +91,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                   text: "Rp. " +
                       currencyFormatter
                           .format(revenue)
-                          .toString(), //'\Rp. $revenue',
+                          .toString(),
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.black,
@@ -169,8 +169,6 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
         ),
         //Expanded(
         Center(
-          // child: Padding(
-          //   padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -182,7 +180,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                       blurRadius: 4)
                 ]),
             width: MediaQuery.of(context).size.width / 1.2,
-            height: 400, //MediaQuery.of(context).size.height - 550,
+            height: 400,
             child: Center(
               child: ListTile(
                 title: charts.PieChart(_seriesPieData,
