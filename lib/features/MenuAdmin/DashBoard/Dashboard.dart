@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hydroponics/core/Providers/HydroOrderProvider.dart';
@@ -31,19 +33,21 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
   // double alat =0;
 
   void getAllCards() {
-    user = Provider.of<UserProvider>(context, listen: false).listUserModel.length;
+    user =
+        Provider.of<UserProvider>(context, listen: false).listUserModel.length;
     revenue = Provider.of<OrderProvider>(context, listen: false).revenue +
         Provider.of<HydroOrderProvider>(context, listen: false).revenue;
     transaction = Provider.of<OrderProvider>(context, listen: false)
             .buyers
             .length +
         Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
-    hydroOrder = Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
-    hydroMarket = Provider.of<OrderProvider>(context, listen: false).buyers.length;
+    hydroOrder =
+        Provider.of<HydroOrderProvider>(context, listen: false).buyers.length;
+    hydroMarket =
+        Provider.of<OrderProvider>(context, listen: false).buyers.length;
     persenHydroMarket = hydroMarket * 100 / transaction;
     persenHydroOrder = hydroOrder * 100 / transaction;
-    average = (hydroOrder + hydroMarket)/2;
-    
+    average = (hydroOrder + hydroMarket) / 2;
   }
 
   @override
@@ -53,11 +57,15 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
     _seriesPieData = List<charts.Series<Task, String>>();
     _getData();
   }
-  
+
   _getData() {
     var piedata = [
-      new Task('Hydro Market', double.parse(persenHydroMarket.toStringAsFixed(2)), Color(0xfffdbe19)),
-      new Task('Hydro Order', double.parse(persenHydroOrder.toStringAsFixed(2)), Color(0xff109618)),
+      new Task(
+          'Hydro Market',
+          double.parse(persenHydroMarket.toStringAsFixed(2)),
+          Color(0xfffdbe19)),
+      new Task('Hydro Order', double.parse(persenHydroOrder.toStringAsFixed(2)),
+          Color(0xff109618)),
     ];
 
     _seriesPieData.add(
@@ -68,7 +76,7 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
             charts.ColorUtil.fromDartColor(task.colorval),
         id: 'Air Pollution',
         data: piedata,
-        labelAccessorFn: (Task row, _) => '${row.taskvalue}',
+        labelAccessorFn: (Task row, _) => '${row.taskvalue}%',
       ),
     );
   }
@@ -188,12 +196,13 @@ class _NewAdminDashboardState extends State<NewAdminDashboard> {
                     animationDuration: Duration(seconds: 3),
                     behaviors: [
                       new charts.DatumLegend(
-                        outsideJustification:
-                            charts.OutsideJustification.endDrawArea,
+                        // outsideJustification:
+                        //     charts.OutsideJustification.endDrawArea,
                         // horizontalFirst: false,
                         // desiredMaxRows: 1,
-                        // cellPadding:
-                        //     new EdgeInsets.only(right: 4.0, bottom: 4.0),
+
+                        cellPadding:
+                            new EdgeInsets.only(right: 4.0, bottom: 4.0),
                       )
                     ],
                     defaultRenderer: new charts.ArcRendererConfig(

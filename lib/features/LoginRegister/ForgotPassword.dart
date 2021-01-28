@@ -49,11 +49,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ],
                 ),
                 width: width,
-                padding:
-                EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(60)),
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(60)),
                     gradient: LinearGradient(colors: [
                       Color(0xff19803d),
                       Color(0xff34ff7c),
@@ -70,12 +69,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       TextFormField(
                           validator: (value) {
-                            if(value.isEmpty)
-                            {
-                              return showSnackBar("The password field cannot be empty", _key);
+                            if (value.isEmpty) {
+                              return showSnackBar(
+                                  "The password field cannot be empty", _key);
                             }
-                            if(!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)){
-                              return showSnackBar("Please make sure your email address is valid", _key);
+                            if (!RegExp(
+                                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                .hasMatch(value)) {
+                              return showSnackBar(
+                                  "Please make sure your email address is valid",
+                                  _key);
                             }
                             return null;
                           },
@@ -93,11 +96,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         onTap: () async {
                           if (_formKey.currentState.validate()) {
                             //if( _email.text!=0)
-                            if (await user.sendPasswordResetEmail(
-                                _email.text) ==
+                            if (await user
+                                    .sendPasswordResetEmail(_email.text) ==
                                 true)
-                              changeScreenReplacement(
-                                  context, LoginPage());
+                              changeScreenReplacement(context, LoginPage());
                           }
                         },
                         child: Container(
@@ -111,9 +113,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 Color(0xff34ff7c),
                               ])),
                           child: Text(
-                            'Login',
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 22),
+                            'Send',
+                            style: TextStyle(color: Colors.white, fontSize: 22),
                           ),
                         ),
                       ),
